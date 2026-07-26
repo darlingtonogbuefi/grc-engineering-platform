@@ -1,0 +1,307 @@
+#
+# ISO/IEC 27001:2022 Framework Metadata
+# metadata.yml
+#
+
+framework:
+
+  id: ISO27001
+
+  name: ISO/IEC 27001
+
+  version: "2022"
+
+  edition: "ISO/IEC 27001:2022"
+
+  publisher:
+    name: International Organization for Standardization (ISO)
+
+  description: >
+    Information security management framework represented as atomic
+    assessment controls based on ISO/IEC 27001:2022 Annex A.
+
+    Controls are structured for evidence collection, assessment,
+    scoring and compliance reporting.
+
+    This implementation maps ISO/IEC 27001 Annex A controls
+    exclusively to the NCSC Cyber Assessment Framework (CAF).
+
+    No mappings to NIST, CIS, OWASP, COBIT or other frameworks
+    are included.
+
+
+
+scope:
+
+  domains:
+
+    - Information security governance
+    - Risk management
+    - Asset management
+    - Identity and access management
+    - Supplier security
+    - Incident management
+    - Business continuity
+    - Compliance management
+    - People security
+    - Physical security
+    - Technology security
+
+
+  environments:
+
+    - Enterprise systems
+    - Cloud services
+    - End-user devices
+    - Network infrastructure
+    - Applications
+    - Development environments
+    - Operational technology where applicable
+
+
+
+control_model:
+
+  type: control_assessment
+
+
+  structure:
+
+    control_identifier: true
+
+    fields:
+
+      - id
+      - theme
+      - category
+      - title
+      - requirement
+      - assessment_guidance
+      - evidence
+      - applicability
+      - priority
+      - tags
+      - caf_controls
+
+
+
+control_domains:
+
+
+  organisational:
+
+    prefix: ISO27001-ORG
+
+    control_count: 37
+
+
+  people:
+
+    prefix: ISO27001-PEO
+
+    control_count: 8
+
+
+  physical:
+
+    prefix: ISO27001-PHY
+
+    control_count: 12
+
+
+  technological:
+
+    prefix: ISO27001-TEC
+
+    control_count: 30
+
+
+
+total_controls:
+
+  count: 87
+
+  standard_reference:
+
+    name: ISO/IEC 27001:2022 Annex A
+
+    control_reference:
+      - A.5 Organisational controls
+      - A.6 People controls
+      - A.7 Physical controls
+      - A.8 Technological controls
+
+
+
+assessment:
+
+  scoring_model:
+
+    supported: true
+
+    scoring_file:
+
+      - scoring.yml
+
+
+    outcomes:
+
+      - pass
+      - partial
+      - fail
+      - not_applicable
+
+
+
+evidence_management:
+
+  supported: true
+
+
+  evidence_source:
+
+    - evidence.yml
+
+
+  evidence_requirements:
+
+    - Current
+    - Attributable
+    - Relevant
+    - Sufficient
+    - Repeatable
+
+
+
+mapping:
+
+  enabled: true
+
+
+  target_framework:
+
+    id: CAF
+
+    name: NCSC Cyber Assessment Framework
+
+
+  mapping_file:
+
+    - mappings.yml
+
+
+  restrictions:
+
+    - Only CAF mappings are maintained
+    - No ISO clause mappings included
+    - No external framework mappings included
+
+
+
+caf_alignment:
+
+
+  domains:
+
+    - id: A
+      name: Managing security risk
+
+
+    - id: B
+      name: Protecting against cyber attack
+
+
+    - id: C
+      name: Detecting cyber security events
+
+
+    - id: D
+      name: Minimising the impact of incidents
+
+
+
+governance:
+
+
+  ownership:
+
+    framework_owner:
+      name: Information Security Governance Function
+
+
+    review_owner:
+      name: Cyber Security Assurance Function
+
+
+
+  maintenance_cycle:
+
+    frequency: annual
+
+
+    review_triggers:
+
+      - ISO/IEC 27001 revision
+      - Annex A changes
+      - NCSC CAF updates
+      - Major technology changes
+      - Regulatory changes
+
+
+
+validation:
+
+  schema_version: "1.0"
+
+
+  status: validated
+
+
+  checks:
+
+
+    structure:
+
+      - Framework metadata defined
+      - Control domains defined
+      - Evidence integration defined
+      - Mapping integration defined
+
+
+    consistency:
+
+      - Control identifiers validated
+      - YAML syntax validated
+      - Scoring references aligned
+      - Evidence references aligned
+      - CAF mappings aligned
+
+
+
+production_readiness:
+
+
+  status: ready
+
+
+  review_required:
+
+
+    - Annual framework review
+
+    - Validate against future ISO/IEC 27001 updates
+
+    - Validate CAF alignment following CAF revisions
+
+
+
+version_history:
+
+
+  - version: "2022"
+
+    date: "Initial release"
+
+    description: >
+      ISO/IEC 27001:2022 Annex A atomic control implementation
+      mapped exclusively to NCSC CAF.

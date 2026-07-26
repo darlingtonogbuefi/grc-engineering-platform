@@ -1,0 +1,350 @@
+# GovAssure Security Assessment Evidence Catalogue
+# evidence.yml
+
+framework: GOVASSURE
+version: "2024"
+
+
+evidence_model:
+
+  type: evidence_catalogue
+
+  purpose:
+
+    - Security assessment support
+    - Evidence collection
+    - Control verification
+    - Compliance reporting
+
+
+
+evidence_items:
+
+
+  #
+  # Governance and Risk Management
+  #
+
+  - id: GA-EV-001
+    name: Security governance framework
+
+    description: >
+      Documented governance structures defining cybersecurity
+      responsibilities, ownership and oversight arrangements.
+
+    evidence_type:
+      - governance_document
+      - policy
+
+    related_controls:
+      - GA-GOV-001
+
+
+  - id: GA-EV-002
+    name: Cyber risk register
+
+    description: >
+      Records identifying cybersecurity risks, assessments,
+      ownership and treatment activities.
+
+    evidence_type:
+      - risk_register
+      - assessment_record
+
+    related_controls:
+      - GA-GOV-002
+
+
+
+  #
+  # Asset Management
+  #
+
+  - id: GA-EV-003
+    name: Technology asset inventory
+
+    description: >
+      Inventory of hardware, software, services and technology assets
+      supporting government services.
+
+    evidence_type:
+      - inventory
+      - asset_record
+
+    related_controls:
+      - GA-AM-001
+
+
+
+  #
+  # Identity and Access Management
+  #
+
+  - id: GA-EV-004
+    name: Identity management records
+
+    description: >
+      Records showing user identities, account ownership and lifecycle
+      management processes.
+
+    evidence_type:
+      - identity_record
+      - access_record
+
+    related_controls:
+      - GA-IAM-001
+
+
+  - id: GA-EV-005
+    name: Privileged access register
+
+    description: >
+      Inventory of privileged accounts, assigned owners and access
+      permissions.
+
+    evidence_type:
+      - access_record
+      - privileged_account_register
+
+    related_controls:
+      - GA-IAM-002
+
+
+  - id: GA-EV-006
+    name: Multi-factor authentication configuration
+
+    description: >
+      Configuration records demonstrating enforcement of strong
+      authentication controls.
+
+    evidence_type:
+      - configuration
+      - security_record
+
+    related_controls:
+      - GA-IAM-003
+
+
+
+  #
+  # Secure Configuration
+  #
+
+  - id: GA-EV-007
+    name: Secure configuration standards
+
+    description: >
+      Approved system hardening standards and configuration
+      requirements.
+
+    evidence_type:
+      - standard
+      - configuration_baseline
+
+    related_controls:
+      - GA-SC-001
+
+
+
+  #
+  # Vulnerability Management
+  #
+
+  - id: GA-EV-008
+    name: Vulnerability assessment reports
+
+    description: >
+      Vulnerability scanning results, findings and remediation
+      tracking information.
+
+    evidence_type:
+      - vulnerability_report
+      - assessment_record
+
+    related_controls:
+      - GA-VULN-001
+
+
+
+  #
+  # Security Monitoring
+  #
+
+  - id: GA-EV-009
+    name: Security monitoring records
+
+    description: >
+      Logs, alerts and monitoring outputs demonstrating detection
+      capability.
+
+    evidence_type:
+      - monitoring_record
+      - security_event
+
+    related_controls:
+      - GA-MON-001
+
+
+
+  #
+  # Incident Management
+  #
+
+  - id: GA-EV-010
+    name: Incident response plan
+
+    description: >
+      Documented processes for identifying, responding to and managing
+      cybersecurity incidents.
+
+    evidence_type:
+      - procedure
+      - response_plan
+
+    related_controls:
+      - GA-INC-001
+
+
+  - id: GA-EV-011
+    name: Incident exercise records
+
+    description: >
+      Records demonstrating testing and improvement of incident
+      response capabilities.
+
+    evidence_type:
+      - exercise_record
+      - review_record
+
+    related_controls:
+      - GA-INC-001
+
+
+
+  #
+  # Supplier Security
+  #
+
+  - id: GA-EV-012
+    name: Supplier security assessments
+
+    description: >
+      Assessments evaluating cybersecurity risks associated with
+      suppliers and third parties.
+
+    evidence_type:
+      - supplier_assessment
+      - assurance_record
+
+    related_controls:
+      - GA-SUP-001
+
+
+  - id: GA-EV-013
+    name: Supplier security agreements
+
+    description: >
+      Contracts and agreements containing security requirements for
+      third-party providers.
+
+    evidence_type:
+      - contract
+      - agreement
+
+    related_controls:
+      - GA-SUP-001
+
+
+
+  #
+  # Data Protection
+  #
+
+  - id: GA-EV-014
+    name: Data protection policy
+
+    description: >
+      Policies defining requirements for protecting sensitive
+      organisational information.
+
+    evidence_type:
+      - policy
+      - standard
+
+    related_controls:
+      - GA-DATA-001
+
+
+  - id: GA-EV-015
+    name: Data access control records
+
+    description: >
+      Evidence demonstrating access restrictions and protective
+      controls applied to sensitive information.
+
+    evidence_type:
+      - access_record
+      - configuration_record
+
+    related_controls:
+      - GA-DATA-001
+
+
+
+
+evidence_requirements:
+
+
+  mandatory:
+
+
+    - id: ER-001
+
+      requirement: >
+        Evidence must be attributable to the assessed organisation,
+        service or system.
+
+
+    - id: ER-002
+
+      requirement: >
+        Evidence must demonstrate implementation of the associated
+        GovAssure control requirement.
+
+
+    - id: ER-003
+
+      requirement: >
+        Evidence must be current, relevant and representative of the
+        assessed environment.
+
+
+
+assessment_states:
+
+
+  accepted:
+
+    description: >
+      Evidence demonstrates effective implementation of the control.
+
+
+  insufficient:
+
+    description: >
+      Evidence does not fully demonstrate implementation.
+
+
+  unavailable:
+
+    description: >
+      Required evidence has not been provided.
+
+
+
+relationships:
+
+
+  control_reference_field: related_controls
+
+  evidence_reference_field: id

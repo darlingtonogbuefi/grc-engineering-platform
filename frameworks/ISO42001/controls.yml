@@ -1,0 +1,497 @@
+# ISO/IEC 42001 AI Management System Control Framework
+# controls.yml
+
+framework:
+  id: ISO42001
+  name: ISO/IEC 42001 Artificial Intelligence Management System
+  version: "2023"
+  publisher: ISO
+  description: >
+    Atomic assessment controls derived from ISO/IEC 42001 Annex A
+    controls for AI management systems, mapped exclusively to the
+    NCSC Cyber Assessment Framework (CAF).
+
+  scope:
+    - AI governance
+    - AI system lifecycle management
+    - AI risk management
+    - AI data governance
+    - AI transparency and explainability
+    - Human oversight
+    - AI security
+    - AI monitoring and improvement
+
+  assessment_model:
+    type: control_assessment
+    scoring:
+      - pass
+      - partial
+      - fail
+      - not_applicable
+
+
+controls:
+
+
+  #
+  # AI Governance and Policies
+  #
+
+  - id: ISO42001-GOV-001
+    theme: AI Governance
+    category: AI Management System
+    title: AI policy framework
+
+    requirement: >
+      The organisation establishes and maintains policies governing
+      the responsible development, deployment and operation of AI systems.
+
+    assessment_guidance: >
+      Verify approved AI policies exist covering governance,
+      responsibilities, acceptable use and operational requirements.
+
+    evidence:
+      - AI policy documents
+      - Governance framework
+      - Policy approval records
+      - Management review records
+
+    applicability:
+      enterprise: true
+      cloud: true
+      ai_systems: true
+
+    priority: high
+
+    tags:
+      - ai-governance
+      - policy
+      - management-system
+
+    caf_controls:
+      - A1.a
+      - A1.b
+      - B1.a
+
+
+  - id: ISO42001-GOV-002
+    theme: AI Governance
+    category: Roles and Responsibilities
+    title: AI accountability assignment
+
+    requirement: >
+      Roles, responsibilities and authorities for AI management
+      activities are defined and assigned.
+
+    assessment_guidance: >
+      Confirm ownership exists for AI systems, risks, approvals,
+      monitoring and incident handling.
+
+    evidence:
+      - Responsibility matrix
+      - AI governance committee records
+      - Role descriptions
+
+    applicability:
+      enterprise: true
+
+    priority: high
+
+    tags:
+      - accountability
+      - ownership
+      - governance
+
+    caf_controls:
+      - A1.b
+      - A4.a
+
+
+  #
+  # AI Risk Management
+  #
+
+  - id: ISO42001-RM-001
+    theme: AI Risk Management
+    category: Risk Identification
+    title: AI risk assessment process
+
+    requirement: >
+      AI-related risks are identified, assessed and managed through
+      a defined risk management process.
+
+    assessment_guidance: >
+      Review AI risk assessments and confirm risks are documented,
+      evaluated and assigned treatment actions.
+
+    evidence:
+      - AI risk assessments
+      - Risk register
+      - Risk treatment plans
+
+    applicability:
+      enterprise: true
+      ai_systems: true
+
+    priority: critical
+
+    tags:
+      - ai-risk
+      - risk-management
+      - assessment
+
+    caf_controls:
+      - A2.a
+      - A2.b
+      - A2.c
+
+
+  - id: ISO42001-RM-002
+    theme: AI Risk Management
+    category: Risk Treatment
+    title: AI risk mitigation controls
+
+    requirement: >
+      Controls are implemented to reduce identified AI-related risks.
+
+    assessment_guidance: >
+      Verify mitigation actions address security, privacy, safety
+      and operational risks.
+
+    evidence:
+      - Risk treatment records
+      - Control implementation records
+      - Risk acceptance approvals
+
+    applicability:
+      enterprise: true
+
+    priority: high
+
+    tags:
+      - mitigation
+      - controls
+      - risk-treatment
+
+    caf_controls:
+      - B1.b
+      - B5.a
+
+
+  #
+  # AI Lifecycle Management
+  #
+
+  - id: ISO42001-LCM-001
+    theme: AI Lifecycle Management
+    category: AI Development
+    title: AI lifecycle governance
+
+    requirement: >
+      AI systems are managed through defined lifecycle processes from
+      design through retirement.
+
+    assessment_guidance: >
+      Confirm lifecycle stages, approvals and operational controls
+      are documented.
+
+    evidence:
+      - AI lifecycle process
+      - Development standards
+      - System records
+
+    applicability:
+      enterprise: true
+      ai_development: true
+
+    priority: high
+
+    tags:
+      - lifecycle
+      - development
+      - governance
+
+    caf_controls:
+      - B4.a
+      - B4.d
+
+
+  - id: ISO42001-LCM-002
+    theme: AI Lifecycle Management
+    category: Change Management
+    title: AI system change control
+
+    requirement: >
+      Changes to AI systems are assessed, approved and documented.
+
+    assessment_guidance: >
+      Review change records, testing evidence and approval workflows.
+
+    evidence:
+      - Change records
+      - Release approvals
+      - Testing reports
+
+    applicability:
+      enterprise: true
+
+    priority: high
+
+    tags:
+      - change-management
+      - ai-operations
+
+    caf_controls:
+      - B4.c
+      - B4.d
+
+
+  #
+  # Data Governance
+  #
+
+  - id: ISO42001-DATA-001
+    theme: AI Data Governance
+    category: Data Management
+    title: AI data management controls
+
+    requirement: >
+      Data used by AI systems is managed according to defined
+      governance requirements.
+
+    assessment_guidance: >
+      Verify data sources, ownership, quality requirements and
+      management processes are documented.
+
+    evidence:
+      - Data inventories
+      - Data governance policies
+      - Dataset records
+
+    applicability:
+      enterprise: true
+      ai_systems: true
+
+    priority: high
+
+    tags:
+      - data-governance
+      - datasets
+      - ownership
+
+    caf_controls:
+      - A3.a
+      - B4.b
+
+
+  - id: ISO42001-DATA-002
+    theme: AI Data Governance
+    category: Data Quality
+    title: Data quality management
+
+    requirement: >
+      Data quality requirements are defined and monitored for AI
+      system purposes.
+
+    assessment_guidance: >
+      Review validation processes and controls for training,
+      testing and operational data.
+
+    evidence:
+      - Data quality checks
+      - Validation reports
+      - Data assessment records
+
+    applicability:
+      ai_systems: true
+
+    priority: high
+
+    tags:
+      - data-quality
+      - validation
+
+    caf_controls:
+      - B4.b
+      - C1.a
+
+
+  #
+  # Transparency and Explainability
+  #
+
+  - id: ISO42001-TRN-001
+    theme: Transparency and Explainability
+    category: AI Information
+    title: AI system transparency
+
+    requirement: >
+      Information about AI systems, their purpose and operation is
+      made available to relevant stakeholders.
+
+    assessment_guidance: >
+      Verify documentation exists describing AI functionality,
+      intended use and limitations.
+
+    evidence:
+      - AI system documentation
+      - User guidance
+      - Model documentation
+
+    applicability:
+      enterprise: true
+
+    priority: medium
+
+    tags:
+      - transparency
+      - explainability
+      - documentation
+
+    caf_controls:
+      - A4.a
+      - C2.a
+
+
+  #
+  # Human Oversight
+  #
+
+  - id: ISO42001-HUM-001
+    theme: Human Oversight
+    category: Decision Oversight
+    title: Human control over AI decisions
+
+    requirement: >
+      Appropriate human oversight is implemented for AI-supported
+      decisions.
+
+    assessment_guidance: >
+      Confirm human review points exist where AI decisions may create
+      significant impact.
+
+    evidence:
+      - Human oversight procedures
+      - Approval workflows
+      - Decision review records
+
+    applicability:
+      ai_systems: true
+
+    priority: high
+
+    tags:
+      - human-oversight
+      - decision-making
+      - accountability
+
+    caf_controls:
+      - B2.a
+      - B2.d
+
+
+  #
+  # AI Security
+  #
+
+  - id: ISO42001-SEC-001
+    theme: AI Security
+    category: Security Controls
+    title: AI system security protection
+
+    requirement: >
+      AI systems are protected against unauthorised access,
+      manipulation and security threats.
+
+    assessment_guidance: >
+      Review access controls, security testing and protective measures.
+
+    evidence:
+      - Security assessments
+      - Access control records
+      - Security test reports
+
+    applicability:
+      enterprise: true
+      ai_systems: true
+
+    priority: critical
+
+    tags:
+      - ai-security
+      - access-control
+      - protection
+
+    caf_controls:
+      - B2.a
+      - B4.c
+      - B5.b
+
+
+  - id: ISO42001-SEC-002
+    theme: AI Security
+    category: Monitoring
+    title: AI security monitoring
+
+    requirement: >
+      AI systems are monitored for security events, misuse and
+      operational issues.
+
+    assessment_guidance: >
+      Confirm monitoring processes detect relevant AI security events.
+
+    evidence:
+      - Monitoring records
+      - Security alerts
+      - Incident records
+
+    applicability:
+      enterprise: true
+
+    priority: high
+
+    tags:
+      - monitoring
+      - detection
+      - incident-response
+
+    caf_controls:
+      - C1.a
+      - C1.d
+
+
+  #
+  # Performance and Improvement
+  #
+
+  - id: ISO42001-IMP-001
+    theme: AI Improvement
+    category: Monitoring and Review
+    title: AI system performance review
+
+    requirement: >
+      AI systems are periodically reviewed to ensure continued
+      suitability and effectiveness.
+
+    assessment_guidance: >
+      Verify performance reviews, monitoring results and improvement
+      actions are documented.
+
+    evidence:
+      - Review records
+      - Performance reports
+      - Improvement plans
+
+    applicability:
+      ai_systems: true
+
+    priority: medium
+
+    tags:
+      - continual-improvement
+      - monitoring
+      - review
+
+    caf_controls:
+      - A5.a
+      - D1.a

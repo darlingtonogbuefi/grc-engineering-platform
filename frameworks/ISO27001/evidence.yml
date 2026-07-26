@@ -1,0 +1,630 @@
+# ISO/IEC 27001:2022 Annex A Assessment Evidence Catalogue
+# evidence.yml
+
+framework:
+  id: ISO27001
+  name: ISO/IEC 27001
+  version: "2022"
+
+
+evidence_model:
+
+  type: evidence_catalogue
+
+  purpose:
+    - Evidence collection
+    - Control assessment support
+    - Audit preparation
+    - Compliance reporting
+
+
+
+evidence_items:
+
+
+#
+# Information Security Policies and Governance
+#
+
+- id: ISO27001-EV-001
+  name: Information security policy
+
+  description: >
+    Approved information security policy defining organisational
+    security objectives, principles and responsibilities.
+
+  evidence_type:
+    - policy
+    - governance_document
+
+  related_controls:
+    - ISO27001-ORG-001
+
+
+- id: ISO27001-EV-002
+  name: Information security roles and responsibilities
+
+  description: >
+    Documentation defining ownership, accountability and security
+    responsibilities.
+
+  evidence_type:
+    - responsibility_matrix
+    - organisation_record
+
+  related_controls:
+    - ISO27001-ORG-002
+    - ISO27001-ORG-004
+
+
+
+#
+# Risk and Governance
+#
+
+- id: ISO27001-EV-003
+  name: Information security risk assessment records
+
+  description: >
+    Records demonstrating identification, analysis and treatment of
+    information security risks.
+
+  evidence_type:
+    - risk_assessment
+    - risk_register
+
+  related_controls:
+    - ISO27001-ORG-021
+    - ISO27001-ORG-026
+
+
+- id: ISO27001-EV-004
+  name: Security governance committee records
+
+  description: >
+    Meeting records, decisions and actions demonstrating security
+    governance oversight.
+
+  evidence_type:
+    - meeting_record
+    - governance_record
+
+  related_controls:
+    - ISO27001-ORG-004
+
+
+
+#
+# Asset Management
+#
+
+- id: ISO27001-EV-005
+  name: Information asset inventory
+
+  description: >
+    Inventory identifying information assets, owners, classifications
+    and locations.
+
+  evidence_type:
+    - asset_register
+    - inventory
+
+  related_controls:
+    - ISO27001-ORG-009
+
+
+- id: ISO27001-EV-006
+  name: Acceptable use policy
+
+  description: >
+    Document defining acceptable use requirements for organisational
+    information and assets.
+
+  evidence_type:
+    - policy
+
+  related_controls:
+    - ISO27001-ORG-010
+
+
+- id: ISO27001-EV-007
+  name: Asset return records
+
+  description: >
+    Records demonstrating return or recovery of organisational assets
+    after employment or role changes.
+
+  evidence_type:
+    - lifecycle_record
+
+  related_controls:
+    - ISO27001-ORG-011
+
+
+
+#
+# Information Classification and Protection
+#
+
+- id: ISO27001-EV-008
+  name: Information classification policy
+
+  description: >
+    Classification model defining information sensitivity levels.
+
+  evidence_type:
+    - policy
+    - standard
+
+  related_controls:
+    - ISO27001-ORG-012
+
+
+- id: ISO27001-EV-009
+  name: Information labelling examples
+
+  description: >
+    Samples demonstrating application of information classification
+    labels.
+
+  evidence_type:
+    - sample_records
+
+  related_controls:
+    - ISO27001-ORG-013
+
+
+- id: ISO27001-EV-010
+  name: Secure information transfer procedures
+
+  description: >
+    Procedures defining secure transfer methods and protections.
+
+  evidence_type:
+    - procedure
+    - standard
+
+  related_controls:
+    - ISO27001-ORG-014
+
+
+
+#
+# Identity and Access Management
+#
+
+- id: ISO27001-EV-011
+  name: Access control policy
+
+  description: >
+    Policy defining access approval, restriction and review
+    requirements.
+
+  evidence_type:
+    - policy
+
+  related_controls:
+    - ISO27001-ORG-015
+
+
+- id: ISO27001-EV-012
+  name: Identity lifecycle records
+
+  description: >
+    Records showing account creation, modification and removal.
+
+  evidence_type:
+    - IAM_records
+    - account_inventory
+
+  related_controls:
+    - ISO27001-ORG-016
+
+
+- id: ISO27001-EV-013
+  name: Authentication configuration
+
+  description: >
+    Evidence showing authentication requirements including MFA,
+    password controls and identity provider settings.
+
+  evidence_type:
+    - configuration
+    - security_record
+
+  related_controls:
+    - ISO27001-ORG-017
+    - ISO27001-TEC-005
+
+
+- id: ISO27001-EV-014
+  name: Access review reports
+
+  description: >
+    Periodic reviews confirming appropriate user permissions.
+
+  evidence_type:
+    - access_review
+    - audit_record
+
+  related_controls:
+    - ISO27001-ORG-018
+    - ISO27001-TEC-002
+
+
+
+#
+# Supplier Security
+#
+
+- id: ISO27001-EV-015
+  name: Supplier security assessment
+
+  description: >
+    Assessments evaluating security risks associated with suppliers.
+
+  evidence_type:
+    - supplier_assessment
+
+  related_controls:
+    - ISO27001-ORG-019
+    - ISO27001-ORG-021
+
+
+- id: ISO27001-EV-016
+  name: Supplier agreements
+
+  description: >
+    Contracts containing information security obligations.
+
+  evidence_type:
+    - contract
+    - agreement
+
+  related_controls:
+    - ISO27001-ORG-020
+    - ISO27001-ORG-023
+
+
+
+#
+# Incident Management
+#
+
+- id: ISO27001-EV-017
+  name: Incident response plan
+
+  description: >
+    Documented procedures for detecting, responding to and recovering
+    from information security incidents.
+
+  evidence_type:
+    - response_plan
+    - procedure
+
+  related_controls:
+    - ISO27001-ORG-024
+    - ISO27001-ORG-026
+
+
+- id: ISO27001-EV-018
+  name: Incident records
+
+  description: >
+    Records of security incidents, investigations and remediation.
+
+  evidence_type:
+    - incident_record
+
+  related_controls:
+    - ISO27001-ORG-025
+    - ISO27001-ORG-027
+
+
+- id: ISO27001-EV-019
+  name: Digital evidence handling procedures
+
+  description: >
+    Procedures defining collection and preservation of digital
+    evidence.
+
+  evidence_type:
+    - forensic_procedure
+
+  related_controls:
+    - ISO27001-ORG-028
+
+
+
+#
+# Business Continuity
+#
+
+- id: ISO27001-EV-020
+  name: Business continuity plans
+
+  description: >
+    Plans describing recovery requirements and security during
+    disruption.
+
+  evidence_type:
+    - continuity_plan
+
+  related_controls:
+    - ISO27001-ORG-029
+    - ISO27001-ORG-030
+
+
+
+#
+# Compliance and Assurance
+#
+
+- id: ISO27001-EV-021
+  name: Compliance obligations register
+
+  description: >
+    Register of legal, regulatory and contractual obligations.
+
+  evidence_type:
+    - compliance_register
+
+  related_controls:
+    - ISO27001-ORG-031
+
+
+- id: ISO27001-EV-022
+  name: Privacy impact assessments
+
+  description: >
+    Assessments demonstrating protection of personal information.
+
+  evidence_type:
+    - privacy_assessment
+
+  related_controls:
+    - ISO27001-ORG-034
+
+
+- id: ISO27001-EV-023
+  name: Internal audit reports
+
+  description: >
+    Independent assessments of information security controls.
+
+  evidence_type:
+    - audit_report
+
+  related_controls:
+    - ISO27001-ORG-035
+    - ISO27001-ORG-036
+
+
+
+#
+# People Security
+#
+
+- id: ISO27001-EV-024
+  name: Security awareness training records
+
+  description: >
+    Records demonstrating completion of security awareness training.
+
+  evidence_type:
+    - training_record
+
+  related_controls:
+    - ISO27001-PEO-003
+
+
+- id: ISO27001-EV-025
+  name: Remote working security policy
+
+  description: >
+    Requirements for secure remote access and working practices.
+
+  evidence_type:
+    - policy
+
+  related_controls:
+    - ISO27001-PEO-007
+
+
+- id: ISO27001-EV-026
+  name: Security event reporting process
+
+  description: >
+    Process for reporting suspected security events.
+
+  evidence_type:
+    - procedure
+
+  related_controls:
+    - ISO27001-PEO-008
+
+
+
+#
+# Physical Security
+#
+
+- id: ISO27001-EV-027
+  name: Physical access records
+
+  description: >
+    Records demonstrating controlled access to secure areas.
+
+  evidence_type:
+    - access_record
+
+  related_controls:
+    - ISO27001-PHY-001
+    - ISO27001-PHY-002
+
+
+- id: ISO27001-EV-028
+  name: Physical security monitoring records
+
+  description: >
+    CCTV, alarm and monitoring records.
+
+  evidence_type:
+    - monitoring_record
+
+  related_controls:
+    - ISO27001-PHY-004
+
+
+- id: ISO27001-EV-029
+  name: Equipment disposal records
+
+  description: >
+    Records proving secure disposal or sanitisation of equipment.
+
+  evidence_type:
+    - disposal_record
+
+  related_controls:
+    - ISO27001-PHY-012
+
+
+
+#
+# Technical Security
+#
+
+- id: ISO27001-EV-030
+  name: Endpoint security reports
+
+  description: >
+    Reports showing endpoint protection status.
+
+  evidence_type:
+    - security_report
+
+  related_controls:
+    - ISO27001-TEC-001
+    - ISO27001-TEC-007
+
+
+- id: ISO27001-EV-031
+  name: Vulnerability assessment reports
+
+  description: >
+    Vulnerability scanning and remediation evidence.
+
+  evidence_type:
+    - vulnerability_report
+
+  related_controls:
+    - ISO27001-TEC-008
+    - ISO27001-TEC-028
+
+
+- id: ISO27001-EV-032
+  name: Secure configuration baselines
+
+  description: >
+    Approved hardened configuration standards.
+
+  evidence_type:
+    - configuration_standard
+
+  related_controls:
+    - ISO27001-TEC-009
+
+
+- id: ISO27001-EV-033
+  name: Backup and restoration records
+
+  description: >
+    Evidence demonstrating backup execution and restoration testing.
+
+  evidence_type:
+    - backup_record
+
+  related_controls:
+    - ISO27001-TEC-013
+
+
+- id: ISO27001-EV-034
+  name: Security logging records
+
+  description: >
+    Logs demonstrating monitoring and detection capabilities.
+
+  evidence_type:
+    - log_record
+    - SIEM_record
+
+  related_controls:
+    - ISO27001-TEC-014
+    - ISO27001-TEC-015
+
+
+- id: ISO27001-EV-035
+  name: Network security documentation
+
+  description: >
+    Network architecture, firewall rules and security configurations.
+
+  evidence_type:
+    - configuration
+    - architecture_document
+
+  related_controls:
+    - ISO27001-TEC-019
+    - ISO27001-TEC-021
+
+
+
+#
+# Evidence Quality Requirements
+#
+
+evidence_requirements:
+
+  mandatory:
+
+    - Evidence must be attributable to the assessed organisation.
+
+    - Evidence must demonstrate implementation of the related
+      ISO27001 control.
+
+    - Evidence must be current and representative.
+
+    - Evidence must be sufficient to support assessment decisions.
+
+
+
+assessment_states:
+
+  accepted:
+    description: >
+      Evidence demonstrates effective control implementation.
+
+
+  insufficient:
+    description: >
+      Evidence does not adequately demonstrate implementation.
+
+
+  unavailable:
+    description: >
+      Required evidence has not been provided.
+
+
+
+validation:
+
+  schema_version: "1.0"
+
+  checks:
+
+    - Evidence identifiers are unique
+    - Evidence references match controls.yml
+    - Evidence categories are defined
+    - Evidence supports audit assessment
+
+  status: validated

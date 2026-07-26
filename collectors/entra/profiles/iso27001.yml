@@ -1,0 +1,197 @@
+id: iso27001
+
+name: Microsoft Entra ISO 27001 Profile
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra evidence collection profile aligned
+  with ISO/IEC 27001 information security controls,
+  focusing on identity management, access control,
+  authentication, monitoring, and governance.
+
+collector: entra
+
+framework:
+  name: ISO/IEC 27001
+
+purpose:
+  - information_security_management
+  - access_control_assessment
+  - identity_governance
+  - audit_evidence_collection
+
+queries:
+
+  organization:
+    enabled: true
+    endpoint: /organization
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - signInActivity
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - securityEnabled
+      - groupTypes
+      - createdDateTime
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - operatingSystem
+      - trustType
+      - isManaged
+      - isCompliant
+
+  applications:
+    enabled: true
+    endpoint: /applications
+
+  service_principals:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+  signins:
+    enabled: true
+    endpoint: /auditLogs/signIns
+
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  applications:
+    module: applications
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+
+evidence:
+
+  categories:
+
+    asset_management:
+      - users
+      - groups
+      - devices
+      - applications
+
+    access_control:
+      - directory_roles
+      - conditional_access
+      - authentication_methods
+
+    identity_management:
+      - users
+      - groups
+
+    operational_security:
+      - audit_logs
+      - signins
+
+    supplier_application_access:
+      - service_principals
+
+
+controls:
+
+  iso27001:
+
+    A.5_information_security_policies:
+      - security_configuration_review
+
+    A.5_organization_of_information_security:
+      - identity_governance
+      - administrative_account_review
+
+    A.5_access_control:
+      - user_access_management
+      - privileged_access_rights
+      - authentication_controls
+
+    A.8_asset_management:
+      - asset_inventory
+      - device_inventory
+      - application_inventory
+
+    A.8_technological_controls:
+      - secure_authentication
+      - logging_monitoring
+      - access_review
+
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true
+
+  evidence_metadata:
+    enabled: true

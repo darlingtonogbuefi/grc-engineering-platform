@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grc-engineering-platform/schemas/risk.schema.json",
+  "title": "Risk Assessment Schema",
+  "description": "Schema describing calculated risks associated with compliance findings.",
+  "type": "object",
+
+  "required": [
+    "schemaVersion",
+    "riskId",
+    "tenantId",
+    "framework",
+    "controlId",
+    "likelihood",
+    "impact",
+    "riskScore",
+    "riskRating"
+  ],
+
+  "properties": {
+
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+
+    "riskId": {
+      "type": "string"
+    },
+
+    "tenantId": {
+      "type": "string"
+    },
+
+    "framework": {
+      "type": "string",
+      "enum": [
+        "CAF",
+        "ISO27001",
+        "SOC2",
+        "GovAssure",
+        "CyberEssentials"
+      ]
+    },
+
+    "controlId": {
+      "type": "string"
+    },
+
+    "title": {
+      "type": "string"
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "likelihood": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+
+    "impact": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+
+    "riskScore": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 25
+    },
+
+    "riskRating": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ]
+    },
+
+    "treatment": {
+      "type": "string",
+      "enum": [
+        "Accept",
+        "Mitigate",
+        "Transfer",
+        "Avoid",
+        "Monitor"
+      ]
+    },
+
+    "owner": {
+      "type": "string"
+    },
+
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "In Progress",
+        "Accepted",
+        "Closed"
+      ]
+    },
+
+    "identifiedDate": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "targetResolutionDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+
+    "evidenceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+
+    "metadata": {
+      "type": "object"
+    }
+
+  },
+
+  "additionalProperties": false
+}

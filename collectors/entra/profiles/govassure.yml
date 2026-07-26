@@ -1,0 +1,223 @@
+id: govassure
+
+name: Microsoft Entra Government Assurance Profile
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra evidence collection profile aligned
+  with government assurance requirements covering
+  identity governance, privileged access, security
+  monitoring, authentication, and compliance controls.
+
+collector: entra
+
+framework:
+  name: Government Assurance
+
+purpose:
+  - identity_governance
+  - privileged_access_management
+  - security_monitoring
+  - regulatory_assurance
+  - compliance_evidence
+
+queries:
+
+  organization:
+    enabled: true
+    endpoint: /organization
+
+  domains:
+    enabled: true
+    endpoint: /domains
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - signInActivity
+      - assignedLicenses
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - securityEnabled
+      - groupTypes
+      - membershipRule
+      - createdDateTime
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  privileged_identity_management:
+    enabled: true
+    endpoint: /roleManagement
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  identity_protection:
+    enabled: true
+    endpoint: /identityProtection/riskyUsers
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - operatingSystem
+      - trustType
+      - isManaged
+      - isCompliant
+      - createdDateTime
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+  signins:
+    enabled: true
+    endpoint: /auditLogs/signIns
+
+  applications:
+    enabled: true
+    endpoint: /applications
+
+  service_principals:
+    enabled: true
+    endpoint: /servicePrincipals
+
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  applications:
+    module: applications
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+
+evidence:
+
+  categories:
+
+    governance:
+      - organization
+      - domains
+      - directory_settings
+
+    identity_management:
+      - users
+      - groups
+      - authentication_methods
+
+    access_control:
+      - directory_roles
+      - privileged_identity_management
+      - conditional_access
+
+    security_monitoring:
+      - audit_logs
+      - signins
+      - identity_protection
+
+    endpoint_security:
+      - devices
+
+    application_security:
+      - applications
+      - service_principals
+
+
+controls:
+
+  government_assurance:
+
+    identity:
+      - identity_lifecycle_management
+      - account_review
+      - external_identity_management
+
+    authentication:
+      - strong_authentication
+      - adaptive_access_control
+      - authentication_monitoring
+
+    privileged_access:
+      - administrator_access_review
+      - privileged_role_management
+      - just_in_time_access
+
+    monitoring:
+      - security_event_collection
+      - audit_trail_retention
+      - suspicious_activity_detection
+
+    configuration:
+      - secure_configuration_review
+      - application_governance
+
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+  parallel_execution:
+    enabled: true
+
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true
+
+  evidence_metadata:
+    enabled: true

@@ -1,0 +1,50 @@
+# collectors/azure/queries/defender-settings.yml
+id: azure.defender_settings
+name: Microsoft Defender for Cloud Settings
+description: >
+  Collect Microsoft Defender for Cloud configurations,
+  security posture settings, and protection status.
+
+service: Microsoft.Security
+resource: defenderSettings
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Security/settings
+api_version: "2023-12-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: SecurityNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - properties.enabled
+  - properties.settingName
+  - properties.value
+
+metadata:
+  category: security
+  evidence_type: defender_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

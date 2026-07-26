@@ -1,0 +1,213 @@
+#collectors\entra\profiles\iso42001.yml
+
+id: iso42001
+
+name: Microsoft Entra ISO 42001 AI Governance Profile
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra evidence collection profile aligned
+  with ISO/IEC 42001 Artificial Intelligence Management
+  System governance requirements. Focuses on identity,
+  access governance, accountability, monitoring, and
+  controlled access to AI-enabled applications and
+  services.
+
+collector: entra
+
+framework:
+  name: ISO/IEC 42001
+  domain: Artificial Intelligence Management System
+
+purpose:
+  - ai_governance
+  - accountability_management
+  - access_control_assessment
+  - application_governance
+  - audit_evidence_collection
+
+queries:
+
+  organization:
+    enabled: true
+    endpoint: /organization
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - signInActivity
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - securityEnabled
+      - groupTypes
+      - membershipRule
+      - createdDateTime
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  applications:
+    enabled: true
+    endpoint: /applications
+    select:
+      - id
+      - displayName
+      - appId
+      - publisherDomain
+      - signInAudience
+      - createdDateTime
+
+  enterprise_apps:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  service_principals:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+  signins:
+    enabled: true
+    endpoint: /auditLogs/signIns
+
+  identity_protection:
+    enabled: true
+    endpoint: /identityProtection/riskyUsers
+
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  applications:
+    module: applications
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+
+evidence:
+
+  categories:
+
+    governance:
+      - organization
+      - directory_roles
+      - administrative_access
+
+    accountability:
+      - users
+      - groups
+      - role_assignments
+
+    ai_application_inventory:
+      - applications
+      - enterprise_apps
+      - service_principals
+
+    access_control:
+      - conditional_access
+      - authentication_methods
+
+    monitoring:
+      - audit_logs
+      - signins
+      - identity_protection
+
+
+controls:
+
+  iso42001:
+
+    governance:
+      - ai_policy_management
+      - accountability_assignment
+      - responsibility_tracking
+
+    risk_management:
+      - access_risk_assessment
+      - identity_risk_monitoring
+      - application_review
+
+    transparency:
+      - application_inventory
+      - service_identity_tracking
+      - audit_traceability
+
+    security:
+      - authentication_controls
+      - privileged_access_management
+      - conditional_access_enforcement
+
+    monitoring:
+      - operational_logging
+      - activity_review
+      - incident_detection
+
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+  parallel_execution:
+    enabled: true
+
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true
+
+  evidence_metadata:
+    enabled: true

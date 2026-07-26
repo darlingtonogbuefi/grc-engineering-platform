@@ -1,0 +1,53 @@
+# collectors/azure/queries/diagnostic-settings.yml
+id: azure.diagnostic_settings
+name: Azure Diagnostic Settings
+description: >
+  Collect Azure diagnostic settings configurations for
+  monitoring, logging, auditing, and compliance evidence.
+
+service: Microsoft.Insights
+resource: diagnosticSettings
+method: GET
+endpoint: /{resourceUri}/providers/microsoft.insights/diagnosticSettings
+api_version: "2021-05-01-preview"
+scope: resource
+
+pagination:
+  enabled: false
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: LoggingNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - properties.logs
+  - properties.metrics
+  - properties.workspaceId
+  - properties.storageAccountId
+  - properties.eventHubAuthorizationRuleId
+  - properties.eventHubName
+  - properties.serviceBusRuleId
+
+metadata:
+  category: monitoring
+  evidence_type: diagnostic_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

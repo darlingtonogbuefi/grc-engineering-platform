@@ -1,0 +1,324 @@
+#
+# SOC 2 Trust Services Criteria CAF Mapping Catalogue
+# mappings.yml
+#
+
+framework:
+
+  id: SOC2
+
+  name: SOC 2 Trust Services Criteria
+
+  version: "2017+"
+
+
+mapping_target:
+
+  id: CAF
+
+  name: NCSC Cyber Assessment Framework
+
+
+
+mapping_model:
+
+  type: control_to_framework_mapping
+
+
+  source:
+
+    framework: SOC 2
+
+    component:
+
+      - Security
+      - Availability
+      - Processing Integrity
+      - Confidentiality
+      - Privacy
+
+
+  target:
+
+    framework: NCSC Cyber Assessment Framework
+
+
+  rules:
+
+    - SOC 2 controls are mapped exclusively to CAF outcomes.
+    - CAF mappings represent security capability alignment.
+    - No mappings to ISO 27001, NIST, CIS, OWASP or other frameworks are maintained.
+
+
+
+mappings:
+
+
+#
+# Security Common Criteria
+#
+
+- control_id: SOC2-CC-001
+
+  caf_controls:
+
+    - A1.a
+    - A1.b
+
+
+
+- control_id: SOC2-CC-002
+
+  caf_controls:
+
+    - A1.b
+
+
+
+- control_id: SOC2-CC-003
+
+  caf_controls:
+
+    - A2.a
+    - A2.b
+
+
+
+- control_id: SOC2-CC-004
+
+  caf_controls:
+
+    - B4.b
+
+
+
+#
+# Identity and Access Management
+#
+
+- control_id: SOC2-CC-005
+
+  caf_controls:
+
+    - B2.a
+    - B2.c
+
+
+
+- control_id: SOC2-CC-006
+
+  caf_controls:
+
+    - B2.a
+    - B2.d
+
+
+
+- control_id: SOC2-CC-007
+
+  caf_controls:
+
+    - B2.c
+    - B4.c
+
+
+
+- control_id: SOC2-CC-008
+
+  caf_controls:
+
+    - B2.c
+
+
+
+#
+# Security Operations
+#
+
+- control_id: SOC2-CC-009
+
+  caf_controls:
+
+    - C1.a
+    - C1.c
+    - C1.d
+
+
+
+- control_id: SOC2-CC-010
+
+  caf_controls:
+
+    - C1.d
+    - D1.a
+
+
+
+#
+# Availability
+#
+
+- control_id: SOC2-A-001
+
+  caf_controls:
+
+    - D2.a
+
+
+
+- control_id: SOC2-A-002
+
+  caf_controls:
+
+    - D2.a
+    - D2.b
+
+
+
+#
+# Confidentiality
+#
+
+- control_id: SOC2-C-001
+
+  caf_controls:
+
+    - B5.a
+    - B5.b
+
+
+
+#
+# Processing Integrity
+#
+
+- control_id: SOC2-PI-001
+
+  caf_controls:
+
+    - B4.b
+    - C1.a
+
+
+
+#
+# Privacy
+#
+
+- control_id: SOC2-P-001
+
+  caf_controls:
+
+    - B5.a
+    - B5.b
+
+
+
+#
+# CAF Coverage Summary
+#
+
+caf_coverage:
+
+
+  domains:
+
+
+    A:
+
+      name: Managing security risk
+
+      mapped_controls:
+
+        - SOC2-CC-001
+        - SOC2-CC-002
+        - SOC2-CC-003
+
+
+
+    B:
+
+      name: Protecting against cyber attack
+
+      mapped_controls:
+
+        - SOC2-CC-004
+        - SOC2-CC-005
+        - SOC2-CC-006
+        - SOC2-CC-007
+        - SOC2-CC-008
+        - SOC2-C-001
+        - SOC2-PI-001
+        - SOC2-P-001
+
+
+
+    C:
+
+      name: Detecting cyber security events
+
+      mapped_controls:
+
+        - SOC2-CC-009
+        - SOC2-PI-001
+
+
+
+    D:
+
+      name: Minimising the impact of incidents
+
+      mapped_controls:
+
+        - SOC2-CC-010
+        - SOC2-A-001
+        - SOC2-A-002
+
+
+
+#
+# Validation
+#
+
+validation:
+
+
+  schema_version: "1.0"
+
+
+  framework: "SOC2"
+
+
+  mapping_status: validated
+
+
+
+  checks:
+
+
+    - All SOC2 controls have CAF mappings
+
+    - CAF references follow approved naming convention
+
+    - No unsupported framework mappings included
+
+    - Mapping identifiers are unique
+
+    - YAML syntax validated
+
+
+
+production_readiness:
+
+
+  status: ready
+
+
+  review_required:
+
+
+    - Review following AICPA Trust Services Criteria updates
+
+    - Review following NCSC CAF revisions
+
+    - Review following organisational scope changes

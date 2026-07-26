@@ -1,0 +1,802 @@
+id: cloud
+
+name: Cloud Security Evidence Model
+
+version: "1.0.0"
+
+description: >
+  Defines evidence requirements for assessing cloud governance,
+  architecture, security, monitoring and resilience across public,
+  private and hybrid cloud environments.
+
+  Evidence may be collected from cloud providers, security platforms,
+  infrastructure automation tools and operational systems.
+
+
+evidence:
+
+
+  #
+  # CLOUD-001 Cloud Governance Framework
+  #
+
+  - id: EVID-CLOUD-001
+
+    controls:
+
+      - CLOUD-001
+
+
+    name: Cloud Governance Evidence
+
+
+    description: >
+      Evidence showing cloud governance processes, policies and
+      accountability.
+
+
+    collectors:
+
+      - azure
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - governance_configuration
+
+
+    objects:
+
+      - cloud_policies
+
+      - governance_standards
+
+      - ownership_records
+
+      - management_structure
+
+
+    validation:
+
+      rules:
+
+        - governance_documented
+
+        - resource_owners_identified
+
+        - security_policies_available
+
+
+
+  #
+  # CLOUD-002 Cloud Asset Inventory
+  #
+
+  - id: EVID-CLOUD-002
+
+    controls:
+
+      - CLOUD-002
+
+
+    name: Cloud Resource Inventory
+
+
+    collectors:
+
+      - azure
+
+      - aws
+
+      - gcp
+
+      - vmware
+
+
+    evidence_type:
+
+      - asset_inventory
+
+
+    objects:
+
+      - subscriptions
+
+      - accounts
+
+      - projects
+
+      - resource_groups
+
+      - cloud_resources
+
+
+    validation:
+
+      rules:
+
+        - all_cloud_accounts_discovered
+
+        - resources_identified
+
+        - ownership_assigned
+
+
+
+  #
+  # CLOUD-003 Secure Cloud Architecture
+  #
+
+  - id: EVID-CLOUD-003
+
+    controls:
+
+      - CLOUD-003
+
+
+    name: Cloud Architecture Evidence
+
+
+    collectors:
+
+      - azure
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - architecture_configuration
+
+
+    objects:
+
+      - landing_zones
+
+      - management_groups
+
+      - organisational_units
+
+      - architecture_standards
+
+      - security_baselines
+
+
+    validation:
+
+      rules:
+
+        - landing_zone_detected
+
+        - security_baselines_present
+
+        - architecture_controls_defined
+
+
+
+  #
+  # CLOUD-004 Cloud Identity Security
+  #
+
+  - id: EVID-CLOUD-004
+
+    controls:
+
+      - CLOUD-004
+
+
+    name: Cloud Identity and Access Evidence
+
+
+    collectors:
+
+      - entra
+
+      - azure
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - identity_access
+
+
+    objects:
+
+      - cloud_roles
+
+      - role_assignments
+
+      - privileged_accounts
+
+      - service_accounts
+
+      - application_identities
+
+
+    validation:
+
+      rules:
+
+        - privileged_access_identified
+
+        - excessive_permissions_detected
+
+        - authentication_controls_available
+
+
+
+  #
+  # CLOUD-005 Cloud Network Security
+  #
+
+  - id: EVID-CLOUD-005
+
+    controls:
+
+      - CLOUD-005
+
+
+    name: Cloud Network Configuration Evidence
+
+
+    collectors:
+
+      - azure
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - network_security
+
+
+    objects:
+
+      - virtual_networks
+
+      - subnets
+
+      - firewalls
+
+      - security_groups
+
+      - routes
+
+      - private_endpoints
+
+
+    validation:
+
+      rules:
+
+        - network_boundaries_identified
+
+        - internet_exposure_detected
+
+        - firewall_controls_available
+
+
+
+  #
+  # CLOUD-006 Secure Configuration
+  #
+
+  - id: EVID-CLOUD-006
+
+    controls:
+
+      - CLOUD-006
+
+
+    name: Cloud Configuration Compliance Evidence
+
+
+    collectors:
+
+      - azure
+
+      - defender
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - configuration_assessment
+
+
+    objects:
+
+      - resource_configuration
+
+      - policy_assignments
+
+      - compliance_results
+
+      - security_recommendations
+
+
+    validation:
+
+      rules:
+
+        - configuration_assessment_available
+
+        - policy_compliance_measured
+
+        - insecure_configuration_detected
+
+
+
+  #
+  # CLOUD-007 Data Protection
+  #
+
+  - id: EVID-CLOUD-007
+
+    controls:
+
+      - CLOUD-007
+
+
+    name: Cloud Data Protection Evidence
+
+
+    collectors:
+
+      - azure
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - data_security
+
+
+    objects:
+
+      - encryption_configuration
+
+      - storage_accounts
+
+      - databases
+
+      - key_vaults
+
+      - certificates
+
+
+    validation:
+
+      rules:
+
+        - encryption_status_available
+
+        - key_management_identified
+
+        - sensitive_storage_identified
+
+
+
+  #
+  # CLOUD-008 Workload Security
+  #
+
+  - id: EVID-CLOUD-008
+
+    controls:
+
+      - CLOUD-008
+
+
+    name: Cloud Workload Security Evidence
+
+
+    collectors:
+
+      - azure
+
+      - defender
+
+      - vmware
+
+
+    evidence_type:
+
+      - workload_security
+
+
+    objects:
+
+      - virtual_machines
+
+      - containers
+
+      - databases
+
+      - applications
+
+      - vulnerability_findings
+
+
+    validation:
+
+      rules:
+
+        - workloads_discovered
+
+        - vulnerabilities_identified
+
+        - security_agents_present
+
+
+
+  #
+  # CLOUD-009 CSPM
+  #
+
+  - id: EVID-CLOUD-009
+
+    controls:
+
+      - CLOUD-009
+
+
+    name: Cloud Security Posture Evidence
+
+
+    collectors:
+
+      - defender
+
+      - azure
+
+      - aws
+
+      - gcp
+
+
+    evidence_type:
+
+      - security_posture
+
+
+    objects:
+
+      - security_assessments
+
+      - compliance_scores
+
+      - recommendations
+
+      - risk_findings
+
+
+    validation:
+
+      rules:
+
+        - posture_assessment_available
+
+        - risks_prioritised
+
+        - remediation_tracking_available
+
+
+
+  #
+  # CLOUD-010 Monitoring
+  #
+
+  - id: EVID-CLOUD-010
+
+    controls:
+
+      - CLOUD-010
+
+
+    name: Cloud Monitoring Evidence
+
+
+    collectors:
+
+      - azure
+
+      - defender
+
+      - monitoring
+
+
+    evidence_type:
+
+      - monitoring_logs
+
+
+    objects:
+
+      - activity_logs
+
+      - audit_logs
+
+      - security_alerts
+
+      - diagnostic_logs
+
+
+    validation:
+
+      rules:
+
+        - logging_enabled
+
+        - security_events_available
+
+        - alerts_generated
+
+
+
+  #
+  # CLOUD-011 Resilience
+  #
+
+  - id: EVID-CLOUD-011
+
+    controls:
+
+      - CLOUD-011
+
+
+    name: Cloud Backup and Recovery Evidence
+
+
+    collectors:
+
+      - azure
+
+      - backup
+
+
+    evidence_type:
+
+      - resilience_configuration
+
+
+    objects:
+
+      - backup_configuration
+
+      - recovery_plans
+
+      - restore_tests
+
+      - availability_configuration
+
+
+    validation:
+
+      rules:
+
+        - critical_resources_protected
+
+        - backups_configured
+
+        - recovery_testing_completed
+
+
+
+  #
+  # CLOUD-012 Provider Governance
+  #
+
+  - id: EVID-CLOUD-012
+
+    controls:
+
+      - CLOUD-012
+
+
+    name: Cloud Provider Assurance Evidence
+
+
+    collectors:
+
+      - cloud_inventory
+
+
+    evidence_type:
+
+      - supplier_assurance
+
+
+    objects:
+
+      - cloud_providers
+
+      - contracts
+
+      - certifications
+
+      - assurance_reports
+
+
+    validation:
+
+      rules:
+
+        - providers_identified
+
+        - assurance_available
+
+        - responsibilities_documented
+
+
+
+  #
+  # CLOUD-013 Infrastructure Automation Security
+  #
+
+  - id: EVID-CLOUD-013
+
+    controls:
+
+      - CLOUD-013
+
+
+    name: Infrastructure as Code Evidence
+
+
+    collectors:
+
+      - azuredevops
+
+      - github
+
+      - devops
+
+
+    evidence_type:
+
+      - infrastructure_automation
+
+
+    objects:
+
+      - terraform
+
+      - bicep
+
+      - cloudformation
+
+      - pipelines
+
+      - deployment_history
+
+
+    validation:
+
+      rules:
+
+        - infrastructure_code_versioned
+
+        - deployments_tracked
+
+        - security_checks_performed
+
+
+
+#
+# Collection Schedule
+#
+
+collection:
+
+
+  refresh_frequency:
+
+
+    asset_inventory:
+
+      daily
+
+
+    identity_access:
+
+      daily
+
+
+    configuration_assessment:
+
+      daily
+
+
+    security_posture:
+
+      daily
+
+
+    monitoring_logs:
+
+      hourly
+
+
+    backup_configuration:
+
+      daily
+
+
+    infrastructure_automation:
+
+      daily
+
+
+
+#
+# Normalisation Contract
+#
+
+normalisation:
+
+
+  required_fields:
+
+
+    - tenant_id
+
+    - organisation_id
+
+    - cloud_provider
+
+    - subscription_id
+
+    - collector
+
+    - collector_version
+
+    - evidence_type
+
+    - object_type
+
+    - object_id
+
+    - collection_timestamp
+
+
+
+#
+# Evidence Quality Rules
+#
+
+quality_checks:
+
+
+  - schema_validation_required
+
+  - source_provider_required
+
+  - timestamp_required
+
+  - ownership_information_required
+
+  - cloud_scope_required
+
+  - raw_evidence_retained
+
+  - normalised_evidence_generated

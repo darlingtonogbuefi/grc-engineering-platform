@@ -1,0 +1,64 @@
+id: azure.virtual_networks
+name: Azure Virtual Networks
+description: >
+  Collect Azure Virtual Network configurations including address
+  spaces, subnets, security associations, and network topology
+  evidence for security and compliance assessments.
+
+service: Microsoft.Network
+resource: virtualNetworks
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks
+api_version: "2024-05-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: NetworkNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - properties
+  - properties.provisioningState
+  - properties.resourceGuid
+  - properties.addressSpace
+  - properties.addressSpace.addressPrefixes
+  - properties.dhcpOptions
+  - properties.dhcpOptions.dnsServers
+  - properties.subnets
+  - properties.virtualNetworkPeerings
+  - properties.enableDdosProtection
+  - properties.ddosProtectionPlan
+  - properties.flowTimeoutInMinutes
+  - properties.encryption
+  - properties.privateEndpointVNetPolicies
+  - properties.enableVmProtection
+
+metadata:
+  category: network_security
+  evidence_type: virtual_network_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

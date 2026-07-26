@@ -1,0 +1,138 @@
+#  .github\workflows\validate-frameworks.yml
+
+name: Validate Framework Definitions
+
+on:
+    push:
+        paths:
+            - "frameworks/**"
+
+            - "config/frameworks.yml"
+
+            - ".github/workflows/validate-frameworks.yml"
+
+    pull_request:
+        paths:
+            - "frameworks/**"
+
+            - "config/frameworks.yml"
+
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+env:
+    PYTHON_VERSION: "3.12"
+
+jobs:
+    discover:
+        runs-on: ubuntu-latest
+
+        outputs:
+            frameworks: ${{ steps.list.outputs.frameworks }}
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - id: list
+
+              shell: bash
+
+              run: |
+
+                  FRAMEWORKS=$(find frameworks \
+                      -mindepth 1 \
+                      -maxdepth 1 \
+                      -type d \
+                      -printf '%f\n' \
+                      | jq -R . \
+                      | jq -s -c .)
+
+                  echo "frameworks=$FRAMEWORKS" >> "$GITHUB_OUTPUT"
+
+    validate:
+        needs: discover
+
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+
+            matrix:
+                framework: ${{ fromJson(needs.discover.outputs.frameworks) }}
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-python@v5
+
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+
+            - run: |
+                  pip install pyyaml yamllint jsonschema
+
+            - name: Validate Directory Structure
+
+              run: |
+
+                  BASE=frameworks/${{ matrix.framework }}
+
+                  REQUIRED=(
+                    controls.yml
+                    mappings.yml
+                    scoring.yml
+                    evidence.yml
+                    metadata.yml
+                  )
+
+                  for file in "${REQUIRED[@]}"
+                  do
+                      if [ ! -f "$BASE/$file" ]; then
+                          echo "Missing $BASE/$file"
+                          exit 1
+                      fi
+                  done
+
+            - name: YAML Validation
+
+              run: |
+
+                  yamllint frameworks/${{ matrix.framework }}
+
+            - name: Verify YAML Loads
+
+              shell: python
+
+              run: |
+
+                  import pathlib
+                  import yaml
+
+                  root = pathlib.Path("frameworks") / "${{ matrix.framework }}"
+
+                  for f in root.glob("*.yml"):
+                      with open(f, "r", encoding="utf-8") as handle:
+                          yaml.safe_load(handle)
+
+                  print("Framework validated successfully.")
+
+            - name: Upload Framework Artifact
+
+              uses: actions/upload-artifact@v4
+
+              with:
+                  name: framework-${{ matrix.framework }}
+
+                  path: frameworks/${{ matrix.framework }}
+
+    summary:
+        needs: validate
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - run: |
+
+                  echo "All framework definitions passed validation."

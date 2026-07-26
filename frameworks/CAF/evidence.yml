@@ -1,0 +1,680 @@
+framework:
+  id: CAF
+  name: Cyber Assessment Framework
+  version: "3.2"
+  evidence_library_version: "1.0"
+  publisher: NCSC
+
+evidence:
+
+  - control_id: A1.a
+    title: Board direction
+    evidence_requirements:
+      - Documented cybersecurity strategy approved by board or executive leadership
+      - Board meeting minutes showing regular security discussions
+      - Cybersecurity risk reporting provided to senior leadership
+      - Security objectives aligned with organisational objectives
+    examples:
+      - Board cybersecurity dashboards
+      - Executive risk reports
+      - Security governance meeting minutes
+      - Approved security strategy documents
+    assessment_notes:
+      - Evidence should demonstrate active ownership rather than simple approval of documents
+
+  - control_id: A1.b
+    title: Roles and responsibilities
+    evidence_requirements:
+      - Defined cybersecurity roles and responsibilities
+      - Security accountability matrix
+      - Named security owners for essential functions
+      - Job descriptions containing security responsibilities
+    examples:
+      - RACI matrix
+      - Organisation charts
+      - Security role descriptions
+      - Responsibility assignment records
+    assessment_notes:
+      - Responsibilities should be assigned to capable individuals with appropriate authority
+
+  - control_id: A1.c
+    title: Decision-making
+    evidence_requirements:
+      - Documented security risk decision process
+      - Risk acceptance records
+      - Security escalation procedures
+      - Records of management security decisions
+    examples:
+      - Risk registers
+      - Risk acceptance forms
+      - Security governance forums
+      - Exception approval records
+    assessment_notes:
+      - Decision makers should understand risk ownership and escalation routes
+
+
+  - control_id: A2.a
+    title: Risk management process
+    evidence_requirements:
+      - Cybersecurity risk management methodology
+      - Current security risk register
+      - Risk assessments for essential functions
+      - Documented risk treatment plans
+    examples:
+      - Enterprise risk register
+      - Threat and vulnerability assessments
+      - Security improvement plans
+      - Risk review meeting records
+    assessment_notes:
+      - Risks should be prioritised based on business impact and threat likelihood
+
+  - control_id: A2.b
+    title: Understanding threat
+    evidence_requirements:
+      - Threat intelligence process
+      - Threat modelling activities
+      - Adversary analysis
+      - Vulnerability assessment outputs
+      - Security architecture reviews
+    examples:
+      - Threat intelligence reports
+      - MITRE ATT&CK mappings
+      - Red team reports
+      - Vulnerability scan reports
+      - Attack path analysis
+    assessment_notes:
+      - Threat understanding should influence architecture and security decisions
+
+  - control_id: A2.c
+    title: Assurance
+    evidence_requirements:
+      - Security assurance plans
+      - Independent security assessments
+      - Penetration testing reports
+      - Remediation tracking
+    examples:
+      - Audit reports
+      - Penetration test results
+      - Compliance assessment reports
+      - Security improvement backlog
+    assessment_notes:
+      - Assurance activities should verify security controls remain effective over time
+
+
+  - control_id: A3.a
+    title: Asset management
+    evidence_requirements:
+      - Complete asset inventory
+      - Hardware and software ownership records
+      - Asset classification records
+      - Asset lifecycle management procedures
+    examples:
+      - CMDB exports
+      - Hardware inventory
+      - Software inventory
+      - Data classification registers
+      - Asset disposal records
+    assessment_notes:
+      - Inventory should include assets supporting essential functions
+
+
+  - control_id: A4.a
+    title: Supply chain
+    evidence_requirements:
+      - Supplier security assessment process
+      - Supplier inventory
+      - Security clauses in contracts
+      - Third-party risk assessments
+      - Supplier monitoring records
+    examples:
+      - Supplier questionnaires
+      - Contracts and security schedules
+      - Supplier assurance reports
+      - Third-party risk register
+    assessment_notes:
+      - Critical suppliers should have proportionate assurance requirements
+
+  - control_id: A4.b
+    title: Secure software development and support
+    evidence_requirements:
+      - Secure development lifecycle process
+      - Software dependency management
+      - Code security testing
+      - Release approval procedures
+      - Software integrity verification
+    examples:
+      - Secure coding standards
+      - CI/CD security pipelines
+      - SAST and DAST reports
+      - Software bill of materials (SBOM)
+      - Change management records
+    assessment_notes:
+      - Evidence should demonstrate security throughout development and maintenance
+
+  - control_id: B1.a
+    title: Policy, process and procedure development
+    evidence_requirements:
+      - Approved cybersecurity policies and procedures
+      - Security governance framework documentation
+      - Regulatory and compliance mapping
+      - Policy review schedule
+      - Security KPIs reported to management
+    examples:
+      - Information security policy
+      - Cybersecurity standards catalogue
+      - Compliance obligations register
+      - Policy review records
+      - Security metrics dashboards
+    assessment_notes:
+      - Policies should be practical, maintained and aligned with operational risks
+
+
+  - control_id: B1.b
+    title: Policy, process and procedure implementation
+    evidence_requirements:
+      - Evidence that security policies are implemented operationally
+      - Staff awareness of security responsibilities
+      - Policy compliance monitoring
+      - Records of policy exceptions and corrective actions
+    examples:
+      - Internal audit findings
+      - Security awareness records
+      - Exception registers
+      - Compliance monitoring reports
+      - Disciplinary or corrective action records
+    assessment_notes:
+      - Evidence should demonstrate adoption and effectiveness, not only documentation
+
+
+  - control_id: B2.a
+    title: Identity verification, authentication and authorisation
+    evidence_requirements:
+      - Identity lifecycle management procedures
+      - Authentication standards
+      - MFA implementation evidence
+      - Access approval workflows
+      - Periodic access reviews
+    examples:
+      - Identity management system reports
+      - MFA configuration screenshots
+      - User access review records
+      - Joiner mover leaver procedures
+      - Authentication policy
+    assessment_notes:
+      - Access should follow least privilege and strong authentication principles
+
+
+  - control_id: B2.b
+    title: Device management
+    evidence_requirements:
+      - Managed device inventory
+      - Device compliance policies
+      - Trusted device authentication controls
+      - Privileged access workstation controls
+      - Remote device security controls
+    examples:
+      - Mobile device management reports
+      - Endpoint compliance dashboards
+      - Certificate management records
+      - Device discovery reports
+      - VPN access policies
+    assessment_notes:
+      - Only authorised and trusted devices should access essential systems
+
+
+  - control_id: B2.c
+    title: Privileged user management
+    evidence_requirements:
+      - Privileged account inventory
+      - Privileged access management procedures
+      - Administrative activity monitoring
+      - Temporary privileged access records
+      - Privileged access reviews
+    examples:
+      - PAM platform reports
+      - Administrator account reviews
+      - Session recordings
+      - Break-glass account procedures
+      - Admin activity logs
+    assessment_notes:
+      - Privileged access should be controlled, monitored and attributable
+
+
+  - control_id: B2.d
+    title: Identity and access management (IdAM)
+    evidence_requirements:
+      - Central identity management process
+      - Access provisioning and removal procedures
+      - Authentication monitoring
+      - Access logging and review processes
+    examples:
+      - IAM system reports
+      - Access certification reports
+      - Authentication logs
+      - Account lifecycle records
+      - Failed authentication alerts
+    assessment_notes:
+      - Access should be reviewed regularly and inappropriate access removed
+
+
+  - control_id: B3.a
+    title: Understanding data
+    evidence_requirements:
+      - Data inventory
+      - Data classification scheme
+      - Data flow documentation
+      - Data ownership records
+      - Data dependency assessments
+    examples:
+      - Data asset register
+      - Information classification policy
+      - Data flow diagrams
+      - Data mapping exercises
+      - Privacy impact assessments
+    assessment_notes:
+      - Important data supporting essential functions should be identified and understood
+
+
+  - control_id: B3.b
+    title: Data in transit
+    evidence_requirements:
+      - Encryption standards
+      - Network protection controls
+      - Secure communication protocols
+      - Data transfer procedures
+    examples:
+      - TLS configuration reports
+      - Network architecture diagrams
+      - VPN configuration
+      - Secure file transfer procedures
+      - Encryption compliance reports
+    assessment_notes:
+      - Sensitive data should be protected when transmitted over untrusted networks
+
+
+  - control_id: B3.c
+    title: Stored data
+    evidence_requirements:
+      - Data protection standards
+      - Encryption at rest controls
+      - Backup protection measures
+      - Data retention procedures
+      - Archive management controls
+    examples:
+      - Storage encryption settings
+      - Backup policies
+      - Retention schedules
+      - Data loss prevention reports
+      - Storage access reviews
+    assessment_notes:
+      - Stored data protections should reflect sensitivity and business impact
+
+
+  - control_id: B3.d
+    title: Mobile data
+    evidence_requirements:
+      - Mobile device security policy
+      - Mobile device inventory
+      - Remote wipe capability evidence
+      - Mobile encryption configuration
+      - Mobile data protection controls
+    examples:
+      - MDM reports
+      - Mobile compliance dashboards
+      - Device encryption reports
+      - Remote wipe test records
+      - Mobile application controls
+    assessment_notes:
+      - Mobile devices containing essential function data should remain under organisational control
+
+
+  - control_id: B3.e
+    title: Media / equipment sanitisation
+    evidence_requirements:
+      - Media disposal procedure
+      - Asset disposal records
+      - Sanitisation certificates
+      - Secure reuse processes
+    examples:
+      - Data destruction certificates
+      - Asset retirement records
+      - Disk wiping reports
+      - Disposal supplier assurance records
+    assessment_notes:
+      - Disposal should prevent recovery of sensitive information
+
+
+  - control_id: B4.a
+    title: Secure by Design
+    evidence_requirements:
+      - Secure architecture principles
+      - Security design reviews
+      - Network segmentation documentation
+      - Threat modelling outputs
+      - Security testing evidence
+    examples:
+      - Architecture diagrams
+      - Security design reviews
+      - Threat models
+      - Penetration testing reports
+      - Application security assessments
+    assessment_notes:
+      - Security should be incorporated during design rather than added later
+
+
+  - control_id: B4.b
+    title: Secure configuration
+    evidence_requirements:
+      - Secure configuration standards
+      - Baseline configurations
+      - Configuration change records
+      - Software allow-listing controls
+      - Default account management
+    examples:
+      - CIS benchmark reports
+      - Configuration management records
+      - Hardening guides
+      - Change tickets
+      - Endpoint configuration reports
+    assessment_notes:
+      - Systems should maintain approved secure configurations
+
+
+  - control_id: B4.c
+    title: Secure management
+    evidence_requirements:
+      - Administrative access procedures
+      - Privileged administration controls
+      - Network diagrams
+      - Malware protection evidence
+      - Administrative activity monitoring
+    examples:
+      - Privileged access reports
+      - Administration workstation records
+      - Network documentation
+      - Endpoint protection reports
+      - Security operations reports
+    assessment_notes:
+      - Administration should only occur through controlled and trusted mechanisms
+
+
+  - control_id: B4.d
+    title: Vulnerability management
+    evidence_requirements:
+      - Vulnerability management process
+      - Vulnerability scanning reports
+      - Patch management records
+      - Remediation tracking
+      - Security testing evidence
+    examples:
+      - Vulnerability scanner reports
+      - Patch compliance dashboards
+      - CVE remediation records
+      - Penetration testing reports
+      - Risk acceptance records
+    assessment_notes:
+      - Vulnerabilities should be identified, prioritised and remediated based on risk
+
+
+  - control_id: B5.a
+    title: Resilience preparation
+    evidence_requirements:
+      - Business continuity plans
+      - Disaster recovery plans
+      - Recovery objectives
+      - Resilience testing records
+      - Threat intelligence reviews
+    examples:
+      - BCP documents
+      - Disaster recovery exercises
+      - Tabletop exercise reports
+      - Recovery test results
+      - Risk assessments
+    assessment_notes:
+      - Recovery arrangements should be tested and improved regularly
+
+
+  - control_id: B5.b
+    title: Design for resilience
+    evidence_requirements:
+      - Resilient architecture documentation
+      - Network segmentation evidence
+      - Dependency assessments
+      - Single point of failure analysis
+      - Availability planning
+    examples:
+      - High availability designs
+      - Network diagrams
+      - Dependency maps
+      - Failover test reports
+      - Capacity assessments
+    assessment_notes:
+      - Resilience should address technical and organisational dependencies
+
+
+  - control_id: B5.c
+    title: Backups
+    evidence_requirements:
+      - Backup policy
+      - Backup schedules
+      - Backup testing records
+      - Recovery test evidence
+      - Backup protection controls
+    examples:
+      - Backup system reports
+      - Restore test results
+      - Immutable backup configuration
+      - Backup access reviews
+      - Recovery procedures
+    assessment_notes:
+      - Backups should be protected, tested and recoverable
+
+
+  - control_id: B6.a
+    title: Cyber security culture
+    evidence_requirements:
+      - Executive cybersecurity communications
+      - Security culture initiatives
+      - Reporting channels for security concerns
+      - Leadership involvement records
+    examples:
+      - Executive messages
+      - Security campaigns
+      - Incident reporting processes
+      - Security awareness surveys
+    assessment_notes:
+      - Security responsibility should be embedded across the organisation
+
+
+  - control_id: B6.b
+    title: Cyber security training
+    evidence_requirements:
+      - Security awareness training programme
+      - Training completion records
+      - Role-based training plans
+      - Training effectiveness reviews
+    examples:
+      - Learning management system reports
+      - Phishing simulation results
+      - Developer security training records
+      - Awareness assessments
+    assessment_notes:
+      - Training should be appropriate to roles and refreshed regularly
+
+
+  - control_id: C1.a
+    title: Sources and tools for logging and monitoring
+    evidence_requirements:
+      - Logging architecture
+      - Security monitoring strategy
+      - Log source inventory
+      - Time synchronisation configuration
+      - Monitoring coverage reviews
+    examples:
+      - SIEM configuration
+      - Log source lists
+      - NTP configuration
+      - Monitoring dashboards
+      - Detection coverage reports
+    assessment_notes:
+      - Monitoring should support detection, investigation and response
+
+
+  - control_id: C1.b
+    title: Securing logs
+    evidence_requirements:
+      - Log access controls
+      - Log retention policy
+      - Log integrity protections
+      - Audit trails for log access
+    examples:
+      - SIEM access reviews
+      - Log retention settings
+      - Immutable logging configuration
+      - Audit records
+    assessment_notes:
+      - Logs must remain trustworthy and protected from tampering
+
+
+  - control_id: C1.c
+    title: Generating alerts
+    evidence_requirements:
+      - Detection rules
+      - Alerting procedures
+      - Threat intelligence integration
+      - Alert tuning records
+    examples:
+      - SIEM detection rules
+      - SOC dashboards
+      - IOC feeds
+      - Alert performance metrics
+    assessment_notes:
+      - Detection capability should evolve with threats
+
+
+  - control_id: C1.d
+    title: Triage of security alerts
+    evidence_requirements:
+      - Alert triage procedures
+      - Security playbooks
+      - Investigation records
+      - Incident escalation procedures
+    examples:
+      - SOC runbooks
+      - Case management records
+      - Incident tickets
+      - Investigation reports
+    assessment_notes:
+      - Alerts should be consistently assessed and acted upon
+
+
+  - control_id: C1.e
+    title: Personnel skills for monitoring and detection
+    evidence_requirements:
+      - SOC role definitions
+      - Analyst training records
+      - Skills matrix
+      - Operational procedures
+    examples:
+      - SOC competency matrix
+      - Training certificates
+      - Shift procedures
+      - Analyst performance reviews
+    assessment_notes:
+      - Monitoring teams require appropriate skills and capacity
+
+
+  - control_id: C1.f
+    title: Understanding user and systems behaviour, and threat intelligence
+    evidence_requirements:
+      - Threat intelligence process
+      - Behaviour monitoring capability
+      - Threat hunting procedures
+      - Intelligence sharing arrangements
+    examples:
+      - Threat intelligence reports
+      - UEBA dashboards
+      - Threat hunting reports
+      - Information sharing records
+    assessment_notes:
+      - Intelligence should influence detection improvements
+
+
+  - control_id: D1.a
+    title: Response plan
+    evidence_requirements:
+      - Incident response plan
+      - Incident roles and responsibilities
+      - Communication procedures
+      - Escalation processes
+    examples:
+      - Incident response handbook
+      - Contact lists
+      - Crisis communication plans
+      - Incident classification criteria
+    assessment_notes:
+      - Plans should cover preparation through recovery
+
+
+  - control_id: D1.b
+    title: Response and recovery capability
+    evidence_requirements:
+      - Incident response capability assessment
+      - Response team structure
+      - External support arrangements
+      - Recovery resources
+    examples:
+      - Incident response retainers
+      - Response team rosters
+      - Recovery procedures
+      - Specialist supplier agreements
+    assessment_notes:
+      - Teams should have authority, skills and resources to respond
+
+
+  - control_id: D1.c
+    title: Testing and exercising
+    evidence_requirements:
+      - Incident response exercise schedule
+      - Exercise scenarios
+      - Exercise reports
+      - Improvement actions
+    examples:
+      - Tabletop exercise reports
+      - Red team exercises
+      - Lessons learned records
+      - Recovery testing results
+    assessment_notes:
+      - Exercises should validate the complete response lifecycle
+
+
+  - control_id: D2.a
+    title: Post incident analysis
+    evidence_requirements:
+      - Post incident review process
+      - Root cause analysis
+      - Incident reports
+      - Improvement recommendations
+    examples:
+      - Post incident reports
+      - RCA documentation
+      - Corrective action plans
+      - Management reviews
+    assessment_notes:
+      - Analysis should consider technical, organisational and human factors
+
+
+  - control_id: D2.b
+    title: Using incidents to drive improvements
+    evidence_requirements:
+      - Lessons learned process
+      - Improvement tracking
+      - Risk updates following incidents
+      - Management reporting
+    examples:
+      - Improvement registers
+      - Updated policies
+      - Security roadmap changes
+      - Risk register updates
+    assessment_notes:
+      - Incidents should result in measurable security improvements

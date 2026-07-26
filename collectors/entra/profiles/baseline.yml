@@ -1,0 +1,164 @@
+#collectors\entra\profiles\baseline.yml
+
+
+
+id: baseline
+
+name: Microsoft Entra Baseline Profile
+
+version: "1.0.0"
+
+description: >
+  Baseline Microsoft Entra evidence collection
+  profile covering core identity, access,
+  device, application, and security inventory.
+
+collector: entra
+
+purpose:
+  - identity_inventory
+  - access_review
+  - security_baseline
+  - compliance_readiness
+
+queries:
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - department
+      - jobTitle
+      - signInActivity
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - groupTypes
+      - securityEnabled
+      - mailEnabled
+      - createdDateTime
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - deviceId
+      - operatingSystem
+      - operatingSystemVersion
+      - trustType
+      - isCompliant
+      - isManaged
+      - createdDateTime
+
+  applications:
+    enabled: true
+    endpoint: /applications
+    select:
+      - id
+      - displayName
+      - appId
+      - publisherDomain
+      - signInAudience
+      - createdDateTime
+
+  service_principals:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  organization:
+    enabled: true
+    endpoint: /organization
+
+normalizers:
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  applications:
+    module: applications
+
+  roles:
+    module: roles
+
+evidence:
+  categories:
+
+    identity:
+      - users
+      - groups
+
+    access_control:
+      - directory_roles
+      - group_membership
+
+    device_security:
+      - devices
+
+    application_security:
+      - applications
+      - service_principals
+
+    tenant_configuration:
+      - organization
+
+controls:
+
+  identity_management:
+    - account_inventory
+    - user_lifecycle
+    - guest_account_visibility
+
+  access_management:
+    - role_assignments
+    - group_membership_review
+
+  device_management:
+    - registered_devices
+    - compliance_state
+
+  application_governance:
+    - application_inventory
+    - enterprise_application_visibility
+
+collection:
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+output:
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true

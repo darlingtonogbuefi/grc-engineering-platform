@@ -1,0 +1,222 @@
+# ---------------------------------------------------------------------------
+# Framework Import Configuration
+#
+# Defines how the importer reads and transforms CAF source data.
+#
+# This file contains framework-specific configuration.
+# The importer engine remains generic.
+# ---------------------------------------------------------------------------
+
+
+framework:
+
+  id: CAF
+
+  name: Cyber Assessment Framework
+
+  version: "3.2"
+
+  description: >
+    UK National Cyber Security Centre Cyber Assessment Framework.
+
+  owner: NCSC
+
+  source_type: excel
+
+
+# ---------------------------------------------------------------------------
+# Source Configuration
+# ---------------------------------------------------------------------------
+
+source:
+
+  filename: CAF.xlsx
+
+  worksheet: CAF
+
+  header_row: 1
+
+
+# ---------------------------------------------------------------------------
+# Output Configuration
+# ---------------------------------------------------------------------------
+
+output:
+
+  directory: ../../frameworks/CAF
+
+  files:
+
+    metadata: metadata.yml
+
+    controls: controls.yml
+
+    mappings: mappings.yml
+
+    evidence: evidence.yml
+
+    scoring: scoring.yml
+
+
+
+# ---------------------------------------------------------------------------
+# Column Mapping
+#
+# Excel columns are defined here.
+#
+# The importer reads this configuration and maps values
+# into the canonical models.
+# ---------------------------------------------------------------------------
+
+columns:
+
+  id: A
+
+  domain: B
+
+  title: C
+
+  description: D
+
+
+  nist:
+
+    column: E
+
+    type: list
+
+
+  capability:
+
+    column: F
+
+    type: list
+
+
+  cloud_security_principles:
+
+    column: G
+
+    type: list
+
+
+  cis:
+
+    column: H
+
+    type: list
+
+
+  owasp:
+
+    column: I
+
+    type: list
+
+
+  iso27001:
+
+    column: J
+
+    type: list
+
+
+
+# ---------------------------------------------------------------------------
+# Transformation Rules
+#
+# Controls how values are cleaned before entering models.
+# ---------------------------------------------------------------------------
+
+transformations:
+
+
+  clean_text:
+
+    enabled: true
+
+
+  split_multiline:
+
+    enabled: true
+
+
+  split_lists:
+
+    enabled: true
+
+    delimiter: ","
+
+
+  normalise_ids:
+
+    enabled: true
+
+
+
+# ---------------------------------------------------------------------------
+# Mapping Configuration
+#
+# Defines where framework references are stored.
+# ---------------------------------------------------------------------------
+
+mapping:
+
+
+  enabled: true
+
+
+  supported:
+
+    - nist
+
+    - iso27001
+
+    - cis
+
+    - owasp
+
+    - cloud_security_principles
+
+
+
+# ---------------------------------------------------------------------------
+# Evidence Generation
+# ---------------------------------------------------------------------------
+
+evidence:
+
+
+  enabled: true
+
+
+  default_type: manual
+
+
+  generate_from:
+
+    - capability
+
+    - control_description
+
+
+
+# ---------------------------------------------------------------------------
+# Validation
+# ---------------------------------------------------------------------------
+
+validation:
+
+
+  enabled: true
+
+
+  schemas:
+
+    framework: ../../schemas/framework.schema.json
+
+    control: ../../schemas/control.schema.json
+
+    mapping: ../../schemas/mapping.schema.json
+
+    evidence: ../../schemas/evidence.schema.json

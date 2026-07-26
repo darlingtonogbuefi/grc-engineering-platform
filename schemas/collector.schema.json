@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grc-engineering-platform/schemas/collector.schema.json",
+  "title": "Collector Schema",
+  "description": "Defines a collector plugin and its configuration.",
+  "type": "object",
+
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "provider",
+    "module",
+    "authentication",
+    "schedule",
+    "evidenceTypes"
+  ],
+
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+
+    "name": {
+      "type": "string"
+    },
+
+    "provider": {
+      "type": "string"
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+
+    "module": {
+      "type": "string",
+      "description": "Python module implementing the collector"
+    },
+
+    "authentication": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2",
+            "managedIdentity",
+            "token",
+            "pat",
+            "certificate",
+            "basic",
+            "apikey"
+          ]
+        },
+
+        "profile": {
+          "type": "string"
+        },
+
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "schedule": {
+      "type": "string",
+      "examples": [
+        "hourly",
+        "daily",
+        "weekly",
+        "monthly"
+      ]
+    },
+
+    "timeoutSeconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+
+    "retryCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "pageSize": {
+      "type": "integer",
+      "minimum": 1
+    },
+
+    "supportsPagination": {
+      "type": "boolean"
+    },
+
+    "supportsDeltaQueries": {
+      "type": "boolean"
+    },
+
+    "evidenceTypes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "identity",
+          "endpoint",
+          "cloud",
+          "networking",
+          "monitoring",
+          "logging",
+          "backup",
+          "vulnerability",
+          "m365",
+          "devops",
+          "business-apps"
+        ]
+      }
+    },
+
+    "outputSchema": {
+      "type": "string",
+      "default": "schemas/evidence.schema.json"
+    },
+
+    "logging": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": [
+            "DEBUG",
+            "INFO",
+            "WARNING",
+            "ERROR"
+          ]
+        },
+
+        "structured": {
+          "type": "boolean"
+        }
+      }
+    },
+
+    "metadata": {
+      "type": "object"
+    }
+  },
+
+  "additionalProperties": false
+}

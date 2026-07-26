@@ -1,0 +1,897 @@
+id: cloud
+
+name: Cloud Security Framework Mappings
+
+version: "1.0.0"
+
+description: >
+  Maps cloud security capability controls to recognised cybersecurity
+  frameworks. These mappings allow cloud evidence to contribute to
+  compliance assessments without coupling cloud engineering controls
+  directly to a specific framework.
+
+
+mappings:
+
+
+  #
+  # CLOUD-001 Cloud Governance
+  #
+
+  CLOUD-001:
+
+    name: Cloud Governance Framework
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B1.a
+            name: Governance and leadership
+
+
+          - id: B3.a
+            name: Security governance
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.1
+            name: Policies for information security
+
+
+          - id: A.5.2
+            name: Information security roles and responsibilities
+
+
+          - id: A.5.37
+            name: Documented operating procedures
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC1.1
+
+          - id: CC1.2
+
+          - id: CC1.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: GV.OC
+            name: Governance and oversight
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Secure Configuration
+
+
+
+  #
+  # CLOUD-002 Asset Management
+  #
+
+  CLOUD-002:
+
+    name: Cloud Asset Inventory
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: A1.a
+            name: Asset management
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.9
+            name: Inventory of information and other associated assets
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+          - id: CC7.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: ID.AM
+            name: Asset management
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Asset Management
+
+
+
+  #
+  # CLOUD-003 Secure Architecture
+  #
+
+  CLOUD-003:
+
+    name: Secure Cloud Architecture
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.b
+            name: Secure architecture
+
+
+          - id: B3.c
+            name: Secure development and deployment
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.23
+            name: Information security for use of cloud services
+
+
+          - id: A.8.27
+            name: Secure system architecture and engineering principles
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.6
+
+          - id: CC8.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IP
+            name: Platform integrity
+
+
+
+  #
+  # CLOUD-004 Identity Security
+  #
+
+  CLOUD-004:
+
+    name: Cloud Identity and Access Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.a
+            name: Identity verification, authentication and authorisation
+
+
+          - id: B2.c
+            name: Privileged user management
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.15
+            name: Access control
+
+
+          - id: A.5.16
+            name: Identity management
+
+
+          - id: A.5.17
+            name: Authentication information
+
+
+          - id: A.5.18
+            name: Access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+          - id: CC6.2
+
+          - id: CC6.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+            name: Identity management
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: User Access Control
+
+
+
+  #
+  # CLOUD-005 Network Security
+  #
+
+  CLOUD-005:
+
+    name: Cloud Network Security
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.b
+            name: Secure architecture
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.20
+            name: Networks security
+
+
+          - id: A.8.22
+            name: Segregation of networks
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.6
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.DS
+            name: Data security
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Firewalls
+
+          - id: Secure Configuration
+
+
+
+  #
+  # CLOUD-006 Secure Configuration
+  #
+
+  CLOUD-006:
+
+    name: Cloud Secure Configuration
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.a
+
+          - id: B5.a
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.9
+            name: Configuration management
+
+
+          - id: A.8.8
+            name: Management of technical vulnerabilities
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.6
+
+          - id: CC7.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IP
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Secure Configuration
+
+
+
+  #
+  # CLOUD-007 Data Protection
+  #
+
+  CLOUD-007:
+
+    name: Cloud Data Protection
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B4.a
+            name: Data security
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.12
+            name: Classification of information
+
+
+          - id: A.5.14
+            name: Information transfer
+
+
+          - id: A.8.24
+            name: Use of cryptography
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.5
+
+          - id: CC6.7
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.DS
+            name: Data security
+
+
+
+  #
+  # CLOUD-008 Workload Security
+  #
+
+  CLOUD-008:
+
+    name: Cloud Workload Protection
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B5.a
+            name: Vulnerability management
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.8
+            name: Management of technical vulnerabilities
+
+
+          - id: A.8.19
+            name: Installation of software on operational systems
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.1
+
+          - id: CC7.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.PS
+            name: Platform security
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Malware Protection
+
+          - id: Vulnerability Management
+
+
+
+  #
+  # CLOUD-009 CSPM
+  #
+
+  CLOUD-009:
+
+    name: Cloud Security Posture Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: D1.b
+            name: Security monitoring and improvement
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.7
+            name: Threat intelligence
+
+
+          - id: A.8.8
+            name: Technical vulnerability management
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.1
+
+          - id: CC7.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: ID.RA
+            name: Risk assessment
+
+
+
+  #
+  # CLOUD-010 Monitoring
+  #
+
+  CLOUD-010:
+
+    name: Cloud Security Monitoring
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: D1.a
+            name: Monitoring and detection
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.15
+            name: Logging
+
+
+          - id: A.8.16
+            name: Monitoring activities
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.2
+
+          - id: CC7.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: DE.CM
+            name: Security continuous monitoring
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Malware Protection
+
+
+
+  #
+  # CLOUD-011 Resilience
+  #
+
+  CLOUD-011:
+
+    name: Cloud Backup and Recovery
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: C1.a
+            name: Service resilience
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.13
+            name: Information backup
+
+
+          - id: A.5.30
+            name: ICT readiness for business continuity
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: A1.2
+
+          - id: A1.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IR
+            name: Resilience
+
+
+
+  #
+  # CLOUD-012 Provider Governance
+  #
+
+  CLOUD-012:
+
+    name: Cloud Service Provider Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.a
+            name: Security governance
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.19
+            name: Information security in supplier relationships
+
+
+          - id: A.5.20
+            name: Addressing information security within supplier agreements
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC9.1
+
+          - id: CC9.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: GV.SC
+            name: Supply chain risk management
+
+
+
+  #
+  # CLOUD-013 Infrastructure Automation
+  #
+
+  CLOUD-013:
+
+    name: Infrastructure as Code Security
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.c
+            name: Secure development and deployment
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.25
+            name: Secure development lifecycle
+
+
+          - id: A.8.32
+            name: Change management
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC8.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IP
+            name: Platform integrity
+
+
+
+#
+# Framework Coverage Summary
+#
+
+framework_coverage:
+
+
+  CAF:
+
+    controls:
+
+      - B1.a
+      - B2.a
+      - B2.c
+      - B3.a
+      - B3.b
+      - B3.c
+      - B4.a
+      - B5.a
+      - C1.a
+      - D1.a
+      - D1.b
+
+
+
+  ISO27001:
+
+    controls:
+
+      - A.5.1
+      - A.5.2
+      - A.5.7
+      - A.5.9
+      - A.5.12
+      - A.5.14
+      - A.5.15
+      - A.5.16
+      - A.5.17
+      - A.5.18
+      - A.5.19
+      - A.5.20
+      - A.5.23
+      - A.5.30
+      - A.8.8
+      - A.8.9
+      - A.8.13
+      - A.8.15
+      - A.8.16
+      - A.8.20
+      - A.8.22
+      - A.8.24
+      - A.8.25
+      - A.8.27
+      - A.8.32
+
+
+
+  SOC2:
+
+    controls:
+
+      - CC1.1
+      - CC1.2
+      - CC1.3
+      - CC6.1
+      - CC6.2
+      - CC6.3
+      - CC6.5
+      - CC6.6
+      - CC6.7
+      - CC7.1
+      - CC7.2
+      - CC7.3
+      - CC8.1
+      - CC9.1
+      - CC9.2
+      - A1.2
+      - A1.3
+
+
+
+  GovAssure:
+
+    controls:
+
+      - GV.OC
+      - GV.SC
+      - ID.AM
+      - ID.RA
+      - PR.AA
+      - PR.DS
+      - PR.IP
+      - PR.IR
+      - PR.PS
+      - DE.CM
+
+
+
+  CyberEssentials:
+
+    controls:
+
+      - Asset Management
+      - User Access Control
+      - Secure Configuration
+      - Firewalls
+      - Malware Protection
+      - Vulnerability Management

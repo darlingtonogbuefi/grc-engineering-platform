@@ -1,0 +1,64 @@
+# ==============================================================================
+# GRC Engineering Platform
+# Dashboard Configuration
+# ==============================================================================
+#
+# Dashboard generation and publication settings.
+#
+# ==============================================================================
+
+schemaVersion: "1.0"
+
+dashboards:
+
+  enabled: true
+
+  outputDirectory: dashboards
+
+  refreshAfterCollection: true
+
+  publishHtml: true
+
+  publishJson: true
+
+widgets:
+
+  complianceScore: true
+
+  secureScore: true
+
+  evidenceStatus: true
+
+  collectorStatus: true
+
+  frameworkCoverage: true
+
+  deviceCompliance: true
+
+  privilegedAccounts: true
+
+frameworks:
+
+  CAF: true
+
+  ISO27001: true
+
+  SOC2: true
+
+  GovAssure: true
+
+  CyberEssentials: true
+
+branding:
+
+  title: GRC Engineering Dashboard
+
+  theme: default
+
+  logo: assets/logo.png
+
+metadata:
+
+  owner: GRC Engineering Platform
+
+  schema: "1.0"

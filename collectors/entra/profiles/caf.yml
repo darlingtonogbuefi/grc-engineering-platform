@@ -1,0 +1,179 @@
+#collectors\entra\profiles\iso42001.yml
+
+
+id: caf
+
+name: Microsoft Cyber Assessment Framework Profile
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra evidence collection profile aligned
+  with Cyber Assessment Framework identity, access,
+  governance, and monitoring requirements.
+
+collector: entra
+
+framework:
+  name: Cyber Assessment Framework
+  short_name: CAF
+
+purpose:
+  - identity_and_access_management
+  - privileged_access_control
+  - authentication_assurance
+  - security_monitoring
+  - governance_review
+
+queries:
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - signInActivity
+      - assignedLicenses
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - securityEnabled
+      - groupTypes
+      - membershipRule
+      - createdDateTime
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  privileged_identity_management:
+    enabled: true
+    endpoint: /roleManagement
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  signins:
+    enabled: true
+    endpoint: /auditLogs/signIns
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+  identity_protection:
+    enabled: true
+    endpoint: /identityProtection/riskyUsers
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - operatingSystem
+      - isCompliant
+      - isManaged
+      - trustType
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+evidence:
+
+  categories:
+
+    identity:
+      - users
+      - groups
+      - authentication_methods
+
+    access_control:
+      - directory_roles
+      - privileged_identity_management
+      - conditional_access
+
+    monitoring:
+      - audit_logs
+      - signins
+      - identity_protection
+
+    device_security:
+      - devices
+
+controls:
+
+  CAF:
+
+    identity:
+      - establish_identity
+      - manage_user_access
+      - review_accounts
+
+    authentication:
+      - enforce_strong_authentication
+      - monitor_authentication_activity
+
+    privileged_access:
+      - privileged_role_review
+      - just_in_time_access
+
+    monitoring:
+      - audit_activity
+      - security_event_review
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true

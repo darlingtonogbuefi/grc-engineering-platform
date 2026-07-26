@@ -1,0 +1,667 @@
+id: cloud
+
+name: Cloud Security Governance Controls
+
+version: "1.0.0"
+
+description: >
+  Defines security and governance controls for cloud platforms,
+  services and workloads. Controls provide a common security model
+  across public, private and hybrid cloud environments.
+
+
+controls:
+
+
+  #
+  # Cloud Governance
+  #
+
+  - id: CLOUD-001
+
+    name: Cloud Governance Framework
+
+    objective: >
+      Establish governance over cloud adoption, ownership and
+      security management.
+
+    description: >
+      Cloud services operate under defined governance processes,
+      policies and accountability models.
+
+    capability_area:
+
+      - Cloud Governance
+
+
+    requirements:
+
+      - >
+        Cloud governance policies are defined.
+
+      - >
+        Cloud resources have accountable owners.
+
+      - >
+        Cloud security standards are documented.
+
+      - >
+        Cloud changes follow governance processes.
+
+
+    evidence_required:
+
+      - cloud_policies
+
+      - ownership_records
+
+      - governance_configuration
+
+
+
+  #
+  # Cloud Asset Management
+  #
+
+  - id: CLOUD-002
+
+    name: Cloud Asset Inventory
+
+    objective: >
+      Maintain visibility of all cloud resources.
+
+    description: >
+      Cloud subscriptions, accounts, projects and resources are
+      inventoried and classified.
+
+    capability_area:
+
+      - Asset Management
+
+
+    requirements:
+
+      - >
+        All cloud resources are discovered.
+
+      - >
+        Resource ownership is recorded.
+
+      - >
+        Unauthorised resources are identified.
+
+      - >
+        Asset lifecycle is managed.
+
+
+    evidence_required:
+
+      - resource_inventory
+
+      - subscriptions
+
+      - projects
+
+      - ownership
+
+
+
+  #
+  # Secure Architecture
+  #
+
+  - id: CLOUD-003
+
+    name: Secure Cloud Architecture
+
+    objective: >
+      Ensure cloud environments follow secure design principles.
+
+    description: >
+      Cloud platforms are designed using approved architectures,
+      landing zones and security patterns.
+
+    capability_area:
+
+      - Cloud Architecture
+
+
+    requirements:
+
+      - >
+        Cloud landing zones are implemented.
+
+      - >
+        Security baselines are defined.
+
+      - >
+        Network and identity architecture is documented.
+
+      - >
+        Cloud design reviews are performed.
+
+
+    evidence_required:
+
+      - landing_zone_configuration
+
+      - architecture_documents
+
+      - security_baselines
+
+
+
+  #
+  # Identity Security
+  #
+
+  - id: CLOUD-004
+
+    name: Cloud Identity and Access Management
+
+    objective: >
+      Protect cloud resources through secure identity controls.
+
+    description: >
+      Access to cloud services is managed using authentication,
+      authorisation and least privilege principles.
+
+    capability_area:
+
+      - Identity Security
+
+
+    requirements:
+
+      - >
+        Multi-factor authentication is enforced.
+
+      - >
+        Privileged access is controlled.
+
+      - >
+        Roles follow least privilege.
+
+      - >
+        Service identities are managed.
+
+
+    evidence_required:
+
+      - cloud_roles
+
+      - permissions
+
+      - privileged_accounts
+
+      - service_accounts
+
+
+
+  #
+  # Network Security
+  #
+
+  - id: CLOUD-005
+
+    name: Cloud Network Security
+
+    objective: >
+      Protect cloud connectivity and network boundaries.
+
+    description: >
+      Cloud networks are segmented, restricted and monitored.
+
+    capability_area:
+
+      - Network Security
+
+
+    requirements:
+
+      - >
+        Network segmentation is implemented.
+
+      - >
+        Internet exposure is controlled.
+
+      - >
+        Firewalls and security groups are configured.
+
+      - >
+        Private connectivity is used where required.
+
+
+    evidence_required:
+
+      - virtual_networks
+
+      - firewalls
+
+      - security_groups
+
+      - routing_configuration
+
+
+
+  #
+  # Configuration Management
+  #
+
+  - id: CLOUD-006
+
+    name: Cloud Secure Configuration
+
+    objective: >
+      Ensure cloud resources follow approved security standards.
+
+    description: >
+      Cloud configurations are continuously assessed against
+      security requirements.
+
+    capability_area:
+
+      - Configuration Management
+
+
+    requirements:
+
+      - >
+        Security baselines are applied.
+
+      - >
+        Misconfigurations are identified.
+
+      - >
+        Policy compliance is monitored.
+
+      - >
+        Configuration changes are tracked.
+
+
+    evidence_required:
+
+      - resource_configuration
+
+      - policy_assignments
+
+      - compliance_assessments
+
+
+
+  #
+  # Data Protection
+  #
+
+  - id: CLOUD-007
+
+    name: Cloud Data Protection
+
+    objective: >
+      Protect data stored and processed in cloud environments.
+
+    description: >
+      Cloud data is protected through encryption, access control
+      and lifecycle management.
+
+    capability_area:
+
+      - Data Security
+
+
+    requirements:
+
+      - >
+        Data classification is applied.
+
+      - >
+        Encryption is enabled.
+
+      - >
+        Key management is controlled.
+
+      - >
+        Data access is monitored.
+
+
+    evidence_required:
+
+      - encryption_configuration
+
+      - key_management
+
+      - storage_configuration
+
+      - access_logs
+
+
+
+  #
+  # Workload Security
+  #
+
+  - id: CLOUD-008
+
+    name: Cloud Workload Protection
+
+    objective: >
+      Protect cloud-hosted workloads.
+
+    description: >
+      Virtual machines, containers, databases and applications are
+      secured against vulnerabilities and threats.
+
+    capability_area:
+
+      - Workload Security
+
+
+    requirements:
+
+      - >
+        Workloads are inventoried.
+
+      - >
+        Vulnerability scanning is performed.
+
+      - >
+        Security agents are deployed where required.
+
+      - >
+        Unsupported workloads are identified.
+
+
+    evidence_required:
+
+      - virtual_machines
+
+      - containers
+
+      - databases
+
+      - vulnerability_findings
+
+
+
+  #
+  # Cloud Security Posture
+  #
+
+  - id: CLOUD-009
+
+    name: Cloud Security Posture Management
+
+    objective: >
+      Continuously identify and reduce cloud security risks.
+
+    description: >
+      Cloud environments are assessed against security standards
+      and recommended improvements.
+
+    capability_area:
+
+      - CSPM
+
+
+    requirements:
+
+      - >
+        Security posture assessments are performed.
+
+      - >
+        High-risk findings are tracked.
+
+      - >
+        Security recommendations are reviewed.
+
+      - >
+        Compliance posture is measured.
+
+
+    evidence_required:
+
+      - security_assessments
+
+      - compliance_reports
+
+      - recommendations
+
+
+
+  #
+  # Monitoring and Detection
+  #
+
+  - id: CLOUD-010
+
+    name: Cloud Security Monitoring
+
+    objective: >
+      Detect suspicious cloud activity.
+
+    description: >
+      Cloud activity and security events are collected, monitored
+      and investigated.
+
+    capability_area:
+
+      - Security Operations
+
+
+    requirements:
+
+      - >
+        Cloud audit logging is enabled.
+
+      - >
+        Security alerts are monitored.
+
+      - >
+        Administrative activity is recorded.
+
+      - >
+        Events integrate with monitoring platforms.
+
+
+    evidence_required:
+
+      - activity_logs
+
+      - audit_logs
+
+      - security_alerts
+
+
+
+  #
+  # Backup and Recovery
+  #
+
+  - id: CLOUD-011
+
+    name: Cloud Resilience and Recovery
+
+    objective: >
+      Ensure cloud services can recover from disruption.
+
+    description: >
+      Cloud workloads use appropriate backup and recovery
+      capabilities.
+
+    capability_area:
+
+      - Resilience
+
+
+    requirements:
+
+      - >
+        Critical resources are backed up.
+
+      - >
+        Recovery objectives are defined.
+
+      - >
+        Backups are protected.
+
+      - >
+        Recovery testing is performed.
+
+
+    evidence_required:
+
+      - backup_configuration
+
+      - recovery_configuration
+
+      - recovery_tests
+
+
+
+  #
+  # Third Party Cloud Services
+  #
+
+  - id: CLOUD-012
+
+    name: Cloud Service Provider Governance
+
+    objective: >
+      Manage risks associated with cloud service providers.
+
+    description: >
+      Cloud providers and services are assessed, approved and
+      monitored.
+
+    capability_area:
+
+      - Supplier Security
+
+
+    requirements:
+
+      - >
+        Cloud providers are approved.
+
+      - >
+        Security responsibilities are understood.
+
+      - >
+        Provider assurance is reviewed.
+
+      - >
+        Service changes are monitored.
+
+
+    evidence_required:
+
+      - cloud_provider_inventory
+
+      - contracts
+
+      - assurance_reports
+
+
+
+  #
+  # Infrastructure as Code
+  #
+
+  - id: CLOUD-013
+
+    name: Cloud Infrastructure Automation Security
+
+    objective: >
+      Secure automated cloud provisioning.
+
+    description: >
+      Infrastructure changes are controlled through secure
+      automation practices.
+
+    capability_area:
+
+      - Infrastructure Automation
+
+
+    requirements:
+
+      - >
+        Infrastructure definitions are version controlled.
+
+      - >
+        Deployments are reviewed.
+
+      - >
+        Templates are security scanned.
+
+      - >
+        Changes are traceable.
+
+
+    evidence_required:
+
+      - terraform
+
+      - bicep
+
+      - deployment_history
+
+      - pipeline_logs
+
+
+
+control_summary:
+
+  total_controls: 13
+
+
+  control_groups:
+
+
+    governance:
+
+      - CLOUD-001
+      - CLOUD-002
+      - CLOUD-003
+
+
+    identity:
+
+      - CLOUD-004
+
+
+    infrastructure:
+
+      - CLOUD-005
+      - CLOUD-006
+
+
+    data:
+
+      - CLOUD-007
+
+
+    workloads:
+
+      - CLOUD-008
+
+
+    security_operations:
+
+      - CLOUD-009
+      - CLOUD-010
+
+
+    resilience:
+
+      - CLOUD-011
+
+
+    supplier_security:
+
+      - CLOUD-012
+
+
+    automation:
+
+      - CLOUD-013

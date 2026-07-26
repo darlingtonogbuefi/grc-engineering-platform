@@ -1,0 +1,100 @@
+name: iso27001
+
+version: 1.0.0
+
+description: >
+  Azure evidence collection profile for
+  ISO/IEC 27001:2022 Information Security
+  Management System (ISMS) assessments.
+
+extends: default
+
+queries:
+  # Tenant & Platform
+  - subscriptions
+  - management-groups
+  - resource-groups
+  - resources
+
+  # Identity & Access Management
+  - users
+  - groups
+  - role-assignments
+  - role-definitions
+  - privileged-identity-management
+  - conditional-access-policies
+  - authentication-methods
+
+  # Governance
+  - policy-definitions
+  - policy-assignments
+  - policy-exemptions
+  - resource-locks
+  - tags
+
+  # Security Configuration
+  - defender-settings
+  - security-settings
+  - secure-score
+  - recommendations
+
+  # Monitoring & Audit
+  - activity-logs
+  - diagnostic-settings
+  - log-analytics-workspaces
+  - alerts
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+  - application-gateways
+  - load-balancers
+  - private-endpoints
+  - dns-zones
+
+  # Compute
+  - virtual-machines
+  - vm-scale-sets
+  - app-services
+  - container-registries
+  - kubernetes-clusters
+
+  # Storage & Data Protection
+  - storage-accounts
+  - key-vaults
+  - managed-identities
+  - disk-encryption
+
+  # Data Protection
+  - encryption-settings
+  - backup-vaults
+  - recovery-services-vaults
+
+  # Compliance
+  - regulatory-compliance
+  - security-assessments
+
+collection:
+  mode: comprehensive
+
+  include_metadata: true
+
+  include_relationships: true
+
+output:
+  evidence_types:
+    - resource_inventory
+    - configuration
+    - governance
+    - identity_and_access
+    - privileged_access
+    - security_configuration
+    - vulnerability_management
+    - monitoring
+    - logging
+    - networking
+    - encryption
+    - key_management
+    - backup
+    - compliance

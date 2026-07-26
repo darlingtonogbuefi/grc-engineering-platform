@@ -1,0 +1,314 @@
+id: devops
+
+name: DevSecOps
+
+version: "1.0.0"
+
+description: >
+  The DevSecOps capability ensures that software is designed,
+  developed, tested, deployed and maintained using secure,
+  repeatable and auditable engineering practices. It integrates
+  security throughout the software development lifecycle (SDLC),
+  protects software supply chains, secures CI/CD pipelines,
+  and provides governance over source code, build systems,
+  deployment processes and development infrastructure.
+
+purpose: >
+  Reduce software supply chain risk by embedding security into
+  development processes, automating security controls, enforcing
+  secure coding practices, protecting development platforms,
+  and ensuring complete traceability from source code through
+  deployment into production.
+
+capability_domain:
+
+  category: Engineering Security
+
+  domains:
+
+    - Secure Software Development
+    - DevSecOps
+    - Software Supply Chain Security
+    - CI/CD Security
+    - Source Code Management
+    - Infrastructure as Code
+    - Release Management
+    - Application Security
+    - Change Management
+    - Platform Engineering
+
+business_objectives:
+
+  - >
+    Integrate security throughout the software development lifecycle.
+
+  - >
+    Protect source code and development platforms from unauthorised
+    access or modification.
+
+  - >
+    Ensure software changes are reviewed, approved and fully auditable.
+
+  - >
+    Secure CI/CD pipelines against compromise.
+
+  - >
+    Detect vulnerabilities before deployment.
+
+  - >
+    Prevent secrets from being exposed within repositories or pipelines.
+
+  - >
+    Maintain integrity of software artefacts throughout the build
+    and deployment lifecycle.
+
+  - >
+    Improve software resilience through secure engineering practices.
+
+capability_objectives:
+
+  - id: DEVOPS-OBJ-001
+
+    name: Source Code Governance
+
+    description: >
+      Source code repositories are protected through strong
+      authentication, access control, branch protection and
+      code ownership.
+
+  - id: DEVOPS-OBJ-002
+
+    name: Secure Development Lifecycle
+
+    description: >
+      Security activities are integrated throughout planning,
+      development, testing and release processes.
+
+  - id: DEVOPS-OBJ-003
+
+    name: Secure CI/CD Pipelines
+
+    description: >
+      Build and deployment pipelines are secured, monitored
+      and protected from unauthorised modification.
+
+  - id: DEVOPS-OBJ-004
+
+    name: Software Supply Chain Security
+
+    description: >
+      Third-party dependencies, packages and build artefacts
+      are validated and monitored.
+
+  - id: DEVOPS-OBJ-005
+
+    name: Infrastructure as Code Security
+
+    description: >
+      Infrastructure definitions are version controlled,
+      reviewed and security validated before deployment.
+
+  - id: DEVOPS-OBJ-006
+
+    name: Secrets Management
+
+    description: >
+      Secrets are securely stored, rotated and never embedded
+      within source code or deployment pipelines.
+
+  - id: DEVOPS-OBJ-007
+
+    name: Release Governance
+
+    description: >
+      Production releases follow approved change control,
+      testing and deployment processes.
+
+  - id: DEVOPS-OBJ-008
+
+    name: Security Monitoring
+
+    description: >
+      Development platforms and deployment activities are
+      logged, monitored and investigated.
+
+supported_platforms:
+
+  source_control:
+
+    - GitHub
+    - GitHub Enterprise
+    - Azure DevOps
+    - GitLab
+    - Bitbucket
+
+  ci_cd:
+
+    - GitHub Actions
+    - Azure Pipelines
+    - GitLab CI
+    - Jenkins
+    - CircleCI
+
+  container_platforms:
+
+    - Docker
+    - Kubernetes
+    - Azure Kubernetes Service
+    - OpenShift
+
+  infrastructure:
+
+    - Terraform
+    - Bicep
+    - ARM Templates
+    - Pulumi
+    - Ansible
+
+  package_management:
+
+    - NuGet
+    - npm
+    - Maven
+    - PyPI
+    - Docker Hub
+    - GitHub Packages
+
+  security_tools:
+
+    - Microsoft Defender for DevOps
+    - GitHub Advanced Security
+    - Dependabot
+    - CodeQL
+    - Trivy
+    - Snyk
+    - SonarQube
+
+collectors:
+
+  supported:
+
+    - github
+    - azuredevops
+    - defender
+    - azure
+    - azurearc
+
+related_capabilities:
+
+  - cloud
+  - identity
+  - vulnerability
+  - monitoring
+  - logging
+  - endpoint
+
+evidence_categories:
+
+  - repositories
+  - branch_protection
+  - pull_requests
+  - code_reviews
+  - contributors
+  - pipelines
+  - pipeline_permissions
+  - build_history
+  - release_history
+  - deployment_history
+  - infrastructure_as_code
+  - dependency_inventory
+  - vulnerability_scan_results
+  - secret_scanning
+  - code_scanning
+  - security_alerts
+  - audit_logs
+  - artifact_inventory
+  - container_images
+  - package_registries
+
+maturity_model:
+
+  level_0:
+
+    name: Non-existent
+
+    description: >
+      Development activities are unmanaged with no defined
+      security practices.
+
+  level_1:
+
+    name: Initial
+
+    description: >
+      Basic version control and manual development practices
+      exist with limited security controls.
+
+  level_2:
+
+    name: Managed
+
+    description: >
+      Secure development standards are documented and
+      consistently applied across projects.
+
+  level_3:
+
+    name: Defined
+
+    description: >
+      CI/CD pipelines enforce automated testing, code review,
+      vulnerability scanning and deployment governance.
+
+  level_4:
+
+    name: Optimised
+
+    description: >
+      Security is fully integrated into engineering workflows
+      using automation, policy enforcement and continuous
+      software supply chain monitoring.
+
+ownership:
+
+  primary:
+
+    function: Platform Engineering
+
+  stakeholders:
+
+    - Application Development
+    - DevOps Engineering
+    - Platform Engineering
+    - Cloud Engineering
+    - Information Security
+    - Security Operations
+    - Enterprise Architecture
+    - Change Management
+
+dependencies:
+
+  capabilities:
+
+    - identity
+    - cloud
+    - vulnerability
+    - monitoring
+    - logging
+
+tags:
+
+  - DevSecOps
+  - Secure Development
+  - CI/CD
+  - SDLC
+  - GitHub
+  - Azure DevOps
+  - IaC
+  - Software Supply Chain
+  - Source Control
+  - Code Review
+  - Release Management
+  - Change Control
+  - Application Security
+  - Containers

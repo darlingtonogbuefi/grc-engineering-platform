@@ -1,0 +1,188 @@
+
+
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://grc-engineering-platform/schemas/control.schema.json",
+
+  "title": "GRC Control Schema",
+
+  "description": "Defines individual security and compliance controls.",
+
+  "type": "object",
+
+  "required": [
+    "id",
+    "name",
+    "framework",
+    "category",
+    "requirements"
+  ],
+
+
+  "properties": {
+
+
+    "id": {
+
+      "type": "string",
+
+      "description": "Unique control identifier",
+
+      "examples": [
+        "CAF.A1.GOV.01",
+        "ISO27001.A.5.1",
+        "SOC2.CC6.1"
+      ]
+
+    },
+
+
+    "name": {
+
+      "type": "string"
+
+    },
+
+
+    "framework": {
+
+      "type": "string"
+
+    },
+
+
+    "version": {
+
+      "type": "string"
+
+    },
+
+
+    "category": {
+
+      "type": "string"
+
+    },
+
+
+    "description": {
+
+      "type": "string"
+
+    },
+
+
+    "requirements": {
+
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string"
+
+      }
+
+    },
+
+
+    "capabilities": {
+
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string"
+
+      },
+
+      "examples": [
+
+        "identity",
+        "endpoint",
+        "cloud"
+
+      ]
+
+    },
+
+
+    "evidenceRequirements": {
+
+
+      "type": "array",
+
+      "items": {
+
+
+        "type": "object",
+
+        "required": [
+
+          "type"
+
+        ],
+
+        "properties": {
+
+
+          "type": {
+
+            "type": "string"
+
+          },
+
+
+          "collector": {
+
+            "type": "string"
+
+          },
+
+
+          "mandatory": {
+
+            "type": "boolean",
+
+            "default": true
+
+          }
+
+        }
+
+      }
+
+    },
+
+
+    "scoring": {
+
+
+      "type": "object",
+
+      "properties": {
+
+
+        "weight": {
+
+          "type": "number"
+
+        },
+
+
+        "passThreshold": {
+
+          "type": "number"
+
+        }
+
+      }
+
+    }
+
+
+  }
+}

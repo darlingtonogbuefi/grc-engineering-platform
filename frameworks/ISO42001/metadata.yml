@@ -1,0 +1,303 @@
+# ISO/IEC 42001 AI Management System Framework Metadata
+# metadata.yml
+
+framework:
+
+  id: ISO42001
+
+  name: ISO/IEC 42001 Artificial Intelligence Management System
+
+  version: "2023"
+
+  publisher:
+    name: International Organization for Standardization
+    abbreviation: ISO
+
+
+description: >
+  Atomic assessment framework representing ISO/IEC 42001 Annex A
+  controls for establishing, implementing, maintaining and improving
+  an Artificial Intelligence Management System (AIMS).
+
+  Controls are structured for evidence collection, assessment,
+  scoring and reporting workflows.
+
+  Controls are mapped exclusively to the NCSC Cyber Assessment
+  Framework (CAF).
+
+
+purpose:
+
+  - Establish AI governance assessment capability
+  - Support AI risk management activities
+  - Enable evidence-based AI control assessment
+  - Support AI lifecycle assurance
+  - Provide traceable compliance reporting
+
+
+scope:
+
+  environments:
+
+    - Enterprise AI systems
+    - Cloud AI services
+    - AI development platforms
+    - AI operational environments
+    - AI-enabled business processes
+
+
+  control_domains:
+
+    - AI Governance
+    - AI Risk Management
+    - AI Lifecycle Management
+    - AI Data Governance
+    - Transparency and Explainability
+    - Human Oversight
+    - AI Security
+    - AI Improvement
+
+
+
+framework_structure:
+
+
+  files:
+
+
+    controls.yml:
+
+      purpose: >
+        Defines ISO/IEC 42001 Annex A atomic assessment controls,
+        requirements, evidence expectations and CAF mappings.
+
+
+    evidence.yml:
+
+      purpose: >
+        Defines evidence artefacts used to validate implementation
+        of AI management system controls.
+
+
+    mappings.yml:
+
+      purpose: >
+        Defines mappings between ISO/IEC 42001 controls and NCSC
+        Cyber Assessment Framework references.
+
+
+    scoring.yml:
+
+      purpose: >
+        Defines assessment outcomes, scoring rules and reporting
+        calculations.
+
+
+    metadata.yml:
+
+      purpose: >
+        Defines framework identity, governance and lifecycle
+        information.
+
+
+
+assessment_model:
+
+
+  type: control_assessment
+
+
+  assessment_states:
+
+    - pass
+    - partial
+    - fail
+    - not_applicable
+
+
+  assessment_principles:
+
+    - Evidence-based assessment
+    - Repeatable control evaluation
+    - Risk-informed decision making
+    - Traceable assessment outcomes
+
+
+
+control_model:
+
+
+  identifier_format:
+
+    pattern: "ISO42001-{DOMAIN}-{NUMBER}"
+
+
+  domains:
+
+
+    GOV:
+
+      name: AI Governance
+
+      description: >
+        Controls supporting AI governance structures, policies,
+        accountability and organisational oversight.
+
+
+    RM:
+
+      name: AI Risk Management
+
+      description: >
+        Controls supporting identification, assessment and treatment
+        of AI-related risks.
+
+
+    LCM:
+
+      name: AI Lifecycle Management
+
+      description: >
+        Controls supporting AI system lifecycle governance,
+        development and change management.
+
+
+    DATA:
+
+      name: AI Data Governance
+
+      description: >
+        Controls supporting data ownership, quality and governance
+        activities.
+
+
+    TRN:
+
+      name: Transparency and Explainability
+
+      description: >
+        Controls supporting communication, transparency and
+        explainability of AI systems.
+
+
+    HUM:
+
+      name: Human Oversight
+
+      description: >
+        Controls supporting human review, intervention and
+        accountability.
+
+
+    SEC:
+
+      name: AI Security
+
+      description: >
+        Controls supporting protection, monitoring and security of
+        AI systems.
+
+
+    IMP:
+
+      name: AI Improvement
+
+      description: >
+        Controls supporting monitoring, review and continual
+        improvement.
+
+
+
+caf_mapping:
+
+
+  enabled: true
+
+
+  target_framework:
+
+    name: NCSC Cyber Assessment Framework
+
+    abbreviation: CAF
+
+
+  mapping_rules:
+
+    - Only CAF references are maintained
+    - Each control maps to one or more CAF outcomes
+    - No external framework mappings included
+
+
+
+evidence_management:
+
+
+  enabled: true
+
+
+  evidence_reference:
+
+    source_file: evidence.yml
+
+
+  requirements:
+
+    - Evidence must identify the assessed AI system
+    - Evidence must be attributable to responsible owners
+    - Evidence must demonstrate control implementation
+    - Evidence must represent the current operating environment
+
+
+
+governance:
+
+
+  ownership:
+
+    framework_owner: Organisation implementing ISO/IEC 42001
+
+    standard_owner: ISO
+
+
+  review_cycle:
+
+    frequency: annual
+
+
+  review_requirements:
+
+    - Review against ISO/IEC 42001 updates
+    - Review AI governance changes
+    - Review CAF guidance changes
+    - Review AI technology changes
+
+
+
+quality_assurance:
+
+
+  validation_status: validated
+
+
+  validation_checks:
+
+    - YAML syntax validated
+    - Control identifiers verified
+    - Evidence references aligned
+    - CAF mappings validated
+    - Assessment model consistency checked
+
+
+
+production_readiness:
+
+
+  status: ready
+
+
+  notes:
+
+    - Suitable for AI management system assessment platforms
+    - Suitable for evidence collection workflows
+    - Suitable for compliance reporting pipelines
+    - Designed for integration with governance, risk and compliance tools

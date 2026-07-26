@@ -1,0 +1,56 @@
+id: azure.policy_definitions
+name: Azure Policy Definitions
+description: >
+  Collect Azure Policy Definitions to provide governance,
+  compliance, and security policy evidence across subscriptions.
+
+service: Microsoft.Authorization
+resource: policyDefinitions
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions
+api_version: "2023-04-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: GovernanceNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - properties
+  - properties.displayName
+  - properties.description
+  - properties.policyType
+  - properties.mode
+  - properties.metadata
+  - properties.version
+  - properties.parameters
+  - properties.policyRule
+  - properties.versions
+
+metadata:
+  category: governance
+  evidence_type: policy_definition
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

@@ -1,0 +1,200 @@
+#  config\frameworks.yml
+
+# ==============================================================================
+# GRC Engineering Platform
+# Framework Configuration
+# ==============================================================================
+#
+# Controls which compliance frameworks are available to the engine.
+#
+# Framework definitions are stored under:
+#
+# frameworks/<FrameworkName>/
+#
+# ==============================================================================
+
+schemaVersion: "1.0"
+
+defaults:
+  enabled: true
+
+  scoringModel: weighted
+
+  evidenceRequired: true
+
+  allowManualEvidence: true
+
+  inheritMetadata: true
+
+frameworks:
+  CAF:
+    enabled: true
+
+    displayName: Cyber Assessment Framework
+
+    version: "3.2"
+
+    directory: frameworks/CAF
+
+    controlFile: controls.yml
+
+    mappingsFile: mappings.yml
+
+    scoringFile: scoring.yml
+
+    evidenceFile: evidence.yml
+
+    metadataFile: metadata.yml
+
+    weighting: 1.0
+
+    priority: 10
+
+  ISO27001:
+    enabled: true
+
+    displayName: ISO/IEC 27001
+
+    version: "2022"
+
+    directory: frameworks/ISO27001
+
+    controlFile: controls.yml
+
+    mappingsFile: mappings.yml
+
+    scoringFile: scoring.yml
+
+    evidenceFile: evidence.yml
+
+    metadataFile: metadata.yml
+
+    weighting: 1.0
+
+    priority: 20
+
+  SOC2:
+    enabled: true
+
+    displayName: SOC 2
+
+    version: "2017"
+
+    directory: frameworks/SOC2
+
+    controlFile: controls.yml
+
+    mappingsFile: mappings.yml
+
+    scoringFile: scoring.yml
+
+    evidenceFile: evidence.yml
+
+    metadataFile: metadata.yml
+
+    weighting: 1.0
+
+    priority: 30
+
+  GovAssure:
+    enabled: true
+
+    displayName: GovAssure
+
+    version: "Current"
+
+    directory: frameworks/GovAssure
+
+    controlFile: controls.yml
+
+    mappingsFile: mappings.yml
+
+    scoringFile: scoring.yml
+
+    evidenceFile: evidence.yml
+
+    metadataFile: metadata.yml
+
+    weighting: 1.0
+
+    priority: 40
+
+  CyberEssentials:
+    enabled: true
+
+    displayName: Cyber Essentials
+
+    version: "Current"
+
+    directory: frameworks/CyberEssentials
+
+    controlFile: controls.yml
+
+    mappingsFile: mappings.yml
+
+    scoringFile: scoring.yml
+
+    evidenceFile: evidence.yml
+
+    metadataFile: metadata.yml
+
+    weighting: 1.0
+
+    priority: 50
+
+validation:
+  requireControlFile: true
+
+  requireMappingFile: true
+
+  requireScoringFile: true
+
+  requireEvidenceFile: true
+
+  requireMetadataFile: true
+
+  failOnMissingFramework: true
+
+  failOnDuplicateControls: true
+
+  failOnDuplicateMappings: true
+
+scoring:
+  defaultModel: weighted
+
+  passThreshold: 80
+
+  warningThreshold: 60
+
+  failThreshold: 40
+
+  maximumScore: 100
+
+  minimumScore: 0
+
+mapping:
+  allowCrossFrameworkMappings: true
+
+  validateTargetControls: true
+
+  requireUniqueMappings: true
+
+  inheritEvidence: true
+
+engine:
+  cacheDefinitions: true
+
+  cacheTimeoutMinutes: 60
+
+  validateOnStartup: true
+
+  preloadFrameworks: true
+
+  parallelValidation: true
+
+metadata:
+  owner: GRC Engineering Platform
+
+  managedBy: Framework Engine
+
+  schema: "1.0"

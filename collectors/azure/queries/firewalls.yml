@@ -1,0 +1,60 @@
+id: azure.firewalls
+name: Azure Firewalls
+description: >
+  Collect Azure Firewall configurations for network security,
+  traffic filtering, threat protection, and compliance evidence.
+
+service: Microsoft.Network
+resource: azureFirewalls
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Network/azureFirewalls
+api_version: "2024-05-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: NetworkNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - sku
+  - zones
+  - properties
+  - properties.provisioningState
+  - properties.threatIntelMode
+  - properties.firewallPolicy
+  - properties.ipConfigurations
+  - properties.managementIpConfiguration
+  - properties.applicationRuleCollections
+  - properties.networkRuleCollections
+  - properties.natRuleCollections
+  - properties.additionalProperties
+
+metadata:
+  category: network_security
+  evidence_type: firewall_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

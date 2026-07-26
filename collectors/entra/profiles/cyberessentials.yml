@@ -1,0 +1,167 @@
+#collectors\entra\profiles\cyberessentials.yml
+
+
+id: cyberessentials
+
+name: Microsoft Entra Cyber Essentials Profile
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra evidence collection profile aligned
+  with Cyber Essentials requirements for identity,
+  access control, secure configuration, and
+  authentication protection.
+
+collector: entra
+
+framework:
+  name: Cyber Essentials
+
+purpose:
+  - account_management
+  - access_control
+  - secure_configuration
+  - authentication_security
+  - device_management
+
+queries:
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - signInActivity
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - securityEnabled
+      - groupTypes
+      - members
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - operatingSystem
+      - operatingSystemVersion
+      - isCompliant
+      - isManaged
+      - trustType
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+evidence:
+
+  categories:
+
+    user_management:
+      - users
+      - groups
+
+    authentication:
+      - authentication_methods
+      - conditional_access
+
+    privileged_access:
+      - directory_roles
+
+    device_security:
+      - devices
+
+    monitoring:
+      - audit_logs
+
+controls:
+
+  cyber_essentials:
+
+    account_security:
+      - user_account_inventory
+      - disable_unused_accounts
+      - control_admin_access
+
+    authentication:
+      - multi_factor_authentication
+      - secure_login_controls
+
+    access_control:
+      - least_privilege
+      - role_assignment_review
+
+    secure_configuration:
+      - managed_devices
+      - device_compliance
+
+    monitoring:
+      - administrative_activity_logging
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true

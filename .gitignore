@@ -1,0 +1,96 @@
+# ==============================================================================
+# GRC Engineering Platform
+# ==============================================================================
+
+
+# Python
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+.venv/
+
+
+# Environment
+
+.env
+.env.*
+
+
+!.env.example
+
+
+# IDE
+
+.vscode/
+.idea/
+
+
+# Evidence Data
+
+evidence/raw/
+
+evidence/processed/
+
+evidence/runs/
+
+evidence/archive/
+
+
+# GovAssure Evidence Packages
+
+evidence/govassure/
+
+reports/GovAssure/generated/
+
+
+# Framework Generated Data
+
+frameworks/*/generated/
+
+frameworks/*/cache/
+
+
+# Reports
+
+reports/*
+
+!reports/.gitkeep
+
+
+# Dashboards
+
+dashboards/generated/
+
+
+# Runtime Output
+
+output/*
+
+!output/.gitkeep
+
+
+# Logs
+
+*.log
+
+logs/
+
+
+# Security Material
+
+*.pem
+
+*.key
+
+*.pfx
+
+*.crt
+
+
+# Database
+
+*.sqlite
+
+*.db

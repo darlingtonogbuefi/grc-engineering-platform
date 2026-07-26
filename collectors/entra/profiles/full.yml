@@ -1,0 +1,248 @@
+id: full
+
+name: Microsoft Entra Full Evidence Profile
+
+version: "1.0.0"
+
+description: >
+  Complete Microsoft Entra evidence collection profile.
+  Collects identity, authentication, authorization,
+  security, governance, application, device, and
+  audit evidence from Microsoft Graph.
+
+collector: entra
+
+purpose:
+  - complete_security_assessment
+  - compliance_audit
+  - identity_governance
+  - security_monitoring
+
+queries:
+
+  organization:
+    enabled: true
+    endpoint: /organization
+
+  domains:
+    enabled: true
+    endpoint: /domains
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - department
+      - jobTitle
+      - createdDateTime
+      - signInActivity
+      - assignedLicenses
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - groupTypes
+      - securityEnabled
+      - mailEnabled
+      - membershipRule
+      - createdDateTime
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - deviceId
+      - operatingSystem
+      - operatingSystemVersion
+      - trustType
+      - isManaged
+      - isCompliant
+      - createdDateTime
+
+  applications:
+    enabled: true
+    endpoint: /applications
+
+  enterprise_apps:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  service_principals:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  licenses:
+    enabled: true
+    endpoint: /subscribedSkus
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  administrative_units:
+    enabled: true
+    endpoint: /administrativeUnits
+
+  directory_settings:
+    enabled: true
+    endpoint: /settings
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  identity_protection:
+    enabled: true
+    endpoint: /identityProtection/riskyUsers
+
+  privileged_identity_management:
+    enabled: true
+    endpoint: /roleManagement
+
+  signins:
+    enabled: true
+    endpoint: /auditLogs/signIns
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  applications:
+    module: applications
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+
+evidence:
+
+  categories:
+
+    tenant_configuration:
+      - organization
+      - domains
+      - directory_settings
+
+    identity:
+      - users
+      - groups
+      - administrative_units
+
+    authentication:
+      - authentication_methods
+      - conditional_access
+      - signins
+
+    authorization:
+      - directory_roles
+      - privileged_identity_management
+
+    device_security:
+      - devices
+
+    application_security:
+      - applications
+      - enterprise_apps
+      - service_principals
+
+    licensing:
+      - licenses
+
+    monitoring:
+      - audit_logs
+      - identity_protection
+
+
+controls:
+
+  identity_management:
+    - account_inventory
+    - user_lifecycle
+    - guest_access_review
+
+  authentication_security:
+    - authentication_methods
+    - conditional_access
+    - sign_in_monitoring
+
+  privileged_access:
+    - directory_role_review
+    - privileged_identity_management
+
+  device_management:
+    - device_inventory
+    - compliance_state
+
+  application_governance:
+    - application_inventory
+    - service_principal_review
+    - permissions_review
+
+  security_monitoring:
+    - audit_logging
+    - risk_detection
+
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+  parallel_execution:
+    enabled: true
+
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true
+
+  evidence_metadata:
+    enabled: true

@@ -1,0 +1,277 @@
+# GovAssure Security Assessment Framework Metadata
+# metadata.yml
+
+framework:
+
+  id: GOVASSURE
+
+  name: GovAssure
+
+  version: "2024"
+
+  publisher:
+    name: UK Government
+    organisation: Cabinet Office
+
+  description: >
+    Atomic assessment framework representing GovAssure security
+    assessment controls for UK Government organisations.
+
+    Controls are structured for evidence collection, assessment,
+    scoring and reporting and are mapped exclusively to the
+    NCSC Cyber Assessment Framework (CAF).
+
+
+
+purpose:
+
+  - Support GovAssure security assessments
+  - Enable evidence-based cybersecurity assurance
+  - Assess implementation of security controls
+  - Support risk management and compliance reporting
+  - Provide repeatable assessment outcomes
+
+
+
+scope:
+
+  environments:
+
+    - Enterprise ICT
+    - Government digital services
+    - Cloud services
+    - End-user devices
+    - Network infrastructure
+    - Administrative systems
+    - Operational technology (where applicable)
+    - Third-party managed services
+
+  control_domains:
+
+    - Governance and Risk Management
+    - Asset Management
+    - Identity and Access Management
+    - Secure Configuration
+    - Vulnerability Management
+    - Security Monitoring
+    - Incident Management
+    - Supplier Security
+    - Data Protection
+
+
+
+framework_structure:
+
+  files:
+
+    controls.yml:
+
+      purpose: >
+        Defines atomic GovAssure assessment controls including
+        requirements, assessment guidance, evidence expectations
+        and CAF mappings.
+
+    evidence.yml:
+
+      purpose: >
+        Defines evidence artefacts used during GovAssure
+        assessments.
+
+    mappings.yml:
+
+      purpose: >
+        Maps GovAssure controls to NCSC Cyber Assessment
+        Framework references.
+
+    scoring.yml:
+
+      purpose: >
+        Defines assessment outcomes, scoring methodology
+        and reporting calculations.
+
+    metadata.yml:
+
+      purpose: >
+        Framework metadata, governance information and
+        lifecycle management.
+
+
+
+assessment_model:
+
+  type: control_assessment
+
+  assessment_states:
+
+    - pass
+    - partial
+    - fail
+    - not_applicable
+
+  assessment_principles:
+
+    - Evidence-based assessment
+    - Risk-based evaluation
+    - Repeatable assessment methodology
+    - Independent verification
+    - Traceable assessment outcomes
+
+
+
+control_model:
+
+  identifier_format:
+
+    pattern: "GA-{DOMAIN}-{NUMBER}"
+
+  domains:
+
+    GOV:
+
+      name: Governance and Risk Management
+
+      description: >
+        Security governance, leadership and cyber risk management.
+
+    AM:
+
+      name: Asset Management
+
+      description: >
+        Identification, ownership and management of technology assets.
+
+    IAM:
+
+      name: Identity and Access Management
+
+      description: >
+        Identity lifecycle, authentication and privileged access.
+
+    SC:
+
+      name: Secure Configuration
+
+      description: >
+        Secure build standards and configuration management.
+
+    VULN:
+
+      name: Vulnerability Management
+
+      description: >
+        Identification, assessment and remediation of vulnerabilities.
+
+    MON:
+
+      name: Security Monitoring
+
+      description: >
+        Continuous monitoring, logging and security event detection.
+
+    INC:
+
+      name: Incident Management
+
+      description: >
+        Cyber incident response, recovery and lessons learned.
+
+    SUP:
+
+      name: Supplier Security
+
+      description: >
+        Third-party and supply chain security assurance.
+
+    DATA:
+
+      name: Data Protection
+
+      description: >
+        Protection of sensitive information and supporting controls.
+
+
+
+caf_mapping:
+
+  enabled: true
+
+  target_framework:
+
+    name: NCSC Cyber Assessment Framework
+
+    abbreviation: CAF
+
+  mapping_rules:
+
+    - Only CAF references are maintained
+    - Every control maps to one or more CAF outcomes
+    - No mappings to ISO, NIST, CIS or OWASP
+
+
+
+evidence_management:
+
+  enabled: true
+
+  evidence_reference:
+
+    source_file: evidence.yml
+
+  requirements:
+
+    - Evidence must be attributable to the assessed organisation
+    - Evidence must demonstrate control implementation
+    - Evidence must be current and relevant
+    - Evidence must be sufficient to support assessment decisions
+    - Evidence should be independently verifiable where possible
+
+
+
+governance:
+
+  ownership:
+
+    framework_owner: UK Government Organisation
+
+    assessment_owner: GovAssure Assessment Team
+
+  review_cycle:
+
+    frequency: annual
+
+  review_requirements:
+
+    - Review following GovAssure guidance updates
+    - Review following CAF updates
+    - Review after major organisational change
+    - Review after significant cybersecurity incidents
+
+
+
+quality_assurance:
+
+  validation_status: validated
+
+  validation_checks:
+
+    - YAML syntax validated
+    - Control identifiers verified
+    - Evidence references aligned
+    - CAF mappings validated
+    - Scoring model consistency checked
+    - Metadata consistency verified
+
+
+
+production_readiness:
+
+  status: ready
+
+  intended_use:
+
+    - Internal GovAssure assessments
+    - Independent assurance reviews
+    - Compliance reporting
+    - Security maturity assessments
+    - Governance, Risk and Compliance (GRC) platforms
+    - Evidence management systems

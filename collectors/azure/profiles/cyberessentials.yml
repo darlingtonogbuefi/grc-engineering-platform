@@ -1,0 +1,51 @@
+name: cyberessentials
+
+version: 1.0.0
+
+description: >
+  Azure evidence collection profile for
+  Cyber Essentials assessments.
+
+extends: default
+
+queries:
+  # Azure inventory
+  - subscriptions
+  - resource-groups
+  - resources
+
+  # Identity & access
+  - role-assignments
+  - role-definitions
+
+  # Security configuration
+  - defender-settings
+  - security-settings
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+
+  # Logging
+  - activity-logs
+  - diagnostic-settings
+
+  # Storage
+  - storage-accounts
+
+  # Compute
+  - virtual-machines
+
+collection:
+  mode: standard
+  include_metadata: true
+  include_relationships: false
+
+output:
+  evidence_types:
+    - resource_inventory
+    - access_control
+    - security_configuration
+    - networking
+    - logging

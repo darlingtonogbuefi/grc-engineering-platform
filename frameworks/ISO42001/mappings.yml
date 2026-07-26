@@ -1,0 +1,233 @@
+# ISO/IEC 42001 AI Management System Control Mapping Catalogue
+# mappings.yml
+
+framework: ISO42001
+version: "2023"
+
+mapping_model:
+  type: control_mapping
+
+  purpose:
+    - CAF alignment
+    - Control traceability
+    - Assessment reporting
+
+
+mapping_scope:
+
+  source_framework:
+    name: ISO/IEC 42001 Artificial Intelligence Management System
+
+  target_framework:
+    name: NCSC Cyber Assessment Framework
+    abbreviation: CAF
+
+  mapping_rules:
+    - Only CAF references are included
+    - No ISO mappings are repeated
+    - No NIST mappings included
+    - No CIS mappings included
+    - No OWASP mappings included
+
+
+
+mappings:
+
+
+  #
+  # AI Governance
+  #
+
+  - control_id: ISO42001-GOV-001
+    control_title: AI policy framework
+    caf_controls:
+      - A1.a
+      - A1.b
+      - B1.a
+
+
+  - control_id: ISO42001-GOV-002
+    control_title: AI accountability assignment
+    caf_controls:
+      - A1.b
+      - A4.a
+
+
+
+  #
+  # AI Risk Management
+  #
+
+  - control_id: ISO42001-RM-001
+    control_title: AI risk assessment process
+    caf_controls:
+      - A2.a
+      - A2.b
+      - A2.c
+
+
+  - control_id: ISO42001-RM-002
+    control_title: AI risk mitigation controls
+    caf_controls:
+      - B1.b
+      - B5.a
+
+
+
+  #
+  # AI Lifecycle Management
+  #
+
+  - control_id: ISO42001-LCM-001
+    control_title: AI lifecycle governance
+    caf_controls:
+      - B4.a
+      - B4.d
+
+
+  - control_id: ISO42001-LCM-002
+    control_title: AI system change control
+    caf_controls:
+      - B4.c
+      - B4.d
+
+
+
+  #
+  # AI Data Governance
+  #
+
+  - control_id: ISO42001-DATA-001
+    control_title: AI data management controls
+    caf_controls:
+      - A3.a
+      - B4.b
+
+
+  - control_id: ISO42001-DATA-002
+    control_title: Data quality management
+    caf_controls:
+      - B4.b
+      - C1.a
+
+
+
+  #
+  # Transparency and Explainability
+  #
+
+  - control_id: ISO42001-TRN-001
+    control_title: AI system transparency
+    caf_controls:
+      - A4.a
+      - C2.a
+
+
+
+  #
+  # Human Oversight
+  #
+
+  - control_id: ISO42001-HUM-001
+    control_title: Human control over AI decisions
+    caf_controls:
+      - B2.a
+      - B2.d
+
+
+
+  #
+  # AI Security
+  #
+
+  - control_id: ISO42001-SEC-001
+    control_title: AI system security protection
+    caf_controls:
+      - B2.a
+      - B4.c
+      - B5.b
+
+
+  - control_id: ISO42001-SEC-002
+    control_title: AI security monitoring
+    caf_controls:
+      - C1.a
+      - C1.d
+
+
+
+  #
+  # AI Improvement
+  #
+
+  - control_id: ISO42001-IMP-001
+    control_title: AI system performance review
+    caf_controls:
+      - A5.a
+      - D1.a
+
+
+
+
+caf_domains:
+
+
+  A:
+    name: Managing security risk
+
+    controls:
+      - A1.a
+      - A1.b
+      - A2.a
+      - A2.b
+      - A2.c
+      - A3.a
+      - A4.a
+      - A5.a
+
+
+  B:
+    name: Protecting against cyber attack
+
+    controls:
+      - B1.a
+      - B1.b
+      - B2.a
+      - B2.d
+      - B4.a
+      - B4.b
+      - B4.c
+      - B4.d
+      - B5.a
+      - B5.b
+
+
+  C:
+    name: Detecting cyber security events
+
+    controls:
+      - C1.a
+      - C1.d
+      - C2.a
+
+
+  D:
+    name: Minimising the impact of cyber security incidents
+
+    controls:
+      - D1.a
+
+
+
+validation:
+
+  schema_version: "1.0"
+
+  checks:
+
+    - "All ISO42001 controls have CAF mappings"
+    - "Mappings reference CAF domains only"
+    - "Control identifiers match controls.yml"
+    - "No non-CAF frameworks included"
+
+  status: validated

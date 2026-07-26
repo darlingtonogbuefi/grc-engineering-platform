@@ -1,0 +1,303 @@
+id: identity
+
+name: Identity and Access Management
+
+version: "1.0"
+
+description: >
+  Identity and Access Management (IAM) capability responsible for
+  establishing trusted identities, authenticating users, devices and
+  services, enforcing authorisation decisions, managing access rights,
+  and protecting privileged access to systems supporting essential
+  business functions.
+
+
+purpose: >
+  Ensure that only authorised users, devices and services can access
+  organisational systems and information based on verified identity,
+  appropriate authentication strength, least privilege principles,
+  and controlled lifecycle management.
+
+
+capability_domain:
+
+  category: Security Operations
+
+  domains:
+
+    - Identity Management
+    - Authentication
+    - Authorisation
+    - Access Control
+    - Privileged Access Management
+    - Device Identity
+
+
+business_objectives:
+
+  - >
+    Establish confidence in user identity before granting access.
+
+  - >
+    Ensure access is granted only to authorised individuals,
+    devices and services.
+
+  - >
+    Enforce least privilege access.
+
+  - >
+    Protect privileged operations through dedicated controls.
+
+  - >
+    Maintain visibility of identity activity through logging,
+    monitoring and review.
+
+
+caf_alignment:
+
+  framework: CAF
+
+  principles:
+
+    - id: B2
+      name: Identity and access control
+
+  outcomes:
+
+    - id: B2.a
+      name: Identity verification, authentication and authorisation
+
+    - id: B2.b
+      name: Device management
+
+    - id: B2.c
+      name: Privileged user management
+
+    - id: B2.d
+      name: Identity and access management
+
+
+capability_objectives:
+
+
+  - id: IAM-OBJ-001
+
+    name: Trusted Identity Verification
+
+    description: >
+      Users, devices and services have verified identities before
+      accessing organisational resources.
+
+
+
+  - id: IAM-OBJ-002
+
+    name: Strong Authentication
+
+    description: >
+      Authentication mechanisms provide appropriate assurance,
+      including multi-factor authentication where required.
+
+
+
+  - id: IAM-OBJ-003
+
+    name: Controlled Authorisation
+
+    description: >
+      Access permissions are granted according to business need,
+      least privilege and approved roles.
+
+
+
+  - id: IAM-OBJ-004
+
+    name: Privileged Access Protection
+
+    description: >
+      Administrative access is separately managed, monitored and
+      protected using enhanced security controls.
+
+
+
+  - id: IAM-OBJ-005
+
+    name: Identity Lifecycle Management
+
+    description: >
+      Identity creation, modification and removal processes ensure
+      access remains appropriate throughout the user lifecycle.
+
+
+
+  - id: IAM-OBJ-006
+
+    name: Identity Monitoring
+
+    description: >
+      Identity activity, authentication events and access changes
+      are logged, monitored and investigated.
+
+
+technologies:
+
+
+  identity_providers:
+
+    - Microsoft Entra ID
+    - Active Directory
+    - Okta
+    - Ping Identity
+
+
+  privileged_access:
+
+    - CyberArk
+    - BeyondTrust
+    - Microsoft Entra Privileged Identity Management
+
+
+  authentication:
+
+    - Multi Factor Authentication
+    - Conditional Access
+    - Certificate Authentication
+    - FIDO2 Security Keys
+
+
+
+evidence_categories:
+
+
+  - identity_inventory
+
+  - user_accounts
+
+  - privileged_accounts
+
+  - authentication_configuration
+
+  - conditional_access_policies
+
+  - access_reviews
+
+  - device_registration
+
+  - authentication_logs
+
+  - privileged_activity_logs
+
+
+
+maturity_model:
+
+
+  level_0:
+
+    name: Non-existent
+
+    description: >
+      Identity controls are not formally implemented.
+
+
+
+  level_1:
+
+    name: Initial
+
+    description: >
+      Basic identity management exists but is inconsistent
+      and manually operated.
+
+
+
+  level_2:
+
+    name: Managed
+
+    description: >
+      Identity processes are documented and operational with
+      defined ownership.
+
+
+
+  level_3:
+
+    name: Defined
+
+    description: >
+      Identity controls are standardised, automated and
+      regularly reviewed.
+
+
+
+  level_4:
+
+    name: Optimised
+
+    description: >
+      Identity security is continuously improved using
+      analytics, automation and risk-based controls.
+
+
+
+ownership:
+
+  primary:
+
+    function: Identity Security
+
+
+  stakeholders:
+
+    - Security Operations
+    - Infrastructure
+    - IT Operations
+    - Human Resources
+    - Application Owners
+
+
+
+related_capabilities:
+
+
+  - endpoint
+
+  - cloud
+
+  - networking
+
+  - monitoring
+
+  - logging
+
+
+collectors:
+
+
+  supported:
+
+    - entra
+
+    - azure
+
+    - intune
+
+    - defender
+
+    - active-directory
+
+
+tags:
+
+  - IAM
+
+  - Authentication
+
+  - Authorisation
+
+  - MFA
+
+  - PAM
+
+  - Zero Trust

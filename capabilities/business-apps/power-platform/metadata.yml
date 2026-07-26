@@ -1,0 +1,312 @@
+id: powerplatform
+
+name: Microsoft Power Platform Governance
+
+version: "1.0.0"
+
+description: >
+  The Microsoft Power Platform capability provides governance,
+  security, compliance and operational controls for Microsoft
+  Power Apps, Power Automate, Dataverse, Power Pages, Copilot Studio
+  and associated platform services. It ensures that citizen
+  development and enterprise application delivery occur within a
+  secure, governed and auditable environment.
+
+purpose: >
+  Enable secure low-code and no-code application development while
+  maintaining governance over environments, makers, applications,
+  data, connectors, automation, identities and application
+  lifecycle management.
+
+capability_domain:
+
+  category: Business Applications
+
+  domains:
+
+    - Power Platform Governance
+    - Power Apps
+    - Power Automate
+    - Dataverse
+    - Power Pages
+    - Copilot Studio
+    - Environment Management
+    - Application Lifecycle Management
+    - Data Loss Prevention
+    - Low-Code Development
+
+business_objectives:
+
+  - >
+    Govern Power Platform usage across the organisation.
+
+  - >
+    Prevent uncontrolled application and workflow development.
+
+  - >
+    Protect organisational data through Data Loss Prevention (DLP)
+    policies.
+
+  - >
+    Control access to environments, applications and connectors.
+
+  - >
+    Secure integrations with Microsoft 365, Azure and third-party
+    services.
+
+  - >
+    Provide auditability for application development and automation.
+
+  - >
+    Enable secure citizen development supported by enterprise
+    governance.
+
+  - >
+    Manage the application lifecycle through controlled deployment
+    and release processes.
+
+capability_objectives:
+
+  - id: PP-OBJ-001
+
+    name: Tenant Governance
+
+    description: >
+      Power Platform tenant settings are centrally governed and
+      monitored.
+
+  - id: PP-OBJ-002
+
+    name: Environment Governance
+
+    description: >
+      Power Platform environments are created, managed and secured
+      according to organisational policy.
+
+  - id: PP-OBJ-003
+
+    name: Identity and Access Management
+
+    description: >
+      Access to Power Platform resources follows least privilege and
+      role-based access control principles.
+
+  - id: PP-OBJ-004
+
+    name: Data Loss Prevention
+
+    description: >
+      Data Loss Prevention policies protect sensitive information
+      from unauthorised movement between services.
+
+  - id: PP-OBJ-005
+
+    name: Connector Governance
+
+    description: >
+      Standard, premium and custom connectors are approved,
+      monitored and controlled.
+
+  - id: PP-OBJ-006
+
+    name: Application Lifecycle Management
+
+    description: >
+      Solutions are developed, tested and deployed using controlled
+      ALM processes.
+
+  - id: PP-OBJ-007
+
+    name: Automation Governance
+
+    description: >
+      Power Automate flows are monitored and governed throughout
+      their lifecycle.
+
+  - id: PP-OBJ-008
+
+    name: Dataverse Security
+
+    description: >
+      Dataverse environments, tables and records are protected
+      through appropriate security controls.
+
+  - id: PP-OBJ-009
+
+    name: Monitoring and Audit
+
+    description: >
+      Administrative actions, application activity and platform
+      events are logged and monitored.
+
+supported_services:
+
+  power_platform:
+
+    - Power Apps
+    - Power Automate
+    - Dataverse
+    - Power Pages
+    - Copilot Studio
+    - AI Builder
+
+  microsoft_services:
+
+    - Microsoft Entra ID
+    - Microsoft 365
+    - SharePoint Online
+    - Microsoft Teams
+    - Exchange Online
+    - Microsoft Purview
+    - Microsoft Defender XDR
+    - Azure Key Vault
+    - Azure Monitor
+
+  administration:
+
+    - Power Platform Admin Center
+    - CoE Starter Kit
+    - PowerShell
+    - Microsoft Graph
+
+collectors:
+
+  supported:
+
+    - powerplatform
+    - entra
+    - purview
+    - defender
+    - azure
+    - m365
+
+related_capabilities:
+
+  - identity
+  - m365
+  - devops
+  - cloud
+  - monitoring
+  - logging
+  - business-apps
+
+evidence_categories:
+
+  - tenant_configuration
+  - tenant_settings
+  - environments
+  - environment_roles
+  - environment_permissions
+  - makers
+  - applications
+  - application_permissions
+  - application_inventory
+  - solutions
+  - solution_history
+  - managed_solutions
+  - unmanaged_solutions
+  - power_automate_flows
+  - cloud_flows
+  - desktop_flows
+  - connectors
+  - custom_connectors
+  - connector_usage
+  - dlp_policies
+  - dataverse
+  - dataverse_security_roles
+  - dataverse_tables
+  - service_principals
+  - service_accounts
+  - audit_logs
+  - activity_logs
+  - admin_actions
+  - licensing
+  - capacity
+  - security_alerts
+
+maturity_model:
+
+  level_0:
+
+    name: Non-existent
+
+    description: >
+      Power Platform usage is unmanaged with no governance or
+      security controls.
+
+  level_1:
+
+    name: Initial
+
+    description: >
+      Basic administration exists but environments, applications
+      and makers are largely unmanaged.
+
+  level_2:
+
+    name: Managed
+
+    description: >
+      Governance processes, DLP policies and administrative controls
+      are implemented consistently.
+
+  level_3:
+
+    name: Defined
+
+    description: >
+      Environment strategy, ALM, monitoring and security controls
+      are standardised across the organisation.
+
+  level_4:
+
+    name: Optimised
+
+    description: >
+      Governance is automated using policy, monitoring, analytics
+      and continuous compliance assessment.
+
+ownership:
+
+  primary:
+
+    function: Power Platform Centre of Excellence
+
+  stakeholders:
+
+    - Enterprise Architecture
+    - Information Security
+    - Platform Engineering
+    - Microsoft 365 Administration
+    - Business Application Owners
+    - Data Governance
+    - Compliance
+    - Internal Audit
+
+dependencies:
+
+  capabilities:
+
+    - identity
+    - m365
+    - cloud
+    - devops
+    - monitoring
+    - logging
+
+tags:
+
+  - Microsoft Power Platform
+  - Power Apps
+  - Power Automate
+  - Dataverse
+  - Power Pages
+  - Copilot Studio
+  - Citizen Development
+  - Low Code
+  - No Code
+  - DLP
+  - ALM
+  - CoE
+  - Governance
+  - Business Applications

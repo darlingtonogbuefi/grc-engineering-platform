@@ -1,0 +1,250 @@
+# ISO/IEC 42001 AI Management System Assessment Scoring Model
+# scoring.yml
+
+framework: ISO42001
+version: "2023"
+
+
+scoring_model:
+
+  type: control_assessment
+
+  purpose:
+
+    - Assess AI management system control effectiveness
+    - Support evidence-based compliance decisions
+    - Enable consistent AI control scoring
+    - Produce assessment reports
+
+
+
+assessment_states:
+
+
+  pass:
+
+    value: 1
+
+    description: >
+      The AI management system control is implemented and sufficient
+      evidence has been provided.
+
+
+  partial:
+
+    value: 0.5
+
+    description: >
+      The control is partially implemented or evidence demonstrates
+      incomplete implementation.
+
+
+  fail:
+
+    value: 0
+
+    description: >
+      The control is not implemented or evidence does not demonstrate
+      compliance.
+
+
+  not_applicable:
+
+    value: null
+
+    description: >
+      The control does not apply to the assessed AI environment.
+
+
+
+control_scoring:
+
+
+  calculation_method:
+
+    type: weighted_average
+
+
+  formula: >
+
+    Total Score =
+    Sum(Control Score x Control Weight) /
+    Sum(Applicable Control Weights) * 100
+
+
+
+applicable_controls:
+
+
+  include:
+
+    - pass
+    - partial
+    - fail
+
+
+  exclude:
+
+    - not_applicable
+
+
+
+priority_weights:
+
+
+  enabled: true
+
+
+  method: risk_priority_weighting
+
+
+  weights:
+
+
+    critical:
+
+      value: 4
+
+
+    high:
+
+      value: 3
+
+
+    medium:
+
+      value: 2
+
+
+    low:
+
+      value: 1
+
+
+
+control_result_mapping:
+
+
+  pass:
+
+    score: 1
+
+
+  partial:
+
+    score: 0.5
+
+
+  fail:
+
+    score: 0
+
+
+  not_applicable:
+
+    score: null
+
+
+
+compliance_status:
+
+
+  compliant:
+
+
+    criteria:
+
+      - "All applicable critical controls pass"
+      - "Overall score equals 100 percent"
+
+
+  improvement_required:
+
+
+    criteria:
+
+      - "One or more controls are partial"
+      - "Overall score is below 100 percent"
+      - "AI governance improvements are required"
+
+
+  non_compliant:
+
+
+    criteria:
+
+      - "One or more critical AI controls fail"
+      - "Required AI management system controls are not implemented"
+
+
+
+critical_control_rules:
+
+
+  enabled: true
+
+
+  controls:
+
+
+    - ISO42001-RM-001
+    - ISO42001-SEC-001
+    - ISO42001-GOV-001
+
+
+  failure_condition:
+
+
+    - >
+      Failure of a critical AI governance, risk or security control
+      prevents full compliance status.
+
+
+
+reporting:
+
+
+  outputs:
+
+
+    - Overall AI control compliance percentage
+    - Control assessment summary
+    - Failed control register
+    - Partial implementation register
+    - Evidence gaps
+    - AI risk remediation priorities
+
+
+
+assessment_reporting:
+
+
+  summary_fields:
+
+
+    - control_id
+    - control_title
+    - assessment_result
+    - evidence_reference
+    - assessor_notes
+    - remediation_action
+
+
+
+validation:
+
+
+  schema_version: "1.0"
+
+
+  checks:
+
+
+    - "All assessment states defined"
+    - "Scoring formula documented"
+    - "Priority weighting defined"
+    - "Control result mappings complete"
+    - "Compatible with controls.yml identifiers"
+
+
+  status: validated

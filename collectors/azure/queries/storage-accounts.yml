@@ -1,0 +1,68 @@
+id: azure.storage_accounts
+name: Azure Storage Accounts
+description: >
+  Collect Azure Storage Account configurations for data protection,
+  encryption, access control, networking, and compliance evidence.
+
+service: Microsoft.Storage
+resource: storageAccounts
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+api_version: "2023-05-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: StorageNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - sku
+  - kind
+  - identity
+  - properties
+  - properties.provisioningState
+  - properties.creationTime
+  - properties.primaryEndpoints
+  - properties.accessTier
+  - properties.allowBlobPublicAccess
+  - properties.minimumTlsVersion
+  - properties.supportsHttpsTrafficOnly
+  - properties.encryption
+  - properties.networkRuleSet
+  - properties.publicNetworkAccess
+  - properties.privateEndpointConnections
+  - properties.routingPreference
+  - properties.largeFileSharesState
+  - properties.isHnsEnabled
+  - properties.enableHttpsTrafficOnly
+  - properties.allowSharedKeyAccess
+
+metadata:
+  category: data_security
+  evidence_type: storage_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

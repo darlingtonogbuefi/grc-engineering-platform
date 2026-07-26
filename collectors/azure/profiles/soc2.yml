@@ -1,0 +1,110 @@
+name: soc2
+
+version: 1.0.0
+
+description: >
+  Azure evidence collection profile for
+  SOC 2 Trust Services Criteria (Security,
+  Availability, Confidentiality, Processing
+  Integrity, and Privacy) assessments.
+
+extends: default
+
+queries:
+  # Tenant & Platform
+  - subscriptions
+  - management-groups
+  - resource-groups
+  - resources
+
+  # Identity & Access Management
+  - users
+  - groups
+  - role-assignments
+  - role-definitions
+  - privileged-identity-management
+  - conditional-access-policies
+  - authentication-methods
+
+  # Governance
+  - policy-definitions
+  - policy-assignments
+  - policy-exemptions
+  - resource-locks
+  - tags
+
+  # Security Configuration
+  - defender-settings
+  - security-settings
+  - secure-score
+  - recommendations
+  - security-assessments
+
+  # Monitoring & Logging
+  - activity-logs
+  - diagnostic-settings
+  - log-analytics-workspaces
+  - alerts
+  - service-health
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+  - application-gateways
+  - load-balancers
+  - private-endpoints
+  - dns-zones
+
+  # Compute
+  - virtual-machines
+  - vm-scale-sets
+  - app-services
+  - function-apps
+  - kubernetes-clusters
+  - container-registries
+
+  # Storage & Data Protection
+  - storage-accounts
+  - key-vaults
+  - managed-identities
+  - disk-encryption
+  - encryption-settings
+
+  # Backup & Recovery
+  - backup-vaults
+  - recovery-services-vaults
+
+  # Business Continuity
+  - recovery-plans
+  - availability-sets
+
+  # Compliance
+  - regulatory-compliance
+
+collection:
+  mode: comprehensive
+
+  include_metadata: true
+
+  include_relationships: true
+
+output:
+  evidence_types:
+    - resource_inventory
+    - governance
+    - identity_and_access
+    - privileged_access
+    - access_control
+    - security_configuration
+    - vulnerability_management
+    - monitoring
+    - logging
+    - networking
+    - encryption
+    - key_management
+    - data_protection
+    - backup
+    - disaster_recovery
+    - availability
+    - compliance

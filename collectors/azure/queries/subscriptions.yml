@@ -1,0 +1,52 @@
+id: azure.subscriptions
+name: Azure Subscriptions
+description: >
+  Collect Azure subscription metadata and configuration details
+  for inventory, governance, ownership, and compliance evidence.
+
+service: Microsoft.Resources
+resource: subscriptions
+method: GET
+endpoint: /subscriptions
+api_version: "2022-12-01"
+scope: tenant
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: ResourceNormalizer
+primary_key: subscriptionId
+
+fields:
+  - id
+  - subscriptionId
+  - displayName
+  - tenantId
+  - state
+  - subscriptionPolicies
+  - authorizationSource
+  - managedByTenants
+  - tags
+
+metadata:
+  category: inventory
+  evidence_type: subscription_inventory
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

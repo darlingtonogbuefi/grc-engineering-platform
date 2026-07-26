@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grc-engineering-platform/schemas/report.schema.json",
+  "title": "GRC Report Schema",
+  "description": "Schema describing a generated compliance report.",
+  "type": "object",
+
+  "required": [
+    "schemaVersion",
+    "reportId",
+    "tenantId",
+    "framework",
+    "generatedAt",
+    "summary",
+    "controls"
+  ],
+
+  "properties": {
+
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+
+    "reportId": {
+      "type": "string"
+    },
+
+    "tenantId": {
+      "type": "string"
+    },
+
+    "framework": {
+      "type": "string",
+      "enum": [
+        "CAF",
+        "ISO27001",
+        "SOC2",
+        "GovAssure",
+        "CyberEssentials"
+      ]
+    },
+
+    "frameworkVersion": {
+      "type": "string"
+    },
+
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "generatedBy": {
+      "type": "string"
+    },
+
+    "reportProfile": {
+      "type": "string",
+      "enum": [
+        "executive",
+        "technical",
+        "audit",
+        "custom"
+      ]
+    },
+
+    "summary": {
+      "type": "object",
+      "required": [
+        "overallScore",
+        "status"
+      ],
+      "properties": {
+
+        "overallScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "Compliant",
+            "Partially Compliant",
+            "Non-Compliant",
+            "Unknown"
+          ]
+        },
+
+        "passedControls": {
+          "type": "integer",
+          "minimum": 0
+        },
+
+        "failedControls": {
+          "type": "integer",
+          "minimum": 0
+        },
+
+        "notAssessedControls": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "controlId",
+          "status",
+          "score"
+        ],
+        "properties": {
+
+          "controlId": {
+            "type": "string"
+          },
+
+          "title": {
+            "type": "string"
+          },
+
+          "status": {
+            "type": "string",
+            "enum": [
+              "Pass",
+              "Fail",
+              "Partial",
+              "Manual Review",
+              "Not Assessed"
+            ]
+          },
+
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "metadata": {
+      "type": "object"
+    }
+
+  },
+
+  "additionalProperties": false
+}

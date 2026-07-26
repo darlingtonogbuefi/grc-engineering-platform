@@ -1,0 +1,52 @@
+id: azure.resource_groups
+name: Azure Resource Groups
+description: >
+  Collect Azure Resource Group configurations to provide
+  inventory, governance, tagging, and lifecycle evidence
+  across subscriptions.
+
+service: Microsoft.Resources
+resource: resourceGroups
+method: GET
+endpoint: /subscriptions/{subscriptionId}/resourcegroups
+api_version: "2022-09-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: ResourceNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - managedBy
+  - properties
+  - properties.provisioningState
+
+metadata:
+  category: inventory
+  evidence_type: resource_group
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

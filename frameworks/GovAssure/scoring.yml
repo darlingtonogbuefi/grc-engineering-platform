@@ -1,0 +1,192 @@
+# GovAssure Security Assessment Scoring Model
+# scoring.yml
+
+framework: GOVASSURE
+version: "2024"
+
+scoring_model:
+
+  type: control_assessment
+
+  purpose:
+    - Assess GovAssure control implementation
+    - Support evidence-based assurance
+    - Produce repeatable assessment outcomes
+    - Enable compliance reporting
+    - Prioritise remediation activities
+
+assessment_states:
+
+  pass:
+    value: 1
+    description: >
+      The control is fully implemented and supported by sufficient,
+      current and appropriate evidence.
+
+  partial:
+    value: 0.5
+    description: >
+      The control is partially implemented or evidence demonstrates
+      incomplete implementation.
+
+  fail:
+    value: 0
+    description: >
+      The control is not implemented or evidence is insufficient to
+      demonstrate effective operation.
+
+  not_applicable:
+    value: null
+    description: >
+      The control is not applicable to the assessed service or system.
+
+
+control_scoring:
+
+  calculation_method:
+    type: weighted_average
+
+  formula: >
+    Overall Score =
+    Sum(Control Score × Control Weight) /
+    Sum(Applicable Control Weights) × 100
+
+
+applicable_controls:
+
+  include:
+    - pass
+    - partial
+    - fail
+
+  exclude:
+    - not_applicable
+
+
+priority_weights:
+
+  enabled: true
+
+  method: priority_based_weighting
+
+  weights:
+
+    critical:
+      value: 4
+
+    high:
+      value: 3
+
+    medium:
+      value: 2
+
+    low:
+      value: 1
+
+
+control_result_mapping:
+
+  pass:
+    score: 1
+
+  partial:
+    score: 0.5
+
+  fail:
+    score: 0
+
+  not_applicable:
+    score: null
+
+
+compliance_status:
+
+  compliant:
+
+    criteria:
+      - All applicable critical controls pass
+      - Overall assessment score is at least 95 percent
+
+  improvement_required:
+
+    criteria:
+      - One or more controls are partially implemented
+      - Overall score is between 75 and 94 percent
+
+  non_compliant:
+
+    criteria:
+      - One or more critical controls fail
+      - Overall score is below 75 percent
+
+
+critical_control_rules:
+
+  enabled: true
+
+  controls:
+
+    - GA-GOV-002
+    - GA-IAM-002
+    - GA-IAM-003
+    - GA-VULN-001
+    - GA-INC-001
+
+  failure_condition:
+    - >
+      Failure of any critical control prevents an overall
+      compliant assessment outcome.
+
+
+reporting:
+
+  outputs:
+    - Overall compliance percentage
+    - Assessment summary
+    - Control assessment results
+    - Failed controls
+    - Partially implemented controls
+    - Outstanding evidence
+    - Remediation priorities
+    - Executive summary
+
+
+assessment_reporting:
+
+  summary_fields:
+    - control_id
+    - control_title
+    - assessment_result
+    - priority
+    - evidence_reference
+    - assessor_comments
+    - remediation_action
+    - target_completion_date
+
+
+metrics:
+
+  calculate:
+    - Total controls
+    - Applicable controls
+    - Passed controls
+    - Partial controls
+    - Failed controls
+    - Not applicable controls
+    - Overall weighted score
+    - Compliance percentage
+
+
+validation:
+
+  schema_version: "1.0"
+
+  checks:
+    - Assessment states defined
+    - Weighting model validated
+    - Formula verified
+    - Critical control rules defined
+    - Reporting outputs complete
+    - Compatible with controls.yml identifiers
+
+  status: validated

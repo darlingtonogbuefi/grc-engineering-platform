@@ -1,0 +1,627 @@
+#
+# SOC 2 Trust Services Criteria Evidence Catalogue
+# evidence.yml
+#
+
+framework:
+
+  id: SOC2
+
+  name: SOC 2 Trust Services Criteria
+
+  version: "2017+"
+
+
+
+evidence_model:
+
+  type: evidence_catalogue
+
+
+  purpose:
+
+    - Evidence collection
+    - Control assessment support
+    - SOC 2 audit preparation
+    - Compliance reporting
+
+
+
+evidence_items:
+
+
+#
+# Governance and Risk
+#
+
+- id: SOC2-EV-001
+
+  name: Information security policy
+
+
+  description: >
+    Approved security policies defining organisational security
+    objectives, responsibilities and operating requirements.
+
+
+  evidence_type:
+
+    - policy
+    - governance_document
+
+
+  related_controls:
+
+    - SOC2-CC-001
+
+
+
+- id: SOC2-EV-002
+
+  name: Security responsibility matrix
+
+
+  description: >
+    Documentation defining security roles, ownership and
+    accountability.
+
+
+  evidence_type:
+
+    - responsibility_matrix
+
+
+  related_controls:
+
+    - SOC2-CC-002
+
+
+
+- id: SOC2-EV-003
+
+  name: Risk assessment records
+
+
+  description: >
+    Records demonstrating identification, assessment and treatment
+    of information security risks.
+
+
+  evidence_type:
+
+    - risk_register
+    - assessment_record
+
+
+  related_controls:
+
+    - SOC2-CC-003
+
+
+
+- id: SOC2-EV-004
+
+  name: Change management records
+
+
+  description: >
+    Records showing system changes are requested, approved,
+    tested and implemented.
+
+
+  evidence_type:
+
+    - change_ticket
+    - approval_record
+
+
+  related_controls:
+
+    - SOC2-CC-004
+
+
+
+#
+# Identity and Access Management
+#
+
+- id: SOC2-EV-005
+
+  name: User account inventory
+
+
+  description: >
+    Inventory of user accounts, ownership and account status.
+
+
+  evidence_type:
+
+    - identity_inventory
+
+
+  related_controls:
+
+    - SOC2-CC-005
+    - SOC2-CC-006
+
+
+
+- id: SOC2-EV-006
+
+  name: Authentication configuration
+
+
+  description: >
+    Identity provider and authentication configuration supporting
+    secure access.
+
+
+  evidence_type:
+
+    - configuration
+    - security_record
+
+
+  related_controls:
+
+    - SOC2-CC-005
+    - SOC2-CC-008
+
+
+
+- id: SOC2-EV-007
+
+  name: Access review records
+
+
+  description: >
+    Periodic reviews validating user permissions remain appropriate.
+
+
+  evidence_type:
+
+    - access_review
+    - audit_record
+
+
+  related_controls:
+
+    - SOC2-CC-006
+
+
+
+- id: SOC2-EV-008
+
+  name: Privileged access inventory
+
+
+  description: >
+    Records identifying privileged accounts and administrative
+    permissions.
+
+
+  evidence_type:
+
+    - privileged_account_register
+
+
+  related_controls:
+
+    - SOC2-CC-007
+
+
+
+- id: SOC2-EV-009
+
+  name: Privileged access management configuration
+
+
+  description: >
+    Configuration demonstrating management and monitoring of
+    privileged accounts.
+
+
+  evidence_type:
+
+    - PAM_configuration
+
+
+  related_controls:
+
+    - SOC2-CC-007
+
+
+
+#
+# Security Operations
+#
+
+- id: SOC2-EV-010
+
+  name: Security monitoring records
+
+
+  description: >
+    Monitoring dashboards, alerts and security event records.
+
+
+  evidence_type:
+
+    - SIEM_record
+    - monitoring_report
+
+
+  related_controls:
+
+    - SOC2-CC-009
+
+
+
+- id: SOC2-EV-011
+
+  name: Incident response plan
+
+
+  description: >
+    Documented processes for detecting, responding to and recovering
+    from security incidents.
+
+
+  evidence_type:
+
+    - procedure
+    - response_plan
+
+
+  related_controls:
+
+    - SOC2-CC-010
+
+
+
+- id: SOC2-EV-012
+
+  name: Incident records
+
+
+  description: >
+    Records of security incidents, investigation activities and
+    remediation actions.
+
+
+  evidence_type:
+
+    - incident_record
+
+
+  related_controls:
+
+    - SOC2-CC-010
+
+
+
+#
+# Availability
+#
+
+- id: SOC2-EV-013
+
+  name: Availability management documentation
+
+
+  description: >
+    Documentation defining availability requirements and resilience
+    expectations.
+
+
+  evidence_type:
+
+    - availability_plan
+    - SLA_document
+
+
+  related_controls:
+
+    - SOC2-A-001
+
+
+
+- id: SOC2-EV-014
+
+  name: Backup reports
+
+
+  description: >
+    Evidence showing backup execution, retention and monitoring.
+
+
+  evidence_type:
+
+    - backup_record
+
+
+  related_controls:
+
+    - SOC2-A-002
+
+
+
+- id: SOC2-EV-015
+
+  name: Recovery testing records
+
+
+  description: >
+    Evidence demonstrating restoration and recovery testing.
+
+
+  evidence_type:
+
+    - test_record
+
+
+  related_controls:
+
+    - SOC2-A-002
+
+
+
+#
+# Confidentiality
+#
+
+- id: SOC2-EV-016
+
+  name: Data classification policy
+
+
+  description: >
+    Policy defining classification and handling requirements for
+    confidential information.
+
+
+  evidence_type:
+
+    - policy
+
+
+  related_controls:
+
+    - SOC2-C-001
+
+
+
+- id: SOC2-EV-017
+
+  name: Encryption configuration
+
+
+  description: >
+    Evidence demonstrating encryption protection for sensitive data.
+
+
+  evidence_type:
+
+    - configuration
+    - security_standard
+
+
+  related_controls:
+
+    - SOC2-C-001
+
+
+
+- id: SOC2-EV-018
+
+  name: Data access controls
+
+
+  description: >
+    Records demonstrating restrictions protecting confidential
+    information.
+
+
+  evidence_type:
+
+    - access_control_record
+
+
+  related_controls:
+
+    - SOC2-C-001
+
+
+
+#
+# Processing Integrity
+#
+
+- id: SOC2-EV-019
+
+  name: Application validation controls
+
+
+  description: >
+    Controls ensuring information processing is accurate and
+    complete.
+
+
+  evidence_type:
+
+    - application_control
+
+
+  related_controls:
+
+    - SOC2-PI-001
+
+
+
+- id: SOC2-EV-020
+
+  name: Application testing records
+
+
+  description: >
+    Testing evidence confirming processing accuracy and reliability.
+
+
+  evidence_type:
+
+    - test_report
+
+
+  related_controls:
+
+    - SOC2-PI-001
+
+
+
+#
+# Privacy
+#
+
+- id: SOC2-EV-021
+
+  name: Privacy policy
+
+
+  description: >
+    Policy defining handling and protection requirements for
+    personal information.
+
+
+  evidence_type:
+
+    - policy
+
+
+  related_controls:
+
+    - SOC2-P-001
+
+
+
+- id: SOC2-EV-022
+
+  name: Personal data inventory
+
+
+  description: >
+    Records identifying personal data types, processing activities
+    and ownership.
+
+
+  evidence_type:
+
+    - data_inventory
+
+
+  related_controls:
+
+    - SOC2-P-001
+
+
+
+- id: SOC2-EV-023
+
+  name: Privacy assessment records
+
+
+  description: >
+    Assessments demonstrating privacy risks are identified and
+    managed.
+
+
+  evidence_type:
+
+    - privacy_assessment
+
+
+  related_controls:
+
+    - SOC2-P-001
+
+
+
+#
+# Evidence Quality Requirements
+#
+
+evidence_requirements:
+
+
+  mandatory:
+
+
+    - Evidence must be attributable to the organisation.
+
+    - Evidence must demonstrate control operation.
+
+    - Evidence must be current and representative.
+
+    - Evidence must support the assessment conclusion.
+
+
+
+assessment_states:
+
+
+  accepted:
+
+    description: >
+      Evidence sufficiently demonstrates control effectiveness.
+
+
+
+  insufficient:
+
+    description: >
+      Evidence does not demonstrate adequate control operation.
+
+
+
+  unavailable:
+
+    description: >
+      Required evidence has not been provided.
+
+
+
+validation:
+
+
+  schema_version: "1.0"
+
+
+  framework: "SOC2"
+
+
+  status: validated
+
+
+  checks:
+
+
+    - Evidence identifiers are unique
+
+    - Evidence references align with controls.yml
+
+    - Evidence categories are defined
+
+    - Evidence supports SOC2 assessment activities
+
+
+  production_readiness:
+
+
+    status: ready
+
+
+    review_required:
+
+
+      - Review following AICPA Trust Services Criteria updates
+
+      - Review CAF alignment following CAF changes

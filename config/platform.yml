@@ -1,0 +1,70 @@
+# ==============================================================================
+# GRC Engineering Platform
+# Platform Configuration
+# ==============================================================================
+#
+# Global platform settings.
+#
+# ==============================================================================
+
+schemaVersion: "1.0"
+
+platform:
+
+  name: GRC Engineering Platform
+
+  version: "1.0.0"
+
+  environment: Production
+
+  timezone: UTC
+
+  locale: en-GB
+
+  organisation: Contoso Ltd
+
+  owner: GRC Engineering Team
+
+paths:
+
+  evidence: evidence
+
+  reports: reports
+
+  output: output
+
+  dashboards: dashboards
+
+  logs: output/logs
+
+execution:
+
+  parallelProcessing: true
+
+  maxThreads: 10
+
+  retryAttempts: 3
+
+  timeoutSeconds: 300
+
+logging:
+
+  level: Information
+
+  structuredLogging: true
+
+  logRetentionDays: 90
+
+security:
+
+  requireCodeSigning: false
+
+  enforceTls12: true
+
+  validateCertificates: true
+
+metadata:
+
+  schema: "1.0"
+
+  managedBy: GRC Engineering Platform

@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grc-engineering-platform/schemas/evidence.schema.json",
+
+  "title": "GRC Evidence Schema",
+
+  "description": "Defines the normalized evidence object collected from security, cloud, identity and business systems.",
+
+  "type": "object",
+
+  "required": [
+    "id",
+    "tenantId",
+    "collector",
+    "source",
+    "evidenceType",
+    "collectedAt",
+    "data",
+    "metadata"
+  ],
+
+  "properties": {
+
+    "id": {
+      "type": "string",
+      "description": "Unique evidence identifier"
+    },
+
+    "tenantId": {
+      "type": "string"
+    },
+
+    "collector": {
+      "type": "string",
+      "description": "Collector that generated this evidence"
+    },
+
+    "source": {
+      "type": "string",
+      "description": "Originating platform",
+      "examples": [
+        "Microsoft Entra ID",
+        "Azure",
+        "GitHub",
+        "VMware"
+      ]
+    },
+
+    "evidenceType": {
+      "type": "string",
+      "examples": [
+        "user",
+        "device",
+        "policy",
+        "configuration",
+        "alert"
+      ]
+    },
+
+    "collectionRunId": {
+      "type": "string"
+    },
+
+    "collectedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "expiresAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+
+    "classification": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ],
+      "default": "internal"
+    },
+
+    "integrity": {
+      "type": "object",
+
+      "properties": {
+
+        "hashAlgorithm": {
+          "type": "string",
+          "default": "sha256"
+        },
+
+        "hash": {
+          "type": "string"
+        },
+
+        "verified": {
+          "type": "boolean",
+          "default": false
+        }
+
+      }
+    },
+
+
+    "metadata": {
+
+      "type": "object",
+
+      "required": [
+        "schemaVersion"
+      ],
+
+      "properties": {
+
+        "schemaVersion": {
+          "type": "string"
+        },
+
+        "collectorVersion": {
+          "type": "string"
+        },
+
+        "region": {
+          "type": "string"
+        },
+
+        "tags": {
+
+          "type": "array",
+
+          "items": {
+            "type": "string"
+          }
+
+        }
+
+      }
+
+    },
+
+
+    "data": {
+
+      "type": "object",
+
+      "description": "Normalized evidence payload"
+
+    },
+
+
+    "rawReference": {
+
+      "type": [
+        "string",
+        "null"
+      ],
+
+      "description": "Path or URI to immutable raw evidence"
+
+    }
+
+  }
+}

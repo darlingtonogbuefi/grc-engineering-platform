@@ -1,0 +1,60 @@
+id: azure.role_assignments
+name: Azure Role Assignments
+description: >
+  Collect Azure Role-Based Access Control (RBAC) role assignments
+  to provide identity access, authorization, and privilege
+  management evidence.
+
+service: Microsoft.Authorization
+resource: roleAssignments
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments
+api_version: "2022-04-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: IdentityNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - properties
+  - properties.roleDefinitionId
+  - properties.principalId
+  - properties.principalType
+  - properties.scope
+  - properties.createdOn
+  - properties.updatedOn
+  - properties.createdBy
+  - properties.updatedBy
+  - properties.condition
+  - properties.conditionVersion
+  - properties.delegatedManagedIdentityResourceId
+  - properties.description
+
+metadata:
+  category: identity_access
+  evidence_type: role_assignment
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

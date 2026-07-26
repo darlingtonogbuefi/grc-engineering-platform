@@ -1,0 +1,223 @@
+id: soc2
+
+name: Microsoft Entra SOC 2 Profile
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra evidence collection profile aligned
+  with SOC 2 Trust Services Criteria covering security,
+  availability, confidentiality, processing integrity,
+  and logical access controls.
+
+collector: entra
+
+framework:
+  name: SOC 2
+  version: "2017 Trust Services Criteria"
+
+purpose:
+  - logical_access_review
+  - security_monitoring
+  - authentication_assurance
+  - change_and_configuration_review
+  - compliance_evidence_collection
+
+queries:
+
+  organization:
+    enabled: true
+    endpoint: /organization
+
+  users:
+    enabled: true
+    endpoint: /users
+    select:
+      - id
+      - displayName
+      - userPrincipalName
+      - userType
+      - accountEnabled
+      - createdDateTime
+      - signInActivity
+      - assignedLicenses
+
+  groups:
+    enabled: true
+    endpoint: /groups
+    select:
+      - id
+      - displayName
+      - description
+      - securityEnabled
+      - groupTypes
+      - membershipRule
+
+  devices:
+    enabled: true
+    endpoint: /devices
+    select:
+      - id
+      - displayName
+      - operatingSystem
+      - operatingSystemVersion
+      - isManaged
+      - isCompliant
+      - trustType
+
+  directory_roles:
+    enabled: true
+    endpoint: /directoryRoles
+    expand:
+      - members
+
+  authentication_methods:
+    enabled: true
+    endpoint: /users/authentication/methods
+
+  conditional_access:
+    enabled: true
+    endpoint: /identity/conditionalAccess/policies
+
+  applications:
+    enabled: true
+    endpoint: /applications
+
+  service_principals:
+    enabled: true
+    endpoint: /servicePrincipals
+
+  audit_logs:
+    enabled: true
+    endpoint: /auditLogs/directoryAudits
+
+  signins:
+    enabled: true
+    endpoint: /auditLogs/signIns
+
+  identity_protection:
+    enabled: true
+    endpoint: /identityProtection/riskyUsers
+
+
+normalizers:
+
+  users:
+    module: users
+
+  groups:
+    module: groups
+
+  devices:
+    module: devices
+
+  applications:
+    module: applications
+
+  policies:
+    module: policies
+
+  roles:
+    module: roles
+
+  logs:
+    module: logs
+
+
+evidence:
+
+  categories:
+
+    logical_access:
+      - users
+      - groups
+      - directory_roles
+      - authentication_methods
+
+    authentication_security:
+      - conditional_access
+      - signins
+
+    asset_inventory:
+      - devices
+      - applications
+      - service_principals
+
+    monitoring:
+      - audit_logs
+      - identity_protection
+
+    governance:
+      - organization
+
+
+controls:
+
+  soc2:
+
+    CC1_control_environment:
+      - accountability
+      - responsibility_assignment
+
+    CC2_communication:
+      - security_activity_visibility
+
+    CC3_risk_assessment:
+      - identity_risk_monitoring
+      - privileged_access_review
+
+    CC4_monitoring:
+      - audit_logging
+      - security_event_review
+
+    CC5_control_activities:
+      - access_control
+      - authentication_controls
+
+    CC6_logical_access:
+      - user_provisioning
+      - access_review
+      - privileged_access_management
+      - multi_factor_authentication
+
+    CC7_system_operations:
+      - incident_detection
+      - operational_monitoring
+
+    CC8_change_management:
+      - application_inventory
+      - configuration_review
+
+    CC9_risk_mitigation:
+      - third_party_application_review
+      - service_identity_governance
+
+
+collection:
+
+  pagination:
+    enabled: true
+
+  retries:
+    enabled: true
+
+  rate_limit_handling:
+    enabled: true
+
+  parallel_execution:
+    enabled: true
+
+
+output:
+
+  format:
+    - json
+
+  include_raw:
+    enabled: true
+
+  include_normalized:
+    enabled: true
+
+  evidence_metadata:
+    enabled: true

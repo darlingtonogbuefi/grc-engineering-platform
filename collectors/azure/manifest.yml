@@ -1,0 +1,23 @@
+collectors/
+└── azure/
+    |
+    ├── manifest.yml
+    |
+    ├── profiles/
+    |    |
+    |    ├── cyberessentials.yml
+    |    ├── caf.yml
+    |    ├── govassure.yml
+    |    └── full.yml
+    |
+    ├── queries/
+    |    |
+    |    ├── subscriptions.yml
+    |    ├── role_assignments.yml
+    |    ├── policies.yml
+    |    └── resources.yml
+    |
+    ├── collector.py
+    ├── auth.py
+    ├── client.py
+    └── normalizers/

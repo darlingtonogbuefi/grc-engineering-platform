@@ -1,0 +1,227 @@
+# Microsoft Entra Collection Profiles
+
+Collection profiles define **what Microsoft Entra data is collected** by the Entra collector.
+
+A profile enables a specific set of query modules to support different inventory, security, and compliance scenarios without modifying the collector itself.
+
+---
+
+## Available Profiles
+
+### `baseline.yml`
+
+Collects the minimum recommended data required for general tenant inventory and security assessments.
+
+Typical data includes:
+
+* Users
+* Groups
+* Directory roles
+* Licenses
+* Organization information
+
+**Use when:**
+
+* Performing a basic tenant assessment
+* Running a quick inventory
+* Minimizing Microsoft Graph API calls
+
+---
+
+### `full.yml`
+
+Collects all supported Microsoft Entra resources.
+
+Typical data includes:
+
+* Users
+* Groups
+* Devices
+* Applications
+* Enterprise Applications
+* Service Principals
+* Conditional Access
+* Authentication Methods
+* Privileged Identity Management (PIM)
+* Audit Logs
+* Sign-in Logs
+* Identity Protection
+* Administrative Units
+* Domains
+* Directory Settings
+* Organization
+* Licenses
+
+**Use when:**
+
+* Performing a comprehensive security assessment
+* Building a complete evidence package
+* Detailed forensic or governance reviews
+
+---
+
+### `caf.yml`
+
+Optimized for Microsoft Cloud Adoption Framework assessments.
+
+Focus areas include:
+
+* Identity inventory
+* Identity governance
+* Access management
+* Security configuration
+
+---
+
+### `cyberessentials.yml`
+
+Collects evidence relevant to the UK Cyber Essentials controls.
+
+Focus areas include:
+
+* User accounts
+* Authentication
+* Privileged access
+* Device inventory
+* Security configuration
+
+---
+
+### `govassure.yml`
+
+Collects evidence aligned with the UK GovAssure assessment framework.
+
+Focus areas include:
+
+* Identity governance
+* Privileged administration
+* Authentication
+* Audit logging
+* Security monitoring
+
+---
+
+### `iso27001.yml`
+
+Collects evidence supporting ISO/IEC 27001 information security controls.
+
+Focus areas include:
+
+* Identity management
+* Access control
+* Authentication
+* Audit logging
+* Device management
+* Application governance
+
+---
+
+### `iso42001.yml`
+
+Collects evidence supporting ISO/IEC 42001 Artificial Intelligence Management System (AIMS) assessments where Microsoft Entra contributes identity and governance evidence.
+
+Focus areas include:
+
+* Identity governance
+* Access management
+* Privileged access
+* Authentication
+* Audit logging
+
+---
+
+### `soc2.yml`
+
+Collects evidence supporting SOC 2 Trust Services Criteria.
+
+Focus areas include:
+
+* Identity and access management
+* Authentication controls
+* Privileged access
+* Audit trails
+* Application governance
+
+---
+
+# How Profiles Work
+
+Profiles enable one or more query modules located in:
+
+```text
+queries/
+```
+
+Each enabled query retrieves data from Microsoft Graph.
+
+The collector executes the enabled queries, normalizes the returned data, and writes the resulting evidence.
+
+```text
+Profile
+    │
+    ▼
+Enabled Queries
+    │
+    ▼
+Microsoft Graph
+    │
+    ▼
+Normalizers
+    │
+    ▼
+Evidence Output
+```
+
+---
+
+# Choosing a Profile
+
+| Profile           | Purpose                                 | API Usage |
+| ----------------- | --------------------------------------- | --------: |
+| `baseline`        | General inventory and security baseline |       Low |
+| `full`            | Complete tenant collection              |      High |
+| `caf`             | Microsoft Cloud Adoption Framework      |    Medium |
+| `cyberessentials` | UK Cyber Essentials                     |    Medium |
+| `govassure`       | UK GovAssure                            |    Medium |
+| `iso27001`        | ISO/IEC 27001 evidence                  |    Medium |
+| `iso42001`        | ISO/IEC 42001 evidence                  |    Medium |
+| `soc2`            | SOC 2 evidence                          |    Medium |
+
+---
+
+# Creating a Custom Profile
+
+Create a new YAML file in this directory.
+
+Example:
+
+```yaml
+id: custom
+
+name: Custom Assessment
+
+queries:
+
+  users:
+    enabled: true
+
+  groups:
+    enabled: true
+
+  conditional_access:
+    enabled: true
+
+  audit_logs:
+    enabled: true
+```
+
+Only enabled queries will be executed.
+
+---
+
+# Best Practices
+
+* Use **`baseline.yml`** for routine inventory and lightweight assessments.
+* Use **`full.yml`** only when complete tenant visibility is required.
+* Prefer framework-specific profiles for compliance assessments to reduce unnecessary Microsoft Graph API calls.
+* Keep profiles focused on **what to collect** rather than **how collection is performed**. Query implementation details such as endpoints, pagination, and normalization should remain within the query modules.

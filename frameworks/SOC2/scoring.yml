@@ -1,0 +1,485 @@
+#
+# SOC 2 Trust Services Criteria Assessment Scoring Model
+# scoring.yml
+#
+
+framework:
+
+  id: SOC2
+
+  name: SOC 2 Trust Services Criteria
+
+  version: "2017+"
+
+
+
+scoring_model:
+
+  type: control_based_assessment
+
+
+  purpose:
+
+
+    - SOC 2 readiness assessment
+
+    - Control effectiveness evaluation
+
+    - Evidence-based compliance scoring
+
+    - Remediation prioritisation
+
+    - Governance reporting
+
+
+
+assessment_results:
+
+
+  pass:
+
+
+    value: 1
+
+
+    description: >
+      Control is implemented, operating effectively and supported
+      by sufficient evidence.
+
+
+
+  partial:
+
+
+    value: 0.5
+
+
+    description: >
+      Control is partially implemented or evidence demonstrates
+      incomplete operation.
+
+
+
+  fail:
+
+
+    value: 0
+
+
+    description: >
+      Control is not implemented or evidence does not demonstrate
+      effective operation.
+
+
+
+  not_applicable:
+
+
+    value: null
+
+
+    description: >
+      Control does not apply to the assessed environment and is
+      excluded from scoring.
+
+
+
+scoring_calculation:
+
+
+  formula: >
+
+    Compliance Score =
+    Sum of Applicable Control Scores /
+    Number of Applicable Controls
+    x 100
+
+
+
+  exclusions:
+
+
+    - not_applicable
+
+
+
+score_interpretation:
+
+
+  strong:
+
+
+    minimum_percentage: 90
+
+
+    maximum_percentage: 100
+
+
+    rating: Strong Control Environment
+
+
+
+  acceptable:
+
+
+    minimum_percentage: 75
+
+
+    maximum_percentage: 89
+
+
+    rating: Acceptable Control Environment
+
+
+
+  improvement_required:
+
+
+    minimum_percentage: 50
+
+
+    maximum_percentage: 74
+
+
+    rating: Improvement Required
+
+
+
+  weak:
+
+
+    minimum_percentage: 0
+
+
+    maximum_percentage: 49
+
+
+    rating: Weak Control Environment
+
+
+
+priority_weighting:
+
+
+  enabled: true
+
+
+  purpose:
+
+
+    - Risk-based remediation ranking
+
+    - Control weakness prioritisation
+
+    - Executive reporting
+
+
+
+  weights:
+
+
+    critical:
+
+
+      multiplier: 4
+
+
+      description: >
+        Control failures creating significant security, availability
+        or confidentiality risk.
+
+
+
+    high:
+
+
+      multiplier: 3
+
+
+      description: >
+        Control weaknesses creating material operational or security
+        exposure.
+
+
+
+    medium:
+
+
+      multiplier: 2
+
+
+      description: >
+        Controls requiring improvement to reduce identified risk.
+
+
+
+    low:
+
+
+      multiplier: 1
+
+
+      description: >
+        Minor improvement opportunities.
+
+
+
+weighted_scoring:
+
+
+  enabled: true
+
+
+  formula: >
+
+    Weighted Score =
+    Sum(Control Result x Priority Weight) /
+    Sum(Priority Weights)
+    x 100
+
+
+
+trust_service_category_scoring:
+
+
+  enabled: true
+
+
+  categories:
+
+
+    security:
+
+
+      prefix:
+
+        - SOC2-CC
+
+
+      included: true
+
+
+
+    availability:
+
+
+      prefix:
+
+        - SOC2-A
+
+
+      included: true
+
+
+
+    processing_integrity:
+
+
+      prefix:
+
+        - SOC2-PI
+
+
+      included: true
+
+
+
+    confidentiality:
+
+
+      prefix:
+
+        - SOC2-C
+
+
+      included: true
+
+
+
+    privacy:
+
+
+      prefix:
+
+        - SOC2-P
+
+
+      included: true
+
+
+
+control_status_mapping:
+
+
+  compliant:
+
+
+    assessment_result:
+
+      - pass
+
+
+
+  partially_compliant:
+
+
+    assessment_result:
+
+      - partial
+
+
+
+  non_compliant:
+
+
+    assessment_result:
+
+      - fail
+
+
+
+  excluded:
+
+
+    assessment_result:
+
+      - not_applicable
+
+
+
+assessment_reporting:
+
+
+  required_fields:
+
+
+    - control_id
+
+    - assessment_result
+
+    - evidence_reference
+
+    - assessor_notes
+
+    - identified_gap
+
+    - remediation_action
+
+    - remediation_owner
+
+    - target_date
+
+
+
+remediation_tracking:
+
+
+  severity_mapping:
+
+
+    critical:
+
+
+      condition: >
+        Failure affects critical security objectives, sensitive data,
+        availability commitments or customer obligations.
+
+
+
+    high:
+
+
+      condition: >
+        Failure creates significant control weakness requiring
+        prioritised remediation.
+
+
+
+    medium:
+
+
+      condition: >
+        Improvement required to strengthen control maturity.
+
+
+
+    low:
+
+
+      condition: >
+        Minor enhancement or optimisation opportunity.
+
+
+
+integration:
+
+
+  control_source:
+
+
+    - controls.yml
+
+
+
+  evidence_source:
+
+
+    - evidence.yml
+
+
+
+  mapping_source:
+
+
+    - mappings.yml
+
+
+
+validation:
+
+
+  schema_version: "1.0"
+
+
+  framework: SOC2
+
+
+  status: validated
+
+
+
+  checks:
+
+
+    - Assessment outcomes defined
+
+    - Scoring formula validated
+
+    - Trust Services categories supported
+
+    - Priority weighting configured
+
+    - Control identifiers compatible with controls.yml
+
+    - Evidence references compatible with evidence.yml
+
+    - CAF mapping references compatible with mappings.yml
+
+
+
+production_readiness:
+
+
+  status: ready
+
+
+  review_required:
+
+
+    - Review scoring thresholds annually
+
+    - Review weighting methodology after risk changes
+
+    - Review following AICPA Trust Services Criteria updates
+
+    - Review CAF alignment following CAF revisions

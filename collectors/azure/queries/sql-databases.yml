@@ -1,0 +1,68 @@
+id: azure.sql_databases
+name: Azure SQL Databases
+description: >
+  Collect Azure SQL Database configurations for database security,
+  availability, encryption, auditing, and compliance evidence.
+
+service: Microsoft.Sql
+resource: databases
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers/{serverName}/databases
+api_version: "2024-05-01-preview"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: DatabaseNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - sku
+  - kind
+  - properties
+  - properties.status
+  - properties.collation
+  - properties.creationDate
+  - properties.databaseId
+  - properties.catalogCollation
+  - properties.databaseCollation
+  - properties.maxSizeBytes
+  - properties.currentServiceObjectiveName
+  - properties.requestedServiceObjectiveName
+  - properties.zoneRedundant
+  - properties.readScale
+  - properties.earliestRestoreDate
+  - properties.encryptionProtector
+  - properties.transparentDataEncryption
+  - properties.longTermRetentionPolicy
+  - properties.backupLongTermRetentionPolicy
+  - properties.highAvailabilityReplicaCount
+
+metadata:
+  category: data_security
+  evidence_type: sql_database_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

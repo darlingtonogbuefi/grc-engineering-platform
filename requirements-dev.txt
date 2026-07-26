@@ -1,0 +1,49 @@
+-r requirements.txt
+
+
+# Testing
+
+pytest>=8.0.0
+
+pytest-cov>=4.1.0
+
+
+# Code Quality
+
+ruff>=0.2.0
+
+mypy>=1.8.0
+
+
+# Security
+
+bandit>=1.7.7
+
+pip-audit>=2.7.0
+
+
+# YAML / Framework Validation
+
+yamllint>=1.35.0
+
+
+# Schema Validation
+
+check-jsonschema>=0.28.0
+
+
+# Documentation
+
+mkdocs>=1.5.3
+
+mkdocs-material>=9.5.0
+
+
+# Development Workflow
+
+pre-commit>=3.6.0
+
+
+# Debugging
+
+ipython>=8.20.0

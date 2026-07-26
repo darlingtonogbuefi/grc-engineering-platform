@@ -1,0 +1,284 @@
+framework:
+  id: CAF
+  name: Cyber Assessment Framework
+  version: "3.2"
+
+publisher:
+  name: National Cyber Security Centre
+  abbreviation: NCSC
+  country: United Kingdom
+
+metadata:
+  description: >
+    The NCSC Cyber Assessment Framework (CAF) provides a systematic approach
+    for assessing the effectiveness of cybersecurity and resilience measures
+    protecting essential functions and services.
+
+  purpose:
+    - Assess cybersecurity risk management capability
+    - Evaluate protection of essential functions
+    - Support regulatory and assurance activities
+    - Provide consistent cybersecurity assessment criteria
+
+  framework_type:
+    - Cybersecurity assessment framework
+    - Risk management framework
+    - Assurance framework
+
+  jurisdiction:
+    - United Kingdom
+
+  applicable_sectors:
+    - Critical national infrastructure
+    - Public sector
+    - Government
+    - Healthcare
+    - Finance
+    - Transport
+    - Energy
+    - Digital services
+    - Essential service providers
+
+  source:
+    organisation: NCSC
+    website: https://www.ncsc.gov.uk
+    framework_page: https://www.ncsc.gov.uk/collection/cyber-assessment-framework
+
+
+taxonomy:
+
+  objectives:
+    - id: A
+      name: Managing security risk
+      description: >
+        Governance, risk management, asset management and supply chain
+        security capabilities.
+
+    - id: B
+      name: Protecting against cyber attack
+      description: >
+        Controls supporting identity, data, systems, resilience and
+        workforce security.
+
+    - id: C
+      name: Detecting cyber security events
+      description: >
+        Capabilities for monitoring, detection and threat intelligence.
+
+    - id: D
+      name: Minimising the impact of cyber security incidents
+      description: >
+        Incident response, recovery and continuous improvement capabilities.
+
+
+domains:
+
+  - id: A1
+    name: Governance
+
+  - id: A2
+    name: Risk management
+
+  - id: A3
+    name: Asset management
+
+  - id: A4
+    name: Supply chain security
+
+  - id: B1
+    name: Service protection policies, processes and procedures
+
+  - id: B2
+    name: Identity and access control
+
+  - id: B3
+    name: Data security
+
+  - id: B4
+    name: System security
+
+  - id: B5
+    name: Resilient networks and systems
+
+  - id: B6
+    name: Staff awareness and training
+
+  - id: C1
+    name: Security monitoring
+
+  - id: D1
+    name: Response and recovery planning
+
+  - id: D2
+    name: Lessons learned
+
+
+principles:
+
+  - id: P1
+    name: Data in transit protection
+
+  - id: P2
+    name: Asset protection and resilience
+
+  - id: P3
+    name: Separation between customers
+
+  - id: P4
+    name: Governance framework
+
+  - id: P5
+    name: Operational security
+
+  - id: P6
+    name: Personnel security
+
+  - id: P7
+    name: Secure development
+
+  - id: P8
+    name: Supply chain security
+
+  - id: P9
+    name: Secure user management
+
+  - id: P10
+    name: Identity and authentication
+
+  - id: P11
+    name: External interface protection
+
+  - id: P12
+    name: Secure service administration
+
+  - id: P13
+    name: Audit information and alerting for customers
+
+  - id: P14
+    name: Secure use of the service
+
+
+assessment:
+
+  assessment_model:
+    type: maturity_based
+
+  outcomes:
+    - Prevent
+    - Detect
+    - Respond
+    - Recover
+
+  assurance_levels:
+    - Basic
+    - Intermediate
+    - Advanced
+
+  assessment_methods:
+    - Document review
+    - Interview
+    - Technical validation
+    - Evidence sampling
+    - Configuration review
+    - Security testing
+
+
+scoring:
+
+  model:
+    type: maturity
+
+  supported_scores:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+
+  maturity_levels:
+
+    - score: 0
+      name: Not achieved
+      description: >
+        The expected outcome is not achieved.
+
+    - score: 1
+      name: Partially achieved
+      description: >
+        Some aspects of the outcome are achieved but significant weaknesses
+        remain.
+
+    - score: 2
+      name: Mostly achieved
+      description: >
+        The outcome is largely achieved with minor weaknesses.
+
+    - score: 3
+      name: Fully achieved
+      description: >
+        The outcome is achieved consistently and effectively.
+
+    - score: 4
+      name: Optimised
+      description: >
+        The capability is continuously improved and adapted.
+
+
+files:
+
+  controls:
+    filename: controls.yml
+    purpose: >
+      Contains CAF control objectives, descriptions and framework mappings.
+
+  evidence:
+    filename: evidence.yml
+    purpose: >
+      Defines expected evidence and assessment artefacts for each control.
+
+  mappings:
+    filename: mappings.yml
+    purpose: >
+      Provides mappings between CAF controls and external security frameworks.
+
+  scoring:
+    filename: scoring.yml
+    purpose: >
+      Defines assessment scoring methodology and maturity calculations.
+
+
+related_frameworks:
+
+  - id: NIST_800_53
+    name: NIST Special Publication 800-53
+    version: "Rev.5"
+
+  - id: ISO27001
+    name: ISO/IEC 27001 Information Security Management System
+    version: "2022"
+
+  - id: CIS_CONTROLS
+    name: CIS Critical Security Controls
+    version: "8"
+
+  - id: OWASP_TOP10
+    name: OWASP Top 10 Web Application Security Risks
+    version: "2021"
+
+
+maintenance:
+
+  owner:
+    organisation: NCSC
+
+  review_frequency:
+    recommended: Annual
+
+  update_triggers:
+    - Framework revision
+    - Changes to cybersecurity threats
+    - Regulatory changes
+    - Major security incidents
+
+  schema_version:
+    value: "1.0"

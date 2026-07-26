@@ -1,0 +1,62 @@
+id: azure.policy_assignments
+name: Azure Policy Assignments
+description: >
+  Collect Azure Policy Assignments to determine which policies
+  are assigned across subscriptions and resource scopes for
+  governance and compliance evidence.
+
+service: Microsoft.Authorization
+resource: policyAssignments
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments
+api_version: "2023-04-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: GovernanceNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - identity
+  - properties
+  - properties.displayName
+  - properties.description
+  - properties.scope
+  - properties.notScopes
+  - properties.policyDefinitionId
+  - properties.definitionVersion
+  - properties.parameters
+  - properties.metadata
+  - properties.enforcementMode
+  - properties.nonComplianceMessages
+  - properties.overrides
+  - properties.resourceSelectors
+
+metadata:
+  category: governance
+  evidence_type: policy_assignment
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

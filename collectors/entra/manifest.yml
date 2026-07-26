@@ -1,0 +1,78 @@
+id: entra
+
+name: Microsoft Entra ID
+
+version: "1.0.0"
+
+description: >
+  Microsoft Entra ID evidence collector.
+  Collects identity, access control, security,
+  and configuration evidence from Microsoft Graph.
+
+provider:
+  type: entra
+  platform: microsoft-entra
+  api: microsoft-graph
+
+authentication:
+  type: client_credentials
+  required:
+    - tenant_id
+    - client_id
+    - client_secret
+
+  scopes:
+    - https://graph.microsoft.com/.default
+
+collector:
+  class: EntraCollector
+  module: collectors.entra.collector
+
+client:
+  class: EntraClient
+  module: collectors.entra.client
+
+authenticator:
+  class: EntraAuthenticator
+  module: collectors.entra.auth
+
+capabilities:
+  - users
+  - groups
+  - devices
+  - applications
+  - service_principals
+  - directory_roles
+  - audit_logs
+  - sign_ins
+  - conditional_access
+  - identity_protection
+  - privileged_identity_management
+
+queries:
+  path: queries
+
+normalizers:
+  path: normalizers
+
+profiles:
+  path: profiles
+
+evidence:
+  format:
+    - json
+
+  retention:
+    enabled: true
+
+logging:
+  enabled: true
+  level: INFO
+
+health_check:
+  endpoint: /organization
+
+requirements:
+  python:
+    - requests
+    - azure-identity

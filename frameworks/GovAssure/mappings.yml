@@ -1,0 +1,233 @@
+# GovAssure Security Assessment Control Mappings
+# mappings.yml
+
+framework: GOVASSURE
+version: "2024"
+
+mapping_model:
+  type: control_mapping
+
+  purpose:
+    - CAF alignment
+    - Control traceability
+    - Assessment reporting
+
+mapping_scope:
+
+  source_framework:
+    name: GovAssure
+
+  target_framework:
+    name: NCSC Cyber Assessment Framework
+    abbreviation: CAF
+
+  mapping_rules:
+    - Only CAF references are included
+    - No ISO mappings
+    - No NIST mappings
+    - No CIS mappings
+    - No OWASP mappings
+
+
+
+mappings:
+
+
+  #
+  # Governance and Risk Management
+  #
+
+  - control_id: GA-GOV-001
+    control_title: Security governance framework
+
+    caf_controls:
+      - A1.a
+      - A1.b
+
+
+  - control_id: GA-GOV-002
+    control_title: Cyber risk management process
+
+    caf_controls:
+      - A2.a
+      - A2.b
+      - A2.c
+
+
+
+  #
+  # Asset Management
+  #
+
+  - control_id: GA-AM-001
+    control_title: Technology asset inventory
+
+    caf_controls:
+      - A3.a
+      - B4.d
+
+
+
+  #
+  # Identity and Access Management
+  #
+
+  - control_id: GA-IAM-001
+    control_title: User identity management
+
+    caf_controls:
+      - B2.a
+      - B2.d
+
+
+  - control_id: GA-IAM-002
+    control_title: Privileged access management
+
+    caf_controls:
+      - B2.c
+      - B4.c
+
+
+  - control_id: GA-IAM-003
+    control_title: Strong authentication controls
+
+    caf_controls:
+      - B2.a
+      - B2.c
+
+
+
+  #
+  # Secure Configuration
+  #
+
+  - control_id: GA-SC-001
+    control_title: Secure system configuration
+
+    caf_controls:
+      - B4.a
+      - B4.b
+
+
+
+  #
+  # Vulnerability Management
+  #
+
+  - control_id: GA-VULN-001
+    control_title: Vulnerability assessment process
+
+    caf_controls:
+      - A2.b
+      - A2.c
+      - B4.d
+
+
+
+  #
+  # Security Monitoring
+  #
+
+  - control_id: GA-MON-001
+    control_title: Security event monitoring
+
+    caf_controls:
+      - C1.a
+      - C1.d
+
+
+
+  #
+  # Incident Management
+  #
+
+  - control_id: GA-INC-001
+    control_title: Cyber incident response capability
+
+    caf_controls:
+      - D1.a
+      - D2.a
+
+
+
+  #
+  # Supplier Security
+  #
+
+  - control_id: GA-SUP-001
+    control_title: Supplier security assurance
+
+    caf_controls:
+      - A1.b
+      - A2.a
+
+
+
+  #
+  # Data Protection
+  #
+
+  - control_id: GA-DATA-001
+    control_title: Protection of sensitive information
+
+    caf_controls:
+      - B5.a
+      - B5.b
+
+
+
+caf_domains:
+
+  A:
+    name: Managing Security Risk
+
+    controls:
+      - A1.a
+      - A1.b
+      - A2.a
+      - A2.b
+      - A2.c
+      - A3.a
+
+  B:
+    name: Protecting Against Cyber Attack
+
+    controls:
+      - B2.a
+      - B2.c
+      - B2.d
+      - B4.a
+      - B4.b
+      - B4.c
+      - B4.d
+      - B5.a
+      - B5.b
+
+  C:
+    name: Detecting Cyber Security Events
+
+    controls:
+      - C1.a
+      - C1.d
+
+  D:
+    name: Minimising the Impact of Cyber Security Incidents
+
+    controls:
+      - D1.a
+      - D2.a
+
+
+
+validation:
+
+  schema_version: "1.0"
+
+  checks:
+    - All GovAssure controls have CAF mappings
+    - Mappings reference CAF controls only
+    - Control identifiers match controls.yml
+    - No external framework mappings included
+    - Mapping integrity validated
+
+  status: validated

@@ -1,0 +1,755 @@
+id: powerplatform
+
+name: Microsoft Power Platform Evidence Model
+
+version: "1.0.0"
+
+description: >
+  Defines evidence requirements for assessing Microsoft Power Platform
+  governance, security and compliance controls. Evidence is collected
+  from Power Platform, Microsoft Graph, Entra ID, Purview, Defender
+  and Azure services, then normalised into common evidence objects.
+
+
+evidence:
+
+
+  #
+  # PP-001 Tenant Governance
+  #
+
+  - id: EVID-PP-001
+
+    controls:
+
+      - PP-001
+
+    name: Tenant Configuration Evidence
+
+    description: >
+      Evidence of Power Platform tenant-level governance settings.
+
+    collectors:
+
+      - powerplatform
+
+      - m365
+
+      - entra
+
+
+    evidence_type:
+
+      - tenant_configuration
+
+
+    objects:
+
+      - tenant_settings
+
+      - tenant_details
+
+      - administrative_roles
+
+      - platform_features
+
+
+    validation:
+
+      rules:
+
+        - tenant_settings_available
+
+        - administrators_identified
+
+        - privileged_roles_reviewed
+
+
+
+  #
+  # PP-002 Environment Governance
+  #
+
+  - id: EVID-PP-002
+
+    controls:
+
+      - PP-002
+
+
+    name: Environment Inventory
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - environment_inventory
+
+
+    objects:
+
+      - environments
+
+      - environment_types
+
+      - environment_owners
+
+      - environment_security_groups
+
+
+    validation:
+
+      rules:
+
+        - all_environments_identified
+
+        - production_environments_classified
+
+        - owners_assigned
+
+
+
+  #
+  # PP-003 Access Control
+  #
+
+  - id: EVID-PP-003
+
+    controls:
+
+      - PP-003
+
+
+    name: Power Platform Permissions
+
+
+    collectors:
+
+      - powerplatform
+
+      - entra
+
+
+    evidence_type:
+
+      - access_control
+
+
+    objects:
+
+      - users
+
+      - security_roles
+
+      - environment_roles
+
+      - administrators
+
+
+    validation:
+
+      rules:
+
+        - privileged_users_identified
+
+        - excessive_permissions_detected
+
+        - access_review_available
+
+
+
+  #
+  # PP-004 Maker Governance
+  #
+
+  - id: EVID-PP-004
+
+    controls:
+
+      - PP-004
+
+
+    name: Maker Inventory
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - maker_inventory
+
+
+    objects:
+
+      - makers
+
+      - maker_activity
+
+      - applications_created
+
+      - flows_created
+
+
+    validation:
+
+      rules:
+
+        - makers_identified
+
+        - inactive_makers_detected
+
+        - ownership_defined
+
+
+
+  #
+  # PP-005 Application Governance
+  #
+
+  - id: EVID-PP-005
+
+    controls:
+
+      - PP-005
+
+
+    name: Application Inventory
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - application_inventory
+
+
+    objects:
+
+      - power_apps
+
+      - applications
+
+      - owners
+
+      - usage_metrics
+
+
+    validation:
+
+      rules:
+
+        - applications_discovered
+
+        - application_owner_present
+
+        - unused_applications_identified
+
+
+
+  #
+  # PP-006 Data Loss Prevention
+  #
+
+  - id: EVID-PP-006
+
+    controls:
+
+      - PP-006
+
+
+    name: DLP Policy Configuration
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - dlp_configuration
+
+
+    objects:
+
+      - dlp_policies
+
+      - connector_groups
+
+      - policy_assignments
+
+
+    validation:
+
+      rules:
+
+        - dlp_policies_exist
+
+        - connector_restrictions_defined
+
+        - policies_assigned_to_environments
+
+
+
+  #
+  # PP-007 Connector Governance
+  #
+
+  - id: EVID-PP-007
+
+    controls:
+
+      - PP-007
+
+
+    name: Connector Inventory
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - connector_inventory
+
+
+    objects:
+
+      - standard_connectors
+
+      - premium_connectors
+
+      - custom_connectors
+
+      - connector_usage
+
+
+    validation:
+
+      rules:
+
+        - connectors_identified
+
+        - risky_connectors_reviewed
+
+        - custom_connectors_documented
+
+
+
+  #
+  # PP-008 Dataverse Security
+  #
+
+  - id: EVID-PP-008
+
+    controls:
+
+      - PP-008
+
+
+    name: Dataverse Security Evidence
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - dataverse_security
+
+
+    objects:
+
+      - dataverse_instances
+
+      - tables
+
+      - security_roles
+
+      - permissions
+
+
+    validation:
+
+      rules:
+
+        - dataverse_instances_identified
+
+        - roles_documented
+
+        - sensitive_tables_reviewed
+
+
+
+  #
+  # PP-009 Power Automate Governance
+  #
+
+  - id: EVID-PP-009
+
+    controls:
+
+      - PP-009
+
+
+    name: Automation Inventory
+
+
+    collectors:
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - automation_inventory
+
+
+    objects:
+
+      - cloud_flows
+
+      - desktop_flows
+
+      - flow_owners
+
+      - connections
+
+
+    validation:
+
+      rules:
+
+        - flows_identified
+
+        - owners_assigned
+
+        - orphaned_flows_detected
+
+
+
+  #
+  # PP-010 ALM
+  #
+
+  - id: EVID-PP-010
+
+    controls:
+
+      - PP-010
+
+
+    name: Solution Lifecycle Evidence
+
+
+    collectors:
+
+      - powerplatform
+
+      - azuredevops
+
+      - github
+
+
+    evidence_type:
+
+      - application_lifecycle
+
+
+    objects:
+
+      - solutions
+
+      - managed_solutions
+
+      - solution_versions
+
+      - deployments
+
+
+    validation:
+
+      rules:
+
+        - production_solutions_managed
+
+        - deployment_history_available
+
+        - versions_tracked
+
+
+
+  #
+  # PP-011 Service Identity
+  #
+
+  - id: EVID-PP-011
+
+    controls:
+
+      - PP-011
+
+
+    name: Application Identity Evidence
+
+
+    collectors:
+
+      - entra
+
+      - powerplatform
+
+
+    evidence_type:
+
+      - application_identity
+
+
+    objects:
+
+      - service_principals
+
+      - service_accounts
+
+      - application_permissions
+
+
+    validation:
+
+      rules:
+
+        - identities_have_owners
+
+        - permissions_reviewed
+
+        - inactive_accounts_identified
+
+
+
+  #
+  # PP-012 Audit Monitoring
+  #
+
+  - id: EVID-PP-012
+
+    controls:
+
+      - PP-012
+
+
+    name: Audit Activity Evidence
+
+
+    collectors:
+
+      - powerplatform
+
+      - purview
+
+
+    evidence_type:
+
+      - audit_logging
+
+
+    objects:
+
+      - audit_events
+
+      - administrative_actions
+
+      - user_activity
+
+
+    validation:
+
+      rules:
+
+        - audit_logging_enabled
+
+        - administrative_activity_logged
+
+        - retention_configured
+
+
+
+  #
+  # PP-013 Security Posture
+  #
+
+  - id: EVID-PP-013
+
+    controls:
+
+      - PP-013
+
+
+    name: Security Posture Evidence
+
+
+    collectors:
+
+      - powerplatform
+
+      - defender
+
+
+    evidence_type:
+
+      - security_posture
+
+
+    objects:
+
+      - recommendations
+
+      - security_alerts
+
+      - risky_configurations
+
+
+    validation:
+
+      rules:
+
+        - security_findings_available
+
+        - recommendations_reviewed
+
+        - critical_findings_tracked
+
+
+
+#
+# Collection Requirements
+#
+
+collection:
+
+
+  refresh_frequency:
+
+
+    tenant_configuration:
+
+      daily
+
+
+    environment_inventory:
+
+      daily
+
+
+    access_control:
+
+      daily
+
+
+    maker_inventory:
+
+      daily
+
+
+    application_inventory:
+
+      daily
+
+
+    dlp_configuration:
+
+      daily
+
+
+    connector_inventory:
+
+      daily
+
+
+    dataverse_security:
+
+      daily
+
+
+    automation_inventory:
+
+      daily
+
+
+    application_lifecycle:
+
+      daily
+
+
+    audit_logging:
+
+      hourly
+
+
+    security_posture:
+
+      daily
+
+
+
+#
+# Normalisation Contract
+#
+
+normalisation:
+
+
+  required_fields:
+
+
+    - tenant_id
+
+    - organisation_id
+
+    - source_system
+
+    - collector
+
+    - collector_version
+
+    - evidence_type
+
+    - object_type
+
+    - object_id
+
+    - collection_timestamp
+
+
+
+#
+# Evidence Quality Rules
+#
+
+quality_checks:
+
+
+  - schema_validation_required
+
+  - timestamp_required
+
+  - source_system_required
+
+  - collector_version_required
+
+  - ownership_information_required
+
+  - tenant_scope_required

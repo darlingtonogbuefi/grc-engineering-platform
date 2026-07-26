@@ -1,0 +1,478 @@
+id: identity
+
+name: Identity and Access Management Controls
+
+version: "1.0"
+
+description: >
+  Capability controls defining the required security outcomes for
+  identity verification, authentication, authorisation, privileged
+  access management, device identity and identity lifecycle management.
+
+
+controls:
+
+
+  #
+  # Identity Verification and Authentication
+  #
+
+  - id: IAM-001
+
+    name: Identity Verification
+
+    objective: >
+      Ensure user identities are verified before access is granted
+      to organisational systems.
+
+    description: >
+      Identity proofing processes provide sufficient confidence
+      that users accessing systems are who they claim to be.
+
+    capability_area:
+      - Identity Verification
+
+    requirements:
+
+      - >
+        User identity is verified before account creation.
+
+      - >
+        Identity records are uniquely associated with individual users.
+
+      - >
+        Shared user identities are prohibited unless formally justified.
+
+      - >
+        Identity verification follows approved organisational processes.
+
+    evidence_required:
+
+      - user_identity_process
+
+      - identity_source_configuration
+
+      - account_inventory
+
+
+    maturity:
+
+      level_1:
+        description: >
+          Identity verification is performed manually.
+
+      level_2:
+        description: >
+          Identity verification process is documented.
+
+      level_3:
+        description: >
+          Identity verification is integrated with identity lifecycle systems.
+
+      level_4:
+        description: >
+          Identity verification uses automated risk-based controls.
+
+
+
+  - id: IAM-002
+
+    name: Strong Authentication
+
+    objective: >
+      Ensure users authenticate using appropriate security controls.
+
+    description: >
+      Authentication mechanisms provide appropriate assurance,
+      including multi-factor authentication where required.
+
+    capability_area:
+
+      - Authentication
+
+    requirements:
+
+      - >
+        Multi-factor authentication is enabled for privileged accounts.
+
+      - >
+        Multi-factor authentication is enabled for remote access.
+
+      - >
+        Authentication methods meet current security best practice.
+
+      - >
+        Weak authentication methods are restricted.
+
+    evidence_required:
+
+      - authentication_methods
+
+      - conditional_access_policies
+
+      - mfa_configuration
+
+
+    maturity:
+
+      level_1:
+        description:
+          Password authentication only.
+
+      level_2:
+        description:
+          MFA enabled for administrators.
+
+      level_3:
+        description:
+          MFA enforced across business systems.
+
+      level_4:
+        description:
+          Adaptive authentication and risk-based controls implemented.
+
+
+
+  #
+  # Authorisation and Access Control
+  #
+
+  - id: IAM-003
+
+    name: Least Privilege Access Management
+
+    objective: >
+      Ensure users receive only the access required to perform
+      their authorised responsibilities.
+
+    description: >
+      Access rights are controlled using least privilege,
+      role-based access control and approval processes.
+
+    capability_area:
+
+      - Authorisation
+
+      - Access Control
+
+
+    requirements:
+
+      - >
+        Access is granted based on business requirement.
+
+      - >
+        Roles and permissions are documented.
+
+      - >
+        Excessive privileges are identified and removed.
+
+      - >
+        Access approvals are recorded.
+
+
+    evidence_required:
+
+      - role_assignments
+
+      - access_requests
+
+      - entitlement_reviews
+
+
+
+  - id: IAM-004
+
+    name: Access Review and Recertification
+
+    objective: >
+      Ensure access rights remain appropriate over time.
+
+    description: >
+      User and system access permissions are periodically reviewed
+      and updated.
+
+    capability_area:
+
+      - Access Governance
+
+
+    requirements:
+
+      - >
+        User access reviews are performed regularly.
+
+      - >
+        Privileged access reviews are performed more frequently.
+
+      - >
+        Joiner, mover and leaver processes update access rights.
+
+      - >
+        Review outcomes are recorded.
+
+
+    evidence_required:
+
+      - access_review_records
+
+      - identity_lifecycle_events
+
+      - entitlement_changes
+
+
+
+  #
+  # Privileged Access Management
+  #
+
+  - id: IAM-005
+
+    name: Privileged Access Management
+
+    objective: >
+      Protect administrative accounts and privileged operations.
+
+    description: >
+      Privileged identities are separately managed, monitored and
+      controlled.
+
+    capability_area:
+
+      - Privileged Access Management
+
+
+    requirements:
+
+      - >
+        Administrative accounts are separate from standard user accounts.
+
+      - >
+        Privileged accounts require strong authentication.
+
+      - >
+        Privileged access is time-bound where possible.
+
+      - >
+        Privileged activity is logged and monitored.
+
+      - >
+        Privileged access is regularly reviewed.
+
+
+    evidence_required:
+
+      - privileged_accounts
+
+      - privileged_role_assignments
+
+      - privileged_activity_logs
+
+      - pim_configuration
+
+
+
+  - id: IAM-006
+
+    name: Privileged Access Workstations
+
+    objective: >
+      Ensure privileged operations are performed from trusted devices.
+
+    description: >
+      Administrative activities are restricted to hardened,
+      dedicated management devices.
+
+    capability_area:
+
+      - Device Identity
+
+      - Privileged Access Management
+
+
+    requirements:
+
+      - >
+        Privileged operations use approved trusted devices.
+
+      - >
+        Administrative workstations have enhanced security controls.
+
+      - >
+        Unmanaged devices cannot perform privileged operations.
+
+
+    evidence_required:
+
+      - compliant_device_inventory
+
+      - device_compliance_policy
+
+      - privileged_access_policy
+
+
+
+  #
+  # Device Identity Management
+  #
+
+  - id: IAM-007
+
+    name: Device Identity and Trust
+
+    objective: >
+      Ensure only authorised devices can access organisational systems.
+
+    description: >
+      Devices are identified, registered and validated before access.
+
+    capability_area:
+
+      - Device Management
+
+
+    requirements:
+
+      - >
+        Devices have unique identities.
+
+      - >
+        Device registration is maintained.
+
+      - >
+        Unknown devices are detected and investigated.
+
+      - >
+        Device authentication is enforced where required.
+
+
+    evidence_required:
+
+      - device_inventory
+
+      - device_registration
+
+      - compliance_state
+
+
+
+  #
+  # Identity Monitoring
+  #
+
+  - id: IAM-008
+
+    name: Identity Activity Monitoring
+
+    objective: >
+      Detect and investigate suspicious identity activity.
+
+    description: >
+      Authentication, authorisation and access events are monitored.
+
+    capability_area:
+
+      - Monitoring
+
+      - Detection
+
+
+    requirements:
+
+      - >
+        Authentication events are logged.
+
+      - >
+        Failed authentication attempts are monitored.
+
+      - >
+        Privileged activity is recorded.
+
+      - >
+        Suspicious identity behaviour generates alerts.
+
+
+    evidence_required:
+
+      - sign_in_logs
+
+      - audit_logs
+
+      - security_alerts
+
+
+
+  #
+  # Service and Application Identity
+  #
+
+  - id: IAM-009
+
+    name: Service Identity Management
+
+    objective: >
+      Control non-human identities and service accounts.
+
+    description: >
+      Service accounts and application identities are identified,
+      secured and managed.
+
+    capability_area:
+
+      - Identity Lifecycle Management
+
+
+    requirements:
+
+      - >
+        Service accounts are inventoried.
+
+      - >
+        Service credentials are protected.
+
+      - >
+        Unused service identities are removed.
+
+      - >
+        Application permissions are reviewed.
+
+
+    evidence_required:
+
+      - service_account_inventory
+
+      - application_permissions
+
+      - credential_rotation_records
+
+
+
+control_summary:
+
+  total_controls: 9
+
+
+  control_groups:
+
+    identity_verification:
+      - IAM-001
+
+    authentication:
+      - IAM-002
+
+    access_control:
+      - IAM-003
+      - IAM-004
+
+    privileged_access:
+      - IAM-005
+      - IAM-006
+
+    device_identity:
+      - IAM-007
+
+    monitoring:
+      - IAM-008
+
+    service_identity:
+      - IAM-009

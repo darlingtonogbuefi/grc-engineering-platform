@@ -1,0 +1,447 @@
+id: cloud
+
+name: Cloud Security Governance
+
+version: "1.0.0"
+
+description: >
+  The Cloud Security capability provides governance, security and
+  operational controls for cloud platforms and services. It ensures
+  cloud environments are securely designed, configured, monitored
+  and operated throughout their lifecycle.
+
+  The capability supports public, private and hybrid cloud
+  environments including Microsoft Azure, Amazon Web Services,
+  Google Cloud Platform and connected infrastructure platforms.
+
+purpose: >
+  Establish a secure cloud operating model that manages cloud
+  resources, identities, configurations, workloads, data protection,
+  monitoring and resilience while enabling controlled cloud adoption.
+
+capability_domain:
+
+  category: Cloud Security
+
+  domains:
+
+    - Cloud Governance
+    - Cloud Architecture
+    - Cloud Identity
+    - Cloud Infrastructure
+    - Cloud Networking
+    - Cloud Workloads
+    - Cloud Data Protection
+    - Cloud Monitoring
+    - Cloud Resilience
+    - Cloud Security Posture Management
+
+
+business_objectives:
+
+  - >
+    Ensure cloud services are deployed using approved security
+    standards.
+
+  - >
+    Maintain visibility of all cloud assets and resources.
+
+  - >
+    Protect cloud workloads, identities and data.
+
+  - >
+    Prevent insecure cloud configurations.
+
+  - >
+    Apply consistent governance across cloud platforms.
+
+  - >
+    Detect and respond to cloud security threats.
+
+  - >
+    Ensure cloud services meet organisational compliance
+    requirements.
+
+  - >
+    Provide resilient cloud services through backup and recovery
+    controls.
+
+
+capability_objectives:
+
+
+  - id: CLOUD-OBJ-001
+
+    name: Cloud Governance
+
+    description: >
+      Cloud environments operate under defined governance,
+      ownership and security policies.
+
+
+  - id: CLOUD-OBJ-002
+
+    name: Cloud Asset Management
+
+    description: >
+      Cloud resources are inventoried, classified and managed
+      throughout their lifecycle.
+
+
+  - id: CLOUD-OBJ-003
+
+    name: Secure Cloud Architecture
+
+    description: >
+      Cloud platforms follow secure architecture principles,
+      landing zone standards and design patterns.
+
+
+  - id: CLOUD-OBJ-004
+
+    name: Cloud Identity Security
+
+    description: >
+      Cloud identities, roles and permissions follow least
+      privilege and strong authentication practices.
+
+
+  - id: CLOUD-OBJ-005
+
+    name: Cloud Network Security
+
+    description: >
+      Cloud networks are segmented, protected and monitored.
+
+
+  - id: CLOUD-OBJ-006
+
+    name: Cloud Configuration Management
+
+    description: >
+      Cloud resources are securely configured and continuously
+      assessed.
+
+
+  - id: CLOUD-OBJ-007
+
+    name: Cloud Data Protection
+
+    description: >
+      Cloud-hosted data is protected through encryption,
+      access control and lifecycle management.
+
+
+  - id: CLOUD-OBJ-008
+
+    name: Cloud Workload Security
+
+    description: >
+      Cloud workloads are protected against vulnerabilities,
+      compromise and unauthorised activity.
+
+
+  - id: CLOUD-OBJ-009
+
+    name: Cloud Monitoring and Detection
+
+    description: >
+      Cloud activity, security events and operational events are
+      monitored and investigated.
+
+
+  - id: CLOUD-OBJ-010
+
+    name: Cloud Resilience
+
+    description: >
+      Cloud services maintain availability through backup,
+      recovery and resilience controls.
+
+
+supported_platforms:
+
+
+  public_cloud:
+
+
+    - Microsoft Azure
+
+    - Amazon Web Services
+
+    - Google Cloud Platform
+
+
+  hybrid_cloud:
+
+
+    - Azure Arc
+
+    - VMware Cloud
+
+    - Azure Stack
+
+
+  security_services:
+
+
+    - Microsoft Defender for Cloud
+
+    - AWS Security Hub
+
+    - Google Security Command Center
+
+    - Cloud Security Posture Management Platforms
+
+
+collectors:
+
+
+  supported:
+
+
+    - azure
+
+    - azurearc
+
+    - defender
+
+    - entra
+
+    - vmware
+
+
+future_collectors:
+
+
+    - aws
+
+    - gcp
+
+    - kubernetes
+
+    - terraform
+
+
+related_capabilities:
+
+
+  - identity
+
+  - networking
+
+  - endpoint
+
+  - monitoring
+
+  - logging
+
+  - backup
+
+  - vulnerability
+
+  - devops
+
+  - m365
+
+
+evidence_categories:
+
+
+  - cloud_accounts
+
+  - subscriptions
+
+  - projects
+
+  - resource_inventory
+
+  - resource_configuration
+
+  - landing_zone_configuration
+
+  - management_groups
+
+  - organisational_units
+
+  - cloud_roles
+
+  - permissions
+
+  - service_accounts
+
+  - network_security_groups
+
+  - firewalls
+
+  - security_groups
+
+  - private_endpoints
+
+  - routing_configuration
+
+  - encryption_configuration
+
+  - key_management
+
+  - certificates
+
+  - workloads
+
+  - virtual_machines
+
+  - containers
+
+  - databases
+
+  - storage_accounts
+
+  - backup_configuration
+
+  - recovery_configuration
+
+  - security_assessments
+
+  - vulnerability_findings
+
+  - security_alerts
+
+  - activity_logs
+
+  - audit_logs
+
+  - policy_assignments
+
+  - compliance_reports
+
+
+maturity_model:
+
+
+  level_0:
+
+    name: Non-existent
+
+    description: >
+      Cloud services are unmanaged with no formal governance,
+      ownership or security controls.
+
+
+  level_1:
+
+    name: Initial
+
+    description: >
+      Cloud adoption exists but security practices are inconsistent
+      and largely manual.
+
+
+  level_2:
+
+    name: Managed
+
+    description: >
+      Cloud governance, asset management and baseline security
+      controls are established.
+
+
+  level_3:
+
+    name: Defined
+
+    description: >
+      Cloud security architecture, automation, monitoring and
+      compliance processes are standardised.
+
+
+  level_4:
+
+    name: Optimised
+
+    description: >
+      Cloud security is continuously improved through automation,
+      policy enforcement, threat intelligence and advanced
+      security analytics.
+
+
+ownership:
+
+
+  primary:
+
+    function: Cloud Platform Engineering
+
+
+  stakeholders:
+
+
+    - Cloud Engineering
+
+    - Enterprise Architecture
+
+    - Information Security
+
+    - Security Operations
+
+    - Infrastructure Operations
+
+    - Network Engineering
+
+    - Application Development
+
+    - Data Governance
+
+    - Compliance
+
+    - Internal Audit
+
+
+dependencies:
+
+
+  capabilities:
+
+
+    - identity
+
+    - networking
+
+    - monitoring
+
+    - logging
+
+    - vulnerability
+
+    - backup
+
+    - devops
+
+
+tags:
+
+
+  - Cloud Security
+
+  - Cloud Governance
+
+  - Azure
+
+  - AWS
+
+  - GCP
+
+  - Hybrid Cloud
+
+  - Landing Zone
+
+  - CSPM
+
+  - Infrastructure Security
+
+  - Cloud Architecture
+
+  - Cloud Compliance
+
+  - Zero Trust
+
+  - Workload Security

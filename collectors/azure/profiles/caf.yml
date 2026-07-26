@@ -1,0 +1,62 @@
+name: caf
+
+version: 1.0.0
+
+description: >
+  Azure evidence collection profile for
+  Cyber Assessment Framework (CAF) assessments.
+
+extends: default
+
+queries:
+  # Platform inventory
+  - subscriptions
+  - resource-groups
+  - resources
+
+  # Identity & access
+  - role-assignments
+  - role-definitions
+
+  # Governance
+  - policy-definitions
+  - policy-assignments
+
+  # Security configuration
+  - defender-settings
+  - security-settings
+
+  # Logging & monitoring
+  - activity-logs
+  - diagnostic-settings
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+
+  # Storage & encryption
+  - storage-accounts
+  - key-vaults
+
+  # Compute
+  - virtual-machines
+
+  # Business continuity
+  - backup-vaults
+
+collection:
+  mode: standard
+  include_metadata: true
+  include_relationships: true
+
+output:
+  evidence_types:
+    - resource_inventory
+    - configuration
+    - access_control
+    - governance
+    - networking
+    - logging
+    - backup
+

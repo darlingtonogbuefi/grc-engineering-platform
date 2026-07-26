@@ -1,0 +1,184 @@
+# Cyber Essentials Framework Metadata
+# metadata.yml
+
+framework:
+  id: CE
+  name: Cyber Essentials
+  version: "2023"
+
+publisher:
+  name: IASME
+  scheme: Cyber Essentials
+
+description: >
+  Cyber Essentials technical controls represented as atomic assessment
+  controls mapped exclusively to the NCSC Cyber Assessment Framework (CAF).
+
+purpose:
+  - Support cybersecurity self-assessment
+  - Enable evidence-based compliance assessment
+  - Provide stable control identifiers for reporting
+  - Support automated scoring and assessment workflows
+
+scope:
+
+  environments:
+    - Enterprise networks
+    - End-user devices
+    - Cloud services
+    - Internet-facing services
+    - Administrative systems
+
+  security_domains:
+    - Boundary protection
+    - Secure configuration
+    - Identity and access management
+    - Malware protection
+    - Vulnerability management
+
+
+framework_structure:
+
+  files:
+
+    controls.yml:
+      purpose: >
+        Defines Cyber Essentials assessment controls, requirements,
+        evidence expectations and CAF mappings.
+
+    evidence.yml:
+      purpose: >
+        Defines evidence items used to demonstrate control
+        implementation.
+
+    mappings.yml:
+      purpose: >
+        Defines Cyber Essentials control relationships with NCSC CAF
+        references.
+
+    scoring.yml:
+      purpose: >
+        Defines assessment scoring logic and control outcome handling.
+
+    metadata.yml:
+      purpose: >
+        Defines framework identity, versioning and governance metadata.
+
+
+assessment_model:
+
+  type: control_assessment
+
+  assessment_states:
+    - pass
+    - partial
+    - fail
+    - not_applicable
+
+  assessment_principles:
+    - Evidence-based assessment
+    - Repeatable control evaluation
+    - Traceable compliance decisions
+    - Consistent scoring outcomes
+
+
+control_model:
+
+  identifier_format:
+    pattern: "CE-{DOMAIN}-{NUMBER}"
+
+  domains:
+
+    FW:
+      name: Firewalls and Internet Gateways
+      description: >
+        Controls protecting network boundaries and managing internet
+        connectivity.
+
+    SC:
+      name: Secure Configuration
+      description: >
+        Controls ensuring systems are securely configured and managed.
+
+    UA:
+      name: User Access Control
+      description: >
+        Controls managing identity, authentication and permissions.
+
+    MP:
+      name: Malware Protection
+      description: >
+        Controls protecting systems against malicious software.
+
+    SUM:
+      name: Security Update Management
+      description: >
+        Controls managing updates, vulnerabilities and remediation.
+
+
+caf_mapping:
+
+  enabled: true
+
+  target_framework:
+    name: NCSC Cyber Assessment Framework
+    abbreviation: CAF
+
+  mapping_rules:
+    - Only CAF references are included
+    - Each control maps to one or more CAF outcomes
+    - No mappings to other security frameworks are maintained
+
+
+evidence_management:
+
+  enabled: true
+
+  evidence_reference:
+    source_file: evidence.yml
+
+  requirements:
+
+    - Evidence must be attributable
+    - Evidence must represent the assessed environment
+    - Evidence must support the associated control objective
+    - Evidence should be reviewed periodically
+
+
+governance:
+
+  ownership:
+    framework_owner: IASME
+    implementation_owner: Organisation using the framework
+
+  review_cycle:
+    frequency: annual
+
+  review_requirements:
+    - Review against Cyber Essentials scheme updates
+    - Review CAF mapping changes
+    - Review evidence requirements
+    - Review assessment scoring model
+
+
+quality_assurance:
+
+  validation_status: validated
+
+  validation_checks:
+
+    - YAML syntax validated
+    - Control identifiers verified
+    - Evidence references aligned
+    - CAF mappings validated
+    - Framework metadata complete
+
+
+production_readiness:
+
+  status: ready
+
+  notes:
+    - Suitable for compliance assessment platforms
+    - Suitable for evidence collection workflows
+    - Suitable for automated reporting pipelines

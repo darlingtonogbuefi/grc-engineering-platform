@@ -1,0 +1,565 @@
+id: devops
+
+name: DevSecOps Controls
+
+version: "1.0.0"
+
+description: >
+  Capability controls for secure software development, source code
+  management, CI/CD security, software supply chain protection,
+  infrastructure as code, release governance and secure engineering
+  practices.
+
+controls:
+
+  #
+  # Source Code Governance
+  #
+
+  - id: DEVOPS-001
+
+    name: Source Code Repository Security
+
+    objective: >
+      Protect source code repositories from unauthorised access,
+      modification and deletion.
+
+    description: >
+      All source code repositories are governed through approved
+      access controls, branch protection and repository policies.
+
+    capability_area:
+
+      - Source Code Management
+
+    requirements:
+
+      - Repository access is authenticated.
+
+      - Repository permissions follow least privilege.
+
+      - Default branches are protected.
+
+      - Repository administrators are limited.
+
+      - Repository auditing is enabled.
+
+    evidence_required:
+
+      - repositories
+
+      - repository_permissions
+
+      - branch_protection
+
+  - id: DEVOPS-002
+
+    name: Branch Protection
+
+    objective: >
+      Ensure production code cannot be modified without review.
+
+    description: >
+      Branch protection policies prevent unauthorised or unsafe
+      changes reaching protected branches.
+
+    capability_area:
+
+      - Source Control
+
+    requirements:
+
+      - Pull Requests required.
+
+      - Direct commits prohibited.
+
+      - Required reviewers enforced.
+
+      - Status checks enforced.
+
+      - Signed commits supported.
+
+    evidence_required:
+
+      - branch_protection
+
+      - pull_requests
+
+      - repository_settings
+
+  #
+  # Secure Development Lifecycle
+  #
+
+  - id: DEVOPS-003
+
+    name: Secure Development Lifecycle
+
+    objective: >
+      Integrate security throughout software development.
+
+    description: >
+      Development follows documented secure engineering
+      practices from design through deployment.
+
+    capability_area:
+
+      - Secure Development
+
+    requirements:
+
+      - Secure coding standards exist.
+
+      - Security requirements defined.
+
+      - Threat modelling performed.
+
+      - Security testing included.
+
+      - Security defects tracked.
+
+    evidence_required:
+
+      - development_standards
+
+      - security_reviews
+
+      - threat_models
+
+  - id: DEVOPS-004
+
+    name: Code Review
+
+    objective: >
+      Ensure all code changes receive appropriate review.
+
+    description: >
+      Code reviews reduce implementation risk and improve
+      software quality.
+
+    capability_area:
+
+      - Secure Development
+
+    requirements:
+
+      - Pull Requests reviewed.
+
+      - Minimum reviewers enforced.
+
+      - Review approvals recorded.
+
+      - Self approval restricted.
+
+    evidence_required:
+
+      - pull_requests
+
+      - reviewers
+
+      - approvals
+
+  #
+  # CI/CD Security
+  #
+
+  - id: DEVOPS-005
+
+    name: Pipeline Security
+
+    objective: >
+      Secure build and deployment pipelines.
+
+    description: >
+      CI/CD pipelines are protected from unauthorised changes,
+      credential theft and misuse.
+
+    capability_area:
+
+      - CI/CD
+
+    requirements:
+
+      - Pipeline permissions restricted.
+
+      - Pipeline changes audited.
+
+      - Pipeline identities managed.
+
+      - Build agents secured.
+
+    evidence_required:
+
+      - pipelines
+
+      - pipeline_permissions
+
+      - service_connections
+
+  - id: DEVOPS-006
+
+    name: Build Integrity
+
+    objective: >
+      Ensure software builds are trusted and repeatable.
+
+    description: >
+      Builds are generated from approved source using trusted
+      infrastructure.
+
+    capability_area:
+
+      - Build Security
+
+    requirements:
+
+      - Builds reproducible.
+
+      - Build artefacts retained.
+
+      - Build logs protected.
+
+      - Build provenance recorded.
+
+    evidence_required:
+
+      - build_history
+
+      - artifacts
+
+      - build_logs
+
+  #
+  # Software Supply Chain
+  #
+
+  - id: DEVOPS-007
+
+    name: Dependency Management
+
+    objective: >
+      Control third-party software dependencies.
+
+    description: >
+      Dependencies are inventoried, monitored and updated to
+      reduce software supply chain risk.
+
+    capability_area:
+
+      - Software Supply Chain
+
+    requirements:
+
+      - Dependency inventory maintained.
+
+      - Vulnerabilities monitored.
+
+      - Unsupported libraries removed.
+
+      - Package sources approved.
+
+    evidence_required:
+
+      - dependency_inventory
+
+      - package_sources
+
+      - dependency_alerts
+
+  - id: DEVOPS-008
+
+    name: Artifact Security
+
+    objective: >
+      Protect build artefacts throughout their lifecycle.
+
+    description: >
+      Artefacts are securely stored, signed and validated before
+      deployment.
+
+    capability_area:
+
+      - Artifact Management
+
+    requirements:
+
+      - Artefact repositories protected.
+
+      - Artefacts immutable.
+
+      - Artefacts signed where supported.
+
+      - Artefact integrity verified.
+
+    evidence_required:
+
+      - artifacts
+
+      - artifact_repository
+
+      - signatures
+
+  #
+  # Infrastructure as Code
+  #
+
+  - id: DEVOPS-009
+
+    name: Infrastructure as Code Governance
+
+    objective: >
+      Ensure infrastructure definitions are securely managed.
+
+    description: >
+      Infrastructure definitions are version controlled,
+      reviewed and security validated.
+
+    capability_area:
+
+      - Infrastructure as Code
+
+    requirements:
+
+      - IaC stored in version control.
+
+      - IaC reviewed.
+
+      - IaC scanned.
+
+      - IaC deployments approved.
+
+    evidence_required:
+
+      - iac_templates
+
+      - iac_scans
+
+      - deployment_history
+
+  #
+  # Secrets Management
+  #
+
+  - id: DEVOPS-010
+
+    name: Secrets Management
+
+    objective: >
+      Prevent exposure of credentials and sensitive secrets.
+
+    description: >
+      Secrets are securely managed throughout development
+      and deployment.
+
+    capability_area:
+
+      - Secrets Management
+
+    requirements:
+
+      - Secrets not stored in repositories.
+
+      - Secret vault used.
+
+      - Secrets rotated.
+
+      - Secret scanning enabled.
+
+    evidence_required:
+
+      - secret_scanning
+
+      - key_vault_configuration
+
+      - credential_inventory
+
+  #
+  # Application Security Testing
+  #
+
+  - id: DEVOPS-011
+
+    name: Security Testing
+
+    objective: >
+      Identify vulnerabilities before deployment.
+
+    description: >
+      Automated security testing is integrated into development
+      and deployment pipelines.
+
+    capability_area:
+
+      - Application Security
+
+    requirements:
+
+      - Static analysis executed.
+
+      - Dependency scanning enabled.
+
+      - Container scanning enabled.
+
+      - High-risk findings reviewed.
+
+    evidence_required:
+
+      - sast_results
+
+      - dependency_scan_results
+
+      - container_scan_results
+
+  #
+  # Release Governance
+  #
+
+  - id: DEVOPS-012
+
+    name: Release Management
+
+    objective: >
+      Ensure production releases follow approved governance.
+
+    description: >
+      Software releases follow documented approval,
+      testing and deployment processes.
+
+    capability_area:
+
+      - Release Management
+
+    requirements:
+
+      - Release approvals required.
+
+      - Production deployments logged.
+
+      - Rollback capability maintained.
+
+      - Release history retained.
+
+    evidence_required:
+
+      - releases
+
+      - deployment_history
+
+      - approvals
+
+  #
+  # Monitoring & Audit
+  #
+
+  - id: DEVOPS-013
+
+    name: DevOps Audit Logging
+
+    objective: >
+      Maintain audit trails for development activities.
+
+    description: >
+      Administrative and engineering activities are logged
+      and monitored.
+
+    capability_area:
+
+      - Monitoring
+
+    requirements:
+
+      - Repository auditing enabled.
+
+      - Pipeline auditing enabled.
+
+      - Administrative activity logged.
+
+      - Log retention defined.
+
+    evidence_required:
+
+      - audit_logs
+
+      - pipeline_logs
+
+      - repository_audit
+
+  - id: DEVOPS-014
+
+    name: DevOps Security Monitoring
+
+    objective: >
+      Detect suspicious activity across development platforms.
+
+    description: >
+      Security monitoring identifies threats affecting
+      repositories, pipelines and build environments.
+
+    capability_area:
+
+      - Detection
+
+    requirements:
+
+      - Security alerts enabled.
+
+      - Alert investigation process defined.
+
+      - Critical events escalated.
+
+      - Monitoring integrated with SIEM.
+
+    evidence_required:
+
+      - security_alerts
+
+      - defender_alerts
+
+      - siem_alerts
+
+control_summary:
+
+  total_controls: 14
+
+  control_groups:
+
+    source_code:
+
+      - DEVOPS-001
+      - DEVOPS-002
+
+    secure_development:
+
+      - DEVOPS-003
+      - DEVOPS-004
+
+    ci_cd:
+
+      - DEVOPS-005
+      - DEVOPS-006
+
+    supply_chain:
+
+      - DEVOPS-007
+      - DEVOPS-008
+
+    infrastructure_as_code:
+
+      - DEVOPS-009
+
+    secrets:
+
+      - DEVOPS-010
+
+    application_security:
+
+      - DEVOPS-011
+
+    release_management:
+
+      - DEVOPS-012
+
+    monitoring:
+
+      - DEVOPS-013
+      - DEVOPS-014

@@ -1,0 +1,98 @@
+#   config\storage.yml
+
+# ==============================================================================
+# Storage Configuration
+# ==============================================================================
+
+schemaVersion: "1.0"
+
+defaults:
+  profile: local
+
+  compression: true
+
+  encryption: true
+
+  checksum: sha256
+
+  immutableEvidence: false
+
+profiles:
+  local:
+    type: filesystem
+
+    root: ./data
+
+    evidence: ./data/evidence
+
+    reports: ./data/reports
+
+    logs: ./data/logs
+
+    cache: ./data/cache
+
+  azureBlob:
+    type: azureblob
+
+    accountName: "${AZURE_STORAGE_ACCOUNT}"
+
+    container: evidence
+
+    authentication: managedIdentity
+
+  awsS3:
+    type: s3
+
+    bucket: grc-evidence
+
+    region: eu-west-2
+
+    authentication: iam
+
+  minio:
+    type: s3-compatible
+
+    endpoint: http://minio:9000
+
+    bucket: evidence
+
+    accessKey: "${MINIO_ACCESS_KEY}"
+
+    secretKey: "${MINIO_SECRET_KEY}"
+
+retention:
+  evidenceDays: 365
+
+  reportsDays: 730
+
+  logsDays: 90
+
+  cacheDays: 7
+
+integrity:
+  generateChecksums: true
+
+  verifyChecksums: true
+
+  signEvidence: false
+
+backup:
+  enabled: true
+
+  frequency: daily
+
+  retainBackups: 30
+
+security:
+  encryptAtRest: true
+
+  encryptInTransit: true
+
+  requireTls: true
+
+performance:
+  parallelUploads: 5
+
+  multipartUploads: true
+
+  compressionLevel: 6

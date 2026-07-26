@@ -1,0 +1,58 @@
+id: azure.network_security_groups
+name: Azure Network Security Groups
+description: >
+  Collect Azure Network Security Group (NSG) configurations,
+  security rules, and associations for network security
+  and compliance evidence.
+
+service: Microsoft.Network
+resource: networkSecurityGroups
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityGroups
+api_version: "2024-05-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: NetworkNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - properties
+  - properties.provisioningState
+  - properties.resourceGuid
+  - properties.securityRules
+  - properties.defaultSecurityRules
+  - properties.networkInterfaces
+  - properties.subnets
+  - properties.flushConnection
+  - etag
+
+metadata:
+  category: network_security
+  evidence_type: network_security_group_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

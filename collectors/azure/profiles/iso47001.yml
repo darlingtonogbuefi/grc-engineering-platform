@@ -1,0 +1,98 @@
+name: iso42001
+
+version: 1.0.0
+
+description: >
+  Azure evidence collection profile for
+  ISO/IEC 42001:2023 Artificial Intelligence
+  Management System (AIMS) assessments.
+
+extends: default
+
+queries:
+  # Tenant & Platform
+  - subscriptions
+  - management-groups
+  - resource-groups
+  - resources
+
+  # Governance
+  - policy-definitions
+  - policy-assignments
+  - tags
+  - resource-locks
+
+  # Identity & Access
+  - users
+  - groups
+  - role-assignments
+  - privileged-identity-management
+  - managed-identities
+
+  # AI Services
+  - machine-learning-workspaces
+  - machine-learning-computes
+  - machine-learning-endpoints
+  - machine-learning-models
+  - machine-learning-registries
+  - ai-foundry-projects
+  - cognitive-services
+  - openai-services
+
+  # Data & Storage
+  - storage-accounts
+  - key-vaults
+  - data-factories
+  - synapse-workspaces
+
+  # Compute
+  - virtual-machines
+  - kubernetes-clusters
+  - container-registries
+  - app-services
+
+  # Security
+  - defender-settings
+  - security-settings
+  - secure-score
+  - recommendations
+
+  # Monitoring
+  - activity-logs
+  - diagnostic-settings
+  - log-analytics-workspaces
+  - application-insights
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+  - private-endpoints
+
+  # Compliance
+  - regulatory-compliance
+  - security-assessments
+
+collection:
+  mode: comprehensive
+
+  include_metadata: true
+
+  include_relationships: true
+
+output:
+  evidence_types:
+    - ai_asset_inventory
+    - ai_model_inventory
+    - ai_endpoint_inventory
+    - resource_inventory
+    - governance
+    - identity_and_access
+    - security_configuration
+    - data_protection
+    - encryption
+    - monitoring
+    - logging
+    - networking
+    - model_governance
+    - compliance

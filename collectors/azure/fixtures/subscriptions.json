@@ -1,0 +1,76 @@
+{
+  "value": [
+    {
+      "id": "/subscriptions/11111111-2222-3333-4444-555555555555",
+      "subscriptionId": "11111111-2222-3333-4444-555555555555",
+      "displayName": "Production",
+      "state": "Enabled",
+      "tenantId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "authorizationSource": "RoleBased",
+      "managedByTenants": [],
+      "subscriptionPolicies": {
+        "locationPlacementId": "Public_2014-09-01",
+        "quotaId": "PayAsYouGo_2014-09-01",
+        "spendingLimit": "Off"
+      },
+      "tags": {
+        "Environment": "Production",
+        "BusinessUnit": "Corporate",
+        "CostCentre": "CC1001",
+        "Owner": "Cloud Platform",
+        "Criticality": "High"
+      }
+    },
+    {
+      "id": "/subscriptions/66666666-7777-8888-9999-000000000000",
+      "subscriptionId": "66666666-7777-8888-9999-000000000000",
+      "displayName": "Development",
+      "state": "Enabled",
+      "tenantId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "authorizationSource": "RoleBased",
+      "managedByTenants": [],
+      "subscriptionPolicies": {
+        "locationPlacementId": "Public_2014-09-01",
+        "quotaId": "EnterpriseAgreement_2014-09-01",
+        "spendingLimit": "Off"
+      },
+      "tags": {
+        "Environment": "Development",
+        "BusinessUnit": "Engineering",
+        "CostCentre": "CC2002",
+        "Owner": "DevOps Team",
+        "Criticality": "Medium"
+      }
+    },
+    {
+      "id": "/subscriptions/99999999-aaaa-bbbb-cccc-dddddddddddd",
+      "subscriptionId": "99999999-aaaa-bbbb-cccc-dddddddddddd",
+      "displayName": "Sandbox",
+      "state": "Warned",
+      "tenantId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "authorizationSource": "RoleBased",
+      "managedByTenants": [],
+      "subscriptionPolicies": {
+        "locationPlacementId": "Public_2014-09-01",
+        "quotaId": "MSDN_2014-09-01",
+        "spendingLimit": "CurrentPeriodOff"
+      },
+      "tags": {
+        "Environment": "Sandbox",
+        "BusinessUnit": "Innovation",
+        "CostCentre": "CC3003",
+        "Owner": "Architecture Team",
+        "Criticality": "Low"
+      }
+    }
+  ],
+  "count": 3,
+  "metadata": {
+    "provider": "Microsoft Azure",
+    "resourceType": "subscriptions",
+    "apiVersion": "2022-12-01",
+    "collectedAt": "2026-07-19T12:00:00Z",
+    "collector": "azure",
+    "fixtureVersion": "1.0.0"
+  }
+}

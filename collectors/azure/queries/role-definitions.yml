@@ -1,0 +1,57 @@
+id: azure.role_definitions
+name: Azure Role Definitions
+description: >
+  Collect Azure RBAC role definitions to identify available
+  permissions, privilege levels, and authorization models
+  for access governance evidence.
+
+service: Microsoft.Authorization
+resource: roleDefinitions
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions
+api_version: "2022-04-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: IdentityNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - properties
+  - properties.roleName
+  - properties.description
+  - properties.type
+  - properties.permissions
+  - properties.permissions.actions
+  - properties.permissions.notActions
+  - properties.permissions.dataActions
+  - properties.permissions.notDataActions
+  - properties.assignableScopes
+
+metadata:
+  category: identity_access
+  evidence_type: role_definition
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

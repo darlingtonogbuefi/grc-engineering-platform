@@ -1,0 +1,675 @@
+id: identity
+
+name: Identity and Access Management Evidence Model
+
+version: "1.0"
+
+description: >
+  Defines evidence requirements required to assess Identity and
+  Access Management capability controls. Evidence is collected
+  from technical collectors, normalised into common models,
+  and evaluated against identity controls.
+
+
+evidence:
+
+
+  #
+  # IAM-001 Identity Verification
+  #
+
+  - id: EVID-IAM-001
+
+    control:
+      - IAM-001
+
+    name: Identity Inventory
+
+    description: >
+      Evidence showing all user identities are uniquely identified
+      and managed.
+
+    collectors:
+
+      - entra
+      - active-directory
+
+
+    evidence_type:
+
+      - identity_inventory
+
+
+    objects:
+
+      - users
+      - guests
+      - groups
+
+
+    required_fields:
+
+      users:
+
+        - id
+
+        - display_name
+
+        - user_principal_name
+
+        - account_enabled
+
+        - user_type
+
+
+    validation:
+
+      rules:
+
+        - unique_identity_required
+
+        - disabled_accounts_identified
+
+        - guest_accounts_identified
+
+
+
+  #
+  # IAM-002 Strong Authentication
+  #
+
+  - id: EVID-IAM-002
+
+    control:
+
+      - IAM-002
+
+
+    name: Authentication Configuration
+
+
+    description: >
+      Evidence showing authentication methods and MFA enforcement.
+
+
+    collectors:
+
+      - entra
+
+
+    evidence_type:
+
+      - authentication_configuration
+
+
+    objects:
+
+      - authentication_methods
+
+      - conditional_access_policies
+
+      - authentication_strengths
+
+
+    required_fields:
+
+
+      authentication_methods:
+
+        - method_type
+
+        - enabled
+
+
+      conditional_access_policies:
+
+        - policy_name
+
+        - state
+
+        - users_in_scope
+
+        - authentication_requirement
+
+
+    validation:
+
+
+      rules:
+
+        - privileged_users_require_mfa
+
+        - remote_access_requires_mfa
+
+        - disabled_legacy_authentication
+
+
+
+  #
+  # IAM-003 Least Privilege Access Management
+  #
+
+  - id: EVID-IAM-003
+
+
+    control:
+
+      - IAM-003
+
+
+    name: Access Permissions
+
+
+    description: >
+      Evidence showing user permissions and assigned roles.
+
+
+    collectors:
+
+      - entra
+
+
+    evidence_type:
+
+      - access_inventory
+
+
+    objects:
+
+      - directory_roles
+
+      - role_assignments
+
+      - group_memberships
+
+
+    required_fields:
+
+
+      role_assignments:
+
+        - principal_id
+
+        - role_name
+
+        - assignment_type
+
+        - created_date
+
+
+    validation:
+
+
+      rules:
+
+        - excessive_privileges_detected
+
+        - privileged_roles_identified
+
+        - inactive_assignments_detected
+
+
+
+  #
+  # IAM-004 Access Reviews
+  #
+
+  - id: EVID-IAM-004
+
+
+    control:
+
+      - IAM-004
+
+
+    name: Access Review Records
+
+
+    description: >
+      Evidence that access rights are periodically reviewed.
+
+
+    collectors:
+
+      - entra
+
+
+    evidence_type:
+
+      - governance_records
+
+
+    objects:
+
+      - access_reviews
+
+      - entitlement_reviews
+
+
+    required_fields:
+
+
+      access_reviews:
+
+        - review_name
+
+        - status
+
+        - reviewers
+
+        - completed_date
+
+
+    validation:
+
+
+      rules:
+
+        - review_frequency_defined
+
+        - review_completion_recorded
+
+
+
+  #
+  # IAM-005 Privileged Access Management
+  #
+
+  - id: EVID-IAM-005
+
+
+    control:
+
+      - IAM-005
+
+
+    name: Privileged Account Inventory
+
+
+    description: >
+      Evidence showing privileged accounts and administrative roles.
+
+
+    collectors:
+
+      - entra
+
+
+    evidence_type:
+
+      - privileged_access
+
+
+    objects:
+
+      - privileged_roles
+
+      - administrative_accounts
+
+      - pim_assignments
+
+
+    required_fields:
+
+
+      privileged_roles:
+
+        - role_name
+
+        - assigned_member
+
+        - assignment_state
+
+
+      pim_assignments:
+
+        - activation_required
+
+        - duration
+
+        - approval_required
+
+
+    validation:
+
+
+      rules:
+
+        - separate_admin_accounts_required
+
+        - privileged_mfa_required
+
+        - temporary_activation_preferred
+
+
+
+  #
+  # IAM-006 Privileged Access Workstations
+  #
+
+  - id: EVID-IAM-006
+
+
+    control:
+
+      - IAM-006
+
+
+    name: Privileged Device Compliance
+
+
+    description: >
+      Evidence showing privileged operations originate from
+      trusted devices.
+
+
+    collectors:
+
+      - intune
+      - defender
+
+
+    evidence_type:
+
+      - device_compliance
+
+
+    objects:
+
+
+      - managed_devices
+
+      - compliance_policies
+
+      - device_risk
+
+
+    required_fields:
+
+
+      managed_devices:
+
+        - device_id
+
+        - compliance_state
+
+        - operating_system
+
+        - ownership
+
+
+    validation:
+
+
+      rules:
+
+        - privileged_devices_registered
+
+        - non_compliant_devices_blocked
+
+
+
+  #
+  # IAM-007 Device Identity and Trust
+  #
+
+  - id: EVID-IAM-007
+
+
+    control:
+
+      - IAM-007
+
+
+    name: Device Identity Inventory
+
+
+    description: >
+      Evidence showing known devices and device registration state.
+
+
+    collectors:
+
+      - intune
+      - entra
+
+
+    evidence_type:
+
+      - device_inventory
+
+
+    objects:
+
+
+      - devices
+
+      - registered_devices
+
+
+    required_fields:
+
+
+      devices:
+
+        - device_id
+
+        - device_name
+
+        - ownership
+
+        - registration_state
+
+
+    validation:
+
+
+      rules:
+
+
+        - unknown_devices_identified
+
+        - inactive_devices_reviewed
+
+
+
+  #
+  # IAM-008 Identity Activity Monitoring
+  #
+
+  - id: EVID-IAM-008
+
+
+    control:
+
+      - IAM-008
+
+
+    name: Authentication and Audit Logs
+
+
+    description: >
+      Evidence showing identity activity is monitored.
+
+
+    collectors:
+
+      - entra
+      - defender
+      - sentinel
+
+
+    evidence_type:
+
+
+      - security_logs
+
+
+    objects:
+
+
+      - sign_in_logs
+
+      - audit_logs
+
+      - risky_sign_ins
+
+
+    required_fields:
+
+
+      sign_in_logs:
+
+        - user_id
+
+        - timestamp
+
+        - authentication_requirement
+
+        - risk_level
+
+
+    validation:
+
+
+      rules:
+
+
+        - failed_authentication_monitored
+
+        - privileged_activity_logged
+
+        - risky_sign_ins_reviewed
+
+
+
+  #
+  # IAM-009 Service Identity Management
+  #
+
+  - id: EVID-IAM-009
+
+
+    control:
+
+      - IAM-009
+
+
+    name: Service Account Inventory
+
+
+    description: >
+      Evidence showing non-human identities are managed.
+
+
+    collectors:
+
+
+      - entra
+
+
+    evidence_type:
+
+
+      - application_identity
+
+
+    objects:
+
+
+      - service_accounts
+
+      - applications
+
+      - service_principals
+
+
+    required_fields:
+
+
+      service_accounts:
+
+        - account_name
+
+        - owner
+
+        - enabled
+
+
+      service_principals:
+
+        - application_id
+
+        - permissions
+
+        - consent_type
+
+
+    validation:
+
+
+      rules:
+
+
+        - service_accounts_owned
+
+        - unused_accounts_reviewed
+
+        - application_permissions_reviewed
+
+
+
+#
+# Evidence Collection Metadata
+#
+
+collection:
+
+
+  refresh_frequency:
+
+
+    identity_inventory:
+      daily
+
+
+    authentication_configuration:
+      daily
+
+
+    access_inventory:
+      daily
+
+
+    security_logs:
+      continuous
+
+
+
+normalisation:
+
+
+  required_common_fields:
+
+
+    - tenant_id
+
+    - source_system
+
+    - collection_timestamp
+
+    - evidence_type
+
+    - object_id
+
+
+quality_checks:
+
+
+  - evidence_timestamp_required
+
+  - source_identifier_required
+
+  - collector_version_required
+
+  - schema_validation_required

@@ -1,0 +1,221 @@
+# Cyber Essentials Control Mapping Catalogue
+# mappings.yml
+
+framework: Cyber Essentials
+version: "2023"
+
+mapping_model:
+  type: control_mapping
+  purpose:
+    - CAF alignment
+    - Control traceability
+    - Assessment reporting
+
+mapping_scope:
+  source_framework: Cyber Essentials
+  target_framework: NCSC Cyber Assessment Framework (CAF)
+  mapping_restrictions:
+    - Only CAF references are included
+    - No NIST mappings
+    - No CIS mappings
+    - No ISO mappings
+    - No OWASP mappings
+
+
+mappings:
+
+  - control_id: CE-FW-001
+    control_title: Internet boundary protection
+    caf_controls:
+      - B4.a
+      - B4.b
+      - B5.b
+
+  - control_id: CE-FW-002
+    control_title: Firewall rule management
+    caf_controls:
+      - B4.b
+      - B4.c
+      - B5.b
+
+  - control_id: CE-FW-003
+    control_title: Administrative access protection
+    caf_controls:
+      - B2.c
+      - B2.d
+      - B4.c
+
+  - control_id: CE-FW-004
+    control_title: Default firewall security settings
+    caf_controls:
+      - B4.b
+      - B4.c
+
+
+  - control_id: CE-SC-001
+    control_title: Supported systems and software
+    caf_controls:
+      - A3.a
+      - B4.d
+
+  - control_id: CE-SC-002
+    control_title: Secure baseline configurations
+    caf_controls:
+      - B4.a
+      - B4.b
+
+  - control_id: CE-SC-003
+    control_title: Removal of unnecessary services
+    caf_controls:
+      - B4.b
+      - B4.d
+
+  - control_id: CE-SC-004
+    control_title: Default account management
+    caf_controls:
+      - B2.c
+      - B2.d
+      - B4.b
+
+  - control_id: CE-SC-005
+    control_title: Application installation control
+    caf_controls:
+      - B4.b
+      - B4.c
+
+
+  - control_id: CE-UA-001
+    control_title: Individual user accounts
+    caf_controls:
+      - B2.a
+      - B2.d
+
+  - control_id: CE-UA-002
+    control_title: Access based on business need
+    caf_controls:
+      - B2.a
+      - B2.d
+
+  - control_id: CE-UA-003
+    control_title: Separate administrator accounts
+    caf_controls:
+      - B2.c
+      - B4.c
+
+  - control_id: CE-UA-004
+    control_title: Multi-factor authentication
+    caf_controls:
+      - B2.a
+      - B2.c
+
+  - control_id: CE-UA-005
+    control_title: Joiner mover leaver process
+    caf_controls:
+      - A1.b
+      - B2.d
+
+  - control_id: CE-UA-006
+    control_title: Dormant account management
+    caf_controls:
+      - B2.d
+
+
+  - control_id: CE-MP-001
+    control_title: Malware protection deployment
+    caf_controls:
+      - B4.c
+      - C1.a
+
+  - control_id: CE-MP-002
+    control_title: Malware detection updates
+    caf_controls:
+      - B4.d
+      - C1.c
+
+  - control_id: CE-MP-003
+    control_title: Malicious content protection
+    caf_controls:
+      - C1.a
+      - C1.c
+      - C1.d
+
+  - control_id: CE-MP-004
+    control_title: Malware event response
+    caf_controls:
+      - C1.d
+      - D1.a
+
+
+  - control_id: CE-SUM-001
+    control_title: Security update process
+    caf_controls:
+      - A2.a
+      - B4.d
+
+  - control_id: CE-SUM-002
+    control_title: Timely security patching
+    caf_controls:
+      - A2.c
+      - B4.d
+
+  - control_id: CE-SUM-003
+    control_title: Software inventory
+    caf_controls:
+      - A3.a
+      - B4.d
+
+  - control_id: CE-SUM-004
+    control_title: Vulnerability identification
+    caf_controls:
+      - A2.b
+      - A2.c
+      - B4.d
+
+
+caf_domains:
+
+  A:
+    name: Managing security risk
+    controls:
+      - A1.b
+      - A2.a
+      - A2.b
+      - A2.c
+      - A3.a
+
+  B:
+    name: Protecting against cyber attack
+    controls:
+      - B2.a
+      - B2.c
+      - B2.d
+      - B4.a
+      - B4.b
+      - B4.c
+      - B4.d
+      - B5.b
+
+  C:
+    name: Detecting cyber security events
+    controls:
+      - C1.a
+      - C1.c
+      - C1.d
+
+  D:
+    name: Minimising the impact of cyber security incidents
+    controls:
+      - D1.a
+
+
+validation:
+
+  schema_version: "1.0"
+
+  checks:
+    - "All Cyber Essentials controls have CAF mappings"
+    - "Mappings reference CAF domains only"
+    - "No external framework mappings included"
+    - "Control identifiers match controls.yml"
+
+  status: validated

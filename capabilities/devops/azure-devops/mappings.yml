@@ -1,0 +1,494 @@
+id: devops
+
+name: DevSecOps Framework Mappings
+
+version: "1.0.0"
+
+description: >
+  Maps DevSecOps capability controls to external compliance
+  frameworks. Capability controls remain framework-independent
+  and represent engineering security outcomes.
+
+mappings:
+
+  #
+  # DEVOPS-001 Repository Security
+  #
+
+  DEVOPS-001:
+
+    name: Source Code Repository Security
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.b
+            name: Secure administration
+
+      ISO27001:
+        controls:
+          - id: A.5.15
+            name: Access control
+          - id: A.5.18
+            name: Access rights
+
+      SOC2:
+        controls:
+          - id: CC6.1
+          - id: CC6.2
+
+      GovAssure:
+        controls:
+          - id: PR.AC
+
+      CyberEssentials:
+        controls:
+          - id: Access Control
+
+  #
+  # DEVOPS-002 Branch Protection
+  #
+
+  DEVOPS-002:
+
+    name: Branch Protection
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.c
+
+      ISO27001:
+        controls:
+          - id: A.8.32
+            name: Change management
+
+      SOC2:
+        controls:
+          - id: CC8.1
+
+      GovAssure:
+        controls:
+          - id: PR.IP
+
+      CyberEssentials:
+        controls:
+          - id: Secure Configuration
+
+  #
+  # DEVOPS-003 Secure Development Lifecycle
+  #
+
+  DEVOPS-003:
+
+    name: Secure Development Lifecycle
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.d
+
+      ISO27001:
+        controls:
+          - id: A.8.25
+            name: Secure development lifecycle
+          - id: A.8.28
+            name: Secure coding
+
+      SOC2:
+        controls:
+          - id: CC8.1
+          - id: CC8.2
+
+      GovAssure:
+        controls:
+          - id: PR.IP
+
+      CyberEssentials:
+        controls:
+          - id: Secure Configuration
+
+  #
+  # DEVOPS-004 Code Review
+  #
+
+  DEVOPS-004:
+
+    name: Code Review
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.d
+
+      ISO27001:
+        controls:
+          - id: A.8.28
+            name: Secure coding
+
+      SOC2:
+        controls:
+          - id: CC8.1
+
+      GovAssure:
+        controls:
+          - id: PR.IP
+
+  #
+  # DEVOPS-005 Pipeline Security
+  #
+
+  DEVOPS-005:
+
+    name: Pipeline Security
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.c
+
+      ISO27001:
+        controls:
+          - id: A.8.31
+            name: Separation of development, test and production
+
+      SOC2:
+        controls:
+          - id: CC6.6
+
+      GovAssure:
+        controls:
+          - id: PR.PT
+
+  #
+  # DEVOPS-006 Build Integrity
+  #
+
+  DEVOPS-006:
+
+    name: Build Integrity
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.d
+
+      ISO27001:
+        controls:
+          - id: A.8.32
+            name: Change management
+
+      SOC2:
+        controls:
+          - id: CC8.1
+
+      GovAssure:
+        controls:
+          - id: PR.IP
+
+  #
+  # DEVOPS-007 Dependency Management
+  #
+
+  DEVOPS-007:
+
+    name: Dependency Management
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.d
+
+      ISO27001:
+        controls:
+          - id: A.8.8
+            name: Management of technical vulnerabilities
+          - id: A.8.29
+            name: Security testing in development
+
+      SOC2:
+        controls:
+          - id: CC7.1
+
+      GovAssure:
+        controls:
+          - id: DE.CM
+
+      CyberEssentials:
+        controls:
+          - id: Vulnerability Management
+
+  #
+  # DEVOPS-008 Artifact Security
+  #
+
+  DEVOPS-008:
+
+    name: Artifact Security
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.c
+
+      ISO27001:
+        controls:
+          - id: A.8.24
+            name: Use of cryptography
+
+      SOC2:
+        controls:
+          - id: CC6.6
+
+      GovAssure:
+        controls:
+          - id: PR.DS
+
+  #
+  # DEVOPS-009 Infrastructure as Code
+  #
+
+  DEVOPS-009:
+
+    name: Infrastructure as Code
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.d
+
+      ISO27001:
+        controls:
+          - id: A.8.9
+            name: Configuration management
+
+      SOC2:
+        controls:
+          - id: CC8.1
+
+      GovAssure:
+        controls:
+          - id: PR.IP
+
+      CyberEssentials:
+        controls:
+          - id: Secure Configuration
+
+  #
+  # DEVOPS-010 Secrets Management
+  #
+
+  DEVOPS-010:
+
+    name: Secrets Management
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B2.a
+
+      ISO27001:
+        controls:
+          - id: A.5.17
+            name: Authentication information
+
+      SOC2:
+        controls:
+          - id: CC6.1
+
+      GovAssure:
+        controls:
+          - id: PR.AA
+
+      CyberEssentials:
+        controls:
+          - id: Access Control
+
+  #
+  # DEVOPS-011 Security Testing
+  #
+
+  DEVOPS-011:
+
+    name: Security Testing
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.d
+
+      ISO27001:
+        controls:
+          - id: A.8.29
+            name: Security testing
+
+      SOC2:
+        controls:
+          - id: CC7.1
+          - id: CC7.2
+
+      GovAssure:
+        controls:
+          - id: DE.CM
+
+  #
+  # DEVOPS-012 Release Management
+  #
+
+  DEVOPS-012:
+
+    name: Release Management
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: B3.c
+
+      ISO27001:
+        controls:
+          - id: A.8.32
+            name: Change management
+
+      SOC2:
+        controls:
+          - id: CC8.1
+
+      GovAssure:
+        controls:
+          - id: PR.IP
+
+  #
+  # DEVOPS-013 Audit Logging
+  #
+
+  DEVOPS-013:
+
+    name: DevOps Audit Logging
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: D1.a
+
+      ISO27001:
+        controls:
+          - id: A.8.15
+            name: Logging
+          - id: A.8.16
+            name: Monitoring activities
+
+      SOC2:
+        controls:
+          - id: CC7.2
+
+      GovAssure:
+        controls:
+          - id: DE.CM
+
+  #
+  # DEVOPS-014 Security Monitoring
+  #
+
+  DEVOPS-014:
+
+    name: DevOps Security Monitoring
+
+    frameworks:
+
+      CAF:
+        controls:
+          - id: D1.a
+          - id: D1.b
+
+      ISO27001:
+        controls:
+          - id: A.8.16
+            name: Monitoring activities
+
+      SOC2:
+        controls:
+          - id: CC7.2
+          - id: CC7.3
+
+      GovAssure:
+        controls:
+          - id: DE.CM
+
+      CyberEssentials:
+        controls:
+          - id: Security Monitoring
+
+framework_coverage:
+
+  CAF:
+
+    capability:
+      Secure Development and System Security
+
+    mapped_controls:
+      - B2.a
+      - B3.b
+      - B3.c
+      - B3.d
+      - D1.a
+      - D1.b
+
+  ISO27001:
+
+    mapped_controls:
+      - A.5.15
+      - A.5.17
+      - A.5.18
+      - A.8.8
+      - A.8.9
+      - A.8.15
+      - A.8.16
+      - A.8.24
+      - A.8.25
+      - A.8.28
+      - A.8.29
+      - A.8.31
+      - A.8.32
+
+  SOC2:
+
+    mapped_controls:
+      - CC6.1
+      - CC6.2
+      - CC6.6
+      - CC7.1
+      - CC7.2
+      - CC7.3
+      - CC8.1
+      - CC8.2
+
+  GovAssure:
+
+    mapped_controls:
+      - PR.AA
+      - PR.AC
+      - PR.DS
+      - PR.IP
+      - PR.PT
+      - DE.CM
+
+  CyberEssentials:
+
+    mapped_controls:
+      - Access Control
+      - Secure Configuration
+      - Vulnerability Management
+      - Security Monitoring

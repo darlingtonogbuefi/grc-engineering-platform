@@ -1,0 +1,65 @@
+id: azure.key_vaults
+name: Azure Key Vaults
+description: >
+  Collect Azure Key Vault configurations for secrets management,
+  encryption, access control, and compliance evidence.
+
+service: Microsoft.KeyVault
+resource: vaults
+method: GET
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/vaults
+api_version: "2023-07-01"
+scope: subscription
+
+pagination:
+  enabled: true
+  next_link: nextLink
+
+authentication:
+  type: bearer
+
+response:
+  items: value
+
+normalizer: SecurityNormalizer
+primary_key: id
+
+fields:
+  - id
+  - name
+  - type
+  - location
+  - tags
+  - identity
+  - properties
+  - properties.tenantId
+  - properties.sku
+  - properties.accessPolicies
+  - properties.enableRbacAuthorization
+  - properties.enabledForDeployment
+  - properties.enabledForDiskEncryption
+  - properties.enabledForTemplateDeployment
+  - properties.enableSoftDelete
+  - properties.softDeleteRetentionInDays
+  - properties.enablePurgeProtection
+  - properties.publicNetworkAccess
+  - properties.networkAcls
+  - properties.privateEndpointConnections
+  - properties.provisioningState
+  - properties.createMode
+
+metadata:
+  category: security
+  evidence_type: key_vault_configuration
+  provider: azure
+  version: 1
+
+profiles:
+  - default
+  - cyberessentials
+  - caf
+  - govassure
+  - iso27001
+  - iso42001
+  - soc2
+  - full

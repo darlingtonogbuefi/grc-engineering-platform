@@ -1,0 +1,855 @@
+id: powerplatform
+
+name: Microsoft Power Platform Framework Mappings
+
+version: "1.0.0"
+
+description: >
+  Maps Microsoft Power Platform governance and security capability
+  controls to recognised cybersecurity and compliance frameworks.
+  These mappings allow Power Platform evidence to contribute toward
+  multiple compliance assessments without embedding framework logic
+  into the capability model.
+
+
+mappings:
+
+
+  #
+  # PP-001 Tenant Governance
+  #
+
+  PP-001:
+
+    name: Power Platform Tenant Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B1.a
+            name: Governance and leadership
+
+
+          - id: B3.a
+            name: Security governance
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.1
+            name: Policies for information security
+
+
+          - id: A.5.2
+            name: Information security roles and responsibilities
+
+
+          - id: A.5.37
+            name: Documented operating procedures
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC1.2
+
+          - id: CC1.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: GV.OC
+            name: Governance and oversight
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Secure Configuration
+
+
+
+  #
+  # PP-002 Environment Governance
+  #
+
+  PP-002:
+
+    name: Power Platform Environment Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.a
+
+          - id: B3.c
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.9
+            name: Configuration management
+
+
+          - id: A.5.9
+            name: Inventory of information and assets
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+          - id: CC6.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IP
+            name: Platform governance
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Secure Configuration
+
+
+
+  #
+  # PP-003 Access Control
+  #
+
+  PP-003:
+
+    name: Power Platform Access Control
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.a
+            name: Identity verification, authentication and authorisation
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.15
+            name: Access control
+
+
+          - id: A.5.18
+            name: Access rights
+
+
+          - id: A.8.2
+            name: Privileged access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+          - id: CC6.2
+
+          - id: CC6.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+            name: Identity management
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: User Access Control
+
+
+
+  #
+  # PP-004 Maker Governance
+  #
+
+  PP-004:
+
+    name: Maker Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B6.a
+            name: User awareness and responsibilities
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.6.3
+            name: Information security awareness
+
+
+          - id: A.5.18
+            name: Access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC2.1
+
+          - id: CC6.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AT
+            name: Awareness and training
+
+
+
+  #
+  # PP-005 Application Governance
+  #
+
+  PP-005:
+
+    name: Application Inventory and Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: A1.a
+            name: Asset management
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.9
+            name: Inventory of information and assets
+
+
+          - id: A.8.1
+            name: User endpoint devices
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+          - id: CC7.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: ID.AM
+            name: Asset management
+
+
+
+  #
+  # PP-006 Data Loss Prevention
+  #
+
+  PP-006:
+
+    name: Data Loss Prevention
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B4.a
+            name: Data security
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.12
+            name: Classification of information
+
+
+          - id: A.5.14
+            name: Information transfer
+
+
+          - id: A.8.12
+            name: Data leakage prevention
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.5
+
+          - id: CC7.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.DS
+            name: Data security
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Malware Protection
+
+
+
+  #
+  # PP-007 Connector Governance
+  #
+
+  PP-007:
+
+    name: Connector Security Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.b
+            name: Secure architecture
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.19
+            name: Information security in supplier relationships
+
+
+          - id: A.8.20
+            name: Networks security
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.6
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.DS
+
+
+
+  #
+  # PP-008 Dataverse Security
+  #
+
+  PP-008:
+
+    name: Dataverse Security Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B4.a
+            name: Data security
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.15
+            name: Access control
+
+
+          - id: A.5.33
+            name: Protection of records
+
+
+          - id: A.8.11
+            name: Data masking
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+          - id: CC6.7
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.DS
+
+
+
+  #
+  # PP-009 Power Automate Governance
+  #
+
+  PP-009:
+
+    name: Automation Governance
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.c
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.32
+            name: Change management
+
+
+          - id: A.8.16
+            name: Monitoring activities
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.2
+
+          - id: CC8.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IP
+
+
+
+  #
+  # PP-010 ALM
+  #
+
+  PP-010:
+
+    name: Application Lifecycle Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B3.d
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.25
+            name: Secure development lifecycle
+
+
+          - id: A.8.32
+            name: Change management
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC8.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.IP
+
+
+
+  #
+  # PP-011 Service Identities
+  #
+
+  PP-011:
+
+    name: Service Account and Application Identity Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.a
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.16
+            name: Identity management
+
+
+          - id: A.5.18
+            name: Access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+
+
+
+  #
+  # PP-012 Audit Monitoring
+  #
+
+  PP-012:
+
+    name: Audit Logging
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: D1.a
+            name: Monitoring and detection
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.15
+            name: Logging
+
+
+          - id: A.8.16
+            name: Monitoring activities
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.2
+
+          - id: CC7.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: DE.CM
+
+
+
+  #
+  # PP-013 Security Posture
+  #
+
+  PP-013:
+
+    name: Power Platform Security Posture Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: D1.b
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.8
+            name: Management of technical vulnerabilities
+
+
+          - id: A.5.7
+            name: Threat intelligence
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.1
+
+          - id: CC7.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: DE.CM
+
+          - id: DE.AE
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: Vulnerability Management
+
+
+
+#
+# Framework Coverage Summary
+#
+
+framework_coverage:
+
+
+  CAF:
+
+    capability:
+
+      Power Platform Governance and Security
+
+
+    controls:
+
+      - B1.a
+      - B2.a
+      - B3.a
+      - B3.b
+      - B3.c
+      - B3.d
+      - B4.a
+      - D1.a
+      - D1.b
+
+
+
+  ISO27001:
+
+    mapped_controls:
+
+      - A.5.1
+      - A.5.2
+      - A.5.7
+      - A.5.9
+      - A.5.12
+      - A.5.14
+      - A.5.15
+      - A.5.16
+      - A.5.18
+      - A.5.19
+      - A.5.33
+      - A.6.3
+      - A.8.1
+      - A.8.2
+      - A.8.8
+      - A.8.9
+      - A.8.11
+      - A.8.12
+      - A.8.15
+      - A.8.16
+      - A.8.20
+      - A.8.25
+      - A.8.32
+
+
+
+  SOC2:
+
+    mapped_controls:
+
+      - CC1.2
+      - CC1.3
+      - CC2.1
+      - CC6.1
+      - CC6.2
+      - CC6.3
+      - CC6.5
+      - CC6.6
+      - CC6.7
+      - CC7.1
+      - CC7.2
+      - CC7.3
+      - CC8.1
+
+
+
+  GovAssure:
+
+    mapped_controls:
+
+      - GV.OC
+      - ID.AM
+      - PR.AA
+      - PR.AT
+      - PR.DS
+      - PR.IP
+      - DE.CM
+      - DE.AE
+
+
+
+  CyberEssentials:
+
+    mapped_controls:
+
+      - User Access Control
+      - Secure Configuration
+      - Malware Protection
+      - Vulnerability Management

@@ -1,0 +1,90 @@
+# ==============================================================================
+# Docker Ignore
+# GRC Engineering Platform
+# ==============================================================================
+
+
+.git
+
+.github
+
+
+# Development
+
+.vscode/
+
+.idea/
+
+
+# Python
+
+__pycache__/
+
+*.pyc
+
+.venv/
+
+
+# Testing
+
+tests/
+
+.pytest_cache/
+
+
+# Documentation
+
+docs/
+
+site/
+
+
+# Runtime Evidence
+
+evidence/raw/
+
+evidence/processed/
+
+evidence/runs/
+
+evidence/archive/
+
+
+# GovAssure Generated Evidence
+
+evidence/govassure/
+
+
+# Generated Reports
+
+reports/*
+
+output/
+
+
+# Framework Cache
+
+frameworks/*/generated/
+
+frameworks/*/cache/
+
+
+# Local secrets
+
+.env
+
+
+# Logs
+
+*.log
+
+logs/
+
+
+# Build
+
+dist/
+
+build/
+
+*.egg-info/

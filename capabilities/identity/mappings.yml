@@ -1,0 +1,731 @@
+id: identity
+
+name: Identity and Access Management Framework Mappings
+
+version: "1.0"
+
+description: >
+  Maps Identity and Access Management capability controls to
+  external compliance frameworks including CAF, ISO27001,
+  SOC2, GovAssure and Cyber Essentials.
+
+
+mappings:
+
+
+  #
+  # IAM-001 Identity Verification
+  #
+
+  IAM-001:
+
+    name: Identity Verification
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.a
+
+            name:
+              Identity verification, authentication and authorisation
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.16
+
+            name:
+              Identity management
+
+
+          - id: A.5.17
+
+            name:
+              Authentication information
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+            name:
+              Logical and physical access controls
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+
+            name:
+              Identity management and authentication
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 5.1
+
+            name:
+              Establish and maintain inventory of accounts
+
+
+
+  #
+  # IAM-002 Strong Authentication
+  #
+
+  IAM-002:
+
+    name: Strong Authentication
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.a
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.5
+
+            name:
+              Secure authentication
+
+
+          - id: A.5.17
+
+            name:
+              Authentication information
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.1
+
+
+          - id: CC6.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA-03
+
+            name:
+              Authentication mechanisms
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 6.3
+
+            name:
+              Require MFA for externally exposed applications
+
+
+          - id: 6.4
+
+            name:
+              Require MFA for remote network access
+
+
+          - id: 6.5
+
+            name:
+              Require MFA for administrative access
+
+
+
+  #
+  # IAM-003 Least Privilege Access Management
+  #
+
+  IAM-003:
+
+    name:
+      Least Privilege Access Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.a
+
+          - id: B2.d
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.15
+
+            name:
+              Access control
+
+
+          - id: A.5.18
+
+            name:
+              Access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.2
+
+          - id: CC6.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+
+            name:
+              Access permissions
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 5.4
+
+            name:
+              Restrict administrator privileges
+
+
+
+  #
+  # IAM-004 Access Review and Recertification
+  #
+
+  IAM-004:
+
+    name:
+      Access Review and Recertification
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.d
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.18
+
+            name:
+              Access rights
+
+
+          - id: A.5.19
+
+            name:
+              Access rights review
+
+
+          - id: A.5.20
+
+            name:
+              Removal or adjustment of access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA-05
+
+            name:
+              Access reviews
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 6.2
+
+            name:
+              Establish access revoking process
+
+
+
+  #
+  # IAM-005 Privileged Access Management
+  #
+
+  IAM-005:
+
+    name:
+      Privileged Access Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.c
+
+            name:
+              Privileged user management
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.15
+
+          - id: A.5.18
+
+          - id: A.8.2
+
+            name:
+              Privileged access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.3
+
+          - id: CC7.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+
+            name:
+              Privileged access control
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 5.4
+
+            name:
+              Restrict administrator privileges
+
+          - id: 6.5
+
+            name:
+              Require MFA for administrative access
+
+
+
+  #
+  # IAM-006 Privileged Access Workstations
+  #
+
+  IAM-006:
+
+    name:
+      Privileged Access Workstations
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.b
+
+            name:
+              Device management
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.1
+
+            name:
+              User endpoint devices
+
+
+          - id: A.8.2
+
+            name:
+              Privileged access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.6
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AC
+
+            name:
+              Access control
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 13.5
+
+            name:
+              Manage access control for remote assets
+
+
+
+  #
+  # IAM-007 Device Identity and Trust
+  #
+
+  IAM-007:
+
+    name:
+      Device Identity and Trust
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.b
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.1
+
+            name:
+              User endpoint devices
+
+
+          - id: A.8.20
+
+            name:
+              Network security
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.6
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.DS
+
+            name:
+              Device security
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 1.1
+
+            name:
+              Establish and maintain asset inventory
+
+
+
+  #
+  # IAM-008 Identity Monitoring
+  #
+
+  IAM-008:
+
+    name:
+      Identity Activity Monitoring
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.d
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.8.16
+
+            name:
+              Monitoring activities
+
+
+          - id: A.5.25
+
+            name:
+              Assessment and decision on information security events
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC7.2
+
+          - id: CC7.3
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: DE.CM
+
+            name:
+              Security monitoring
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 4.7
+
+            name:
+              Manage default accounts on enterprise assets
+
+
+
+  #
+  # IAM-009 Service Identity Management
+  #
+
+  IAM-009:
+
+    name:
+      Service Identity Management
+
+
+    frameworks:
+
+
+      CAF:
+
+        controls:
+
+          - id: B2.d
+
+
+
+      ISO27001:
+
+        controls:
+
+          - id: A.5.16
+
+            name:
+              Identity management
+
+
+          - id: A.5.18
+
+            name:
+              Access rights
+
+
+
+      SOC2:
+
+        controls:
+
+          - id: CC6.2
+
+
+
+      GovAssure:
+
+        controls:
+
+          - id: PR.AA
+
+            name:
+              Identity lifecycle management
+
+
+
+      CyberEssentials:
+
+        controls:
+
+          - id: 5.5
+
+            name:
+              Establish and maintain inventory of service accounts
+
+
+
+#
+# Mapping Metadata
+#
+
+framework_coverage:
+
+
+  CAF:
+
+    capability:
+      Identity and access control
+
+    controls:
+      - B2.a
+      - B2.b
+      - B2.c
+      - B2.d
+
+
+
+  ISO27001:
+
+    clauses:
+
+      - A.5.15
+      - A.5.16
+      - A.5.17
+      - A.5.18
+      - A.8.1
+      - A.8.2
+      - A.8.5
+      - A.8.16
+
+
+
+  SOC2:
+
+    criteria:
+
+      - CC6
+      - CC7
+
+
+
+  GovAssure:
+
+    domains:
+
+      - Identity
+      - Access Control
+      - Monitoring
+
+
+
+  CyberEssentials:
+
+    requirements:
+
+      - Account Management
+      - Authentication
+      - Access Control
+      - Device Management

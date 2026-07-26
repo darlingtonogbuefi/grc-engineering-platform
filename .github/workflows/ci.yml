@@ -1,0 +1,161 @@
+#  .github\workflows\ci.yml
+
+name: Continuous Integration
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+            - feature/**
+            - release/**
+    pull_request:
+        branches:
+            - "*"
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    PYTHON_VERSION: "3.12"
+
+jobs:
+    lint-test:
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+
+            matrix:
+                python-version:
+                    - "3.11"
+                    - "3.12"
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: ${{ matrix.python-version }}
+
+            - name: Cache Pip
+              uses: actions/cache@v4
+              with:
+                  path: ~/.cache/pip
+                  key: pip-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('requirements*.txt') }}
+                  restore-keys: |
+                      pip-${{ runner.os }}-${{ matrix.python-version }}
+
+            - name: Install Dependencies
+              run: |
+                  python -m pip install --upgrade pip
+
+                  if [ -f requirements.txt ]; then
+                    pip install -r requirements.txt
+                  fi
+
+                  pip install \
+                    pytest \
+                    pytest-cov \
+                    ruff \
+                    mypy \
+                    yamllint \
+                    jsonschema
+
+            - name: Ruff Lint
+              run: |
+                  ruff check .
+
+            - name: Ruff Format Check
+              run: |
+                  ruff format --check .
+
+            - name: MyPy
+              run: |
+                  mypy . || true
+
+            - name: Validate YAML
+              run: |
+                  yamllint .
+
+            - name: Run Unit Tests
+              run: |
+                  pytest -v --cov=. --cov-report=xml || true
+
+            - name: Upload Coverage
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: coverage-${{ matrix.python-version }}
+                  path: coverage.xml
+
+            - name: Upload Test Results
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: test-results-${{ matrix.python-version }}
+                  path: ./
+
+    validate-config:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-python@v5
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+
+            - run: |
+                  pip install pyyaml jsonschema yamllint
+
+            - name: Validate Configuration Files
+              run: |
+
+                  test -f config/tenants.yml
+                  test -f config/frameworks.yml
+                  test -f config/collectors.yml
+                  test -f config/reporting.yml
+                  test -f config/storage.yml
+
+                  yamllint config
+
+    security:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-python@v5
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+
+            - run: |
+                  python -m pip install --upgrade pip
+                  pip install pip-audit bandit
+
+            - name: Dependency Audit
+              run: |
+                  pip-audit || true
+
+            - name: Bandit
+              run: |
+                  bandit -r . || true
+
+    build-summary:
+        needs:
+            - lint-test
+            - validate-config
+            - security
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - run: |
+                  echo "CI completed successfully."

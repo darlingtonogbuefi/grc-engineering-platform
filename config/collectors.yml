@@ -1,0 +1,912 @@
+# ==============================================================================
+# GRC Engineering Platform
+# Collector Configuration
+# ==============================================================================
+#
+# Controls which evidence collectors are available to the engine.
+#
+# Collector implementations are stored under:
+#
+# collectors/<CollectorName>/
+#
+# Each collector is responsible for:
+#
+# - Authentication
+# - Data retrieval
+# - Raw evidence collection
+# - Evidence normalisation
+# - Schema validation
+#
+# ==============================================================================
+
+
+schemaVersion: "1.0"
+
+
+defaults:
+
+  enabled: true
+
+  evidenceRequired: true
+
+  allowManualEvidence: false
+
+  inheritMetadata: true
+
+  retryAttempts: 3
+
+  timeoutSeconds: 300
+
+  validateOutput: true
+
+  # Phase 7 configuration defaults
+
+  tenant: Production
+
+  profile: default
+
+
+
+collectors:
+
+
+  # ============================================================================
+  # Microsoft Entra ID
+  # ============================================================================
+
+  entra:
+
+    enabled: true
+
+    profile: full
+
+    tenant: Production
+
+    displayName: Microsoft Entra ID
+
+    version: "1.0"
+
+    directory: collectors/entra
+
+    type: identity
+
+    provider: Microsoft
+
+    authentication:
+
+      method: azure_identity
+
+      requiredPermissions:
+
+        - Directory.Read.All
+
+        - User.Read.All
+
+        - Group.Read.All
+
+        - RoleManagement.Read.Directory
+
+
+    capabilities:
+
+      - identity
+
+      - cloud
+
+      - m365
+
+
+    evidenceTypes:
+
+      - users
+
+      - groups
+
+      - roles
+
+      - privileged_accounts
+
+      - service_principals
+
+      - conditional_access
+
+      - authentication_methods
+
+
+    priority: 10
+
+
+
+  # ============================================================================
+  # Microsoft Azure
+  # ============================================================================
+
+  azure:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Azure
+
+    version: "1.0"
+
+    directory: collectors/azure
+
+    type: cloud
+
+    provider: Microsoft
+
+
+    authentication:
+
+      method: azure_identity
+
+      requiredPermissions:
+
+        - Reader
+
+        - Security Reader
+
+
+    capabilities:
+
+      - cloud
+
+      - networking
+
+      - monitoring
+
+      - backup
+
+      - vulnerability
+
+
+    evidenceTypes:
+
+      - subscriptions
+
+      - management_groups
+
+      - resource_inventory
+
+      - virtual_machines
+
+      - storage_accounts
+
+      - network_security_groups
+
+      - policies
+
+      - role_assignments
+
+      - activity_logs
+
+
+    priority: 20
+
+
+
+  # ============================================================================
+  # Microsoft Intune
+  # ============================================================================
+
+  intune:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Intune
+
+    version: "1.0"
+
+    directory: collectors/intune
+
+    type: endpoint
+
+    provider: Microsoft
+
+
+    authentication:
+
+      method: graph_api
+
+
+    capabilities:
+
+      - endpoint
+
+      - identity
+
+      - m365
+
+
+    evidenceTypes:
+
+      - devices
+
+      - compliance_policies
+
+      - configuration_profiles
+
+      - applications
+
+      - device_encryption
+
+      - device_health
+
+
+    priority: 30
+
+
+
+  # ============================================================================
+  # Microsoft Defender
+  # ============================================================================
+
+  defender:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Defender Security Platform
+
+    version: "1.0"
+
+    directory: collectors/defender
+
+    type: security
+
+    provider: Microsoft
+
+
+    authentication:
+
+      method: graph_api
+
+
+    capabilities:
+
+      - endpoint
+
+      - cloud
+
+      - vulnerability
+
+      - monitoring
+
+
+    evidenceTypes:
+
+      - security_alerts
+
+      - incidents
+
+      - vulnerabilities
+
+      - recommendations
+
+      - secure_score
+
+
+    priority: 40
+
+
+
+  # ============================================================================
+  # Microsoft Exchange Online
+  # ============================================================================
+
+  exchange:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Exchange Online
+
+    version: "1.0"
+
+    directory: collectors/exchange
+
+    type: m365
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - m365
+
+      - identity
+
+
+    evidenceTypes:
+
+      - mailboxes
+
+      - mailbox_permissions
+
+      - forwarding_rules
+
+      - anti_spam_configuration
+
+
+    priority: 50
+
+
+
+  # ============================================================================
+  # Microsoft Teams
+  # ============================================================================
+
+  teams:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Teams
+
+    version: "1.0"
+
+    directory: collectors/teams
+
+    type: collaboration
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - m365
+
+
+    evidenceTypes:
+
+      - teams
+
+      - channels
+
+      - external_access
+
+      - meeting_policies
+
+
+    priority: 60
+
+
+
+  # ============================================================================
+  # SharePoint Online
+  # ============================================================================
+
+  sharepoint:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: SharePoint Online
+
+    version: "1.0"
+
+    directory: collectors/sharepoint
+
+    type: m365
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - m365
+
+      - cloud
+
+
+    evidenceTypes:
+
+      - sites
+
+      - permissions
+
+      - sharing_settings
+
+      - external_access
+
+
+    priority: 70
+
+
+
+  # ============================================================================
+  # OneDrive
+  # ============================================================================
+
+  onedrive:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: OneDrive for Business
+
+    version: "1.0"
+
+    directory: collectors/onedrive
+
+    type: m365
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - m365
+
+      - cloud
+
+
+    evidenceTypes:
+
+      - storage_usage
+
+      - sharing_links
+
+      - permissions
+
+      - external_sharing
+
+
+    priority: 80
+
+
+
+  # ============================================================================
+  # Microsoft Purview
+  # ============================================================================
+
+  purview:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Purview
+
+    version: "1.0"
+
+    directory: collectors/purview
+
+    type: compliance
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - m365
+
+      - cloud
+
+      - logging
+
+
+    evidenceTypes:
+
+      - audit_logs
+
+      - retention_policies
+
+      - sensitivity_labels
+
+      - data_classification
+
+
+    priority: 90
+
+
+
+  # ============================================================================
+  # GitHub
+  # ============================================================================
+
+  github:
+
+    enabled: true
+
+    profile: default
+
+    displayName: GitHub Enterprise
+
+    version: "1.0"
+
+    directory: collectors/github
+
+    type: devops
+
+    provider: GitHub
+
+
+    authentication:
+
+      method: api_token
+
+
+    capabilities:
+
+      - devops
+
+
+    evidenceTypes:
+
+      - repositories
+
+      - branches
+
+      - pull_requests
+
+      - workflows
+
+      - security_scanning
+
+
+    priority: 100
+
+
+
+  # ============================================================================
+  # Azure DevOps
+  # ============================================================================
+
+  azuredevops:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Azure DevOps
+
+    version: "1.0"
+
+    directory: collectors/azuredevops
+
+    type: devops
+
+    provider: Microsoft
+
+
+    authentication:
+
+      method: azure_identity
+
+
+    capabilities:
+
+      - devops
+
+      - cloud
+
+
+    evidenceTypes:
+
+      - projects
+
+      - repositories
+
+      - pipelines
+
+      - releases
+
+      - permissions
+
+
+    priority: 110
+
+
+
+  # ============================================================================
+  # Power Platform
+  # ============================================================================
+
+  powerplatform:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Power Platform
+
+    version: "1.0"
+
+    directory: collectors/powerplatform
+
+    type: business_application
+
+    provider: Microsoft
+
+
+    authentication:
+
+      method: graph_api
+
+
+    capabilities:
+
+      - powerplatform
+
+      - business-apps
+
+      - m365
+
+      - identity
+
+
+    evidenceTypes:
+
+      - environments
+
+      - applications
+
+      - flows
+
+      - connectors
+
+      - dlp_policies
+
+      - dataverse
+
+      - solutions
+
+      - audit_logs
+
+
+    priority: 120
+
+
+
+  # ============================================================================
+  # Dynamics 365
+  # ============================================================================
+
+  dynamics365:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Microsoft Dynamics 365
+
+    version: "1.0"
+
+    directory: collectors/dynamics365
+
+    type: business_application
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - business-apps
+
+
+    evidenceTypes:
+
+      - applications
+
+      - roles
+
+      - security_profiles
+
+      - integrations
+
+
+    priority: 130
+
+
+
+  # ============================================================================
+  # Azure Arc
+  # ============================================================================
+
+  azurearc:
+
+    enabled: true
+
+    tenant: Production
+
+    profile: full
+
+    displayName: Azure Arc
+
+    version: "1.0"
+
+    directory: collectors/azurearc
+
+    type: hybrid_cloud
+
+    provider: Microsoft
+
+
+    capabilities:
+
+      - cloud
+
+      - endpoint
+
+
+    evidenceTypes:
+
+      - connected_servers
+
+      - policies
+
+      - extensions
+
+      - compliance_status
+
+
+    priority: 140
+
+
+
+  # ============================================================================
+  # VMware
+  # ============================================================================
+
+  vmware:
+
+    enabled: true
+
+    profile: default
+
+    displayName: VMware Infrastructure
+
+    version: "1.0"
+
+    directory: collectors/vmware
+
+    type: infrastructure
+
+
+    capabilities:
+
+      - cloud
+
+      - endpoint
+
+      - backup
+
+
+    evidenceTypes:
+
+      - virtual_machines
+
+      - hosts
+
+      - clusters
+
+      - permissions
+
+      - configurations
+
+
+    priority: 150
+
+
+
+# ==============================================================================
+# Validation
+# ==============================================================================
+
+validation:
+
+  requireCollectorDirectory: true
+
+  requireEvidenceTypes: true
+
+  requireCapabilityMapping: true
+
+  requireTenantContext: true
+
+  validateTenantReferences: true
+
+  failOnMissingCollector: true
+
+  failOnDuplicateCollectors: true
+
+  failOnDuplicateEvidenceTypes: false
+
+
+
+# ==============================================================================
+# Collection Engine
+# ==============================================================================
+
+engine:
+
+  validateCollectorsOnStartup: true
+
+  preloadCollectors: true
+
+  parallelCollection: true
+
+  cacheCollectors: true
+
+  cacheTimeoutMinutes: 60
+
+
+  execution:
+
+    maxConcurrentCollectors: 10
+
+    retryFailedCollections: true
+
+    retainRawEvidence: true
+
+    retainNormalisedEvidence: true
+
+
+
+# ==============================================================================
+# Evidence Handling
+# ==============================================================================
+
+evidence:
+
+  schemaValidation: true
+
+  requireTimestamp: true
+
+  requireCollectorVersion: true
+
+  requireSourceSystem: true
+
+  requireTenantContext: true
+
+
+  storage:
+
+    rawEvidencePath: evidence/raw
+
+    normalisedEvidencePath: evidence/normalised
+
+
+
+# ==============================================================================
+# Metadata
+# ==============================================================================
+
+metadata:
+
+  owner: GRC Engineering Platform
+
+  managedBy: Collector Engine
+
+  schema: "1.0"

@@ -1,0 +1,72 @@
+# ==============================================================================
+# Production Dependencies
+# GRC Engineering Platform
+# Framework Support:
+# CAF
+# ISO27001
+# SOC2
+# GovAssure
+# Cyber Essentials
+# ==============================================================================
+
+
+pyyaml>=6.0.1
+
+jsonschema>=4.21.0
+
+pydantic>=2.5.0
+
+python-dotenv>=1.0.0
+
+
+# API Clients
+
+requests>=2.31.0
+
+httpx>=0.26.0
+
+tenacity>=8.2.3
+
+
+# Microsoft / Cloud Evidence
+
+azure-identity>=1.15.0
+
+azure-storage-blob>=12.19.0
+
+azure-mgmt-resource>=23.0.1
+
+msgraph-sdk>=1.0.0
+
+
+# GitHub / DevOps Evidence
+
+PyGithub>=2.1.1
+
+
+# VMware Evidence
+
+pyvmomi>=8.0.2
+
+
+# Compliance Evidence Processing
+
+lxml>=5.1.0
+
+python-dateutil>=2.8.2
+
+
+# Reporting
+
+jinja2>=3.1.3
+
+pandas>=2.2.0
+
+openpyxl>=3.1.2
+
+
+# CLI
+
+click>=8.1.7
+
+rich>=13.7.0

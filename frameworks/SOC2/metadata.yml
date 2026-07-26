@@ -1,0 +1,437 @@
+#
+# SOC 2 Trust Services Criteria Framework Metadata
+# metadata.yml
+#
+
+framework:
+
+  id: SOC2
+
+  name: SOC 2 Trust Services Criteria
+
+  version: "2017+"
+
+
+  publisher:
+
+    name: American Institute of Certified Public Accountants (AICPA)
+
+
+  description: >
+    SOC 2 Trust Services Criteria represented as atomic assessment
+    controls suitable for evidence collection, control evaluation,
+    scoring and compliance reporting.
+
+    This implementation represents SOC 2 security requirements as
+    operational assessment controls.
+
+    Controls are mapped exclusively to the NCSC Cyber Assessment
+    Framework (CAF).
+
+    No mappings to ISO 27001, NIST, CIS, OWASP or other frameworks
+    are included.
+
+
+
+scope:
+
+
+  trust_service_categories:
+
+
+    - Security
+
+    - Availability
+
+    - Processing Integrity
+
+    - Confidentiality
+
+    - Privacy
+
+
+
+  environments:
+
+
+    - Enterprise systems
+
+    - Cloud platforms
+
+    - Applications
+
+    - Infrastructure services
+
+    - Data processing environments
+
+    - Third-party service environments
+
+
+
+control_model:
+
+
+  type:
+
+    control_assessment
+
+
+  structure:
+
+
+    required_fields:
+
+
+      - id
+
+      - theme
+
+      - category
+
+      - title
+
+      - requirement
+
+      - assessment_guidance
+
+      - evidence
+
+      - applicability
+
+      - priority
+
+      - tags
+
+      - caf_controls
+
+
+
+control_domains:
+
+
+  common_criteria:
+
+
+    prefix: SOC2-CC
+
+
+    description: >
+      Security common criteria controls covering governance,
+      access management, operations and monitoring.
+
+
+
+  availability:
+
+
+    prefix: SOC2-A
+
+
+    description: >
+      Controls supporting system availability and resilience.
+
+
+
+  processing_integrity:
+
+
+    prefix: SOC2-PI
+
+
+    description: >
+      Controls ensuring accurate and complete processing.
+
+
+
+  confidentiality:
+
+
+    prefix: SOC2-C
+
+
+    description: >
+      Controls protecting confidential information.
+
+
+
+  privacy:
+
+
+    prefix: SOC2-P
+
+
+    description: >
+      Controls supporting personal information protection.
+
+
+
+control_coverage:
+
+
+  total_controls:
+
+    count: 14
+
+
+  categories:
+
+
+    - Security governance
+
+    - Risk management
+
+    - Access control
+
+    - Privileged access management
+
+    - Authentication
+
+    - Monitoring
+
+    - Incident response
+
+    - Availability management
+
+    - Backup and recovery
+
+    - Confidentiality protection
+
+    - Processing integrity
+
+    - Privacy management
+
+
+
+assessment:
+
+
+  scoring_model:
+
+
+    enabled: true
+
+
+    scoring_file:
+
+
+      - scoring.yml
+
+
+
+  assessment_results:
+
+
+    - pass
+
+    - partial
+
+    - fail
+
+    - not_applicable
+
+
+
+evidence_management:
+
+
+  enabled: true
+
+
+  evidence_file:
+
+
+    - evidence.yml
+
+
+  evidence_requirements:
+
+
+    - Current
+
+    - Attributable
+
+    - Relevant
+
+    - Sufficient
+
+    - Representative
+
+
+
+mapping:
+
+
+  enabled: true
+
+
+  mapping_file:
+
+
+    - mappings.yml
+
+
+  target_framework:
+
+
+    id: CAF
+
+
+    name: NCSC Cyber Assessment Framework
+
+
+
+  restrictions:
+
+
+    - Only CAF mappings are maintained
+
+    - No external framework mappings included
+
+    - No duplicate framework mappings allowed
+
+
+
+caf_alignment:
+
+
+  domains:
+
+
+    - id: A
+
+      name: Managing security risk
+
+
+
+    - id: B
+
+      name: Protecting against cyber attack
+
+
+
+    - id: C
+
+      name: Detecting cyber security events
+
+
+
+    - id: D
+
+      name: Minimising the impact of incidents
+
+
+
+governance:
+
+
+  ownership:
+
+
+    framework_owner:
+
+      name: Security Governance Function
+
+
+
+    review_owner:
+
+      name: Cyber Security Assurance Function
+
+
+
+  maintenance:
+
+
+    review_frequency: annual
+
+
+    review_triggers:
+
+
+      - AICPA Trust Services Criteria changes
+
+      - NCSC CAF updates
+
+      - Significant technology changes
+
+      - Regulatory changes
+
+      - Business scope changes
+
+
+
+validation:
+
+
+  schema_version: "1.0"
+
+
+  framework: SOC2
+
+
+  status: validated
+
+
+
+  checks:
+
+
+    structure:
+
+
+      - Framework metadata defined
+
+      - Control domains defined
+
+      - Evidence integration defined
+
+      - Scoring integration defined
+
+      - CAF mapping integration defined
+
+
+
+    consistency:
+
+
+      - Control identifiers validated
+
+      - YAML syntax validated
+
+      - Evidence references aligned
+
+      - CAF mappings aligned
+
+      - Scoring model aligned
+
+
+
+production_readiness:
+
+
+  status: ready
+
+
+  review_required:
+
+
+    - Review annually
+
+    - Review after AICPA Trust Services Criteria updates
+
+    - Review after NCSC CAF revisions
+
+    - Review following major system changes
+
+
+
+version_history:
+
+
+  - version: "2017+"
+
+    date: "Initial release"
+
+    description: >
+      SOC 2 Trust Services Criteria atomic control framework
+      mapped exclusively to NCSC CAF.

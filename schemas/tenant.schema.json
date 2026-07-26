@@ -1,0 +1,282 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grc-engineering-platform/schemas/tenant.schema.json",
+  "title": "Tenant Schema",
+  "description": "Defines a tenant configuration for the GRC Engineering Platform.",
+  "type": "object",
+
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "enabled",
+    "frameworks",
+    "collectors",
+    "identity"
+  ],
+
+  "properties": {
+
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+
+    "name": {
+      "type": "string"
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "enabled": {
+      "type": "boolean"
+    },
+
+    "timezone": {
+      "type": "string"
+    },
+
+    "locale": {
+      "type": "string"
+    },
+
+
+    "identity": {
+
+      "type": "object",
+
+      "required": [
+        "tenantId",
+        "clientId"
+      ],
+
+      "properties": {
+
+        "tenantId": {
+          "type": "string"
+        },
+
+        "clientId": {
+          "type": "string"
+        },
+
+        "environment": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Sandbox",
+            "Dev",
+            "Lab"
+          ]
+        },
+
+        "authentication": {
+
+          "type": "object",
+
+          "properties": {
+
+            "method": {
+              "type": "string",
+              "enum": [
+                "azure_identity",
+                "client_secret",
+                "certificate",
+                "managed_identity"
+              ]
+            },
+
+            "credentialSource": {
+              "type": "string"
+            }
+
+          },
+
+          "additionalProperties": false
+        }
+
+      },
+
+      "additionalProperties": false
+    },
+
+
+    "owner": {
+
+      "type": "object",
+
+      "properties": {
+
+        "name": {
+          "type": "string"
+        },
+
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+
+      },
+
+      "additionalProperties": false
+    },
+
+
+    "frameworks": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "type": "string",
+
+        "enum": [
+          "CAF",
+          "ISO27001",
+          "SOC2",
+          "GovAssure",
+          "CyberEssentials"
+        ]
+      }
+    },
+
+
+    "collectors": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      }
+    },
+
+
+    "storage": {
+
+      "type": "object",
+
+      "properties": {
+
+        "profile": {
+          "type": "string"
+        }
+
+      },
+
+      "additionalProperties": true
+    },
+
+
+    "reporting": {
+
+      "type": "object",
+
+      "properties": {
+
+        "profile": {
+          "type": "string"
+        },
+
+        "schedule": {
+          "type": "string"
+        },
+
+        "formats": {
+
+          "type": "array",
+
+          "items": {
+
+            "type": "string",
+
+            "enum": [
+              "html",
+              "pdf",
+              "json",
+              "markdown",
+              "csv",
+              "xlsx"
+            ]
+          }
+        }
+
+      },
+
+      "additionalProperties": true
+    },
+
+
+    "evidence": {
+
+      "type": "object",
+
+      "properties": {
+
+        "retentionDays": {
+
+          "type": "integer",
+
+          "minimum": 1
+        },
+
+        "encrypt": {
+          "type": "boolean"
+        },
+
+        "immutable": {
+          "type": "boolean"
+        }
+
+      },
+
+      "additionalProperties": true
+    },
+
+
+    "notifications": {
+
+      "type": "object",
+
+      "properties": {
+
+        "enabled": {
+          "type": "boolean"
+        }
+
+      },
+
+      "additionalProperties": true
+    },
+
+
+    "tags": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      }
+    },
+
+
+    "metadata": {
+
+      "type": "object"
+    }
+
+  },
+
+
+  "additionalProperties": false
+}
+

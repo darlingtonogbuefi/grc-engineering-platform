@@ -1,0 +1,50 @@
+# ==============================================================================
+# GRC Engineering Platform
+# Evidence Retention Configuration
+# ==============================================================================
+#
+# Controls evidence retention and archival.
+#
+# ==============================================================================
+
+schemaVersion: "1.0"
+
+retention:
+
+  rawEvidenceDays: 90
+
+  processedEvidenceDays: 365
+
+  runHistoryDays: 180
+
+  archiveYears: 7
+
+archive:
+
+  enabled: true
+
+  location: evidence/archive
+
+  compress: true
+
+  compressionFormat: zip
+
+cleanup:
+
+  removeEmptyDirectories: true
+
+  verifyArchiveBeforeDelete: true
+
+  createAuditLog: true
+
+validation:
+
+  preventDeletionOfArchivedEvidence: true
+
+  requireSuccessfulArchive: true
+
+metadata:
+
+  owner: GRC Engineering Platform
+
+  schema: "1.0"

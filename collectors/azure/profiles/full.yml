@@ -1,0 +1,70 @@
+name: full
+
+version: 1.0.0
+
+description: >
+  Comprehensive Azure evidence collection profile.
+  Enables every supported Azure evidence query.
+
+queries:
+  # Tenant & Subscription
+  - subscriptions
+  - resource-groups
+  - resources
+
+  # Identity & Access
+  - role-assignments
+  - role-definitions
+
+  # Governance
+  - policy-definitions
+  - policy-assignments
+
+  # Security
+  - defender-settings
+  - security-settings
+
+  # Monitoring
+  - activity-logs
+  - diagnostic-settings
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+
+  # Storage & Encryption
+  - storage-accounts
+  - key-vaults
+
+  # Compute
+  - virtual-machines
+
+  # Backup & Recovery
+  - backup-vaults
+
+  # AI Services
+  - ai-services
+  - machine-learning-workspaces
+  - cognitive-services
+  - model-deployments
+
+collection:
+  mode: comprehensive
+
+  include_metadata: true
+
+  include_relationships: true
+
+output:
+  evidence_types:
+    - resource_inventory
+    - configuration
+    - access_control
+    - governance
+    - security_configuration
+    - networking
+    - logging
+    - encryption
+    - backup
+    - ai_services

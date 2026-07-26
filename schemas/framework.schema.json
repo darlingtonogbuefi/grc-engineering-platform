@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://grc-engineering-platform/schemas/framework.schema.json",
+
+  "title": "GRC Framework Schema",
+
+  "description": "Defines compliance framework packages such as CAF, ISO27001, SOC2, GovAssure and Cyber Essentials.",
+
+
+  "type": "object",
+
+
+  "required": [
+
+    "id",
+
+    "name",
+
+    "version",
+
+    "controls"
+
+  ],
+
+
+  "properties": {
+
+
+    "id": {
+
+      "type": "string",
+
+      "examples": [
+
+        "CAF",
+
+        "ISO27001",
+
+        "SOC2",
+
+        "GovAssure",
+
+        "CyberEssentials"
+
+      ]
+
+    },
+
+
+    "name": {
+
+      "type": "string"
+
+    },
+
+
+    "version": {
+
+      "type": "string"
+
+    },
+
+
+    "description": {
+
+      "type": "string"
+
+    },
+
+
+    "owner": {
+
+      "type": "string"
+
+    },
+
+
+    "controls": {
+
+
+      "type": "array",
+
+      "items": {
+
+
+        "type": "object",
+
+        "required": [
+
+          "id"
+
+        ],
+
+        "properties": {
+
+
+          "id": {
+
+            "type": "string"
+
+          },
+
+
+          "title": {
+
+            "type": "string"
+
+          },
+
+
+          "category": {
+
+            "type": "string"
+
+          }
+
+
+        }
+
+      }
+
+    },
+
+
+    "mappings": {
+
+
+      "type": "array",
+
+      "items": {
+
+
+        "type": "object",
+
+        "properties": {
+
+
+          "framework": {
+
+            "type": "string"
+
+          },
+
+
+          "control": {
+
+            "type": "string"
+
+          },
+
+
+          "relationship": {
+
+            "type": "string",
+
+            "enum": [
+
+              "equivalent",
+
+              "related",
+
+              "inherits"
+
+            ]
+
+          }
+
+        }
+
+      }
+
+    },
+
+
+    "scoringModel": {
+
+
+      "type": "string",
+
+      "enum": [
+
+        "weighted",
+
+        "binary",
+
+        "maturity"
+
+      ]
+
+    },
+
+
+    "metadata": {
+
+      "type": "object"
+
+    }
+
+
+  }
+}

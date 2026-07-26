@@ -1,0 +1,257 @@
+#config\tenants.yml
+
+# ==============================================================================
+# GRC Engineering Platform
+# Tenant Configuration
+# ==============================================================================
+#
+# Defines every tenant managed by the platform.
+#
+# Each tenant is isolated and can have:
+#
+#   • Different frameworks
+#   • Different collectors
+#   • Different storage
+#   • Different reporting
+#   • Different authentication contexts
+#
+# ==============================================================================
+
+schemaVersion: "1.0"
+
+
+# ==============================================================================
+# Default Tenant Settings
+# ==============================================================================
+
+defaults:
+  enabled: true
+  timezone: UTC
+  locale: en-GB
+  reportingProfile: standard
+  storageProfile: local
+  collectorProfile: default
+  frameworkProfile: default
+  evidenceRetentionDays: 365
+  logLevel: INFO
+  tags: []
+  metadata: {}
+
+
+# ==============================================================================
+# Microsoft Tenant Authentication
+#
+# Values are resolved from environment variables (.env)
+#
+# No secrets are stored in this file.
+#
+# ==============================================================================
+
+authentication:
+
+  Production:
+    environment: Production
+    auth: client_secret
+    tenant_id_env: AZURE_PRODUCTION_TENANT_ID
+    client_id_env: AZURE_PRODUCTION_CLIENT_ID
+    secret_env: AZURE_PRODUCTION_CLIENT_SECRET
+
+    graph:
+      base_url_env: GRAPH_BASE_URL
+      scope_env: GRAPH_SCOPE
+
+    certificate:
+      path_env: AZURE_PRODUCTION_CERTIFICATE_PATH
+      thumbprint_env: AZURE_PRODUCTION_CERTIFICATE_THUMBPRINT
+
+
+  Sandbox:
+    environment: Sandbox
+    auth: client_secret
+    tenant_id_env: AZURE_SANDBOX_TENANT_ID
+    client_id_env: AZURE_SANDBOX_CLIENT_ID
+    secret_env: AZURE_SANDBOX_CLIENT_SECRET
+
+    graph:
+      base_url_env: GRAPH_BASE_URL
+      scope_env: GRAPH_SCOPE
+
+    certificate:
+      path_env: AZURE_SANDBOX_CERTIFICATE_PATH
+      thumbprint_env: AZURE_SANDBOX_CERTIFICATE_THUMBPRINT
+
+
+  Dev:
+    environment: Dev
+    auth: client_secret
+    tenant_id_env: AZURE_DEV_TENANT_ID
+    client_id_env: AZURE_DEV_CLIENT_ID
+    secret_env: AZURE_DEV_CLIENT_SECRET
+
+    graph:
+      base_url_env: GRAPH_BASE_URL
+      scope_env: GRAPH_SCOPE
+
+    certificate:
+      path_env: AZURE_DEV_CERTIFICATE_PATH
+      thumbprint_env: AZURE_DEV_CERTIFICATE_THUMBPRINT
+
+
+  Lab:
+    environment: Lab
+    auth: managed_identity
+    tenant_id_env: AZURE_LAB_TENANT_ID
+    client_id_env: AZURE_LAB_CLIENT_ID
+    secret_env: AZURE_LAB_CLIENT_SECRET
+
+    graph:
+      base_url_env: GRAPH_BASE_URL
+      scope_env: GRAPH_SCOPE
+
+    certificate:
+      path_env: AZURE_LAB_CERTIFICATE_PATH
+      thumbprint_env: AZURE_LAB_CERTIFICATE_THUMBPRINT
+
+
+# ==============================================================================
+# Platform Tenants
+# ==============================================================================
+
+tenants:
+
+  - id: demo
+    name: Demo Organisation
+    description: Example tenant used for testing.
+
+    enabled: true
+
+    # Microsoft authentication profile
+    authentication: Production
+
+    identity:
+      environment: Production
+      tenantId: ${AZURE_PRODUCTION_TENANT_ID}
+      clientId: ${AZURE_PRODUCTION_CLIENT_ID}
+
+    timezone: Europe/London
+    locale: en-GB
+
+    owner:
+      name: Platform Administrator
+      email: admin@example.com
+
+    frameworks:
+      - CAF
+      - ISO27001
+      - SOC2
+      - GovAssure
+
+    collectors:
+      - entra
+      - azure
+      - intune
+      - defender
+      - exchange
+      - github
+
+    reporting:
+      profile: executive
+      schedule: daily
+      formats:
+        - html
+        - json
+        - markdown
+
+    storage:
+      profile: local
+
+    evidence:
+      retentionDays: 365
+      encrypt: true
+      immutable: false
+
+    notifications:
+      enabled: false
+
+    tags:
+      - demo
+      - production-example
+
+    metadata: {}
+
+
+  - id: engineering
+    name: Engineering
+
+    enabled: true
+
+    # Microsoft authentication profile
+    authentication: Production
+
+    identity:
+      environment: Production
+      tenantId: ${AZURE_PRODUCTION_TENANT_ID}
+      clientId: ${AZURE_PRODUCTION_CLIENT_ID}
+
+    timezone: Europe/London
+    locale: en-GB
+
+    frameworks:
+      - CAF
+      - CyberEssentials
+
+    collectors:
+      - github
+      - azuredevops
+
+    reporting:
+      profile: technical
+      schedule: weekly
+      formats:
+        - html
+        - json
+
+    storage:
+      profile: local
+
+    evidence:
+      retentionDays: 730
+      encrypt: true
+      immutable: true
+
+    notifications:
+      enabled: false
+
+    tags:
+      - engineering
+
+    metadata: {}
+
+
+# ==============================================================================
+# Global Policies
+# ==============================================================================
+
+globalPolicies:
+
+  requireUniqueTenantIds: true
+
+  requireTenantIdentity: true
+
+  requireAuthenticationProfile: true
+
+  requireEncryption: true
+
+  validateFrameworks: true
+
+  validateCollectors: true
+
+  validateAuthenticationReferences: true
+
+  allowDisabledTenants: true
+
+  maximumConcurrentCollections: 5
+
+  defaultRetryCount: 3
+
+  defaultRetryDelaySeconds: 10

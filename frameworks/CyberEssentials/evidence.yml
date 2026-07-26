@@ -1,0 +1,232 @@
+# Cyber Essentials Evidence Catalogue
+# evidence.yml
+
+framework: Cyber Essentials
+version: "2023"
+
+evidence_model:
+  type: evidence_catalogue
+  purpose:
+    - Evidence collection
+    - Control assessment support
+    - Compliance reporting
+
+evidence_items:
+
+  - id: CE-EV-001
+    name: Firewall configuration export
+    description: >
+      Exported firewall configurations showing active rules,
+      security settings and administrative controls.
+    evidence_type:
+      - configuration
+      - technical_record
+    related_controls:
+      - CE-FW-001
+      - CE-FW-002
+      - CE-FW-003
+      - CE-FW-004
+
+  - id: CE-EV-002
+    name: Network architecture diagram
+    description: >
+      Current network diagrams showing internet connections,
+      security boundaries and network segmentation.
+    evidence_type:
+      - architecture_document
+    related_controls:
+      - CE-FW-001
+
+  - id: CE-EV-003
+    name: Firewall rule review records
+    description: >
+      Records demonstrating firewall rules are reviewed,
+      authorised and maintained.
+    evidence_type:
+      - review_record
+    related_controls:
+      - CE-FW-002
+
+  - id: CE-EV-004
+    name: Administrator access records
+    description: >
+      Records identifying authorised administrators and privileged
+      access permissions for security systems.
+    evidence_type:
+      - access_record
+    related_controls:
+      - CE-FW-003
+      - CE-UA-003
+
+  - id: CE-EV-005
+    name: Secure configuration baseline
+    description: >
+      Approved security configuration standards applied to systems
+      and devices.
+    evidence_type:
+      - policy
+      - configuration_standard
+    related_controls:
+      - CE-SC-002
+      - CE-SC-003
+
+  - id: CE-EV-006
+    name: Asset inventory
+    description: >
+      Inventory of hardware, operating systems, applications and
+      supported technology components.
+    evidence_type:
+      - inventory
+    related_controls:
+      - CE-SC-001
+      - CE-SUM-003
+
+  - id: CE-EV-007
+    name: Software inventory
+    description: >
+      Record of installed applications, versions and software
+      ownership information.
+    evidence_type:
+      - inventory
+    related_controls:
+      - CE-SC-001
+      - CE-SUM-003
+
+  - id: CE-EV-008
+    name: User account inventory
+    description: >
+      Listing of user accounts, ownership information and account
+      status.
+    evidence_type:
+      - identity_record
+    related_controls:
+      - CE-UA-001
+      - CE-UA-006
+
+  - id: CE-EV-009
+    name: Access control policy
+    description: >
+      Documented rules defining user access permissions and
+      least-privilege requirements.
+    evidence_type:
+      - policy
+    related_controls:
+      - CE-UA-002
+
+  - id: CE-EV-010
+    name: Privileged account inventory
+    description: >
+      Register of administrator and privileged accounts with assigned
+      owners.
+    evidence_type:
+      - identity_record
+    related_controls:
+      - CE-UA-003
+      - CE-SC-004
+
+  - id: CE-EV-011
+    name: MFA configuration records
+    description: >
+      Evidence showing multi-factor authentication settings,
+      enforcement and exceptions.
+    evidence_type:
+      - configuration
+    related_controls:
+      - CE-UA-004
+      - CE-FW-003
+
+  - id: CE-EV-012
+    name: Joiner mover leaver records
+    description: >
+      Records demonstrating controlled creation, modification and
+      removal of user access.
+    evidence_type:
+      - process_record
+    related_controls:
+      - CE-UA-005
+
+  - id: CE-EV-013
+    name: Endpoint security console reports
+    description: >
+      Reports showing endpoint protection deployment, health status
+      and security monitoring.
+    evidence_type:
+      - security_report
+    related_controls:
+      - CE-MP-001
+      - CE-MP-002
+
+  - id: CE-EV-014
+    name: Malware detection records
+    description: >
+      Alerts, incidents and response records relating to malware
+      detections.
+    evidence_type:
+      - security_event
+      - incident_record
+    related_controls:
+      - CE-MP-003
+      - CE-MP-004
+
+  - id: CE-EV-015
+    name: Patch management records
+    description: >
+      Records showing security updates are identified, deployed and
+      tracked.
+    evidence_type:
+      - change_record
+      - compliance_report
+    related_controls:
+      - CE-SUM-001
+      - CE-SUM-002
+
+  - id: CE-EV-016
+    name: Vulnerability assessment reports
+    description: >
+      Vulnerability scanning results, remediation tracking and risk
+      management records.
+    evidence_type:
+      - vulnerability_report
+    related_controls:
+      - CE-SUM-002
+      - CE-SUM-004
+
+
+evidence_requirements:
+
+  mandatory:
+    - id: ER-001
+      requirement: >
+        Evidence must be current, attributable and representative of
+        the assessed environment.
+
+    - id: ER-002
+      requirement: >
+        Evidence must demonstrate implementation of the associated
+        Cyber Essentials control.
+
+    - id: ER-003
+      requirement: >
+        Evidence must be retained according to organisational
+        retention requirements.
+
+
+  assessment_states:
+
+    accepted:
+      description: >
+        Evidence satisfies the control requirement.
+
+    insufficient:
+      description: >
+        Evidence does not demonstrate full implementation.
+
+    unavailable:
+      description: >
+        Required evidence has not been provided.
+
+
+relationships:
+
+  control_reference_field: related_controls
+  evidence_reference_field: id

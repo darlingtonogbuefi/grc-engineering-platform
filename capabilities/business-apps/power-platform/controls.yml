@@ -1,0 +1,647 @@
+id: powerplatform
+
+name: Microsoft Power Platform Governance Controls
+
+version: "1.0.0"
+
+description: >
+  Capability controls defining security, governance and compliance
+  requirements for Microsoft Power Platform services including
+  Power Apps, Power Automate, Dataverse, Power Pages and Copilot
+  Studio.
+
+
+controls:
+
+
+  #
+  # Tenant Governance
+  #
+
+  - id: PP-001
+
+    name: Power Platform Tenant Governance
+
+    objective: >
+      Ensure Power Platform tenant configuration is governed,
+      monitored and aligned with organisational security policies.
+
+    description: >
+      Tenant-level settings control platform usage, administration,
+      security configuration and governance.
+
+    capability_area:
+
+      - Tenant Governance
+
+
+    requirements:
+
+      - >
+        Tenant settings are reviewed and approved.
+
+      - >
+        Administrative roles are restricted.
+
+      - >
+        Platform-wide security settings are documented.
+
+      - >
+        Tenant configuration changes are monitored.
+
+    evidence_required:
+
+      - tenant_configuration
+
+      - tenant_settings
+
+      - admin_roles
+
+
+
+  #
+  # Environment Management
+  #
+
+  - id: PP-002
+
+    name: Environment Governance
+
+    objective: >
+      Ensure Power Platform environments are controlled and managed.
+
+    description: >
+      Environments are created, classified and managed according
+      to business and security requirements.
+
+    capability_area:
+
+      - Environment Management
+
+
+    requirements:
+
+      - >
+        Production and development environments are separated.
+
+      - >
+        Environment ownership is assigned.
+
+      - >
+        Unused environments are identified and removed.
+
+      - >
+        Environment creation follows approval processes.
+
+
+    evidence_required:
+
+      - environments
+
+      - environment_inventory
+
+      - environment_owners
+
+
+
+  #
+  # Identity and Access
+  #
+
+  - id: PP-003
+
+    name: Power Platform Access Control
+
+    objective: >
+      Ensure access to Power Platform resources follows least
+      privilege principles.
+
+    description: >
+      Users, makers, administrators and applications receive
+      only required permissions.
+
+    capability_area:
+
+      - Identity
+
+      - Authorisation
+
+
+    requirements:
+
+      - >
+        Environment roles are controlled.
+
+      - >
+        Administrative access is restricted.
+
+      - >
+        Privileged roles are reviewed.
+
+      - >
+        External user access is controlled.
+
+
+    evidence_required:
+
+      - environment_roles
+
+      - environment_permissions
+
+      - user_assignments
+
+
+
+  #
+  # Maker Governance
+  #
+
+  - id: PP-004
+
+    name: Maker Governance
+
+    objective: >
+      Ensure application creators are identified and governed.
+
+    description: >
+      Citizen developers and professional developers operate within
+      defined governance boundaries.
+
+    capability_area:
+
+      - Citizen Development
+
+
+    requirements:
+
+      - >
+        Makers are inventoried.
+
+      - >
+        Maker permissions are controlled.
+
+      - >
+        Development standards are defined.
+
+      - >
+        High-risk applications are identified.
+
+
+    evidence_required:
+
+      - makers
+
+      - application_inventory
+
+      - maker_activity
+
+
+
+  #
+  # Application Governance
+  #
+
+  - id: PP-005
+
+    name: Application Inventory and Governance
+
+    objective: >
+      Maintain visibility and control over Power Platform
+      applications.
+
+    description: >
+      Applications are inventoried, classified and managed
+      throughout their lifecycle.
+
+    capability_area:
+
+      - Application Management
+
+
+    requirements:
+
+      - >
+        Applications have identified owners.
+
+      - >
+        Application usage is monitored.
+
+      - >
+        Business critical applications are identified.
+
+      - >
+        Unused applications are reviewed.
+
+
+    evidence_required:
+
+      - applications
+
+      - application_inventory
+
+      - application_owners
+
+
+
+  #
+  # Data Loss Prevention
+  #
+
+  - id: PP-006
+
+    name: Data Loss Prevention Policies
+
+    objective: >
+      Prevent inappropriate movement of organisational data.
+
+    description: >
+      DLP policies control connector usage and data movement
+      between services.
+
+    capability_area:
+
+      - Data Protection
+
+
+    requirements:
+
+      - >
+        DLP policies are configured.
+
+      - >
+        Business and non-business connectors are separated.
+
+      - >
+        Sensitive data movement is restricted.
+
+      - >
+        DLP policies are reviewed.
+
+
+    evidence_required:
+
+      - dlp_policies
+
+      - connector_policies
+
+      - policy_assignments
+
+
+
+  #
+  # Connector Governance
+  #
+
+  - id: PP-007
+
+    name: Connector Security Governance
+
+    objective: >
+      Control integrations between Power Platform and external
+      services.
+
+    description: >
+      Connectors are approved, monitored and restricted based on
+      organisational risk.
+
+    capability_area:
+
+      - Integration Security
+
+
+    requirements:
+
+      - >
+        Connector inventory is maintained.
+
+      - >
+        Custom connectors are reviewed.
+
+      - >
+        High-risk connectors are restricted.
+
+      - >
+        Connector permissions are monitored.
+
+
+    evidence_required:
+
+      - connectors
+
+      - custom_connectors
+
+      - connector_usage
+
+
+
+  #
+  # Dataverse Security
+  #
+
+  - id: PP-008
+
+    name: Dataverse Security Management
+
+    objective: >
+      Protect business data stored within Dataverse.
+
+    description: >
+      Dataverse access, roles and data structures are secured.
+
+    capability_area:
+
+      - Data Security
+
+
+    requirements:
+
+      - >
+        Dataverse security roles are controlled.
+
+      - >
+        Tables have appropriate permissions.
+
+      - >
+        Sensitive data access is restricted.
+
+      - >
+        Dataverse changes are monitored.
+
+
+    evidence_required:
+
+      - dataverse
+
+      - dataverse_tables
+
+      - dataverse_security_roles
+
+
+
+  #
+  # Automation Governance
+  #
+
+  - id: PP-009
+
+    name: Power Automate Governance
+
+    objective: >
+      Ensure automated workflows are secure and controlled.
+
+    description: >
+      Cloud flows and automation processes are managed,
+      monitored and reviewed.
+
+    capability_area:
+
+      - Automation
+
+
+    requirements:
+
+      - >
+        Flows have identified owners.
+
+      - >
+        Critical flows are documented.
+
+      - >
+        Failed executions are monitored.
+
+      - >
+        Service accounts are controlled.
+
+
+    evidence_required:
+
+      - power_automate_flows
+
+      - cloud_flows
+
+      - flow_owners
+
+
+
+  #
+  # ALM and Deployment
+  #
+
+  - id: PP-010
+
+    name: Power Platform Application Lifecycle Management
+
+    objective: >
+      Ensure controlled development and deployment.
+
+    description: >
+      Solutions move through controlled development, testing and
+      production processes.
+
+    capability_area:
+
+      - Application Lifecycle Management
+
+
+    requirements:
+
+      - >
+        Solutions are version controlled.
+
+      - >
+        Managed solutions are used for production.
+
+      - >
+        Deployments are approved.
+
+      - >
+        Deployment history is retained.
+
+
+    evidence_required:
+
+      - solutions
+
+      - managed_solutions
+
+      - solution_history
+
+
+
+  #
+  # Service Identity
+  #
+
+  - id: PP-011
+
+    name: Service Account and Application Identity Management
+
+    objective: >
+      Control non-human identities used by Power Platform.
+
+    description:
+
+      >
+      Service accounts and application identities are managed,
+      monitored and reviewed.
+
+    capability_area:
+
+      - Identity Management
+
+
+    requirements:
+
+      - >
+        Service accounts have owners.
+
+      - >
+        Application permissions are reviewed.
+
+      - >
+        Credentials are protected.
+
+      - >
+        Unused identities are removed.
+
+
+    evidence_required:
+
+      - service_accounts
+
+      - service_principals
+
+      - application_permissions
+
+
+
+  #
+  # Monitoring and Audit
+  #
+
+  - id: PP-012
+
+    name: Power Platform Audit Monitoring
+
+    objective: >
+      Maintain visibility of administrative and application activity.
+
+    description: >
+      Power Platform activity is logged, reviewed and monitored.
+
+    capability_area:
+
+      - Monitoring
+
+
+    requirements:
+
+      - >
+        Audit logging is enabled.
+
+      - >
+        Administrative actions are recorded.
+
+      - >
+        Security events are monitored.
+
+      - >
+        Logs are retained according to policy.
+
+
+    evidence_required:
+
+      - audit_logs
+
+      - activity_logs
+
+      - admin_actions
+
+
+
+  #
+  # Security Posture Management
+  #
+
+  - id: PP-013
+
+    name: Power Platform Security Posture Management
+
+    objective: >
+      Identify and reduce security risks across Power Platform.
+
+    description: >
+      Platform security posture is assessed continuously.
+
+    capability_area:
+
+      - Security Operations
+
+
+    requirements:
+
+      - >
+        Security recommendations are reviewed.
+
+      - >
+        High-risk configurations are remediated.
+
+      - >
+        Security alerts are investigated.
+
+    evidence_required:
+
+      - security_alerts
+
+      - recommendations
+
+      - posture_reports
+
+
+
+control_summary:
+
+  total_controls: 13
+
+
+  control_groups:
+
+    governance:
+
+      - PP-001
+      - PP-002
+      - PP-004
+
+
+    access_control:
+
+      - PP-003
+      - PP-011
+
+
+    application_security:
+
+      - PP-005
+      - PP-010
+
+
+    data_security:
+
+      - PP-006
+      - PP-008
+
+
+    integration_security:
+
+      - PP-007
+
+
+    automation:
+
+      - PP-009
+
+
+    monitoring:
+
+      - PP-012
+      - PP-013

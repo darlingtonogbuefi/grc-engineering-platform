@@ -1,0 +1,455 @@
+id: devops
+
+name: DevSecOps Evidence Model
+
+version: "1.0.0"
+
+description: >
+  Defines the evidence required to assess the DevSecOps capability.
+  Evidence is collected from supported platforms, normalised into
+  common evidence models and evaluated against capability controls.
+
+evidence:
+
+  #
+  # DEVOPS-001 Repository Security
+  #
+
+  - id: EVID-DEVOPS-001
+
+    controls:
+      - DEVOPS-001
+
+    name: Repository Inventory
+
+    description: >
+      Inventory of source code repositories and repository security.
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - repository_inventory
+
+    objects:
+      - repositories
+      - repository_permissions
+      - collaborators
+
+    validation:
+      rules:
+        - repositories_have_owners
+        - admin_permissions_limited
+        - public_repositories_identified
+
+  #
+  # DEVOPS-002 Branch Protection
+  #
+
+  - id: EVID-DEVOPS-002
+
+    controls:
+      - DEVOPS-002
+
+    name: Branch Protection Policies
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - branch_configuration
+
+    objects:
+      - protected_branches
+      - pull_request_rules
+
+    validation:
+      rules:
+        - default_branch_protected
+        - pull_requests_required
+        - status_checks_enabled
+
+  #
+  # DEVOPS-003 Secure Development Lifecycle
+  #
+
+  - id: EVID-DEVOPS-003
+
+    controls:
+      - DEVOPS-003
+
+    name: Secure Development Standards
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - development_governance
+
+    objects:
+      - repositories
+      - templates
+      - policies
+
+    validation:
+      rules:
+        - coding_standards_present
+        - security_reviews_required
+
+  #
+  # DEVOPS-004 Code Review
+  #
+
+  - id: EVID-DEVOPS-004
+
+    controls:
+      - DEVOPS-004
+
+    name: Pull Request Reviews
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - code_reviews
+
+    objects:
+      - pull_requests
+      - reviewers
+      - approvals
+
+    validation:
+      rules:
+        - minimum_reviewers_defined
+        - self_approval_disabled
+
+  #
+  # DEVOPS-005 Pipeline Security
+  #
+
+  - id: EVID-DEVOPS-005
+
+    controls:
+      - DEVOPS-005
+
+    name: CI/CD Pipeline Configuration
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - pipeline_configuration
+
+    objects:
+      - pipelines
+      - service_connections
+      - build_agents
+
+    validation:
+      rules:
+        - pipeline_permissions_restricted
+        - pipeline_changes_audited
+        - privileged_accounts_identified
+
+  #
+  # DEVOPS-006 Build Integrity
+  #
+
+  - id: EVID-DEVOPS-006
+
+    controls:
+      - DEVOPS-006
+
+    name: Build History
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - build_evidence
+
+    objects:
+      - builds
+      - artifacts
+      - build_logs
+
+    validation:
+      rules:
+        - build_history_retained
+        - build_artifacts_present
+        - failed_builds_recorded
+
+  #
+  # DEVOPS-007 Dependency Management
+  #
+
+  - id: EVID-DEVOPS-007
+
+    controls:
+      - DEVOPS-007
+
+    name: Dependency Inventory
+
+    collectors:
+      - github
+      - azuredevops
+      - defender
+
+    evidence_type:
+      - dependency_management
+
+    objects:
+      - dependencies
+      - package_managers
+      - vulnerability_alerts
+
+    validation:
+      rules:
+        - dependency_inventory_complete
+        - vulnerable_packages_identified
+
+  #
+  # DEVOPS-008 Artifact Security
+  #
+
+  - id: EVID-DEVOPS-008
+
+    controls:
+      - DEVOPS-008
+
+    name: Artifact Repository
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - artifact_management
+
+    objects:
+      - artifacts
+      - registries
+
+    validation:
+      rules:
+        - artifact_integrity_verified
+        - artifact_retention_configured
+
+  #
+  # DEVOPS-009 Infrastructure as Code
+  #
+
+  - id: EVID-DEVOPS-009
+
+    controls:
+      - DEVOPS-009
+
+    name: Infrastructure as Code
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - infrastructure_as_code
+
+    objects:
+      - terraform
+      - bicep
+      - arm_templates
+      - workflows
+
+    validation:
+      rules:
+        - infrastructure_version_controlled
+        - infrastructure_reviewed
+
+  #
+  # DEVOPS-010 Secrets Management
+  #
+
+  - id: EVID-DEVOPS-010
+
+    controls:
+      - DEVOPS-010
+
+    name: Secret Management
+
+    collectors:
+      - github
+      - azuredevops
+      - azure
+
+    evidence_type:
+      - secrets_management
+
+    objects:
+      - secret_scanning
+      - key_vault
+      - pipeline_secrets
+
+    validation:
+      rules:
+        - secrets_not_in_repository
+        - secret_scanning_enabled
+        - managed_secret_store_used
+
+  #
+  # DEVOPS-011 Security Testing
+  #
+
+  - id: EVID-DEVOPS-011
+
+    controls:
+      - DEVOPS-011
+
+    name: Application Security Testing
+
+    collectors:
+      - github
+      - defender
+
+    evidence_type:
+      - security_testing
+
+    objects:
+      - code_scanning
+      - dependency_scanning
+      - container_scanning
+
+    validation:
+      rules:
+        - sast_enabled
+        - dependency_scanning_enabled
+        - critical_findings_reviewed
+
+  #
+  # DEVOPS-012 Release Management
+  #
+
+  - id: EVID-DEVOPS-012
+
+    controls:
+      - DEVOPS-012
+
+    name: Release Governance
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - release_management
+
+    objects:
+      - releases
+      - deployments
+      - approvals
+
+    validation:
+      rules:
+        - releases_approved
+        - deployments_audited
+        - rollback_supported
+
+  #
+  # DEVOPS-013 Audit Logging
+  #
+
+  - id: EVID-DEVOPS-013
+
+    controls:
+      - DEVOPS-013
+
+    name: DevOps Audit Logs
+
+    collectors:
+      - github
+      - azuredevops
+
+    evidence_type:
+      - audit_logs
+
+    objects:
+      - repository_logs
+      - pipeline_logs
+      - administrator_actions
+
+    validation:
+      rules:
+        - audit_logging_enabled
+        - log_retention_defined
+
+  #
+  # DEVOPS-014 Security Monitoring
+  #
+
+  - id: EVID-DEVOPS-014
+
+    controls:
+      - DEVOPS-014
+
+    name: Security Monitoring
+
+    collectors:
+      - github
+      - defender
+      - azure
+
+    evidence_type:
+      - security_monitoring
+
+    objects:
+      - security_alerts
+      - code_scanning_alerts
+      - dependency_alerts
+      - defender_alerts
+
+    validation:
+      rules:
+        - alerts_generated
+        - alerts_reviewed
+        - incidents_tracked
+
+collection:
+
+  refresh_frequency:
+
+    repository_inventory: daily
+    branch_configuration: daily
+    pipeline_configuration: daily
+    build_evidence: daily
+    dependency_management: daily
+    infrastructure_as_code: daily
+    secrets_management: daily
+    security_testing: daily
+    release_management: daily
+    audit_logs: hourly
+    security_monitoring: continuous
+
+normalisation:
+
+  required_common_fields:
+
+    - tenant_id
+    - source_system
+    - collector
+    - collector_version
+    - collection_timestamp
+    - evidence_type
+    - object_id
+
+quality_checks:
+
+  - schema_validation_required
+  - collection_timestamp_required
+  - source_system_required
+  - collector_version_required
+  - tenant_identifier_required
+  - object_identifier_required

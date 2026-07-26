@@ -1,0 +1,65 @@
+name: govassure
+
+version: 1.0.0
+
+description: >
+  Azure evidence collection profile for
+  GovAssure assessments.
+
+extends: default
+
+queries:
+  # Tenant & Platform
+  - subscriptions
+  - resource-groups
+  - resources
+
+  # Identity & Access
+  - role-assignments
+  - role-definitions
+
+  # Governance
+  - policy-definitions
+  - policy-assignments
+
+  # Security Configuration
+  - defender-settings
+  - security-settings
+
+  # Monitoring & Audit
+  - activity-logs
+  - diagnostic-settings
+
+  # Networking
+  - virtual-networks
+  - network-security-groups
+  - firewalls
+
+  # Storage & Data Protection
+  - storage-accounts
+  - key-vaults
+
+  # Compute
+  - virtual-machines
+
+  # Backup & Recovery
+  - backup-vaults
+
+collection:
+  mode: comprehensive
+
+  include_metadata: true
+
+  include_relationships: true
+
+output:
+  evidence_types:
+    - resource_inventory
+    - configuration
+    - governance
+    - access_control
+    - security_configuration
+    - networking
+    - logging
+    - encryption
+    - backup
