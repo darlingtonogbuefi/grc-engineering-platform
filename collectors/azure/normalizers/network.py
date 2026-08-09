@@ -21,7 +21,6 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -32,24 +31,16 @@ class NetworkNormalizer(BaseNormalizer):
     """Normalize Azure networking resources."""
 
     RESOURCE_TYPES = {
-        "Microsoft.Network/virtualNetworks":
-            "azure.network.virtual_network",
-
-        "Microsoft.Network/networkSecurityGroups":
-            "azure.network.network_security_group",
-
-        "Microsoft.Network/azureFirewalls":
-            "azure.network.firewall",
-
-        "Microsoft.Network/routeTables":
-            "azure.network.route_table",
-
-        "Microsoft.Network/publicIPAddresses":
-            "azure.network.public_ip",
-
-        "Microsoft.Network/loadBalancers":
-            "azure.network.load_balancer",
+        "Microsoft.Network/virtualNetworks": "azure.network.virtual_network",
+        "Microsoft.Network/networkSecurityGroups": "azure.network.network_security_group",
+        "Microsoft.Network/azureFirewalls": "azure.network.firewall",
+        "Microsoft.Network/routeTables": "azure.network.route_table",
+        "Microsoft.Network/publicIPAddresses": "azure.network.public_ip",
+        "Microsoft.Network/loadBalancers": "azure.network.load_balancer",
     }
+
+    def __init__(self):
+        super().__init__("azure")
 
     def normalize(
         self,
@@ -62,14 +53,11 @@ class NetworkNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(
-            timezone.utc
-        )
-
-        for resource in data.get("value", []):
-            azure_type = resource.get(
-                "type"
-            )
+        for resource in data.get(
+            "value",
+            [],
+        ):
+            azure_type = resource.get("type")
 
             if azure_type not in self.RESOURCE_TYPES:
                 continue
@@ -80,11 +68,8 @@ class NetworkNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
-                    resource_type=self.RESOURCE_TYPES[
-                        azure_type
-                    ],
+                self.create_record(
+                    resource_type=self.RESOURCE_TYPES[azure_type],
                     resource_id=resource_id,
                     data={
                         "name": resource.get(
@@ -93,21 +78,11 @@ class NetworkNormalizer(BaseNormalizer):
                         ),
                         "provider": "azure",
                         "service": "networking",
-                        "location": resource.get(
-                            "location"
-                        ),
-                        "subscription_id": self._subscription_id(
-                            resource_id
-                        ),
-                        "resource_group": self._resource_group(
-                            resource_id
-                        ),
-                        "kind": resource.get(
-                            "kind"
-                        ),
-                        "sku": resource.get(
-                            "sku"
-                        ),
+                        "location": resource.get("location"),
+                        "subscription_id": self._subscription_id(resource_id),
+                        "resource_group": self._resource_group(resource_id),
+                        "kind": resource.get("kind"),
+                        "sku": resource.get("sku"),
                         "properties": resource.get(
                             "properties",
                             {},
@@ -118,13 +93,14 @@ class NetworkNormalizer(BaseNormalizer):
                         ),
                         "raw": resource,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "network",
                     },
                 )
             )
+
+        self.validate(records)
 
         return records
 
@@ -140,9 +116,7 @@ class NetworkNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "subscriptions"
-            )
+            index = parts.index("subscriptions")
 
             return parts[index + 1]
 
@@ -164,9 +138,7 @@ class NetworkNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "resourceGroups"
-            )
+            index = parts.index("resourceGroups")
 
             return parts[index + 1]
 

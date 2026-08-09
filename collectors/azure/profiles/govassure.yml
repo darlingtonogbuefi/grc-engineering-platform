@@ -1,3 +1,6 @@
+#collectors\azure\profiles\govassure.yml
+
+
 name: govassure
 
 version: 1.0.0

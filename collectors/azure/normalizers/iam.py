@@ -1,3 +1,5 @@
+# collectors\azure\normalizers\iam.py
+
 """
 Azure IAM Normalizer.
 
@@ -18,7 +20,6 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -29,15 +30,13 @@ class IAMNormalizer(BaseNormalizer):
     """Normalize Azure identity and access resources."""
 
     RESOURCE_TYPES = {
-        "role_assignment":
-            "azure.iam.role_assignment",
-
-        "role_definition":
-            "azure.iam.role_definition",
-
-        "managed_identity":
-            "azure.iam.managed_identity",
+        "role_assignment": "azure.iam.role_assignment",
+        "role_definition": "azure.iam.role_definition",
+        "managed_identity": "azure.iam.managed_identity",
     }
+
+    def __init__(self):
+        super().__init__("azure")
 
     def normalize(
         self,
@@ -50,10 +49,6 @@ class IAMNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(
-            timezone.utc
-        )
-
         for item in data.get("value", []):
             item_type = self._detect_type(item)
 
@@ -63,8 +58,7 @@ class IAMNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
+                self.create_record(
                     resource_type=self.RESOURCE_TYPES.get(
                         item_type,
                         "azure.iam.unknown",
@@ -74,43 +68,28 @@ class IAMNormalizer(BaseNormalizer):
                         "name": self._name(item),
                         "provider": "azure",
                         "service": "identity_access",
-                        "subscription_id": self._subscription_id(
-                            resource_id
-                        ),
-                        "resource_group": self._resource_group(
-                            resource_id
-                        ),
-                        "principal_id": item.get(
-                            "principalId"
-                        ),
-                        "principal_type": item.get(
-                            "principalType"
-                        ),
-                        "role_definition_id": item.get(
-                            "roleDefinitionId"
-                        ),
-                        "role_definition_name": item.get(
-                            "roleDefinitionName"
-                        ),
-                        "scope": item.get(
-                            "scope"
-                        ),
-                        "tenant_id": item.get(
-                            "tenantId"
-                        ),
+                        "subscription_id": self._subscription_id(resource_id),
+                        "resource_group": self._resource_group(resource_id),
+                        "principal_id": item.get("principalId"),
+                        "principal_type": item.get("principalType"),
+                        "role_definition_id": item.get("roleDefinitionId"),
+                        "role_definition_name": item.get("roleDefinitionName"),
+                        "scope": item.get("scope"),
+                        "tenant_id": item.get("tenantId"),
                         "properties": item.get(
                             "properties",
                             {},
                         ),
                         "raw": item,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "iam",
                     },
                 )
             )
+
+        self.validate(records)
 
         return records
 
@@ -169,9 +148,7 @@ class IAMNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "subscriptions"
-            )
+            index = parts.index("subscriptions")
 
             return parts[index + 1]
 
@@ -193,9 +170,7 @@ class IAMNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "resourceGroups"
-            )
+            index = parts.index("resourceGroups")
 
             return parts[index + 1]
 

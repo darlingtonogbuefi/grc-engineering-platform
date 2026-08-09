@@ -1,3 +1,5 @@
+#collectors\azure\profiles\default.yml
+
 name: cyberessentials
 
 version: 1.0.0

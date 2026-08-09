@@ -1,4 +1,6 @@
 # collectors/azure/queries/defender-settings.yml
+# collectors/azure/queries/defender-settings.yml
+
 id: azure.defender_settings
 name: Microsoft Defender for Cloud Settings
 description: >
@@ -9,7 +11,7 @@ service: Microsoft.Security
 resource: defenderSettings
 method: GET
 endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Security/settings
-api_version: "2023-12-01"
+api_version: "2022-05-01"
 scope: subscription
 
 pagination:

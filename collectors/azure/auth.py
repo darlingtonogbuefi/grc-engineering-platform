@@ -1,3 +1,6 @@
+# collectors\azure\auth.py
+
+
 """
 Azure Authentication Provider.
 
@@ -7,14 +10,14 @@ for Azure evidence collectors.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone, timedelta
+import logging
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
-import logging
+from azure.identity import ClientSecretCredential
 
 from collectors.base.auth import BaseAuthenticator
 from collectors.base.exceptions import AuthenticationError
-
 
 logger = logging.getLogger(__name__)
 
@@ -26,67 +29,145 @@ class AzureAuthenticator(BaseAuthenticator):
         self,
         config: Dict[str, Any],
     ):
-        super().__init__(config)
+        if not config:
+            raise AuthenticationError("Azure authentication configuration is required")
 
-        self.tenant_id = config.get(
-            "tenant_id"
+        super().__init__(
+            config,
         )
 
-        self.client_id = config.get(
-            "client_id"
+        tenant_id = config.get(
+            "tenant_id",
         )
 
-        self.client_secret = config.get(
-            "client_secret"
+        client_id = config.get(
+            "client_id",
         )
+
+        client_secret = config.get(
+            "client_secret",
+        )
+
+        if not isinstance(tenant_id, str):
+            raise AuthenticationError(
+                "Missing tenant_id configuration",
+            )
+
+        if not isinstance(client_id, str):
+            raise AuthenticationError(
+                "Missing client_id configuration",
+            )
+
+        if not isinstance(client_secret, str):
+            raise AuthenticationError(
+                "Missing client_secret configuration",
+            )
+
+        self.tenant_id = tenant_id
+
+        self.client_id = client_id
+
+        self.client_secret = client_secret
 
         self.scope = config.get(
             "scope",
             "https://management.azure.com/.default",
         )
 
+        self._token: Optional[str] = None
+
         self._token_expiry: Optional[datetime] = None
 
     def acquire_token(self) -> str:
         """
-        Acquire Azure access token.
-
-        Uses Azure Identity implementation
-        in production.
+        Acquire Azure Resource Manager access token.
         """
 
         try:
-            token = self._get_token()
-
-            self._token_expiry = (
-                datetime.now(timezone.utc)
-                + timedelta(hours=1)
+            credential = ClientSecretCredential(
+                tenant_id=self.tenant_id,
+                client_id=self.client_id,
+                client_secret=self.client_secret,
             )
 
-            return token
+            access_token = credential.get_token(
+                self.scope,
+            )
+
+            self._token = access_token.token
+
+            self._token_expiry = datetime.fromtimestamp(
+                access_token.expires_on,
+                tz=timezone.utc,
+            )
+
+            return self._token
 
         except Exception as exc:
             logger.exception(
-                "Azure authentication failed"
+                "Azure authentication failed",
             )
 
             raise AuthenticationError(
-                "Azure token acquisition failed"
+                "Azure token acquisition failed",
             ) from exc
+
+    def get_token(self) -> str:
+        """
+        Return current token.
+
+        Required by BaseClient.
+        """
+
+        if not self._token:
+            return self.acquire_token()
+
+        if self._token_expiry and datetime.now(timezone.utc) >= self._token_expiry:
+            return self.acquire_token()
+
+        return self._token
+
+    @property
+    def token(self) -> Optional[str]:
+        """
+        Return current access token.
+        """
+
+        return self._token
 
     def _get_token(self) -> str:
         """
-        Azure identity implementation.
+        Acquire Azure Resource Manager access token.
 
-        Replace with:
-            azure.identity.ClientSecretCredential
-            azure.identity.ManagedIdentityCredential
-            azure.identity.CertificateCredential
+        Uses Azure client secret authentication.
         """
 
-        raise NotImplementedError(
-            "Azure identity provider not configured"
+        if not self.tenant_id:
+            raise AuthenticationError(
+                "Missing tenant_id configuration",
+            )
+
+        if not self.client_id:
+            raise AuthenticationError(
+                "Missing client_id configuration",
+            )
+
+        if not self.client_secret:
+            raise AuthenticationError(
+                "Missing client_secret configuration",
+            )
+
+        credential = ClientSecretCredential(
+            tenant_id=self.tenant_id,
+            client_id=self.client_id,
+            client_secret=self.client_secret,
         )
+
+        token = credential.get_token(
+            self.scope,
+        )
+
+        return token.token
 
     def token_expiry(self) -> Optional[datetime]:
         """

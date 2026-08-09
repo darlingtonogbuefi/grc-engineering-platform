@@ -1,3 +1,5 @@
+#collectors\azure\queries\sql-databases.yml
+
 id: azure.sql_databases
 name: Azure SQL Databases
 description: >
@@ -8,8 +10,11 @@ service: Microsoft.Sql
 resource: databases
 method: GET
 endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers/{serverName}/databases
-api_version: "2024-05-01-preview"
+api_version: "2024-05-01"
 scope: subscription
+
+depends_on:
+  - azure.sql_servers
 
 pagination:
   enabled: true
@@ -50,6 +55,20 @@ fields:
   - properties.longTermRetentionPolicy
   - properties.backupLongTermRetentionPolicy
   - properties.highAvailabilityReplicaCount
+
+collection:
+  retry:
+    enabled: true
+    max_attempts: 3
+
+  timeout_seconds: 60
+
+  throttling:
+    enabled: true
+
+failure_policy:
+  continue_on_error: true
+  store_errors: true
 
 metadata:
   category: data_security

@@ -1,3 +1,6 @@
+#collectors\azure\profiles\full.yml
+
+
 name: full
 
 version: 1.0.0

@@ -1,29 +1,46 @@
+#collectors\azure\queries\resources.yml
+
+# collectors/azure/queries/resources.yml
+
 id: azure.resources
+
 name: Azure Resources
+
 description: >
   Collect Azure resource inventory across subscriptions to provide
   visibility of deployed resources, ownership, configuration,
   and compliance evidence.
 
 service: Microsoft.Resources
+
 resource: resources
+
 method: GET
+
 endpoint: /subscriptions/{subscriptionId}/resources
+
 api_version: "2024-03-01"
+
 scope: subscription
+
 
 pagination:
   enabled: true
   next_link: nextLink
 
+
 authentication:
   type: bearer
+
 
 response:
   items: value
 
+
 normalizer: ResourceNormalizer
+
 primary_key: id
+
 
 fields:
   - id
@@ -38,12 +55,17 @@ fields:
   - identity
   - properties
   - extendedLocation
+  - zones
+  - provisioningState
+
 
 metadata:
   category: inventory
   evidence_type: azure_resource_inventory
   provider: azure
+  source: azure
   version: 1
+
 
 profiles:
   - default

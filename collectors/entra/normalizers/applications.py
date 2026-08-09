@@ -36,39 +36,21 @@ def normalize(
 
     return remove_empty_values(
         {
-            "id": application.get(
-                "id"
-            ),
+            "id": application.get("id"),
             "type": "application",
             "provider": "entra",
-            "display_name": application.get(
-                "displayName"
-            ),
-            "application_id": application.get(
-                "appId"
-            ),
-            "app_id": application.get(
-                "appId"
-            ),
-            "publisher_domain": application.get(
-                "publisherDomain"
-            ),
-            "created_date_time": normalize_datetime(
-                application.get(
-                    "createdDateTime"
-                )
-            ),
-            "sign_in_audience": application.get(
-                "signInAudience"
-            ),
+            "display_name": application.get("displayName"),
+            "application_id": application.get("appId"),
+            "app_id": application.get("appId"),
+            "publisher_domain": application.get("publisherDomain"),
+            "created_date_time": normalize_datetime(application.get("createdDateTime")),
+            "sign_in_audience": application.get("signInAudience"),
             "tags": application.get(
                 "tags",
                 [],
             ),
             "verified_publisher": normalize_publisher(
-                application.get(
-                    "verifiedPublisher"
-                )
+                application.get("verifiedPublisher")
             ),
             "required_resource_access": application.get(
                 "requiredResourceAccess",
@@ -84,6 +66,27 @@ def normalize(
     )
 
 
+def normalize_applications(
+    applications: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra
+    application objects.
+
+    Parameters
+    ----------
+    applications:
+        List of raw Microsoft Graph application objects.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        Normalized application evidence records.
+    """
+
+    return [normalize(application) for application in applications if application]
+
+
 def normalize_publisher(
     publisher: Dict[str, Any] | None,
 ) -> Dict[str, Any] | None:
@@ -96,17 +99,9 @@ def normalize_publisher(
 
     return remove_empty_values(
         {
-            "display_name": publisher.get(
-                "displayName"
-            ),
-            "verified_id": publisher.get(
-                "verifiedId"
-            ),
-            "added_date_time": normalize_datetime(
-                publisher.get(
-                    "addedDateTime"
-                )
-            ),
+            "display_name": publisher.get("displayName"),
+            "verified_id": publisher.get("verifiedId"),
+            "added_date_time": normalize_datetime(publisher.get("addedDateTime")),
         }
     )
 
@@ -121,12 +116,8 @@ def normalize_collection(
     return [
         remove_empty_values(
             {
-                "id": item.get(
-                    "id"
-                ),
-                "display_name": item.get(
-                    "displayName"
-                ),
+                "id": item.get("id"),
+                "display_name": item.get("displayName"),
             }
         )
         for item in items

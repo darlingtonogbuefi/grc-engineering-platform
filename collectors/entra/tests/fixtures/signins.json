@@ -1,0 +1,635 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#auditLogs/signIns",
+  "value": [
+    {
+      "id": "f9d78aee-5904-4ab7-b3ae-70b12bbe0800",
+      "createdDateTime": "2026-07-28T07:43:01Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "4de5948b-62a1-4f80-bd57-bce8e390e4f6",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Portal",
+      "resourceId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "a3261604-80f2-4721-91fc-db1125f30400",
+      "createdDateTime": "2026-07-27T09:10:58Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "52afec91-578a-4076-b248-d0bf55bbfd0c",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Portal",
+      "resourceId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "West End",
+        "state": "Hampshire",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.92659,
+          "longitude": -1.31994
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "2afc4f70-c196-4589-9cfe-21d078860100",
+      "createdDateTime": "2026-07-26T20:54:22Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "eb88a2ce-71f2-4a08-8ae7-ef3ebc495cd5",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Portal",
+      "resourceId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "West End",
+        "state": "Hampshire",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.92659,
+          "longitude": -1.31994
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "f2fd2e74-dab7-4c5d-8e7b-04c7201f0200",
+      "createdDateTime": "2026-07-26T08:33:16Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "c72a76b4-b302-4486-a765-94b018b8a35f",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Portal",
+      "resourceId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "West End",
+        "state": "Hampshire",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.92659,
+          "longitude": -1.31994
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "d31aefe8-d35f-427a-be0f-4de28f580500",
+      "createdDateTime": "2026-07-25T09:25:08Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:116d:6c6b:501e:1686",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "eb3293fb-e522-440b-a56f-af641c4d264e",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Portal",
+      "resourceId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "d94ffe32-63a5-4dd1-afb7-f63735220400",
+      "createdDateTime": "2026-07-24T20:45:56Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:116d:6c6b:501e:1686",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "019f95e0-a09c-77f9-b99b-e7ecb0d91656",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Resource Manager",
+      "resourceId": "797f4846-ba00-4fd7-ba43-dac1f8f63013",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "a87ae3af-781b-4bd7-9125-a2a267110200",
+      "createdDateTime": "2026-07-24T11:50:35Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "7491689e-d9fd-4821-b71b-5a7f988158ab",
+      "appDisplayName": "GRC Engineering Platform",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "f45e6a5c-431d-453d-99f3-4cefc6b9fbe8",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Windows Azure Active Directory",
+      "resourceId": "00000002-0000-0000-c000-000000000000",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "5d54dedb-3f1c-4000-a73d-01b22d3fa43c",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "61493a75-5a27-4092-a714-2d0d06350200",
+      "createdDateTime": "2026-07-24T11:50:31Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "7491689e-d9fd-4821-b71b-5a7f988158ab",
+      "appDisplayName": "GRC Engineering Platform",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "f45e6a5c-431d-453d-99f3-4cefc6b9fbe8",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Windows Azure Active Directory",
+      "resourceId": "00000002-0000-0000-c000-000000000000",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "5d54dedb-3f1c-4000-a73d-01b22d3fa43c",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 65001,
+        "failureReason": "The user or administrator has not consented to use the application with ID '{identifier}'{namePhrase}. Send an interactive authorization request for this user and resource.",
+        "additionalDetails": "MFA requirement satisfied by claim in the token"
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "5f513b02-0adb-49af-8552-1f58eb000200",
+      "createdDateTime": "2026-07-24T10:30:46Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "019f93ad-6ce3-7e0c-9595-2707bc02bb20",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Resource Manager",
+      "resourceId": "797f4846-ba00-4fd7-ba43-dac1f8f63013",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    },
+    {
+      "id": "b9ae3b8a-37fe-4334-9b87-3caab60e0200",
+      "createdDateTime": "2026-07-24T10:30:39Z",
+      "userDisplayName": "DARLINGTON OGBUEFI",
+      "userPrincipalName": "admin@cribr.co.uk",
+      "userId": "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+      "appId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+      "appDisplayName": "Azure Portal",
+      "ipAddress": "2a0e:cb01:2b:d400:1d06:6110:5b2c:34d7",
+      "clientAppUsed": "Browser",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "correlationId": "019f93ad-540d-7262-be81-633dd449f956",
+      "conditionalAccessStatus": "notApplied",
+      "isInteractive": true,
+      "riskDetail": "hidden",
+      "riskLevelAggregated": "hidden",
+      "riskLevelDuringSignIn": "hidden",
+      "riskState": "none",
+      "riskEventTypes": [],
+      "riskEventTypes_v2": [],
+      "resourceDisplayName": "Azure Resource Manager",
+      "resourceId": "797f4846-ba00-4fd7-ba43-dac1f8f63013",
+      "resourceTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "homeTenantId": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "servicePrincipalName": null,
+      "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+      "authenticationAppDeviceDetails": null,
+      "status": {
+        "errorCode": 0,
+        "failureReason": "Other.",
+        "additionalDetails": null
+      },
+      "deviceDetail": {
+        "deviceId": "{PII Removed}",
+        "displayName": "{PII Removed}",
+        "operatingSystem": "Windows10",
+        "browser": "Chrome 150.0.0",
+        "isCompliant": false,
+        "isManaged": false,
+        "trustType": null
+      },
+      "location": {
+        "city": "Southampton",
+        "state": "Southampton",
+        "countryOrRegion": "GB",
+        "geoCoordinates": {
+          "altitude": null,
+          "latitude": 50.93703,
+          "longitude": -1.39164
+        }
+      },
+      "appliedConditionalAccessPolicies": [
+        {
+          "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+          "displayName": "Block All Users",
+          "enforcedGrantControls": [
+            "Block"
+          ],
+          "enforcedSessionControls": [],
+          "result": "notApplied"
+        }
+      ]
+    }
+  ]
+}

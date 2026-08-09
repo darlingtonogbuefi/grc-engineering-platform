@@ -1,4 +1,5 @@
 # collectors/azure/queries/diagnostic-settings.yml
+
 id: azure.diagnostic_settings
 name: Azure Diagnostic Settings
 description: >

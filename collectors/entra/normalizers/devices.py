@@ -1,4 +1,4 @@
-#collectors\entra\normalizers\devices.py#
+# collectors\entra\normalizers\devices.py
 
 """
 Microsoft Entra device normalizer.
@@ -9,7 +9,7 @@ into a consistent evidence format.
 
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from .common import (
     normalize_boolean,
@@ -38,58 +38,22 @@ def normalize(
 
     return remove_empty_values(
         {
-            "id": device.get(
-                "id"
-            ),
+            "id": device.get("id"),
             "type": "device",
             "provider": "entra",
-            "display_name": device.get(
-                "displayName"
-            ),
-            "device_id": device.get(
-                "deviceId"
-            ),
-            "operating_system": device.get(
-                "operatingSystem"
-            ),
-            "operating_system_version": device.get(
-                "operatingSystemVersion"
-            ),
-            "trust_type": device.get(
-                "trustType"
-            ),
-            "enabled": normalize_boolean(
-                device.get(
-                    "accountEnabled"
-                )
-            ),
-            "account_enabled": normalize_boolean(
-                device.get(
-                    "accountEnabled"
-                )
-            ),
-            "is_compliant": normalize_boolean(
-                device.get(
-                    "isCompliant"
-                )
-            ),
-            "is_managed": normalize_boolean(
-                device.get(
-                    "isManaged"
-                )
-            ),
-            "management_type": device.get(
-                "managementType"
-            ),
-            "manufacturer": device.get(
-                "manufacturer"
-            ),
-            "model": device.get(
-                "model"
-            ),
-            "serial_number": device.get(
-                "serialNumber"
-            ),
+            "display_name": device.get("displayName"),
+            "device_id": device.get("deviceId"),
+            "operating_system": device.get("operatingSystem"),
+            "operating_system_version": device.get("operatingSystemVersion"),
+            "trust_type": device.get("trustType"),
+            "enabled": normalize_boolean(device.get("accountEnabled")),
+            "account_enabled": normalize_boolean(device.get("accountEnabled")),
+            "is_compliant": normalize_boolean(device.get("isCompliant")),
+            "is_managed": normalize_boolean(device.get("isManaged")),
+            "management_type": device.get("managementType"),
+            "manufacturer": device.get("manufacturer"),
+            "model": device.get("model"),
+            "serial_number": device.get("serialNumber"),
             "physical_ids": device.get(
                 "physicalIds",
                 [],
@@ -107,18 +71,32 @@ def normalize(
                 )
             ),
             "approximate_last_sign_in": normalize_datetime(
-                device.get(
-                    "approximateLastSignInDateTime"
-                )
+                device.get("approximateLastSignInDateTime")
             ),
-            "created_date_time": normalize_datetime(
-                device.get(
-                    "createdDateTime"
-                )
-            ),
+            "created_date_time": normalize_datetime(device.get("createdDateTime")),
             "alternative_security_ids": device.get(
                 "alternativeSecurityIds",
                 [],
             ),
         }
     )
+
+
+def normalize_devices(
+    devices: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra devices.
+
+    Parameters
+    ----------
+    devices:
+        List of raw Microsoft Graph device objects.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        Normalized device evidence records.
+    """
+
+    return [normalize(device) for device in devices if device]

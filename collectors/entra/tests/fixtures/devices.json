@@ -1,0 +1,69 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices",
+  "value": [
+    {
+      "id": "d4545b09-0b84-4979-bf01-da630b452b34",
+      "deletedDateTime": null,
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2026-07-28T10:07:01Z",
+      "complianceExpirationDateTime": null,
+      "createdDateTime": "2026-05-30T19:08:18Z",
+      "deviceCategory": null,
+      "deviceId": "6dc1d54c-428d-4ad6-b887-e8dddd4673e6",
+      "deviceMetadata": null,
+      "deviceOwnership": null,
+      "deviceVersion": 2,
+      "displayName": "DESKTOP-GFU1BCU",
+      "domainName": null,
+      "enrollmentProfileName": null,
+      "enrollmentType": null,
+      "externalSourceName": null,
+      "isCompliant": null,
+      "isManaged": null,
+      "isRooted": null,
+      "managementType": null,
+      "manufacturer": null,
+      "mdmAppId": null,
+      "model": null,
+      "onPremisesLastSyncDateTime": null,
+      "onPremisesSyncEnabled": null,
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.26200.8524",
+      "physicalIds": [
+        "[USER-GID]:7ef2f073-54aa-48ba-835c-6d3aa08e3573:6896193820368688",
+        "[GID]:g:6896193820368688",
+        "[USER-HWID]:7ef2f073-54aa-48ba-835c-6d3aa08e3573:6755423620495913",
+        "[HWID]:h:6755423620495913"
+      ],
+      "profileType": "RegisteredDevice",
+      "registrationDateTime": "2026-05-30T19:08:17Z",
+      "sourceType": null,
+      "systemLabels": [],
+      "trustType": "Workplace",
+      "extensionAttributes": {
+        "extensionAttribute1": null,
+        "extensionAttribute2": null,
+        "extensionAttribute3": null,
+        "extensionAttribute4": null,
+        "extensionAttribute5": null,
+        "extensionAttribute6": null,
+        "extensionAttribute7": null,
+        "extensionAttribute8": null,
+        "extensionAttribute9": null,
+        "extensionAttribute10": null,
+        "extensionAttribute11": null,
+        "extensionAttribute12": null,
+        "extensionAttribute13": null,
+        "extensionAttribute14": null,
+        "extensionAttribute15": null
+      },
+      "alternativeSecurityIds": [
+        {
+          "type": 2,
+          "identityProvider": null,
+          "key": "WAA1ADAAOQA6ADwAUwBIAEEAMQAtAFQAUAAtAFAAVQBCAEsARQBZAD4ARQA4AEQARAA4ADQANgA5AEQAMgBDADYARgBCAEUAQgA3ADYARABBADgARQA1ADMAMQA2AEEAOAA3ADMAOQA5ADgARAA0ADIARAA5ADcAMgBWACsAOAA5AGwAbABOAEoAYgB6AFQAOQBSAHQATwBjADgAeQB6AGcAcwBqAE8AUgA4AFUAcgBxADkARQBUAEYAMQBNAHgAcABTAEsAVAAwAEgAQwA0AD0A"
+        }
+      ]
+    }
+  ]
+}

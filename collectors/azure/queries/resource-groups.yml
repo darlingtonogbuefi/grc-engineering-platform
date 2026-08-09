@@ -1,3 +1,5 @@
+#collectors\azure\queries\resource-groups.yml
+
 id: azure.resource_groups
 name: Azure Resource Groups
 description: >
@@ -34,11 +36,14 @@ fields:
   - managedBy
   - properties
   - properties.provisioningState
+  - properties.createdTime
+  - properties.changedTime
 
 metadata:
   category: inventory
   evidence_type: resource_group
   provider: azure
+  source: azure
   version: 1
 
 profiles:

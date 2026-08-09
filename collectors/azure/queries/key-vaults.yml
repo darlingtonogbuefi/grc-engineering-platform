@@ -1,3 +1,6 @@
+#collectors\azure\queries\key-vaults.yml
+
+
 id: azure.key_vaults
 name: Azure Key Vaults
 description: >
@@ -34,6 +37,8 @@ fields:
   - properties
   - properties.tenantId
   - properties.sku
+  - properties.sku.family
+  - properties.sku.name
   - properties.accessPolicies
   - properties.enableRbacAuthorization
   - properties.enabledForDeployment
@@ -52,6 +57,7 @@ metadata:
   category: security
   evidence_type: key_vault_configuration
   provider: azure
+  source: azure
   version: 1
 
 profiles:

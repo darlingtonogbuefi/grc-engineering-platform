@@ -148,3 +148,6 @@ ruff format collectors/entra
 ## License
 
 Internal collector module.
+
+## Tests
+python -m pytest collectors/entra/tests -v

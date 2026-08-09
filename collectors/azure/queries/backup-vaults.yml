@@ -1,29 +1,62 @@
 # collectors/azure/queries/backup-vaults.yml
+# collectors/azure/queries/backup-vaults.yml
+
 id: azure.backup_vaults
+
 name: Azure Backup Vaults
+
 description: >
   Collect Azure Backup vault configurations for backup,
-  recovery, and resilience evidence.
+  recovery, resilience, and disaster recovery evidence.
 
 service: Microsoft.DataProtection
+
 resource: backupVaults
+
 method: GET
+
 endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/backupVaults
+
 api_version: "2024-04-01"
+
 scope: subscription
+
 
 pagination:
   enabled: true
   next_link: nextLink
+  mode: absolute_url
+
 
 authentication:
   type: bearer
 
+
+retry:
+  enabled: true
+  max_attempts: 5
+  backoff:
+    strategy: exponential
+    initial_seconds: 2
+    max_seconds: 60
+
+
+throttling:
+  enabled: true
+  respect_retry_after: true
+
+
 response:
   items: value
 
-normalizer: StorageNormalizer
+
+normalizer:
+  class: BackupNormalizer
+  module: collectors.azure.normalizers.backup
+
+
 primary_key: id
+
 
 fields:
   - id
@@ -37,12 +70,19 @@ fields:
   - properties.monitoringSettings
   - properties.securitySettings
   - properties.encryptionSettings
+  - properties.provisioningState
+  - properties.resourceMoveDetails
+  - properties.currentFeatureState
+
 
 metadata:
   category: resilience
   evidence_type: backup_configuration
   provider: azure
   version: 1
+  audit:
+    source: azure_backup_vaults
+
 
 profiles:
   - default

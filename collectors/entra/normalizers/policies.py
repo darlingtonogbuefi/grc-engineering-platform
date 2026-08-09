@@ -1,4 +1,4 @@
-#collectors\entra\normalizers\policies.py
+# collectors\entra\normalizers\policies.py
 
 
 """
@@ -113,6 +113,26 @@ def normalize(
             ),
         }
     )
+
+
+def normalize_conditional_access(
+    policies: list[Dict[str, Any]],
+) -> list[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra Conditional Access policies.
+
+    Parameters
+    ----------
+    policies:
+        List of raw Microsoft Graph Conditional Access policy objects.
+
+    Returns
+    -------
+    list[Dict[str, Any]]
+        Normalized Conditional Access policy evidence records.
+    """
+
+    return [normalize(policy) for policy in policies if policy]
 
 
 def detect_policy_type(

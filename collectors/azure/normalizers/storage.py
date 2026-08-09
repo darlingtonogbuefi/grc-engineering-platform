@@ -1,3 +1,6 @@
+# collectors\azure\normalizers\storage.py
+
+
 """
 Azure Storage Normalizer.
 
@@ -31,21 +34,15 @@ class StorageNormalizer(BaseNormalizer):
     """Normalize Azure storage resources."""
 
     RESOURCE_TYPES = {
-        "Microsoft.Storage/storageAccounts":
-            "azure.storage.account",
-
-        "Microsoft.Storage/storageAccounts/blobServices":
-            "azure.storage.blob_service",
-
-        "Microsoft.Storage/storageAccounts/fileServices":
-            "azure.storage.file_service",
-
-        "Microsoft.Storage/storageAccounts/queueServices":
-            "azure.storage.queue_service",
-
-        "Microsoft.Storage/storageAccounts/tableServices":
-            "azure.storage.table_service",
+        "Microsoft.Storage/storageAccounts": "azure.storage.account",
+        "Microsoft.Storage/storageAccounts/blobServices": "azure.storage.blob_service",
+        "Microsoft.Storage/storageAccounts/fileServices": "azure.storage.file_service",
+        "Microsoft.Storage/storageAccounts/queueServices": "azure.storage.queue_service",
+        "Microsoft.Storage/storageAccounts/tableServices": "azure.storage.table_service",
     }
+
+    def __init__(self):
+        super().__init__("azure")
 
     def normalize(
         self,
@@ -58,9 +55,7 @@ class StorageNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(
-            timezone.utc
-        )
+        collected_at = datetime.now(timezone.utc)
 
         for resource in data.get("value", []):
             azure_type = resource.get("type")
@@ -76,9 +71,7 @@ class StorageNormalizer(BaseNormalizer):
             records.append(
                 EvidenceRecord(
                     source="azure",
-                    resource_type=self.RESOURCE_TYPES[
-                        azure_type
-                    ],
+                    resource_type=self.RESOURCE_TYPES[azure_type],
                     resource_id=resource_id,
                     data={
                         "name": resource.get(
@@ -87,21 +80,11 @@ class StorageNormalizer(BaseNormalizer):
                         ),
                         "provider": "azure",
                         "service": "storage",
-                        "location": resource.get(
-                            "location"
-                        ),
-                        "subscription_id": self._subscription_id(
-                            resource_id
-                        ),
-                        "resource_group": self._resource_group(
-                            resource_id
-                        ),
-                        "kind": resource.get(
-                            "kind"
-                        ),
-                        "sku": resource.get(
-                            "sku"
-                        ),
+                        "location": resource.get("location"),
+                        "subscription_id": self._subscription_id(resource_id),
+                        "resource_group": self._resource_group(resource_id),
+                        "kind": resource.get("kind"),
+                        "sku": resource.get("sku"),
                         "properties": resource.get(
                             "properties",
                             {},
@@ -134,9 +117,7 @@ class StorageNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "subscriptions"
-            )
+            index = parts.index("subscriptions")
 
             return parts[index + 1]
 
@@ -158,9 +139,7 @@ class StorageNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "resourceGroups"
-            )
+            index = parts.index("resourceGroups")
 
             return parts[index + 1]
 

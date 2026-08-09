@@ -1,3 +1,6 @@
+# collectors\azure\queries\network-security-groups.yml
+
+
 id: azure.network_security_groups
 name: Azure Network Security Groups
 description: >
@@ -31,20 +34,30 @@ fields:
   - type
   - location
   - tags
+  - etag
   - properties
   - properties.provisioningState
   - properties.resourceGuid
   - properties.securityRules
+  - properties.securityRules[*].name
+  - properties.securityRules[*].properties.access
+  - properties.securityRules[*].properties.direction
+  - properties.securityRules[*].properties.priority
+  - properties.securityRules[*].properties.protocol
+  - properties.securityRules[*].properties.sourceAddressPrefix
+  - properties.securityRules[*].properties.destinationAddressPrefix
+  - properties.securityRules[*].properties.sourcePortRange
+  - properties.securityRules[*].properties.destinationPortRange
   - properties.defaultSecurityRules
   - properties.networkInterfaces
   - properties.subnets
   - properties.flushConnection
-  - etag
 
 metadata:
   category: network_security
   evidence_type: network_security_group_configuration
   provider: azure
+  source: azure
   version: 1
 
 profiles:

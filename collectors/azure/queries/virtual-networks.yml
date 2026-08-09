@@ -1,3 +1,6 @@
+#collectors\azure\queries\virtual-networks.yml
+
+
 id: azure.virtual_networks
 name: Azure Virtual Networks
 description: >
@@ -46,6 +49,20 @@ fields:
   - properties.encryption
   - properties.privateEndpointVNetPolicies
   - properties.enableVmProtection
+
+collection:
+  retry:
+    enabled: true
+    max_attempts: 3
+
+  timeout_seconds: 60
+
+  throttling:
+    enabled: true
+
+failure_policy:
+  continue_on_error: true
+  store_errors: true
 
 metadata:
   category: network_security

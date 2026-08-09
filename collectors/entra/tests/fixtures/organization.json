@@ -1,0 +1,55 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#organization",
+  "value": [
+    {
+      "id": "29739999-77b0-460b-9b2f-d3373a38b179",
+      "deletedDateTime": null,
+      "businessPhones": [],
+      "city": null,
+      "country": null,
+      "countryLetterCode": "GB",
+      "createdDateTime": "2026-05-28T20:20:06Z",
+      "defaultUsageLocation": null,
+      "displayName": "ConvertPDF Portal",
+      "isMultipleDataLocationsForServicesEnabled": null,
+      "marketingNotificationEmails": [],
+      "onPremisesLastSyncDateTime": null,
+      "onPremisesSyncEnabled": null,
+      "partnerTenantType": null,
+      "postalCode": null,
+      "preferredLanguage": "en",
+      "securityComplianceNotificationMails": [],
+      "securityComplianceNotificationPhones": [],
+      "state": null,
+      "street": null,
+      "technicalNotificationMails": [
+        "admin@cribr.co.uk"
+      ],
+      "tenantType": "CIAM",
+      "directorySizeQuota": {
+        "used": 79,
+        "total": 300000
+      },
+      "privacyProfile": null,
+      "assignedPlans": [],
+      "onPremisesSyncStatus": [],
+      "provisionedPlans": [],
+      "verifiedDomains": [
+        {
+          "capabilities": "Email, OfficeCommunicationsOnline",
+          "isDefault": false,
+          "isInitial": true,
+          "name": "cribrciam.onmicrosoft.com",
+          "type": "Managed"
+        },
+        {
+          "capabilities": "CustomUrlDomain",
+          "isDefault": true,
+          "isInitial": false,
+          "name": "login.cribr.co.uk",
+          "type": "Managed"
+        }
+      ]
+    }
+  ]
+}

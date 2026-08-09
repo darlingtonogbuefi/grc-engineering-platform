@@ -1,23 +1,92 @@
-collectors/
-└── azure/
-    |
-    ├── manifest.yml
-    |
-    ├── profiles/
-    |    |
-    |    ├── cyberessentials.yml
-    |    ├── caf.yml
-    |    ├── govassure.yml
-    |    └── full.yml
-    |
-    ├── queries/
-    |    |
-    |    ├── subscriptions.yml
-    |    ├── role_assignments.yml
-    |    ├── policies.yml
-    |    └── resources.yml
-    |
-    ├── collector.py
-    ├── auth.py
-    ├── client.py
-    └── normalizers/
+# collectors\azure\manifest.yml
+
+
+id: azure
+
+name: Microsoft Azure
+
+version: "1.0.0"
+
+description: >
+  Microsoft Azure evidence collector.
+  Collects cloud infrastructure, identity,
+  security, policy, networking, compute,
+  storage, and configuration evidence from
+  Azure Resource Manager.
+
+provider:
+  type: azure
+  platform: microsoft-azure
+  api: azure-resource-manager
+
+authentication:
+  type: client_credentials
+
+  required:
+    - tenant_id
+    - client_id
+    - client_secret
+
+  scopes:
+    - https://management.azure.com/.default
+
+collector:
+  class: AzureCollector
+  module: collectors.azure.collector
+
+client:
+  class: AzureClient
+  module: collectors.azure.client
+
+authenticator:
+  class: AzureAuthenticator
+  module: collectors.azure.auth
+
+capabilities:
+  - subscriptions
+  - resources
+  - resource_groups
+  - virtual_machines
+  - storage_accounts
+  - key_vaults
+  - virtual_networks
+  - network_security_groups
+  - firewalls
+  - sql_databases
+  - role_assignments
+  - role_definitions
+  - policy_assignments
+  - policy_definitions
+  - activity_logs
+  - diagnostic_settings
+  - defender_settings
+  - backup_vaults
+
+queries:
+  path: queries
+
+normalizers:
+  path: normalizers
+
+profiles:
+  path: profiles
+
+evidence:
+  format:
+    - json
+
+  retention:
+    enabled: true
+
+logging:
+  enabled: true
+  level: INFO
+
+health_check:
+  endpoint: /subscriptions
+
+requirements:
+  python:
+    - requests
+    - pyyaml
+    - azure-identity

@@ -1,3 +1,6 @@
+#collectors\azure\queries\role-assignments.yml
+
+
 id: azure.role_assignments
 name: Azure Role Assignments
 description: >
@@ -22,7 +25,7 @@ authentication:
 response:
   items: value
 
-normalizer: IdentityNormalizer
+normalizer: IAMNormalizer
 primary_key: id
 
 fields:
@@ -47,6 +50,7 @@ metadata:
   category: identity_access
   evidence_type: role_assignment
   provider: azure
+  source: azure
   version: 1
 
 profiles:

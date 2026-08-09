@@ -1,15 +1,24 @@
-id: azure.virtual_networks
-name: Azure Virtual Networks
-description: >
-  Collect Azure Virtual Network configurations including address
-  spaces, subnets, security associations, and network topology
-  evidence for security and compliance assessments.
+# collectors\azure\queries\virtual-machines.yml
 
-service: Microsoft.Network
-resource: virtualNetworks
+id: azure.virtual_machines
+
+name: Azure Virtual Machines
+
+description: >
+  Collect Azure Virtual Machine configurations including compute
+  properties, operating system details, security settings,
+  network associations, and resource metadata for security
+  and compliance assessments.
+
+service: Microsoft.Compute
+resource: virtualMachines
+
 method: GET
-endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks
-api_version: "2024-05-01"
+
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+
+api_version: "2024-03-01"
+
 scope: subscription
 
 pagination:
@@ -22,7 +31,8 @@ authentication:
 response:
   items: value
 
-normalizer: NetworkNormalizer
+normalizer: ComputeNormalizer
+
 primary_key: id
 
 fields:
@@ -32,24 +42,38 @@ fields:
   - location
   - tags
   - properties
+  - properties.vmId
+  - properties.hardwareProfile
+  - properties.hardwareProfile.vmSize
+  - properties.storageProfile
+  - properties.storageProfile.imageReference
+  - properties.storageProfile.osDisk
+  - properties.storageProfile.dataDisks
+  - properties.osProfile
+  - properties.osProfile.computerName
+  - properties.osProfile.adminUsername
+  - properties.networkProfile
+  - properties.networkProfile.networkInterfaces
   - properties.provisioningState
-  - properties.resourceGuid
-  - properties.addressSpace
-  - properties.addressSpace.addressPrefixes
-  - properties.dhcpOptions
-  - properties.dhcpOptions.dnsServers
-  - properties.subnets
-  - properties.virtualNetworkPeerings
-  - properties.enableDdosProtection
-  - properties.ddosProtectionPlan
-  - properties.flowTimeoutInMinutes
-  - properties.encryption
-  - properties.privateEndpointVNetPolicies
-  - properties.enableVmProtection
+  - properties.instanceView
+
+collection:
+  retry:
+    enabled: true
+    max_attempts: 3
+
+  timeout_seconds: 60
+
+  throttling:
+    enabled: true
+
+failure_policy:
+  continue_on_error: true
+  store_errors: true
 
 metadata:
-  category: network_security
-  evidence_type: virtual_network_configuration
+  category: compute_security
+  evidence_type: virtual_machine_configuration
   provider: azure
   version: 1
 

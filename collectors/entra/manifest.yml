@@ -1,3 +1,6 @@
+# collectors\entra\manifest.yml
+
+
 id: entra
 
 name: Microsoft Entra ID

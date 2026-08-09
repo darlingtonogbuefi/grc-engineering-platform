@@ -1,4 +1,4 @@
-#collectors\entra\normalizers\roles.py
+# collectors\entra\normalizers\roles.py
 
 
 """
@@ -16,6 +16,25 @@ from .common import (
     normalize_datetime,
     remove_empty_values,
 )
+
+#
+# Directory roles that represent elevated
+# administrative privileges in Microsoft Entra ID.
+#
+# Used for GRC classification and reporting.
+#
+HIGH_PRIVILEGE_DIRECTORY_ROLES = {
+    "Global Administrator",
+    "Privileged Role Administrator",
+    "Security Administrator",
+    "Conditional Access Administrator",
+    "Exchange Administrator",
+    "SharePoint Administrator",
+    "User Administrator",
+    "Authentication Administrator",
+    "Application Administrator",
+    "Cloud Application Administrator",
+}
 
 
 def normalize(
@@ -37,28 +56,23 @@ def normalize(
 
     return remove_empty_values(
         {
-            "id": role.get(
-                "id"
-            ),
+            "id": role.get("id"),
             "type": "role",
             "provider": "entra",
-            "name": role.get(
-                "displayName"
+            "name": role.get("displayName"),
+            "display_name": role.get("displayName"),
+            #
+            # GRC classification flag.
+            #
+            # Identifies roles requiring privileged
+            # access monitoring and review.
+            #
+            "is_high_privilege": (
+                role.get("displayName") in HIGH_PRIVILEGE_DIRECTORY_ROLES
             ),
-            "display_name": role.get(
-                "displayName"
-            ),
-            "description": role.get(
-                "description"
-            ),
-            "role_template_id": role.get(
-                "roleTemplateId"
-            ),
-            "deleted_date_time": normalize_datetime(
-                role.get(
-                    "deletedDateTime"
-                )
-            ),
+            "description": role.get("description"),
+            "role_template_id": role.get("roleTemplateId"),
+            "deleted_date_time": normalize_datetime(role.get("deletedDateTime")),
             "members": normalize_members(
                 role.get(
                     "members",
@@ -73,6 +87,26 @@ def normalize(
             ),
         }
     )
+
+
+def normalize_directory_roles(
+    roles: list[Dict[str, Any]],
+) -> list[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra directory roles.
+
+    Parameters
+    ----------
+    roles:
+        List of raw Microsoft Graph directory role objects.
+
+    Returns
+    -------
+    list[Dict[str, Any]]
+        Normalized directory role evidence records.
+    """
+
+    return [normalize(role) for role in roles if role]
 
 
 def normalize_members(
@@ -90,30 +124,14 @@ def normalize_members(
     return [
         remove_empty_values(
             {
-                "id": member.get(
-                    "id"
-                ),
-                "display_name": member.get(
-                    "displayName"
-                ),
-                "upn": member.get(
-                    "userPrincipalName"
-                ),
-                "user_principal_name": member.get(
-                    "userPrincipalName"
-                ),
-                "app_id": member.get(
-                    "appId"
-                ),
-                "type": resolve_type(
-                    member
-                ),
-                "object_type": member.get(
-                    "@odata.type"
-                ),
-                "role_member_type": resolve_type(
-                    member
-                ),
+                "id": member.get("id"),
+                "display_name": member.get("displayName"),
+                "upn": member.get("userPrincipalName"),
+                "user_principal_name": member.get("userPrincipalName"),
+                "app_id": member.get("appId"),
+                "type": resolve_type(member),
+                "object_type": member.get("@odata.type"),
+                "role_member_type": resolve_type(member),
             }
         )
         for member in members
@@ -127,9 +145,7 @@ def resolve_type(
     Resolve directory role member type.
     """
 
-    object_type = member.get(
-        "@odata.type"
-    )
+    object_type = member.get("@odata.type")
 
     if not object_type:
         return None
@@ -142,15 +158,9 @@ def resolve_type(
     }
 
     if object_type in mapping:
-        return mapping[
-            object_type
-        ]
+        return mapping[object_type]
 
-    return (
-        object_type
-        .replace(
-            "#microsoft.graph.",
-            "",
-        )
-        .lower()
-    )
+    return object_type.replace(
+        "#microsoft.graph.",
+        "",
+    ).lower()

@@ -1,0 +1,94 @@
+{
+  "value": [
+    {
+      "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg-production/providers/Microsoft.Compute/virtualMachines/vm-web-01",
+      "name": "vm-web-01",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "uksouth",
+      "resourceGroup": "rg-production",
+      "subscriptionId": "11111111-2222-3333-4444-555555555555",
+      "managedBy": null,
+      "kind": null,
+      "sku": null,
+      "tags": {
+        "Environment": "Production",
+        "Application": "Website",
+        "Owner": "Platform Team"
+      }
+    },
+    {
+      "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg-production/providers/Microsoft.Storage/storageAccounts/prodstorage01",
+      "name": "prodstorage01",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "uksouth",
+      "resourceGroup": "rg-production",
+      "subscriptionId": "11111111-2222-3333-4444-555555555555",
+      "managedBy": null,
+      "kind": "StorageV2",
+      "sku": {
+        "name": "Standard_GRS",
+        "tier": "Standard"
+      },
+      "tags": {
+        "Environment": "Production",
+        "Classification": "Confidential"
+      }
+    },
+    {
+      "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg-network/providers/Microsoft.Network/networkSecurityGroups/nsg-production",
+      "name": "nsg-production",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "location": "uksouth",
+      "resourceGroup": "rg-network",
+      "subscriptionId": "11111111-2222-3333-4444-555555555555",
+      "managedBy": null,
+      "kind": null,
+      "sku": null,
+      "tags": {
+        "Environment": "Production"
+      }
+    },
+    {
+      "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg-security/providers/Microsoft.KeyVault/vaults/kv-production",
+      "name": "kv-production",
+      "type": "Microsoft.KeyVault/vaults",
+      "location": "uksouth",
+      "resourceGroup": "rg-security",
+      "subscriptionId": "11111111-2222-3333-4444-555555555555",
+      "managedBy": null,
+      "kind": null,
+      "sku": {
+        "family": "A",
+        "name": "standard"
+      },
+      "tags": {
+        "Environment": "Production",
+        "Criticality": "High"
+      }
+    },
+    {
+      "id": "/subscriptions/66666666-7777-8888-9999-000000000000/resourceGroups/rg-development/providers/Microsoft.Web/sites/dev-api",
+      "name": "dev-api",
+      "type": "Microsoft.Web/sites",
+      "location": "uksouth",
+      "resourceGroup": "rg-development",
+      "subscriptionId": "66666666-7777-8888-9999-000000000000",
+      "managedBy": null,
+      "kind": "app",
+      "sku": null,
+      "tags": {
+        "Environment": "Development",
+        "Owner": "Engineering"
+      }
+    }
+  ],
+  "count": 5,
+  "metadata": {
+    "provider": "Microsoft Azure",
+    "resourceType": "resources",
+    "apiVersion": "2022-12-01",
+    "collectedAt": "2026-07-19T12:00:00Z",
+    "collector": "azure",
+    "fixtureVersion": "1.0.0"
+  }
+}

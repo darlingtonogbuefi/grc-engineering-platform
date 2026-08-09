@@ -1,3 +1,5 @@
+#collectors\azure\queries\subscriptions.yml
+
 id: azure.subscriptions
 name: Azure Subscriptions
 description: >
@@ -8,7 +10,7 @@ service: Microsoft.Resources
 resource: subscriptions
 method: GET
 endpoint: /subscriptions
-api_version: "2022-12-01"
+api_version: "2024-03-01"
 scope: tenant
 
 pagination:
@@ -21,7 +23,7 @@ authentication:
 response:
   items: value
 
-normalizer: ResourceNormalizer
+normalizer: SubscriptionNormalizer
 primary_key: subscriptionId
 
 fields:
@@ -34,6 +36,20 @@ fields:
   - authorizationSource
   - managedByTenants
   - tags
+
+collection:
+  retry:
+    enabled: true
+    max_attempts: 3
+
+  timeout_seconds: 60
+
+  throttling:
+    enabled: true
+
+failure_policy:
+  continue_on_error: true
+  store_errors: true
 
 metadata:
   category: inventory

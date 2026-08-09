@@ -1,4 +1,4 @@
-#collectors\entra\normalizers\users.py
+# collectors\entra\normalizers\users.py
 
 
 """
@@ -144,6 +144,26 @@ def normalize(
             ),
         }
     )
+
+
+def normalize_users(
+    users: list[Dict[str, Any]],
+) -> list[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra users.
+
+    Parameters
+    ----------
+    users:
+        List of raw Microsoft Graph user objects.
+
+    Returns
+    -------
+    list[Dict[str, Any]]
+        Normalized user evidence records.
+    """
+
+    return [normalize(user) for user in users if user]
 
 
 def normalize_sign_in(

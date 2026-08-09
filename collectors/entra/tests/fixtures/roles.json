@@ -1,0 +1,54 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryRoles",
+  "value": [
+    {
+      "id": "1e0890b6-bc2b-4222-ba16-c87f83a3c88c",
+      "deletedDateTime": null,
+      "description": "Can read basic directory information. Commonly used to grant directory read access to applications and guests.",
+      "displayName": "Directory Readers",
+      "roleTemplateId": "88d8e3e3-8f55-4a1e-953a-9b9898b8876b"
+    },
+    {
+      "id": "2051eb0a-4bf6-47ee-bce3-941d123bc408",
+      "deletedDateTime": null,
+      "description": "Define and manage the definition of custom security attributes.",
+      "displayName": "Attribute Definition Administrator",
+      "roleTemplateId": "8424c6f0-a189-499e-bbd0-26c1753c96d4"
+    },
+    {
+      "id": "3c454c62-fa76-4a83-ac0c-44923ee8c63e",
+      "deletedDateTime": null,
+      "description": "Read custom security attribute keys and values for supported Microsoft Entra objects.",
+      "displayName": "Attribute Assignment Reader",
+      "roleTemplateId": "ffd52fa5-98dc-465c-991d-fc073eb59f8f"
+    },
+    {
+      "id": "49ada8bb-fb4b-4e0e-a444-295f52d5246b",
+      "deletedDateTime": null,
+      "description": "Assign custom security attribute keys and values to supported Microsoft Entra objects.",
+      "displayName": "Attribute Assignment Administrator",
+      "roleTemplateId": "58a13ea3-c632-46ae-9ee0-9c0d43cd7f3d"
+    },
+    {
+      "id": "5405fe1f-464a-4217-b5f9-ba580a7c2923",
+      "deletedDateTime": null,
+      "description": "Users assigned to this role are added to the local administrators group on Microsoft Entra joined devices.",
+      "displayName": "Azure AD Joined Device Local Administrator",
+      "roleTemplateId": "9f06204d-73c1-4d4c-880a-6edb90606fd8"
+    },
+    {
+      "id": "5b4d3a92-8641-48c0-926e-bfd9f8f49a30",
+      "deletedDateTime": null,
+      "description": "Read the definition of custom security attributes.",
+      "displayName": "Attribute Definition Reader",
+      "roleTemplateId": "1d336d2c-4ae8-42ef-9711-b3604ce3fc2c"
+    },
+    {
+      "id": "ec2c91ac-1dc5-412a-94f7-2e339b3b7a0d",
+      "deletedDateTime": null,
+      "description": "Can manage all aspects of Microsoft Entra ID and Microsoft services that use Microsoft Entra identities.",
+      "displayName": "Global Administrator",
+      "roleTemplateId": "62e90394-69f5-4237-9190-012177145e10"
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+#collectors\azure\profiles\default.yml
+
+
 name: cyberessentials
 
 version: 1.0.0
@@ -28,7 +31,7 @@ queries:
   - firewalls
 
   # Logging
-  - activity-logs
+  #- activity-logs
   - diagnostic-settings
 
   # Storage

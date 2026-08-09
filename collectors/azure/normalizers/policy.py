@@ -19,7 +19,6 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -30,18 +29,14 @@ class PolicyNormalizer(BaseNormalizer):
     """Normalize Azure Policy resources."""
 
     RESOURCE_TYPES = {
-        "Microsoft.Authorization/policyDefinitions":
-            "azure.policy.definition",
-
-        "Microsoft.Authorization/policySetDefinitions":
-            "azure.policy.initiative",
-
-        "Microsoft.Authorization/policyAssignments":
-            "azure.policy.assignment",
-
-        "Microsoft.Authorization/policyExemptions":
-            "azure.policy.exemption",
+        "Microsoft.Authorization/policyDefinitions": "azure.policy.definition",
+        "Microsoft.Authorization/policySetDefinitions": "azure.policy.initiative",
+        "Microsoft.Authorization/policyAssignments": "azure.policy.assignment",
+        "Microsoft.Authorization/policyExemptions": "azure.policy.exemption",
     }
+
+    def __init__(self):
+        super().__init__("azure")
 
     def normalize(
         self,
@@ -54,14 +49,11 @@ class PolicyNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(
-            timezone.utc
-        )
-
-        for resource in data.get("value", []):
-            azure_type = resource.get(
-                "type"
-            )
+        for resource in data.get(
+            "value",
+            [],
+        ):
+            azure_type = resource.get("type")
 
             if azure_type not in self.RESOURCE_TYPES:
                 continue
@@ -77,61 +69,35 @@ class PolicyNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
-                    resource_type=self.RESOURCE_TYPES[
-                        azure_type
-                    ],
+                self.create_record(
+                    resource_type=self.RESOURCE_TYPES[azure_type],
                     resource_id=resource_id,
                     data={
                         "name": self._name(resource),
                         "provider": "azure",
                         "service": "governance",
-                        "location": resource.get(
-                            "location"
-                        ),
-                        "subscription_id": self._subscription_id(
-                            resource_id
-                        ),
-                        "resource_group": self._resource_group(
-                            resource_id
-                        ),
-                        "display_name": properties.get(
-                            "displayName"
-                        ),
-                        "description": properties.get(
-                            "description"
-                        ),
-                        "policy_type": properties.get(
-                            "policyType"
-                        ),
-                        "mode": properties.get(
-                            "mode"
-                        ),
-                        "parameters": properties.get(
-                            "parameters"
-                        ),
-                        "policy_rule": properties.get(
-                            "policyRule"
-                        ),
-                        "scope": properties.get(
-                            "scope"
-                        ),
-                        "enforcement_mode": properties.get(
-                            "enforcementMode"
-                        ),
-                        "metadata": properties.get(
-                            "metadata"
-                        ),
+                        "location": resource.get("location"),
+                        "subscription_id": self._subscription_id(resource_id),
+                        "resource_group": self._resource_group(resource_id),
+                        "display_name": properties.get("displayName"),
+                        "description": properties.get("description"),
+                        "policy_type": properties.get("policyType"),
+                        "mode": properties.get("mode"),
+                        "parameters": properties.get("parameters"),
+                        "policy_rule": properties.get("policyRule"),
+                        "scope": properties.get("scope"),
+                        "enforcement_mode": properties.get("enforcementMode"),
+                        "metadata": properties.get("metadata"),
                         "raw": resource,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "policy",
                     },
                 )
             )
+
+        self.validate(records)
 
         return records
 
@@ -146,9 +112,7 @@ class PolicyNormalizer(BaseNormalizer):
             or resource.get(
                 "properties",
                 {},
-            ).get(
-                "displayName"
-            )
+            ).get("displayName")
             or ""
         )
 
@@ -164,9 +128,7 @@ class PolicyNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "subscriptions"
-            )
+            index = parts.index("subscriptions")
 
             return parts[index + 1]
 
@@ -188,9 +150,7 @@ class PolicyNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "resourceGroups"
-            )
+            index = parts.index("resourceGroups")
 
             return parts[index + 1]
 

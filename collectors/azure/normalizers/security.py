@@ -1,3 +1,6 @@
+# collectors\azure\normalizers\security.py
+
+
 """
 Azure Security Normalizer.
 
@@ -37,6 +40,9 @@ class SecurityNormalizer(BaseNormalizer):
         "security_contact": "azure.security.contact",
     }
 
+    def __init__(self):
+        super().__init__("azure")
+
     def normalize(
         self,
         data: dict[str, Any],
@@ -48,9 +54,7 @@ class SecurityNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(
-            timezone.utc
-        )
+        collected_at = datetime.now(timezone.utc)
 
         for item in data.get("value", []):
             item_type = self._detect_type(item)
@@ -72,33 +76,15 @@ class SecurityNormalizer(BaseNormalizer):
                         "name": self._name(item),
                         "provider": "azure",
                         "service": "security",
-                        "location": item.get(
-                            "location"
-                        ),
-                        "subscription_id": self._subscription_id(
-                            resource_id
-                        ),
-                        "resource_group": self._resource_group(
-                            resource_id
-                        ),
-                        "azure_type": item.get(
-                            "type"
-                        ),
-                        "status": item.get(
-                            "status"
-                        ),
-                        "severity": item.get(
-                            "severity"
-                        ),
-                        "category": item.get(
-                            "category"
-                        ),
-                        "display_name": item.get(
-                            "displayName"
-                        ),
-                        "description": item.get(
-                            "description"
-                        ),
+                        "location": item.get("location"),
+                        "subscription_id": self._subscription_id(resource_id),
+                        "resource_group": self._resource_group(resource_id),
+                        "azure_type": item.get("type"),
+                        "status": item.get("status"),
+                        "severity": item.get("severity"),
+                        "category": item.get("category"),
+                        "display_name": item.get("displayName"),
+                        "description": item.get("description"),
                         "properties": item.get(
                             "properties",
                             {},
@@ -154,11 +140,7 @@ class SecurityNormalizer(BaseNormalizer):
     ) -> str:
         """Return best available security resource name."""
 
-        return (
-            item.get("name")
-            or item.get("displayName")
-            or item.get("id", "")
-        )
+        return item.get("name") or item.get("displayName") or item.get("id", "")
 
     def _subscription_id(
         self,
@@ -172,9 +154,7 @@ class SecurityNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "subscriptions"
-            )
+            index = parts.index("subscriptions")
 
             return parts[index + 1]
 
@@ -196,9 +176,7 @@ class SecurityNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "resourceGroups"
-            )
+            index = parts.index("resourceGroups")
 
             return parts[index + 1]
 

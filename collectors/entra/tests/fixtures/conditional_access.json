@@ -1,0 +1,76 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies",
+  "value": [
+    {
+      "id": "ee1ddb39-e3af-4340-94bb-94734b133423",
+      "templateId": null,
+      "displayName": "Block All Users",
+      "createdDateTime": "2026-07-05T13:15:08.5968775Z",
+      "modifiedDateTime": "2026-07-10T14:19:13.9328455Z",
+      "state": "enabled",
+      "deletedDateTime": null,
+      "sessionControls": null,
+      "conditions": {
+        "userRiskLevels": [],
+        "signInRiskLevels": [],
+        "clientAppTypes": [
+          "all"
+        ],
+        "servicePrincipalRiskLevels": [],
+        "insiderRiskLevels": null,
+        "platforms": null,
+        "devices": null,
+        "clientApplications": null,
+        "authenticationFlows": null,
+        "applications": {
+          "includeApplications": [
+            "13f56b02-d862-4be4-9d4a-65bc796a5a03",
+            "eddd4b6f-d867-4f2f-8b9c-3663eef3677b"
+          ],
+          "excludeApplications": [],
+          "includeUserActions": [],
+          "includeAuthenticationContextClassReferences": [],
+          "applicationFilter": null
+        },
+        "users": {
+          "includeUsers": [
+            "All"
+          ],
+          "excludeUsers": [
+            "3465cc63-2f26-4ea5-b15a-a0d4e40711cc",
+            "f9109b3c-3eb9-4f63-ae21-9518c5fc0598",
+            "7ef2f073-54aa-48ba-835c-6d3aa08e3573",
+            "3ce2f25e-abdf-4a54-b2fc-d8e17c9fef5d",
+            "21916af3-3c8c-4bb7-9b72-a3c4abd28024",
+            "db7b7267-ed4a-429d-a5cd-7c8a6ee4f8ce",
+            "f1486ae3-00a2-44b0-8f85-8fa575a967c3",
+            "fd953a06-02f8-4663-9791-80c04319c927",
+            "923f4e03-453c-44fb-8fee-6cfab8bf1764"
+          ],
+          "includeGroups": [],
+          "excludeGroups": [],
+          "includeRoles": [],
+          "excludeRoles": [],
+          "includeGuestsOrExternalUsers": null,
+          "excludeGuestsOrExternalUsers": null
+        },
+        "locations": {
+          "includeLocations": [
+            "All"
+          ],
+          "excludeLocations": []
+        }
+      },
+      "grantControls": {
+        "operator": "OR",
+        "builtInControls": [
+          "block"
+        ],
+        "customAuthenticationFactors": [],
+        "termsOfUse": [],
+        "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('ee1ddb39-e3af-4340-94bb-94734b133423')/grantControls/authenticationStrength/$entity",
+        "authenticationStrength": null
+      }
+    }
+  ]
+}

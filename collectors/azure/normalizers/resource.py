@@ -18,7 +18,6 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -29,6 +28,9 @@ class ResourceNormalizer(BaseNormalizer):
     """Normalize generic Azure resources."""
 
     RESOURCE_TYPE = "azure.resource"
+
+    def __init__(self):
+        super().__init__("azure")
 
     def normalize(
         self,
@@ -41,11 +43,8 @@ class ResourceNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(
-            timezone.utc
-        )
-
         for resource in data.get("value", []):
+
             resource_id = resource.get(
                 "id",
                 "",
@@ -57,8 +56,7 @@ class ResourceNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
+                self.create_record(
                     resource_type=self.RESOURCE_TYPE,
                     resource_id=resource_id,
                     data={
@@ -67,28 +65,14 @@ class ResourceNormalizer(BaseNormalizer):
                             "",
                         ),
                         "provider": "azure",
-                        "service": self._service_name(
-                            resource_type
-                        ),
-                        "location": resource.get(
-                            "location"
-                        ),
-                        "subscription_id": self._subscription_id(
-                            resource_id
-                        ),
-                        "resource_group": self._resource_group(
-                            resource_id
-                        ),
+                        "service": self._service_name(resource_type),
+                        "location": resource.get("location"),
+                        "subscription_id": self._subscription_id(resource_id),
+                        "resource_group": self._resource_group(resource_id),
                         "azure_type": resource_type,
-                        "managed_by": resource.get(
-                            "managedBy"
-                        ),
-                        "kind": resource.get(
-                            "kind"
-                        ),
-                        "sku": resource.get(
-                            "sku"
-                        ),
+                        "managed_by": resource.get("managedBy"),
+                        "kind": resource.get("kind"),
+                        "sku": resource.get("sku"),
                         "tags": resource.get(
                             "tags",
                             {},
@@ -99,13 +83,14 @@ class ResourceNormalizer(BaseNormalizer):
                         ),
                         "raw": resource,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "resource",
                     },
                 )
             )
+
+        self.validate(records)
 
         return records
 
@@ -154,9 +139,7 @@ class ResourceNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "subscriptions"
-            )
+            index = parts.index("subscriptions")
 
             return parts[index + 1]
 
@@ -178,9 +161,7 @@ class ResourceNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index(
-                "resourceGroups"
-            )
+            index = parts.index("resourceGroups")
 
             return parts[index + 1]
 

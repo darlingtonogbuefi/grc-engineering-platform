@@ -1,3 +1,6 @@
+# collectors\azure\normalizers\subscription.py
+
+
 """
 Azure Subscription Normalizer.
 
@@ -12,7 +15,6 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -24,6 +26,9 @@ class SubscriptionNormalizer(BaseNormalizer):
 
     RESOURCE_TYPE = "azure.subscription"
 
+    def __init__(self):
+        super().__init__("azure")
+
     def normalize(
         self,
         data: dict[str, Any],
@@ -33,10 +38,6 @@ class SubscriptionNormalizer(BaseNormalizer):
         """
 
         records: list[EvidenceRecord] = []
-
-        collected_at = datetime.now(
-            timezone.utc
-        )
 
         for subscription in data.get(
             "value",
@@ -48,8 +49,7 @@ class SubscriptionNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
+                self.create_record(
                     resource_type=self.RESOURCE_TYPE,
                     resource_id=subscription_id,
                     data={
@@ -60,15 +60,9 @@ class SubscriptionNormalizer(BaseNormalizer):
                         "provider": "azure",
                         "service": "subscriptions",
                         "subscription_id": subscription_id,
-                        "state": subscription.get(
-                            "state"
-                        ),
-                        "tenant_id": subscription.get(
-                            "tenantId"
-                        ),
-                        "authorization_source": subscription.get(
-                            "authorizationSource"
-                        ),
+                        "state": subscription.get("state"),
+                        "tenant_id": subscription.get("tenantId"),
+                        "authorization_source": subscription.get("authorizationSource"),
                         "managed_by_tenants": subscription.get(
                             "managedByTenants",
                             [],
@@ -83,12 +77,13 @@ class SubscriptionNormalizer(BaseNormalizer):
                         ),
                         "raw": subscription,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "subscription",
                     },
                 )
             )
+
+        self.validate(records)
 
         return records

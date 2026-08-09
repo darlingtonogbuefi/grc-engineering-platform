@@ -1,3 +1,5 @@
+# collectors\entra\auth.py
+
 """
 Microsoft Entra Authentication Provider.
 

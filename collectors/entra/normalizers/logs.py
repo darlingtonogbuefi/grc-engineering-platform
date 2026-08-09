@@ -1,4 +1,4 @@
-#collectors\entra\normalizers\logs.py
+# collectors\entra\normalizers\logs.py
 
 """
 Microsoft Entra log normalizer.
@@ -132,6 +132,46 @@ def normalize(
             ),
         }
     )
+
+
+def normalize_audit_logs(
+    logs: list[Dict[str, Any]],
+) -> list[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra audit logs.
+
+    Parameters
+    ----------
+    logs:
+        List of raw Microsoft Graph audit log objects.
+
+    Returns
+    -------
+    list[Dict[str, Any]]
+        Normalized audit log evidence records.
+    """
+
+    return [normalize(log) for log in logs if log]
+
+
+def normalize_sign_ins(
+    logs: list[Dict[str, Any]],
+) -> list[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra sign-in logs.
+
+    Parameters
+    ----------
+    logs:
+        List of raw Microsoft Graph sign-in log objects.
+
+    Returns
+    -------
+    list[Dict[str, Any]]
+        Normalized sign-in log evidence records.
+    """
+
+    return [normalize(log) for log in logs if log]
 
 
 def normalize_initiated_by(
@@ -288,21 +328,20 @@ def extract_user(
     """
     Extract user principal name from
     audit or sign-in logs.
+
+    Audit logs may be initiated by either
+    a user or an application. Handle both
+    safely.
     """
 
-    return (
-        log.get(
-            "userPrincipalName"
-        )
-        or log.get(
-            "initiatedBy",
-            {},
-        )
-        .get(
-            "user",
-            {},
-        )
-        .get(
-            "userPrincipalName"
-        )
-    )
+    #
+    # Sign-in logs expose the UPN directly.
+    #
+    if log.get("userPrincipalName"):
+        return log.get("userPrincipalName")
+
+    initiated_by = log.get("initiatedBy") or {}
+
+    user = initiated_by.get("user") or {}
+
+    return user.get("userPrincipalName")

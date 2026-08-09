@@ -1,0 +1,37 @@
+#collectors\azure\queries\security-settings.yml
+
+id: azure.security_settings
+
+name: Azure Security Settings
+
+description: >
+  Collect Azure Security Center configuration settings
+  used for security posture assessment.
+
+provider: azure
+
+service: security
+
+method: GET
+
+endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Security/settings
+
+api_version: "2022-05-01"
+
+normalizer: SecurityNormalizer
+
+profiles:
+  - default
+  - full
+  - iso27001
+  - iso42001
+  - soc2
+  - caf
+  - govassure
+  - cyberessentials
+
+fields:
+  - id
+  - name
+  - type
+  - properties

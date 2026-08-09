@@ -1,3 +1,6 @@
+#collectors\azure\queries\storage-accounts.yml
+
+
 id: azure.storage_accounts
 name: Azure Storage Accounts
 description: >
@@ -8,7 +11,7 @@ service: Microsoft.Storage
 resource: storageAccounts
 method: GET
 endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-api_version: "2023-05-01"
+api_version: "2024-01-01"
 scope: subscription
 
 pagination:
@@ -50,6 +53,20 @@ fields:
   - properties.isHnsEnabled
   - properties.enableHttpsTrafficOnly
   - properties.allowSharedKeyAccess
+
+collection:
+  retry:
+    enabled: true
+    max_attempts: 3
+
+  timeout_seconds: 60
+
+  throttling:
+    enabled: true
+
+failure_policy:
+  continue_on_error: true
+  store_errors: true
 
 metadata:
   category: data_security

@@ -7,7 +7,7 @@ into a consistent evidence format.
 
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from .common import (
     normalize_boolean,
@@ -35,66 +35,28 @@ def normalize(
 
     return remove_empty_values(
         {
-            "id": group.get(
-                "id"
-            ),
+            "id": group.get("id"),
             "type": "group",
             "provider": "entra",
-            "display_name": group.get(
-                "displayName"
-            ),
-            "description": group.get(
-                "description"
-            ),
+            "display_name": group.get("displayName"),
+            "description": group.get("description"),
             "group_types": group.get(
                 "groupTypes",
                 [],
             ),
-            "mail": group.get(
-                "mail"
-            ),
-            "mail_enabled": normalize_boolean(
-                group.get(
-                    "mailEnabled"
-                )
-            ),
-            "mail_nickname": group.get(
-                "mailNickname"
-            ),
-            "security_enabled": normalize_boolean(
-                group.get(
-                    "securityEnabled"
-                )
-            ),
-            "visibility": group.get(
-                "visibility"
-            ),
-            "membership_rule": group.get(
-                "membershipRule"
-            ),
+            "mail": group.get("mail"),
+            "mail_enabled": normalize_boolean(group.get("mailEnabled")),
+            "mail_nickname": group.get("mailNickname"),
+            "security_enabled": normalize_boolean(group.get("securityEnabled")),
+            "visibility": group.get("visibility"),
+            "membership_rule": group.get("membershipRule"),
             "membership_rule_processing_state": group.get(
                 "membershipRuleProcessingState"
             ),
-            "is_assignable_to_role": normalize_boolean(
-                group.get(
-                    "isAssignableToRole"
-                )
-            ),
-            "created_date_time": normalize_datetime(
-                group.get(
-                    "createdDateTime"
-                )
-            ),
-            "expiration_date_time": normalize_datetime(
-                group.get(
-                    "expirationDateTime"
-                )
-            ),
-            "renewed_date_time": normalize_datetime(
-                group.get(
-                    "renewedDateTime"
-                )
-            ),
+            "is_assignable_to_role": normalize_boolean(group.get("isAssignableToRole")),
+            "created_date_time": normalize_datetime(group.get("createdDateTime")),
+            "expiration_date_time": normalize_datetime(group.get("expirationDateTime")),
+            "renewed_date_time": normalize_datetime(group.get("renewedDateTime")),
             "resource_behavior_options": group.get(
                 "resourceBehaviorOptions",
                 [],
@@ -119,6 +81,26 @@ def normalize(
     )
 
 
+def normalize_groups(
+    groups: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Normalize a collection of Microsoft Entra groups.
+
+    Parameters
+    ----------
+    groups:
+        List of raw Microsoft Graph group objects.
+
+    Returns
+    -------
+    List[Dict[str, Any]]
+        Normalized group evidence records.
+    """
+
+    return [normalize(group) for group in groups if group]
+
+
 def normalize_members(
     members: list[Dict[str, Any]],
 ) -> list[Dict[str, Any]]:
@@ -129,26 +111,12 @@ def normalize_members(
     return [
         remove_empty_values(
             {
-                "id": member.get(
-                    "id"
-                ),
-                "display_name": member.get(
-                    "displayName"
-                ),
-                "upn": member.get(
-                    "userPrincipalName"
-                ),
-                "user_principal_name": member.get(
-                    "userPrincipalName"
-                ),
-                "type": normalize_object_type(
-                    member.get(
-                        "@odata.type"
-                    )
-                ),
-                "object_type": member.get(
-                    "@odata.type"
-                ),
+                "id": member.get("id"),
+                "display_name": member.get("displayName"),
+                "upn": member.get("userPrincipalName"),
+                "user_principal_name": member.get("userPrincipalName"),
+                "type": normalize_object_type(member.get("@odata.type")),
+                "object_type": member.get("@odata.type"),
             }
         )
         for member in members
@@ -181,4 +149,3 @@ def normalize_object_type(
             1,
         )[-1],
     )
-

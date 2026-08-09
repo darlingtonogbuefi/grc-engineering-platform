@@ -1,3 +1,6 @@
+# collectors\entra\__init__.py
+
+
 """
 Microsoft Entra evidence collector.
 

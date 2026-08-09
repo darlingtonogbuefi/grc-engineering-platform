@@ -1,3 +1,6 @@
+#collectors\azure\profiles\iso27001.yml
+
+
 name: iso27001
 
 version: 1.0.0

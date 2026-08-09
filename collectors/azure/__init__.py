@@ -1,18 +1,21 @@
-"""
-Azure Evidence Collector.
+#  collectors\azure\__init__.py
 
-Provides Azure resource collection capabilities
-for the GRC evidence engineering platform.
+"""
+Azure evidence collector.
+
+Provides authentication, API client,
+and collector implementations for
+Microsoft Azure (Azure Resource Manager).
 """
 
-from .collector import AzureCollector
 from .auth import AzureAuthenticator
 from .client import AzureClient
+from .collector import AzureCollector
 
 __version__ = "1.0.0"
 
 __all__ = [
-    "AzureCollector",
     "AzureAuthenticator",
     "AzureClient",
+    "AzureCollector",
 ]

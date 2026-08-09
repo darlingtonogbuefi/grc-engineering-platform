@@ -1,0 +1,39 @@
+{
+  "value": [
+    {
+      "id": "/subscriptions/a9a06c20-9359-4214-b776-9adcbd617d44",
+      "authorizationSource": "RoleBased",
+      "managedByTenants": [],
+      "tags": {
+        "subscription": "identity"
+      },
+      "subscriptionId": "a9a06c20-9359-4214-b776-9adcbd617d44",
+      "tenantId": "90ab40f0-4796-430e-8b3e-95c504993d1a",
+      "displayName": "Connectivity_Subscription",
+      "state": "Enabled",
+      "subscriptionPolicies": {
+        "locationPlacementId": "Public_2014-09-01",
+        "quotaId": "PayAsYouGo_2014-09-01",
+        "spendingLimit": "Off"
+      }
+    },
+    {
+      "id": "/subscriptions/0786264d-36b1-4cf8-8bbe-e3e9ffab9279",
+      "authorizationSource": "RoleBased",
+      "managedByTenants": [],
+      "subscriptionId": "0786264d-36b1-4cf8-8bbe-e3e9ffab9279",
+      "tenantId": "90ab40f0-4796-430e-8b3e-95c504993d1a",
+      "displayName": "Management_Subscription",
+      "state": "Enabled",
+      "subscriptionPolicies": {
+        "locationPlacementId": "Public_2014-09-01",
+        "quotaId": "PayAsYouGo_2014-09-01",
+        "spendingLimit": "Off"
+      }
+    }
+  ],
+  "count": {
+    "type": "Total",
+    "value": 2
+  }
+}

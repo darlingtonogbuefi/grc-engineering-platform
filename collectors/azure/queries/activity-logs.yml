@@ -1,30 +1,68 @@
 # collectors/azure/queries/activity-logs.yml
+# collectors/azure/queries/activity-logs.yml
+
 id: azure.activity_logs
+
 name: Azure Activity Logs
+
 description: >
-  Collect Azure Activity Logs for auditing, monitoring, and compliance evidence.
+  Collect Azure Activity Logs for auditing, monitoring,
+  security investigation, and compliance evidence.
+
 service: Microsoft.Insights
+
 resource: activityLogs
+
 method: GET
+
 endpoint: /subscriptions/{subscriptionId}/providers/Microsoft.Insights/eventtypes/management/values
+
 api_version: "2015-04-01"
+
 scope: subscription
+
 
 pagination:
   enabled: true
   next_link: nextLink
+  mode: absolute_url
+
 
 authentication:
   type: bearer
 
+
+retry:
+  enabled: true
+  max_attempts: 5
+  backoff:
+    strategy: exponential
+    initial_seconds: 2
+    max_seconds: 60
+
+
+throttling:
+  enabled: true
+  respect_retry_after: true
+
+
 response:
   items: value
 
-normalizer: LoggingNormalizer
+
+normalizer:
+  class: LoggingNormalizer
+  module: collectors.azure.normalizers.logging
+
+
 primary_key: eventDataId
 
+
 parameters:
-  timespan: P90D
+  timespan:
+    default: P90D
+    configurable: true
+
 
 fields:
   - eventDataId
@@ -33,19 +71,27 @@ fields:
   - category
   - level
   - status
+  - subStatus
   - caller
   - claims
+  - authorization
   - resourceGroupName
   - resourceProviderName
   - resourceId
   - subscriptionId
+  - tenantId
   - correlationId
+  - properties
+
 
 metadata:
   category: monitoring
   evidence_type: activity_log
   provider: azure
   version: 1
+  audit:
+    source: azure_activity_logs
+
 
 profiles:
   - default

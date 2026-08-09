@@ -1,3 +1,5 @@
+#collectors\azure\profiles\caf.yml
+
 name: caf
 
 version: 1.0.0
