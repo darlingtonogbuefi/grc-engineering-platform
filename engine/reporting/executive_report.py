@@ -1,3 +1,5 @@
+# engine\reporting\executive_report.py
+
 """
 Executive Report Generator
 
@@ -30,7 +32,6 @@ from .report_generator import (
     ReportSection,
 )
 
-
 # ==============================================================================
 # Executive Report Models
 # ==============================================================================
@@ -54,14 +55,8 @@ class ExecutiveReport:
     """
 
     report: ReportDocument
-
-    metrics: list[ExecutiveMetric] = field(
-        default_factory=list
-    )
-
-    recommendations: list[str] = field(
-        default_factory=list
-    )
+    metrics: list[ExecutiveMetric] = field(default_factory=list)
+    recommendations: list[str] = field(default_factory=list)
 
 
 # ==============================================================================
@@ -75,7 +70,6 @@ class ExecutiveReportGenerator:
     """
 
     def __init__(self) -> None:
-
         self.report_generator = ReportGenerator()
 
     # ------------------------------------------------------------------
@@ -85,31 +79,18 @@ class ExecutiveReportGenerator:
         assessment: AssessmentScore,
         tenant: str = "default",
     ) -> ExecutiveReport:
-
         report = self.report_generator.generate(
             assessment,
             tenant,
         )
 
-        metrics = self.build_metrics(
-            assessment
-        )
+        metrics = self.build_metrics(assessment)
 
-        recommendations = self.build_recommendations(
-            assessment
-        )
+        recommendations = self.build_recommendations(assessment)
 
-        report.sections.append(
-            self.metric_section(
-                metrics
-            )
-        )
+        report.sections.append(self.metric_section(metrics))
 
-        report.sections.append(
-            self.recommendation_section(
-                recommendations
-            )
-        )
+        report.sections.append(self.recommendation_section(recommendations))
 
         return ExecutiveReport(
             report=report,
@@ -123,39 +104,33 @@ class ExecutiveReportGenerator:
     def build_metrics(
         assessment: AssessmentScore,
     ) -> list[ExecutiveMetric]:
-
         summary = assessment.executive_summary
 
         return [
-
             ExecutiveMetric(
                 "Security Score",
                 summary.get("security_score", 0),
-                "Good"
-                if summary.get("security_score", 0) >= 80
-                else "Needs Improvement",
+                (
+                    "Good"
+                    if summary.get("security_score", 0) >= 80
+                    else "Needs Improvement"
+                ),
             ),
-
             ExecutiveMetric(
                 "Frameworks Assessed",
                 summary.get("frameworks_assessed", 0),
                 "Complete",
             ),
-
             ExecutiveMetric(
                 "Critical Risks",
                 summary.get("critical_risks", 0),
-                "Attention"
-                if summary.get("critical_risks", 0) > 0
-                else "Healthy",
+                "Attention" if summary.get("critical_risks", 0) > 0 else "Healthy",
             ),
-
             ExecutiveMetric(
                 "Maturity",
                 summary.get("maturity_name", "Unknown"),
                 "Current",
             ),
-
         ]
 
     # ------------------------------------------------------------------
@@ -164,31 +139,23 @@ class ExecutiveReportGenerator:
     def build_recommendations(
         assessment: AssessmentScore,
     ) -> list[str]:
-
         recommendations: list[str] = []
-
         summary = assessment.executive_summary
 
         if summary.get("security_score", 0) < 80:
-
             recommendations.append(
                 "Increase implementation of security controls across assessed frameworks."
             )
 
         if summary.get("critical_risks", 0) > 0:
-
-            recommendations.append(
-                "Prioritise remediation of all Critical risks."
-            )
+            recommendations.append("Prioritise remediation of all Critical risks.")
 
         if summary.get("maturity_level", 0) < 4:
-
             recommendations.append(
                 "Improve governance processes to achieve Managed maturity."
             )
 
         if not recommendations:
-
             recommendations.append(
                 "Maintain current security posture through continuous monitoring."
             )
@@ -201,7 +168,6 @@ class ExecutiveReportGenerator:
     def metric_section(
         metrics: list[ExecutiveMetric],
     ) -> ReportSection:
-
         return ReportSection(
             title="Executive Metrics",
             content={
@@ -222,12 +188,9 @@ class ExecutiveReportGenerator:
     def recommendation_section(
         recommendations: list[str],
     ) -> ReportSection:
-
         return ReportSection(
             title="Executive Recommendations",
-            content={
-                "recommendations": recommendations
-            },
+            content={"recommendations": recommendations},
         )
 
 
@@ -243,7 +206,6 @@ def generate_executive_report(
     """
     Generate an executive report.
     """
-
     generator = ExecutiveReportGenerator()
 
     return generator.generate(

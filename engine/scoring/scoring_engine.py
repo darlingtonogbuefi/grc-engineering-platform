@@ -1,3 +1,5 @@
+# engine\scoring\scoring_engine.py
+
 """
 Scoring Engine
 
@@ -15,63 +17,36 @@ Combines:
 Pipeline:
 
 Evidence
-    |
-    v
+|
+v
 Evidence Score
-    |
-    v
+|
+v
 Control Score
-    |
-    v
+|
+v
 Capability Score
-    |
-    v
+|
+v
 Framework Score
-    |
-    v
+|
+v
 Risk Assessment
-    |
-    v
+|
+v
 Executive Summary
 """
 
 from __future__ import annotations
 
-
 from dataclasses import dataclass, field
-
-
 from typing import Any
 
-
-from .maturity_model import (
-    MaturityModel,
-    MaturityResult,
-)
-
-
-from .risk_calculator import (
-    Risk,
-    RiskCalculator,
-    RiskResult,
-)
-
-
-from ..mapper.control_mapper import (
-    ControlMapping,
-)
-
-
-from ..mapper.capability_mapper import (
-    CapabilityResult,
-)
-
-
-from ..mapper.framework_mapper import (
-    FrameworkResult,
-)
-
-
+from ..mapper.capability_mapper import CapabilityResult
+from ..mapper.control_mapper import ControlMapping
+from ..mapper.framework_mapper import FrameworkResult
+from .maturity_model import MaturityModel, MaturityResult
+from .risk_calculator import Risk, RiskCalculator, RiskResult
 
 # ==============================================================================
 # Score Models
@@ -90,16 +65,21 @@ class EvidenceScore:
 
     confidence: float = 1.0
 
-    findings: list[str] = field(
-        default_factory=list
-    )
-
+    findings: list[str] = field(default_factory=list)
 
 
 @dataclass(slots=True)
 class ControlScore:
     """
     Control effectiveness score.
+
+    In addition to the calculated score, the original control mapping
+    information is retained so downstream reporting layers can produce
+    control-level evidence without reconstructing information from the
+    original evidence collection.
+
+    The score calculation itself remains unchanged:
+        25 points per evidence item, capped at 100.
     """
 
     control_id: str
@@ -108,17 +88,47 @@ class ControlScore:
 
     evidence_count: int
 
-    findings: list[str] = field(
+    findings: list[str] = field(default_factory=list)
+
+    #
+    # Control mapping metadata.
+    #
+    # These fields preserve information that already exists on
+    # ControlMapping but was previously discarded by the scoring layer.
+    #
+    framework: str | None = None
+
+    title: str | None = None
+
+    capability: str | None = None
+
+    confidence: float = 1.0
+
+    #
+    # Original evidence attached to this control.
+    #
+    # The reporting layer can use this directly for observed evidence.
+    #
+    evidence: list[dict[str, Any]] = field(
         default_factory=list
     )
-
 
 
 @dataclass(slots=True)
 class AssessmentScore:
     """
     Complete assessment scoring result.
+
+    The original evidence is retained alongside its calculated
+    EvidenceScore so that downstream reporting and export layers
+    can display the evidence collected during the assessment.
+
+    Control-level mapping information is retained through
+    ControlScore so downstream reporting can expose the actual
+    control evidence and metadata produced by the assessment pipeline.
     """
+
+    evidence: list[dict[str, Any]]
 
     evidence_scores: list[EvidenceScore]
 
@@ -135,7 +145,6 @@ class AssessmentScore:
     executive_summary: dict[str, Any]
 
 
-
 # ==============================================================================
 # Scoring Engine
 # ==============================================================================
@@ -149,15 +158,9 @@ class ScoringEngine:
     def __init__(
         self,
     ) -> None:
+        self.maturity_model = MaturityModel()
 
-        self.maturity_model = (
-            MaturityModel()
-        )
-
-        self.risk_calculator = (
-            RiskCalculator()
-        )
-
+        self.risk_calculator = RiskCalculator()
 
     # ------------------------------------------------------------------
     # Evidence Scoring
@@ -173,14 +176,11 @@ class ScoringEngine:
 
         results: list[EvidenceScore] = []
 
-
         for item in evidence:
-
             evidence_id = item.get(
                 "evidence_id",
                 "unknown",
             )
-
 
             confidence = float(
                 item.get(
@@ -189,43 +189,26 @@ class ScoringEngine:
                 )
             )
 
-
             score = confidence * 100
-
 
             findings = []
 
-
             if confidence < 0.5:
-
-                findings.append(
-                    "Low confidence evidence."
-                )
-
+                findings.append("Low confidence evidence.")
 
             results.append(
-
                 EvidenceScore(
-
                     evidence_id=evidence_id,
-
                     score=round(
                         score,
                         2,
                     ),
-
                     confidence=confidence,
-
                     findings=findings,
-
                 )
-
             )
 
-
         return results
-
-
 
     # ------------------------------------------------------------------
     # Control Scoring
@@ -237,49 +220,127 @@ class ScoringEngine:
     ) -> list[ControlScore]:
         """
         Score control effectiveness.
+
+        Existing scoring behaviour is preserved:
+
+            1 evidence item = 25
+            2 evidence items = 50
+            3 evidence items = 75
+            4+ evidence items = 100
+
+        Multiple ControlMapping objects for the same control are merged
+        so that evidence is not silently overwritten.
+
+        The mapping metadata and original evidence are retained on the
+        resulting ControlScore for downstream reporting.
         """
 
         results: dict[str, ControlScore] = {}
 
-
         for mapping in mappings:
 
-            control_id = (
-                mapping.control_id
+            control_id = mapping.control_id
+
+            #
+            # Look up an existing score for this control.
+            #
+            existing = results.get(
+                control_id,
             )
 
+            if existing is None:
 
-            score = min(
-
-                len(
+                #
+                # First mapping for this control.
+                #
+                evidence = list(
                     mapping.evidence
                 )
-                *
-                25,
 
+                score = min(
+                    len(evidence) * 25,
+                    100,
+                )
+
+                results[control_id] = ControlScore(
+                    control_id=control_id,
+                    score=score,
+                    evidence_count=len(evidence),
+                    framework=mapping.framework,
+                    title=mapping.title,
+                    capability=mapping.capability,
+                    confidence=mapping.confidence,
+                    evidence=evidence,
+                )
+
+                continue
+
+            #
+            # The same control may have been mapped from several
+            # evidence records.
+            #
+            # The previous implementation replaced the existing
+            # ControlScore here, causing earlier evidence to be lost.
+            #
+            # Merge new evidence while avoiding duplicate records.
+            #
+            for evidence_item in mapping.evidence:
+
+                if evidence_item not in existing.evidence:
+                    existing.evidence.append(
+                        evidence_item
+                    )
+
+            #
+            # Recalculate using the complete evidence collection.
+            #
+            existing.evidence_count = len(
+                existing.evidence
+            )
+
+            existing.score = min(
+                existing.evidence_count * 25,
                 100,
-
             )
 
+            #
+            # Preserve useful metadata if the original object did
+            # not already contain it.
+            #
+            if (
+                existing.framework is None
+                and mapping.framework is not None
+            ):
+                existing.framework = (
+                    mapping.framework
+                )
 
-            results[control_id] = ControlScore(
+            if (
+                existing.title is None
+                and mapping.title is not None
+            ):
+                existing.title = mapping.title
 
-                control_id=control_id,
+            if (
+                existing.capability is None
+                and mapping.capability is not None
+            ):
+                existing.capability = (
+                    mapping.capability
+                )
 
-                score=score,
-
-                evidence_count=len(
-                    mapping.evidence
-                ),
-
+            #
+            # Preserve the strongest confidence value available
+            # without changing the existing confidence semantics.
+            #
+            existing.confidence = max(
+                existing.confidence,
+                mapping.confidence,
             )
-
 
         return list(
             results.values()
         )
-
-
 
     # ------------------------------------------------------------------
     # Capability Scoring
@@ -294,28 +355,14 @@ class ScoringEngine:
         """
 
         for capability in capabilities:
-
             capability.score = min(
-
                 capability.score,
-
                 100,
-
             )
 
-
-            capability.maturity = (
-
-                capability.score /
-
-                20
-
-            )
-
+            capability.maturity = capability.score / 20
 
         return capabilities
-
-
 
     # ------------------------------------------------------------------
     # Framework Scoring
@@ -330,19 +377,12 @@ class ScoringEngine:
         """
 
         for framework in frameworks:
-
             framework.score = min(
-
                 framework.score,
-
                 100,
-
             )
 
-
         return frameworks
-
-
 
     # ------------------------------------------------------------------
     # Risk Integration
@@ -357,16 +397,9 @@ class ScoringEngine:
         """
 
         return [
-
-            self.risk_calculator.calculate(
-                risk
-            )
-
+            self.risk_calculator.calculate(risk)
             for risk in risks
-
         ]
-
-
 
     # ------------------------------------------------------------------
     # Complete Assessment
@@ -382,88 +415,61 @@ class ScoringEngine:
     ) -> AssessmentScore:
         """
         Execute complete scoring process.
+
+        The original evidence is deliberately retained in the
+        AssessmentScore so reporting and export layers can expose
+        the evidence collected during the assessment.
+
+        Control mappings are also retained through ControlScore,
+        including control metadata and the evidence attached to
+        each control.
         """
 
-        evidence_scores = (
-            self.score_evidence(
-                evidence
-            )
+        evidence_scores = self.score_evidence(
+            evidence,
         )
 
-
-        control_scores = (
-            self.score_controls(
-                controls
-            )
+        control_scores = self.score_controls(
+            controls,
         )
 
-
-        capability_scores = (
-            self.score_capabilities(
-                capabilities
-            )
+        capability_scores = self.score_capabilities(
+            capabilities,
         )
 
-
-        framework_scores = (
-            self.score_frameworks(
-                frameworks
-            )
+        framework_scores = self.score_frameworks(
+            frameworks,
         )
 
-
-        risk_results = (
-
-            self.calculate_risks(
-                risks or []
-            )
-
+        risk_results = self.calculate_risks(
+            risks or [],
         )
 
-
-        overall_score = (
-            self.calculate_overall_score(
-                framework_scores
-            )
+        overall_score = self.calculate_overall_score(
+            framework_scores,
         )
 
-
-        maturity = (
-            self.maturity_model.calculate(
-                overall_score
-            )
+        maturity = self.maturity_model.calculate(
+            overall_score,
         )
 
-
-        summary = (
-            self.executive_summary(
-                overall_score,
-                maturity,
-                framework_scores,
-                risk_results,
-            )
+        summary = self.executive_summary(
+            overall_score,
+            maturity,
+            framework_scores,
+            risk_results,
         )
-
 
         return AssessmentScore(
-
+            evidence=evidence,
             evidence_scores=evidence_scores,
-
             control_scores=control_scores,
-
             capability_scores=capability_scores,
-
             framework_scores=framework_scores,
-
             risks=risk_results,
-
             maturity=maturity,
-
             executive_summary=summary,
-
         )
-
-
 
     # ------------------------------------------------------------------
     # Overall Score
@@ -478,24 +484,16 @@ class ScoringEngine:
         """
 
         if not frameworks:
-
             return 0.0
 
-
         return round(
-
             sum(
                 item.score
                 for item in frameworks
             )
-            /
-            len(frameworks),
-
+            / len(frameworks),
             2,
-
         )
-
-
 
     # ------------------------------------------------------------------
     # Executive Summary
@@ -513,46 +511,19 @@ class ScoringEngine:
         """
 
         return {
-
-            "security_score":
-                score,
-
-
-            "maturity_level":
-                maturity.level,
-
-
-            "maturity_name":
-                maturity.name,
-
-
-            "frameworks_assessed":
-                len(frameworks),
-
-
-            "risks_identified":
-                len(risks),
-
-
-            "critical_risks":
-                len(
-
-                    [
-
-                        risk
-
-                        for risk in risks
-
-                        if risk.level.value
-                        ==
-                        "Critical"
-
-                    ]
-
-                ),
-
+            "security_score": score,
+            "maturity_level": maturity.level,
+            "maturity_name": maturity.name,
+            "frameworks_assessed": len(frameworks),
+            "risks_identified": len(risks),
+            "critical_risks": len(
+                [
+                    risk
+                    for risk in risks
+                    if risk.level.value == "Critical"
+                ]
+            ),
         }
-
 
 
 # ==============================================================================
@@ -574,15 +545,9 @@ def run_scoring(
     engine = ScoringEngine()
 
     return engine.assess(
-
         evidence,
-
         controls,
-
         capabilities,
-
         frameworks,
-
         risks,
-
     )

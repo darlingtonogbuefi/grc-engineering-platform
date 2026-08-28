@@ -1,3 +1,4 @@
+# engine\scoring\maturity_model.py
 """
 Maturity Model
 
@@ -23,13 +24,8 @@ Scale:
 
 from __future__ import annotations
 
-
 from dataclasses import dataclass, field
-
-
 from typing import Any
-
-
 
 # ==============================================================================
 # Maturity Levels
@@ -43,121 +39,60 @@ class MaturityLevel:
     """
 
     level: int
-
     name: str
-
     description: str
-
     minimum_score: float
-
     maximum_score: float
-
 
 
 # ==============================================================================
 # Default Maturity Model
 # ==============================================================================
 
-
 DEFAULT_MATURITY_LEVELS = [
-
     MaturityLevel(
-
         level=0,
-
         name="Not Implemented",
-
-        description=
-            "No evidence of implementation.",
-
+        description="No evidence of implementation.",
         minimum_score=0,
-
         maximum_score=0,
-
     ),
-
-
     MaturityLevel(
-
         level=1,
-
         name="Initial",
-
-        description=
-            "Processes are reactive and inconsistent.",
-
+        description="Processes are reactive and inconsistent.",
         minimum_score=1,
-
         maximum_score=20,
-
     ),
-
-
     MaturityLevel(
-
         level=2,
-
         name="Developing",
-
-        description=
-            "Basic processes exist but are not standardised.",
-
+        description="Basic processes exist but are not standardised.",
         minimum_score=21,
-
         maximum_score=40,
-
     ),
-
-
     MaturityLevel(
-
         level=3,
-
         name="Defined",
-
-        description=
-            "Processes are documented and repeatable.",
-
+        description="Processes are documented and repeatable.",
         minimum_score=41,
-
         maximum_score=60,
-
     ),
-
-
     MaturityLevel(
-
         level=4,
-
         name="Managed",
-
-        description=
-            "Processes are measured and controlled.",
-
+        description="Processes are measured and controlled.",
         minimum_score=61,
-
         maximum_score=80,
-
     ),
-
-
     MaturityLevel(
-
         level=5,
-
         name="Optimised",
-
-        description=
-            "Processes are continuously improved.",
-
+        description="Processes are continuously improved.",
         minimum_score=81,
-
         maximum_score=100,
-
     ),
-
 ]
-
 
 
 # ==============================================================================
@@ -172,83 +107,43 @@ class ScoringBand:
     """
 
     name: str
-
     minimum: float
-
     maximum: float
-
     rating: str
 
 
-
 DEFAULT_SCORING_BANDS = [
-
     ScoringBand(
-
         name="Critical",
-
         minimum=0,
-
         maximum=20,
-
         rating="Critical",
-
     ),
-
-
     ScoringBand(
-
         name="High",
-
         minimum=21,
-
         maximum=40,
-
         rating="High",
-
     ),
-
-
     ScoringBand(
-
         name="Medium",
-
         minimum=41,
-
         maximum=60,
-
         rating="Medium",
-
     ),
-
-
     ScoringBand(
-
         name="Good",
-
         minimum=61,
-
         maximum=80,
-
         rating="Good",
-
     ),
-
-
     ScoringBand(
-
         name="Excellent",
-
         minimum=81,
-
         maximum=100,
-
         rating="Excellent",
-
     ),
-
 ]
-
 
 
 # ==============================================================================
@@ -263,17 +158,10 @@ class MaturityResult:
     """
 
     score: float
-
     level: int
-
     name: str
-
     description: str
-
-    metadata: dict[str, Any] = field(
-        default_factory=dict
-    )
-
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 # ==============================================================================
@@ -291,19 +179,28 @@ class MaturityModel:
         levels: list[MaturityLevel] | None = None,
         bands: list[ScoringBand] | None = None,
     ) -> None:
+        self.levels = list(levels if levels is not None else DEFAULT_MATURITY_LEVELS)
+        self.bands = list(bands if bands is not None else DEFAULT_SCORING_BANDS)
 
+    # ------------------------------------------------------------------
 
-        self.levels = (
-            levels
-            or DEFAULT_MATURITY_LEVELS
+    @staticmethod
+    def _normalise_score(
+        score: float,
+    ) -> float:
+        """
+        Normalise a score to the supported 0-100 range.
+        """
+
+        score = float(score)
+
+        return max(
+            0.0,
+            min(
+                score,
+                100.0,
+            ),
         )
-
-
-        self.bands = (
-            bands
-            or DEFAULT_SCORING_BANDS
-        )
-
 
     # ------------------------------------------------------------------
 
@@ -315,50 +212,20 @@ class MaturityModel:
         Convert score into maturity level.
         """
 
-        score = max(
-            0,
-            min(
-                score,
-                100,
-            )
-        )
+        score = self._normalise_score(score)
 
-
-        selected = (
-            self.levels[0]
-        )
-
+        selected = self.levels[0]
 
         for level in self.levels:
-
-            if (
-
-                score >= level.minimum_score
-
-                and
-
-                score <= level.maximum_score
-
-            ):
-
+            if score >= level.minimum_score and score <= level.maximum_score:
                 selected = level
 
-
         return MaturityResult(
-
-            score=round(
-                score,
-                2,
-            ),
-
+            score=round(score, 2),
             level=selected.level,
-
             name=selected.name,
-
             description=selected.description,
-
         )
-
 
     # ------------------------------------------------------------------
 
@@ -370,32 +237,13 @@ class MaturityModel:
         Return score classification.
         """
 
-        score = max(
-            0,
-            min(
-                score,
-                100,
-            )
-        )
-
+        score = self._normalise_score(score)
 
         for band in self.bands:
-
-            if (
-
-                score >= band.minimum
-
-                and
-
-                score <= band.maximum
-
-            ):
-
+            if score >= band.minimum and score <= band.maximum:
                 return band
 
-
         return self.bands[-1]
-
 
 
 # ==============================================================================
@@ -412,10 +260,7 @@ def calculate_capability_maturity(
 
     model = MaturityModel()
 
-    return model.calculate(
-        capability_score
-    )
-
+    return model.calculate(capability_score)
 
 
 # ==============================================================================
@@ -432,10 +277,7 @@ def calculate_framework_maturity(
 
     model = MaturityModel()
 
-    return model.calculate(
-        framework_score
-    )
-
+    return model.calculate(framework_score)
 
 
 # ==============================================================================

@@ -1,6 +1,5 @@
 # collectors\azure\normalizers\subscription.py
 
-
 """
 Azure Subscription Normalizer.
 
@@ -15,6 +14,7 @@ Does not perform:
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -39,10 +39,24 @@ class SubscriptionNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
+        #
+        # Generate one UTC timestamp for the entire
+        # normalization run.
+        #
+        # This represents when the Azure Subscription
+        # evidence batch was observed/normalized.
+        #
+        collection_timestamp = datetime.now(
+            UTC,
+        ).isoformat()
+
         for subscription in data.get(
             "value",
             [],
         ):
+            if not isinstance(subscription, dict):
+                continue
+
             subscription_id = subscription.get(
                 "subscriptionId",
                 "",
@@ -53,6 +67,16 @@ class SubscriptionNormalizer(BaseNormalizer):
                     resource_type=self.RESOURCE_TYPE,
                     resource_id=subscription_id,
                     data={
+                        #
+                        # Collection timestamp.
+                        #
+                        # This is the UTC timestamp for the
+                        # live Azure Subscription evidence
+                        # normalization run. Every record from
+                        # this collection run receives the same
+                        # timestamp.
+                        #
+                        "timestamp": collection_timestamp,
                         "name": subscription.get(
                             "displayName",
                             "",

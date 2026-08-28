@@ -1,12 +1,14 @@
+# engine\validator\schema_validator.py
+
 """
 JSON Schema Validation
 
 Responsible for validating all platform objects
 against the schemas located in:
 
-    schemas/
+schemas/
 
-Supported schemas
+Supported schemas:
 
 - evidence.schema.json
 - control.schema.json
@@ -33,7 +35,7 @@ class SchemaValidator:
     """
     JSON Schema validator.
 
-    Example
+    Example:
 
         validator = SchemaValidator()
 
@@ -47,13 +49,8 @@ class SchemaValidator:
         self,
         config: RuntimeConfig | None = None,
     ) -> None:
-
         self.config = config or load_configuration()
-
-        self.schema_directory = (
-            self.config.paths.schemas
-        )
-
+        self.schema_directory = self.config.paths.schemas
         self._cache: dict[str, dict[str, Any]] = {}
 
     # ------------------------------------------------------------------
@@ -67,38 +64,24 @@ class SchemaValidator:
         """
         Load a schema from the schemas directory.
         """
-
         if schema_name in self._cache:
             return self._cache[schema_name]
 
-        schema_file = (
-            self.schema_directory /
-            schema_name
-        )
+        schema_file = self.schema_directory / schema_name
 
         if not schema_file.exists():
-
-            raise ConfigurationError(
-                f"Schema not found: {schema_file}"
-            )
+            raise ConfigurationError(f"Schema not found: {schema_file}")
 
         try:
-
             with schema_file.open(
                 "r",
                 encoding="utf-8",
             ) as file:
-
                 schema = json.load(file)
-
         except json.JSONDecodeError as exc:
-
-            raise ConfigurationError(
-                f"Invalid JSON schema: {schema_file}"
-            ) from exc
+            raise ConfigurationError(f"Invalid JSON schema: {schema_file}") from exc
 
         self._cache[schema_name] = schema
-
         return schema
 
     # ------------------------------------------------------------------
@@ -115,29 +98,19 @@ class SchemaValidator:
 
         Raises ConfigurationError on failure.
         """
+        schema = self.load_schema(schema_name)
 
-        schema = self.load_schema(
-            schema_name
-        )
-
-        validator = Draft202012Validator(
-            schema
-        )
+        validator = Draft202012Validator(schema)
 
         errors = sorted(
             validator.iter_errors(document),
-            key=lambda e: list(e.path),
+            key=lambda error: list(error.path),
         )
 
         if errors:
+            message = self._format_errors(errors)
 
-            message = self._format_errors(
-                errors
-            )
-
-            raise ConfigurationError(
-                message
-            )
+            raise ConfigurationError(message)
 
     # ------------------------------------------------------------------
     # Helpers
@@ -151,27 +124,14 @@ class SchemaValidator:
         Convert validation errors into
         a readable message.
         """
-
         messages: list[str] = []
 
         for error in errors:
+            location = ".".join(str(item) for item in error.path) or "<root>"
 
-            location = (
-                ".".join(
-                    str(item)
-                    for item in error.path
-                )
-                or "<root>"
-            )
+            messages.append(f"{location}: {error.message}")
 
-            messages.append(
-                f"{location}: {error.message}"
-            )
-
-        return (
-            "Schema validation failed:\n"
-            + "\n".join(messages)
-        )
+        return "Schema validation failed:\n" + "\n".join(messages)
 
     # ------------------------------------------------------------------
     # Convenience methods
@@ -181,7 +141,6 @@ class SchemaValidator:
         self,
         evidence: dict[str, Any],
     ) -> None:
-
         self.validate(
             evidence,
             "evidence.schema.json",
@@ -191,7 +150,6 @@ class SchemaValidator:
         self,
         control: dict[str, Any],
     ) -> None:
-
         self.validate(
             control,
             "control.schema.json",
@@ -201,7 +159,6 @@ class SchemaValidator:
         self,
         framework: dict[str, Any],
     ) -> None:
-
         self.validate(
             framework,
             "framework.schema.json",
@@ -211,7 +168,6 @@ class SchemaValidator:
         self,
         collector: dict[str, Any],
     ) -> None:
-
         self.validate(
             collector,
             "collector.schema.json",
@@ -221,7 +177,6 @@ class SchemaValidator:
         self,
         tenant: dict[str, Any],
     ) -> None:
-
         self.validate(
             tenant,
             "tenant.schema.json",
@@ -231,7 +186,6 @@ class SchemaValidator:
         self,
         report: dict[str, Any],
     ) -> None:
-
         self.validate(
             report,
             "report.schema.json",
@@ -241,7 +195,6 @@ class SchemaValidator:
         self,
         risk: dict[str, Any],
     ) -> None:
-
         self.validate(
             risk,
             "risk.schema.json",
@@ -257,10 +210,4 @@ class SchemaValidator:
         """
         Return all available schema files.
         """
-
-        return sorted(
-            path.name
-            for path in self.schema_directory.glob(
-                "*.json"
-            )
-        )
+        return sorted(path.name for path in self.schema_directory.glob("*.json"))

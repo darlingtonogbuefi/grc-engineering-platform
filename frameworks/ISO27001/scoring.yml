@@ -1,307 +1,423 @@
+#frameworks\ISO27001\scoring.yml
 #
-# ISO/IEC 27001:2022 Framework Metadata
-# metadata.yml
+# ISO/IEC 27001:2022
+# Assessment Scoring Model
+#
+# Purpose:
+#   Defines the deterministic scoring model used to assess
+#   ISO/IEC 27001:2022 Annex A controls.
+#
+# Outcomes:
+#   pass
+#   partial
+#   fail
+#   not_applicable
 #
 
 framework:
 
   id: ISO27001
-
   name: ISO/IEC 27001
-
   version: "2022"
-
   edition: "ISO/IEC 27001:2022"
 
-  publisher:
-    name: International Organization for Standardization (ISO)
 
-  description: >
-    Information security management framework represented as atomic
-    assessment controls based on ISO/IEC 27001:2022 Annex A.
+# ==============================================================================
+# Scoring Model
+# ==============================================================================
 
-    Controls are structured for evidence collection, assessment,
-    scoring and compliance reporting.
+scoring:
 
-    This implementation maps ISO/IEC 27001 Annex A controls
-    exclusively to the NCSC Cyber Assessment Framework (CAF).
+  type: weighted_control_score
 
-    No mappings to NIST, CIS, OWASP, COBIT or other frameworks
-    are included.
+  version: "1.0"
+
+  direction: higher_is_better
 
 
+  # --------------------------------------------------------------------------
+  # Control Outcomes
+  # --------------------------------------------------------------------------
 
-scope:
+  outcomes:
 
-  domains:
+    pass:
+      score: 1.0
+      percentage: 100
+      description: >
+        Evidence demonstrates that the control is implemented,
+        operating effectively and satisfies the assessment requirement.
 
-    - Information security governance
-    - Risk management
-    - Asset management
-    - Identity and access management
-    - Supplier security
-    - Incident management
-    - Business continuity
-    - Compliance management
-    - People security
-    - Physical security
-    - Technology security
+    partial:
+      score: 0.5
+      percentage: 50
+      description: >
+        Evidence demonstrates partial implementation or effectiveness
+        of the control, but one or more material requirements remain
+        incomplete.
 
+    fail:
+      score: 0.0
+      percentage: 0
+      description: >
+        The control is not implemented, is ineffective, or available
+        evidence does not demonstrate implementation.
 
-  environments:
-
-    - Enterprise systems
-    - Cloud services
-    - End-user devices
-    - Network infrastructure
-    - Applications
-    - Development environments
-    - Operational technology where applicable
-
-
-
-control_model:
-
-  type: control_assessment
-
-
-  structure:
-
-    control_identifier: true
-
-    fields:
-
-      - id
-      - theme
-      - category
-      - title
-      - requirement
-      - assessment_guidance
-      - evidence
-      - applicability
-      - priority
-      - tags
-      - caf_controls
+    not_applicable:
+      score: null
+      percentage: null
+      excluded: true
+      description: >
+        The control has been formally determined to be not applicable
+        to the assessed organisation and is excluded from the score.
 
 
+  # --------------------------------------------------------------------------
+  # Default Control Weight
+  # --------------------------------------------------------------------------
 
-control_domains:
+  controls:
 
+    default_weight: 1.0
+
+    weight_field: priority
+
+
+  # --------------------------------------------------------------------------
+  # Priority Weights
+  # --------------------------------------------------------------------------
+
+  priority_weights:
+
+    critical: 4.0
+    high: 3.0
+    medium: 2.0
+    low: 1.0
+
+
+  # --------------------------------------------------------------------------
+  # Applicability
+  # --------------------------------------------------------------------------
+
+  applicability:
+
+    required_values:
+
+      - applicable
+      - not_applicable
+
+    default: applicable
+
+    not_applicable_outcome: not_applicable
+
+    require_justification: true
+
+
+  # --------------------------------------------------------------------------
+  # Evidence Requirements
+  # --------------------------------------------------------------------------
+
+  evidence:
+
+    required: true
+
+    minimum_items: 1
+
+    quality:
+
+      attributable:
+        required: true
+        weight: 1.0
+
+      current:
+        required: true
+        weight: 1.0
+
+      relevant:
+        required: true
+        weight: 1.0
+
+      sufficient:
+        required: true
+        weight: 1.0
+
+      repeatable:
+        required: true
+        weight: 1.0
+
+
+    evidence_states:
+
+      accepted:
+        score: 1.0
+
+      insufficient:
+        score: 0.5
+
+      unavailable:
+        score: 0.0
+
+
+  # =============================================================================
+  # Assessment Rules
+  # =============================================================================
+
+  assessment:
+
+    # --------------------------------------------------------------------------
+    # Outcome determination
+    # --------------------------------------------------------------------------
+
+    outcome_rules:
+
+      pass:
+        minimum_score: 1.0
+
+      partial:
+        minimum_score: 0.5
+        maximum_score: 0.99
+
+      fail:
+        maximum_score: 0.49
+
+      not_applicable:
+        excluded: true
+
+
+    # --------------------------------------------------------------------------
+    # Evidence-driven rules
+    # --------------------------------------------------------------------------
+
+    rules:
+
+      - id: NO_EVIDENCE
+        condition:
+          evidence_count: 0
+        outcome: fail
+
+      - id: INSUFFICIENT_EVIDENCE
+        condition:
+          evidence_state: insufficient
+        outcome: partial
+
+      - id: UNAVAILABLE_EVIDENCE
+        condition:
+          evidence_state: unavailable
+        outcome: fail
+
+      - id: ACCEPTED_EVIDENCE
+        condition:
+          evidence_state: accepted
+        outcome: pass
+
+
+# ==============================================================================
+# Control Score Calculation
+# ==============================================================================
+
+control_score:
+
+  formula: >
+    outcome_score * evidence_quality_score * applicability_factor
+
+  outcome_score:
+
+    pass: 1.0
+    partial: 0.5
+    fail: 0.0
+    not_applicable: null
+
+  evidence_quality_score:
+
+    full: 1.0
+    partial: 0.5
+    none: 0.0
+
+  applicability_factor:
+
+    applicable: 1.0
+    not_applicable: null
+
+
+# ==============================================================================
+# Framework Score
+# ==============================================================================
+
+framework_score:
+
+  enabled: true
+
+  formula: >
+    sum(control_score * control_weight)
+    /
+    sum(control_weight)
+
+  exclude:
+
+    - not_applicable
+
+  minimum_applicable_controls: 1
+
+  rounding:
+
+    decimals: 2
+
+  scale:
+
+    minimum: 0
+    maximum: 100
+
+
+# ==============================================================================
+# Coverage
+# ==============================================================================
+
+coverage:
+
+  enabled: true
+
+  formula: >
+    mapped_applicable_controls
+    /
+    total_applicable_controls
+    * 100
+
+  rounding:
+
+    decimals: 2
+
+
+# ==============================================================================
+# Thresholds
+# ==============================================================================
+
+thresholds:
+
+  compliant:
+
+    minimum_score: 80.0
+    description: >
+      Overall control implementation is considered satisfactory.
+
+  partially_compliant:
+
+    minimum_score: 50.0
+    maximum_score: 79.99
+    description: >
+      Significant control implementation exists but material gaps remain.
+
+  non_compliant:
+
+    minimum_score: 0.0
+    maximum_score: 49.99
+    description: >
+      Control implementation is insufficient or materially absent.
+
+
+# ==============================================================================
+# Domain Scoring
+# ==============================================================================
+
+domains:
 
   organisational:
 
     prefix: ISO27001-ORG
-
-    control_count: 37
-
+    weight: 1.0
 
   people:
 
     prefix: ISO27001-PEO
-
-    control_count: 8
-
+    weight: 1.0
 
   physical:
 
     prefix: ISO27001-PHY
-
-    control_count: 12
-
+    weight: 1.0
 
   technological:
 
     prefix: ISO27001-TEC
+    weight: 1.0
 
-    control_count: 30
 
+domain_score:
 
+  formula: >
+    sum(control_scores)
+    /
+    count(applicable_controls)
 
-total_controls:
+  rounding:
 
-  count: 87
+    decimals: 2
 
-  standard_reference:
 
-    name: ISO/IEC 27001:2022 Annex A
+# ==============================================================================
+# Assessment Summary
+# ==============================================================================
 
-    control_reference:
-      - A.5 Organisational controls
-      - A.6 People controls
-      - A.7 Physical controls
-      - A.8 Technological controls
+summary:
 
+  fields:
 
+    - total_controls
+    - applicable_controls
+    - not_applicable_controls
+    - assessed_controls
+    - unassessed_controls
+    - passed_controls
+    - partial_controls
+    - failed_controls
+    - coverage
+    - score
+    - compliance_status
 
-assessment:
 
-  scoring_model:
+# ==============================================================================
+# Reporting
+# ==============================================================================
 
-    supported: true
+reporting:
 
-    scoring_file:
+  include:
 
-      - scoring.yml
+    - framework
+    - version
+    - score
+    - coverage
+    - compliance_status
+    - control_counts
+    - outcome_distribution
+    - domain_scores
+    - evidence_quality
+    - findings
 
 
-    outcomes:
-
-      - pass
-      - partial
-      - fail
-      - not_applicable
-
-
-
-evidence_management:
-
-  supported: true
-
-
-  evidence_source:
-
-    - evidence.yml
-
-
-  evidence_requirements:
-
-    - Current
-    - Attributable
-    - Relevant
-    - Sufficient
-    - Repeatable
-
-
-
-mapping:
-
-  enabled: true
-
-
-  target_framework:
-
-    id: CAF
-
-    name: NCSC Cyber Assessment Framework
-
-
-  mapping_file:
-
-    - mappings.yml
-
-
-  restrictions:
-
-    - Only CAF mappings are maintained
-    - No ISO clause mappings included
-    - No external framework mappings included
-
-
-
-caf_alignment:
-
-
-  domains:
-
-    - id: A
-      name: Managing security risk
-
-
-    - id: B
-      name: Protecting against cyber attack
-
-
-    - id: C
-      name: Detecting cyber security events
-
-
-    - id: D
-      name: Minimising the impact of incidents
-
-
-
-governance:
-
-
-  ownership:
-
-    framework_owner:
-      name: Information Security Governance Function
-
-
-    review_owner:
-      name: Cyber Security Assurance Function
-
-
-
-  maintenance_cycle:
-
-    frequency: annual
-
-
-    review_triggers:
-
-      - ISO/IEC 27001 revision
-      - Annex A changes
-      - NCSC CAF updates
-      - Major technology changes
-      - Regulatory changes
-
-
+# ==============================================================================
+# Validation
+# ==============================================================================
 
 validation:
 
   schema_version: "1.0"
 
+  required_outcomes:
 
-  status: validated
-
+    - pass
+    - partial
+    - fail
+    - not_applicable
 
   checks:
 
+    - All scoring outcomes have defined behaviour
+    - Not applicable controls are excluded from scoring
+    - Control weights are deterministic
+    - Evidence quality affects assessment
+    - Framework score is bounded between 0 and 100
+    - Coverage is bounded between 0 and 100
+    - Score rounding is deterministic
+    - Domain identifiers match control prefixes
 
-    structure:
-
-      - Framework metadata defined
-      - Control domains defined
-      - Evidence integration defined
-      - Mapping integration defined
-
-
-    consistency:
-
-      - Control identifiers validated
-      - YAML syntax validated
-      - Scoring references aligned
-      - Evidence references aligned
-      - CAF mappings aligned
-
-
-
-production_readiness:
-
-
-  status: ready
-
-
-  review_required:
-
-
-    - Annual framework review
-
-    - Validate against future ISO/IEC 27001 updates
-
-    - Validate CAF alignment following CAF revisions
-
-
-
-version_history:
-
-
-  - version: "2022"
-
-    date: "Initial release"
-
-    description: >
-      ISO/IEC 27001:2022 Annex A atomic control implementation
-      mapped exclusively to NCSC CAF.
+  status: validated

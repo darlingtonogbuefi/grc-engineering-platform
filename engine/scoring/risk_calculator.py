@@ -1,3 +1,5 @@
+# engine\scoring\risk_calculator.py
+
 """
 Risk Calculator
 
@@ -37,16 +39,9 @@ Impact:
 
 from __future__ import annotations
 
-
 from dataclasses import dataclass, field
-
-
 from enum import Enum
-
-
 from typing import Any
-
-
 
 # ==============================================================================
 # Risk Enumerations
@@ -67,7 +62,6 @@ class RiskLevel(str, Enum):
     CRITICAL = "Critical"
 
 
-
 class TreatmentPriority(str, Enum):
     """
     Risk remediation priority.
@@ -80,7 +74,6 @@ class TreatmentPriority(str, Enum):
     HIGH = "High"
 
     URGENT = "Urgent"
-
 
 
 # ==============================================================================
@@ -100,30 +93,19 @@ class Risk:
 
     description: str
 
-
     likelihood: int = 1
-
 
     impact: int = 1
 
-
     owner: str | None = None
-
 
     framework: str | None = None
 
-
     capability: str | None = None
 
+    controls: list[str] = field(default_factory=list)
 
-    controls: list[str] = field(
-        default_factory=list
-    )
-
-
-    metadata: dict[str, Any] = field(
-        default_factory=dict
-    )
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(slots=True)
@@ -140,10 +122,7 @@ class RiskResult:
 
     priority: TreatmentPriority
 
-    recommendations: list[str] = field(
-        default_factory=list
-    )
-
+    recommendations: list[str] = field(default_factory=list)
 
 
 # ==============================================================================
@@ -168,44 +147,57 @@ class RiskCalculator:
             likelihood x impact
         """
 
-        score = (
-            risk.likelihood *
-            risk.impact
-        )
+        # ------------------------------------------------------------------
+        # Validate documented 1-5 risk scales.
+        # Existing Risk objects remain unchanged; the normalised values
+        # are used only for this calculation.
+        # ------------------------------------------------------------------
 
+        likelihood = self._normalise_rating(risk.likelihood)
 
-        level = self.classify(
-            score
-        )
+        impact = self._normalise_rating(risk.impact)
 
+        score = likelihood * impact
 
-        priority = self.priority(
-            level
-        )
+        level = self.classify(score)
 
+        priority = self.priority(level)
 
-        recommendations = (
-            self.recommendations(
-                level
-            )
-        )
-
+        recommendations = self.recommendations(level)
 
         return RiskResult(
-
             risk=risk,
-
             score=score,
-
             level=level,
-
             priority=priority,
-
             recommendations=recommendations,
-
         )
 
+    # ------------------------------------------------------------------
+    # Rating Normalisation
+    # ------------------------------------------------------------------
 
+    @staticmethod
+    def _normalise_rating(
+        value: int,
+    ) -> int:
+        """
+        Normalise a risk rating to the documented 1-5 scale.
+
+        Values below 1 are treated as 1.
+        Values above 5 are treated as 5.
+        """
+
+        return max(
+            1,
+            min(
+                int(value),
+                5,
+            ),
+        )
+
+    # ------------------------------------------------------------------
+    # Likelihood Calculation
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -221,28 +213,25 @@ class RiskCalculator:
 
         score = 1
 
-
-        if evidence_count == 0:
+        if evidence_count <= 0:
 
             score += 2
-
 
         if control_gap >= 50:
 
             score += 2
 
-
         elif control_gap >= 25:
 
             score += 1
-
 
         return min(
             score,
             5,
         )
 
-
+    # ------------------------------------------------------------------
+    # Impact Calculation
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -259,40 +248,31 @@ class RiskCalculator:
         value = max(
             1,
             min(
-                asset_value,
+                int(asset_value),
                 5,
-            )
+            ),
         )
-
 
         exposure = max(
             1,
             min(
-                exposure,
+                int(exposure),
                 5,
-            )
+            ),
         )
 
-
-        result = round(
-            (
-                value +
-                exposure
-            )
-            /
-            2
-        )
-
+        result = round((value + exposure) / 2)
 
         return max(
             1,
             min(
                 result,
                 5,
-            )
+            ),
         )
 
-
+    # ------------------------------------------------------------------
+    # Risk Classification
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -307,20 +287,18 @@ class RiskCalculator:
 
             return RiskLevel.CRITICAL
 
-
         if score >= 12:
 
             return RiskLevel.HIGH
-
 
         if score >= 6:
 
             return RiskLevel.MEDIUM
 
-
         return RiskLevel.LOW
 
-
+    # ------------------------------------------------------------------
+    # Treatment Priority
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -332,28 +310,16 @@ class RiskCalculator:
         """
 
         mapping = {
-
-            RiskLevel.CRITICAL:
-                TreatmentPriority.URGENT,
-
-
-            RiskLevel.HIGH:
-                TreatmentPriority.HIGH,
-
-
-            RiskLevel.MEDIUM:
-                TreatmentPriority.NORMAL,
-
-
-            RiskLevel.LOW:
-                TreatmentPriority.LOW,
-
+            RiskLevel.CRITICAL: TreatmentPriority.URGENT,
+            RiskLevel.HIGH: TreatmentPriority.HIGH,
+            RiskLevel.MEDIUM: TreatmentPriority.NORMAL,
+            RiskLevel.LOW: TreatmentPriority.LOW,
         }
-
 
         return mapping[level]
 
-
+    # ------------------------------------------------------------------
+    # Recommendations
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -365,47 +331,25 @@ class RiskCalculator:
         """
 
         recommendations = {
-
             RiskLevel.CRITICAL: [
-
                 "Immediate remediation required.",
-
                 "Escalate to security leadership.",
-
                 "Implement compensating controls.",
-
             ],
-
-
             RiskLevel.HIGH: [
-
                 "Prioritise remediation activity.",
-
                 "Review affected controls.",
-
             ],
-
-
             RiskLevel.MEDIUM: [
-
                 "Plan remediation activity.",
-
                 "Monitor exposure.",
-
             ],
-
-
             RiskLevel.LOW: [
-
                 "Accept or monitor risk.",
-
             ],
-
         }
 
-
         return recommendations[level]
-
 
 
 # ==============================================================================
@@ -422,32 +366,22 @@ class RiskRegister:
 
         self._risks: list[RiskResult] = []
 
-
     def add(
         self,
         result: RiskResult,
     ) -> None:
 
-        self._risks.append(
-            result
-        )
-
+        self._risks.append(result)
 
     def all(
         self,
     ) -> list[RiskResult]:
 
         return sorted(
-
             self._risks,
-
-            key=lambda item:
-                item.score,
-
+            key=lambda item: item.score,
             reverse=True,
-
         )
-
 
     def summary(
         self,
@@ -457,34 +391,12 @@ class RiskRegister:
         """
 
         return {
-
-            "total":
-                len(self._risks),
-
-
-            "critical":
-                len(
-                    [
-                        r
-                        for r in self._risks
-                        if r.level ==
-                        RiskLevel.CRITICAL
-                    ]
-                ),
-
-
-            "high":
-                len(
-                    [
-                        r
-                        for r in self._risks
-                        if r.level ==
-                        RiskLevel.HIGH
-                    ]
-                ),
-
+            "total": len(self._risks),
+            "critical": len(
+                [risk for risk in self._risks if risk.level == RiskLevel.CRITICAL]
+            ),
+            "high": len([risk for risk in self._risks if risk.level == RiskLevel.HIGH]),
         }
-
 
 
 # ==============================================================================
@@ -501,6 +413,4 @@ def calculate_risk(
 
     calculator = RiskCalculator()
 
-    return calculator.calculate(
-        risk
-    )
+    return calculator.calculate(risk)

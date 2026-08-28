@@ -1,3 +1,5 @@
+# engine\__main__.py
+
 """
 Executable package entry point.
 

@@ -1,0 +1,13 @@
+{
+  "generated": "2026-08-25T20:13:54.381182+00:00",
+  "report": "live_assessment",
+  "files": {
+    "json": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.json",
+    "yaml": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.yml",
+    "csv": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.csv",
+    "markdown": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.md",
+    "html": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.html",
+    "excel": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.xlsx",
+    "pdf": "C:\\DevOps-Projects\\grc-engineering-platform\\test_output\\live_assessment.pdf"
+  }
+}

@@ -32,23 +32,13 @@ from .config import RuntimeConfig
 # ==============================================================================
 
 
-DEFAULT_LOG_FORMAT = (
-    "%(asctime)s "
-    "| %(levelname)s "
-    "| %(name)s "
-    "| %(message)s"
-)
+DEFAULT_LOG_FORMAT = "%(asctime)s " "| %(levelname)s " "| %(name)s " "| %(message)s"
 
 
-
-DEFAULT_DATE_FORMAT = (
-    "%Y-%m-%d %H:%M:%S"
-)
-
+DEFAULT_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 LOG_DIRECTORY_NAME = "logs"
-
 
 
 # ==============================================================================
@@ -68,70 +58,60 @@ class JsonFormatter(logging.Formatter):
     - Elastic
     """
 
-
     def format(
         self,
-        record: logging.LogRecord
+        record: logging.LogRecord,
     ) -> str:
+        """
+        Convert a logging record into a JSON document.
+        """
 
         payload: dict[str, Any] = {
-
-            "timestamp":
-                datetime.now(
-                    UTC
-                ).isoformat(),
-
-            "level":
-                record.levelname,
-
-            "logger":
-                record.name,
-
-            "message":
-                record.getMessage(),
-
+            "timestamp": datetime.fromtimestamp(
+                record.created,
+                tz=UTC,
+            ).isoformat(),
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage(),
         }
-
 
         tenant_id = getattr(
             record,
             "tenant_id",
-            None
+            None,
         )
 
-
         if tenant_id is not None:
-
             payload["tenant_id"] = tenant_id
-
-
 
         collector = getattr(
             record,
             "collector",
-            None
+            None,
         )
 
-
         if collector is not None:
-
             payload["collector"] = collector
 
+        evidence_id = getattr(
+            record,
+            "evidence_id",
+            None,
+        )
+
+        if evidence_id is not None:
+            payload["evidence_id"] = evidence_id
 
         if record.exc_info:
-
-            payload["exception"] = (
-                self.formatException(
-                    record.exc_info
-                )
+            payload["exception"] = self.formatException(
+                record.exc_info,
             )
-
 
         return json.dumps(
             payload,
-            ensure_ascii=False
+            ensure_ascii=False,
         )
-
 
 
 # ==============================================================================
@@ -140,7 +120,7 @@ class JsonFormatter(logging.Formatter):
 
 
 class GRCLoggerAdapter(
-    logging.LoggerAdapter
+    logging.LoggerAdapter,
 ):
     """
     Adds GRC-specific context fields.
@@ -153,17 +133,39 @@ class GRCLoggerAdapter(
                 "collector": "entra"
             }
         )
-    """
 
+    The adapter can also carry persistent context:
+
+        logger = GRCLoggerAdapter(
+            get_logger(__name__),
+            {
+                "tenant_id": "tenant-001",
+                "collector": "azure",
+            },
+        )
+
+        logger.info("Collection started")
+    """
 
     def process(
         self,
         msg: Any,
-        kwargs: dict[str, Any]
-    ):
+        kwargs: dict[str, Any],
+    ) -> tuple[Any, dict[str, Any]]:
+        """
+        Merge adapter context into the logging ``extra`` dictionary.
+        """
+
+        extra = kwargs.setdefault(
+            "extra",
+            {},
+        )
+
+        extra.update(
+            self.extra,
+        )
 
         return msg, kwargs
-
 
 
 # ==============================================================================
@@ -172,22 +174,19 @@ class GRCLoggerAdapter(
 
 
 def get_log_level(
-    level: str
+    level: str,
 ) -> int:
     """
     Convert string log level into logging constant.
     """
 
-
     level = level.upper()
-
 
     return getattr(
         logging,
         level,
-        logging.INFO
+        logging.INFO,
     )
-
 
 
 # ==============================================================================
@@ -196,7 +195,7 @@ def get_log_level(
 
 
 def setup_logging(
-    config: RuntimeConfig
+    config: RuntimeConfig,
 ) -> logging.Logger:
     """
     Configure application logging.
@@ -211,124 +210,82 @@ def setup_logging(
         Root application logger
     """
 
-
     log_level = get_log_level(
-        config.application.log_level
+        config.application.log_level,
     )
-
 
     logger = logging.getLogger(
-        "grc-engineering-platform"
+        "grc-engineering-platform",
     )
-
 
     logger.setLevel(
-        log_level
+        log_level,
     )
-
 
     logger.handlers.clear()
 
-
-
     formatter = logging.Formatter(
-
         DEFAULT_LOG_FORMAT,
-
-        DEFAULT_DATE_FORMAT
-
+        DEFAULT_DATE_FORMAT,
     )
-
-
 
     # --------------------------------------------------------------------------
     # Console Handler
     # --------------------------------------------------------------------------
 
-
     console_handler = logging.StreamHandler(
-        sys.stdout
+        sys.stdout,
     )
-
 
     console_handler.setLevel(
-        log_level
+        log_level,
     )
-
 
     console_handler.setFormatter(
-        formatter
+        formatter,
     )
-
 
     logger.addHandler(
-        console_handler
+        console_handler,
     )
-
-
 
     # --------------------------------------------------------------------------
     # File Handler
     # --------------------------------------------------------------------------
 
-
-    log_directory = (
-        config.paths.output /
-        LOG_DIRECTORY_NAME
-    )
-
+    log_directory = config.paths.output / LOG_DIRECTORY_NAME
 
     log_directory.mkdir(
         parents=True,
-        exist_ok=True
+        exist_ok=True,
     )
 
+    log_file = log_directory / "grc-engineering-platform.log"
 
-    log_file = (
-        log_directory /
-        "grc-engineering-platform.log"
+    file_handler = logging.handlers.RotatingFileHandler(
+        filename=log_file,
+        maxBytes=10_485_760,
+        backupCount=10,
+        encoding="utf-8",
     )
-
-
-
-    file_handler = (
-        logging.handlers.RotatingFileHandler(
-
-            filename=log_file,
-
-            maxBytes=10_485_760,
-
-            backupCount=10,
-
-            encoding="utf-8"
-
-        )
-    )
-
 
     file_handler.setLevel(
-        log_level
+        log_level,
     )
-
 
     file_handler.setFormatter(
-        formatter
+        formatter,
     )
-
 
     logger.addHandler(
-        file_handler
+        file_handler,
     )
-
-
 
     logger.info(
-        "Logging initialised"
+        "Logging initialised",
     )
 
-
     return logger
-
 
 
 # ==============================================================================
@@ -338,7 +295,7 @@ def setup_logging(
 
 def enable_json_logging(
     logger: logging.Logger,
-    log_file: Path
+    log_file: Path,
 ) -> None:
     """
     Add JSON log output.
@@ -350,31 +307,20 @@ def enable_json_logging(
     - Audit trails
     """
 
-
-    handler = (
-        logging.handlers.RotatingFileHandler(
-
-            filename=log_file,
-
-            maxBytes=10_485_760,
-
-            backupCount=10,
-
-            encoding="utf-8"
-
-        )
+    handler = logging.handlers.RotatingFileHandler(
+        filename=log_file,
+        maxBytes=10_485_760,
+        backupCount=10,
+        encoding="utf-8",
     )
-
 
     handler.setFormatter(
-        JsonFormatter()
+        JsonFormatter(),
     )
-
 
     logger.addHandler(
-        handler
+        handler,
     )
-
 
 
 # ==============================================================================
@@ -383,7 +329,7 @@ def enable_json_logging(
 
 
 def get_logger(
-    name: str
+    name: str,
 ) -> logging.Logger:
     """
     Retrieve module logger.
@@ -393,11 +339,9 @@ def get_logger(
         logger = get_logger(__name__)
     """
 
-
     return logging.getLogger(
-        f"grc-engineering-platform.{name}"
+        f"grc-engineering-platform.{name}",
     )
-
 
 
 # ==============================================================================
@@ -409,7 +353,7 @@ def log_collector_event(
     logger: logging.Logger,
     collector: str,
     message: str,
-    tenant_id: str | None = None
+    tenant_id: str | None = None,
 ) -> None:
     """
     Log collector activity.
@@ -422,54 +366,37 @@ def log_collector_event(
     - Evidence counts
     """
 
-
-    extra = {
-
-        "collector":
-            collector
-
+    extra: dict[str, Any] = {
+        "collector": collector,
     }
 
-
     if tenant_id:
-
         extra["tenant_id"] = tenant_id
-
-
 
     logger.info(
         message,
-        extra=extra
+        extra=extra,
     )
-
 
 
 def log_evidence_event(
     logger: logging.Logger,
     evidence_id: str,
     message: str,
-    tenant_id: str | None = None
+    tenant_id: str | None = None,
 ) -> None:
     """
     Log evidence lifecycle events.
     """
 
-
-    extra = {
-
-        "evidence_id":
-            evidence_id
-
+    extra: dict[str, Any] = {
+        "evidence_id": evidence_id,
     }
 
-
     if tenant_id:
-
         extra["tenant_id"] = tenant_id
-
-
 
     logger.info(
         message,
-        extra=extra
+        extra=extra,
     )

@@ -37,6 +37,7 @@ class AzureNormalizer(BaseNormalizer):
             "role_assignments": IAMNormalizer(),
             "role_definitions": IAMNormalizer(),
             "policy_assignments": PolicyNormalizer(),
+            "security_settings": SecurityNormalizer(),
             "policy_definitions": PolicyNormalizer(),
             "virtual_networks": NetworkNormalizer(),
             "network_security_groups": NetworkNormalizer(),

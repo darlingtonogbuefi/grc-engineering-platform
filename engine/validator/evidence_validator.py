@@ -1,3 +1,5 @@
+# engine\validator\evidence_validator.py
+
 """
 Evidence Validation
 
@@ -28,66 +30,43 @@ class EvidenceValidator:
     """
 
     REQUIRED_FIELDS = {
-
         "evidence_id",
-
         "collected_at",
-
         "source",
-
         "status",
-
         "data",
-
     }
 
     VALID_STATUSES = {
-
         "collected",
-
         "validated",
-
         "processed",
-
         "failed",
-
     }
 
     def __init__(
         self,
         schema_validator: SchemaValidator | None = None,
     ) -> None:
+        self.schema_validator = schema_validator or SchemaValidator()
 
-        self.schema_validator = (
-            schema_validator or SchemaValidator()
-        )
-
+    # ------------------------------------------------------------------
+    # Validation
     # ------------------------------------------------------------------
 
     def validate(
         self,
         evidence: dict[str, Any],
     ) -> None:
+        self.schema_validator.validate_evidence(evidence)
 
-        self.schema_validator.validate_evidence(
-            evidence
-        )
+        self._validate_required_fields(evidence)
 
-        self._validate_required_fields(
-            evidence
-        )
+        self._validate_timestamp(evidence)
 
-        self._validate_timestamp(
-            evidence
-        )
+        self._validate_status(evidence)
 
-        self._validate_status(
-            evidence
-        )
-
-        self._validate_payload(
-            evidence
-        )
+        self._validate_payload(evidence)
 
     # ------------------------------------------------------------------
 
@@ -95,16 +74,11 @@ class EvidenceValidator:
         self,
         evidence: dict[str, Any],
     ) -> None:
-
-        missing = self.REQUIRED_FIELDS.difference(
-            evidence.keys()
-        )
+        missing = self.REQUIRED_FIELDS.difference(evidence.keys())
 
         if missing:
-
             raise ConfigurationError(
-                "Evidence missing required fields: "
-                + ", ".join(sorted(missing))
+                "Evidence missing required fields: " + ", ".join(sorted(missing))
             )
 
     # ------------------------------------------------------------------
@@ -113,31 +87,20 @@ class EvidenceValidator:
         self,
         evidence: dict[str, Any],
     ) -> None:
-
-        timestamp = evidence.get(
-            "collected_at"
-        )
+        timestamp = evidence.get("collected_at")
 
         if not isinstance(timestamp, str):
-
-            raise ConfigurationError(
-                "collected_at must be a string."
-            )
+            raise ConfigurationError("collected_at must be a string.")
 
         try:
-
             datetime.fromisoformat(
                 timestamp.replace(
                     "Z",
-                    "+00:00"
+                    "+00:00",
                 )
             )
-
         except ValueError as exc:
-
-            raise ConfigurationError(
-                "Invalid collected_at timestamp."
-            ) from exc
+            raise ConfigurationError("Invalid collected_at timestamp.") from exc
 
     # ------------------------------------------------------------------
 
@@ -145,16 +108,10 @@ class EvidenceValidator:
         self,
         evidence: dict[str, Any],
     ) -> None:
-
-        status = evidence.get(
-            "status"
-        )
+        status = evidence.get("status")
 
         if status not in self.VALID_STATUSES:
-
-            raise ConfigurationError(
-                f"Unsupported evidence status: {status}"
-            )
+            raise ConfigurationError(f"Unsupported evidence status: {status}")
 
     # ------------------------------------------------------------------
 
@@ -162,19 +119,13 @@ class EvidenceValidator:
         self,
         evidence: dict[str, Any],
     ) -> None:
-
-        payload = evidence.get(
-            "data"
-        )
+        payload = evidence.get("data")
 
         if not isinstance(
             payload,
-            dict
+            dict,
         ):
-
-            raise ConfigurationError(
-                "Evidence payload must be an object."
-            )
+            raise ConfigurationError("Evidence payload must be an object.")
 
     # ------------------------------------------------------------------
 
@@ -182,7 +133,5 @@ class EvidenceValidator:
         self,
         evidence_items: list[dict[str, Any]],
     ) -> None:
-
         for evidence in evidence_items:
-
             self.validate(evidence)

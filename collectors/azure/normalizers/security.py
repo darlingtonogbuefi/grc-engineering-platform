@@ -1,6 +1,5 @@
 # collectors\azure\normalizers\security.py
 
-
 """
 Azure Security Normalizer.
 
@@ -22,7 +21,7 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -54,9 +53,21 @@ class SecurityNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(timezone.utc)
+        #
+        # Generate one UTC timestamp for the entire
+        # normalization run.
+        #
+        # This represents when the Azure Security evidence
+        # batch was observed/normalized.
+        #
+        collection_timestamp = datetime.now(
+            UTC,
+        ).isoformat()
 
-        for item in data.get("value", []):
+        for item in data.get(
+            "value",
+            [],
+        ):
             item_type = self._detect_type(item)
 
             resource_id = item.get(
@@ -65,14 +76,22 @@ class SecurityNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
+                self.create_record(
                     resource_type=self.RESOURCE_TYPES.get(
                         item_type,
                         "azure.security.unknown",
                     ),
                     resource_id=resource_id,
                     data={
+                        #
+                        # Collection timestamp.
+                        #
+                        # This is the UTC timestamp for the
+                        # live Azure Security evidence normalization
+                        # run. Every record from this collection
+                        # run receives the same timestamp.
+                        #
+                        "timestamp": collection_timestamp,
                         "name": self._name(item),
                         "provider": "azure",
                         "service": "security",
@@ -91,13 +110,14 @@ class SecurityNormalizer(BaseNormalizer):
                         ),
                         "raw": item,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "security",
                     },
                 )
             )
+
+        self.validate(records)
 
         return records
 
@@ -120,6 +140,9 @@ class SecurityNormalizer(BaseNormalizer):
         if "secure scores" in resource_id:
             return "secure_score"
 
+        if "securescores" in resource_id:
+            return "secure_score"
+
         if "regulatorycompliancestandards" in resource_id:
             return "regulatory_compliance"
 
@@ -128,6 +151,9 @@ class SecurityNormalizer(BaseNormalizer):
 
         if "securityassessments" in resource_id:
             return "security_assessment"
+
+        if resource_type == "microsoft.security/settings":
+            return "defender_setting"
 
         if "defender" in resource_type:
             return "defender_setting"
@@ -140,7 +166,17 @@ class SecurityNormalizer(BaseNormalizer):
     ) -> str:
         """Return best available security resource name."""
 
-        return item.get("name") or item.get("displayName") or item.get("id", "")
+        properties = item.get(
+            "properties",
+            {},
+        )
+
+        return (
+            item.get("name")
+            or item.get("displayName")
+            or properties.get("displayName")
+            or item.get("id", "")
+        )
 
     def _subscription_id(
         self,
@@ -154,12 +190,16 @@ class SecurityNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index("subscriptions")
+            index = next(
+                index
+                for index, part in enumerate(parts)
+                if part.lower() == "subscriptions"
+            )
 
             return parts[index + 1]
 
         except (
-            ValueError,
+            StopIteration,
             IndexError,
         ):
             return None
@@ -176,12 +216,16 @@ class SecurityNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index("resourceGroups")
+            index = next(
+                index
+                for index, part in enumerate(parts)
+                if part.lower() == "resourcegroups"
+            )
 
             return parts[index + 1]
 
         except (
-            ValueError,
+            StopIteration,
             IndexError,
         ):
             return None

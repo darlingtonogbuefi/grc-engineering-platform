@@ -1,6 +1,5 @@
 # collectors\azure\normalizers\storage.py
 
-
 """
 Azure Storage Normalizer.
 
@@ -23,7 +22,7 @@ Does not perform:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from collectors.base.normalizer import BaseNormalizer
@@ -55,12 +54,29 @@ class StorageNormalizer(BaseNormalizer):
 
         records: list[EvidenceRecord] = []
 
-        collected_at = datetime.now(timezone.utc)
+        #
+        # Generate one UTC timestamp for the entire
+        # normalization run.
+        #
+        # This represents when the Azure Storage evidence
+        # batch was observed/normalized.
+        #
+        collection_timestamp = datetime.now(
+            UTC,
+        ).isoformat()
 
-        for resource in data.get("value", []):
+        for resource in data.get(
+            "value",
+            [],
+        ):
             azure_type = resource.get("type")
 
-            if azure_type not in self.RESOURCE_TYPES:
+            if not azure_type:
+                continue
+
+            normalized_type = self._resource_type(azure_type)
+
+            if normalized_type is None:
                 continue
 
             resource_id = resource.get(
@@ -69,11 +85,19 @@ class StorageNormalizer(BaseNormalizer):
             )
 
             records.append(
-                EvidenceRecord(
-                    source="azure",
-                    resource_type=self.RESOURCE_TYPES[azure_type],
+                self.create_record(
+                    resource_type=normalized_type,
                     resource_id=resource_id,
                     data={
+                        #
+                        # Collection timestamp.
+                        #
+                        # This is the UTC timestamp for the
+                        # live Azure Storage evidence normalization
+                        # run. Every record from this collection
+                        # run receives the same timestamp.
+                        #
+                        "timestamp": collection_timestamp,
                         "name": resource.get(
                             "name",
                             "",
@@ -95,7 +119,6 @@ class StorageNormalizer(BaseNormalizer):
                         ),
                         "raw": resource,
                     },
-                    collected_at=collected_at,
                     metadata={
                         "collector": "azure",
                         "normalizer": "storage",
@@ -103,7 +126,32 @@ class StorageNormalizer(BaseNormalizer):
                 )
             )
 
+        self.validate(records)
+
         return records
+
+    def _resource_type(
+        self,
+        azure_type: str | None,
+    ) -> str | None:
+        """
+        Resolve the normalized evidence resource type.
+
+        Azure resource type casing is normally consistent, but
+        comparison is made case-insensitive to avoid silently
+        dropping valid resources.
+        """
+
+        if not azure_type:
+            return None
+
+        normalized_azure_type = azure_type.lower()
+
+        for resource_type, evidence_type in self.RESOURCE_TYPES.items():
+            if resource_type.lower() == normalized_azure_type:
+                return evidence_type
+
+        return None
 
     def _subscription_id(
         self,
@@ -117,12 +165,16 @@ class StorageNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index("subscriptions")
+            index = next(
+                index
+                for index, part in enumerate(parts)
+                if part.lower() == "subscriptions"
+            )
 
             return parts[index + 1]
 
         except (
-            ValueError,
+            StopIteration,
             IndexError,
         ):
             return None
@@ -139,12 +191,16 @@ class StorageNormalizer(BaseNormalizer):
         parts = resource_id.split("/")
 
         try:
-            index = parts.index("resourceGroups")
+            index = next(
+                index
+                for index, part in enumerate(parts)
+                if part.lower() == "resourcegroups"
+            )
 
             return parts[index + 1]
 
         except (
-            ValueError,
+            StopIteration,
             IndexError,
         ):
             return None

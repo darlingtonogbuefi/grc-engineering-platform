@@ -1,3 +1,5 @@
+#frameworks\ISO27001\controls.yml
+
 framework:
   id: ISO27001
   name: ISO/IEC 27001

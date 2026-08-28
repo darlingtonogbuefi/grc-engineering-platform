@@ -13,6 +13,7 @@ against frameworks such as:
 
 - CIS Microsoft Azure Foundations Benchmark
 - NIST Cybersecurity Framework
+- ISO 42001
 - ISO 27001
 - SOC 2
 - Cyber Essentials

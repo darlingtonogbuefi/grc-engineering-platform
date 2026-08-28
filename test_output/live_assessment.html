@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Live GRC Assessment Test</title>
+<meta charset="utf-8">
+</head>
+<body>
+<h1>Live GRC Assessment Test</h1>
+<p><strong>Tenant:</strong> 90ab40f0-4796-430e-8b3e-95c504993d1a</p>
+<p><strong>Generated:</strong> 2026-08-25 20:13:53.447292+00:00</p>
+<h2>Executive Summary</h2>
+<pre>{
+  &quot;security_score&quot;: 100,
+  &quot;maturity_level&quot;: 3,
+  &quot;maturity_name&quot;: &quot;Defined&quot;,
+  &quot;frameworks_assessed&quot;: 1,
+  &quot;frameworks_declared&quot;: 2,
+  &quot;risks_identified&quot;: 2,
+  &quot;critical_risks&quot;: 1,
+  &quot;live_control_assessed&quot;: &quot;A.8.2&quot;,
+  &quot;live_control_status&quot;: &quot;PASS&quot;,
+  &quot;assessment_scope&quot;: &quot;Technical evidence observation only&quot;
+}</pre>
+<h2>Evidence Summary</h2>
+<pre>{
+  &quot;evidence_count&quot;: 956,
+  &quot;azure_evidence_count&quot;: 949,
+  &quot;entra_evidence_count&quot;: 7,
+  &quot;control_evidence_count&quot;: 2,
+  &quot;evidence_scores&quot;: [],
+  &quot;evidence_inventory&quot;: {
+    &quot;total_records&quot;: 956,
+    &quot;azure_records&quot;: 949,
+    &quot;entra_records&quot;: 7,
+    &quot;raw_records_embedded_in_report&quot;: 0,
+    &quot;report_raw_data_policy&quot;: &quot;Full live evidence is retained by the collection pipeline but is not embedded in the human-readable report.&quot;
+  },
+  &quot;azure_inventory&quot;: {
+    &quot;normalized_records&quot;: 949,
+    &quot;resource_types&quot;: {
+      &quot;Microsoft.Authorization/roleDefinitions&quot;: 928,
+      &quot;Microsoft.Authorization/roleAssignments&quot;: 14,
+      &quot;Microsoft.Security/settings&quot;: 5,
+      &quot;Microsoft.Resources/subscriptions&quot;: 2
+    },
+    &quot;providers&quot;: {
+      &quot;azure&quot;: 949
+    },
+    &quot;services&quot;: {
+      &quot;identity_access&quot;: 942,
+      &quot;security&quot;: 5,
+      &quot;resources&quot;: 2
+    },
+    &quot;locations&quot;: {},
+    &quot;subscriptions&quot;: {
+      &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;: 941,
+      &quot;0786264d-36b1-4cf8-8bbe-e3e9ffab9279&quot;: 1
+    },
+    &quot;resource_groups&quot;: {}
+  },
+  &quot;entra_inventory&quot;: {
+    &quot;normalized_records&quot;: 7,
+    &quot;evidence_types&quot;: {
+      &quot;role&quot;: 5,
+      &quot;application&quot;: 1,
+      &quot;user&quot;: 1
+    },
+    &quot;high_privilege_roles&quot;: 2,
+    &quot;observed_assignments&quot;: 2
+  },
+  &quot;azure_report_sample&quot;: {
+    &quot;columns&quot;: [
+      &quot;Timestamp&quot;,
+      &quot;Resource Name&quot;,
+      &quot;Provider&quot;,
+      &quot;Service&quot;,
+      &quot;Subscription&quot;,
+      &quot;Evidence&quot;
+    ],
+    &quot;sample_limit&quot;: 25,
+    &quot;sample_count&quot;: 25,
+    &quot;records&quot;: [
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;Connectivity_Subscription&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;resources&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;Management_Subscription&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;resources&quot;,
+        &quot;subscription&quot;: &quot;0786264d-36b1-4cf8-8bbe-e3e9ffab9279&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;14895bfd-0456-4040-aed6-a01b9d72615e&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;75f7d691-b917-416c-9694-3d14bbeb51e3&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;8c617acc-acaa-41b7-baf6-d28a9791fcaa&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;12e7434b-d353-402d-8d12-0f4900a9b96f&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;29a515bb-1940-4d6e-82d3-99bd33b19b3e&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;22c7e4b5-3d30-4749-b45d-90b078e015ed&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;45d9ea67-60c2-43aa-82a6-aae7121531d4&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;5da0c13b-a045-4a17-ab3e-ad9cf13f1dfa&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;0869402a-b2b3-4523-b44f-6001078ad418&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;a8947e4c-5548-4558-92ee-cf46564b9281&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;96127025-a23b-4343-a3dd-fbdc9f7e9b98&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;b9ad5d2f-70ce-42c4-9ac2-f17a396ad105&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;e80a200e-8584-4061-b5c3-caad2bf69853&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;6a19015a-767c-42a6-9a1f-21b0f90a0214&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: null,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;AcrPush&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;API Management Service Contributor&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;AcrPull&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;AcrImageSigner&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;AcrDelete&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;AcrQuarantineReader&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;AcrQuarantineWriter&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;API Management Service Operator Role&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      },
+      {
+        &quot;timestamp&quot;: &quot;08:13:50 PM UTC&quot;,
+        &quot;resource_name&quot;: &quot;API Management Service Reader Role&quot;,
+        &quot;provider&quot;: &quot;azure&quot;,
+        &quot;service&quot;: &quot;identity_access&quot;,
+        &quot;subscription&quot;: &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;,
+        &quot;evidence&quot;: &quot;Azure resource inventory record&quot;
+      }
+    ]
+  },
+  &quot;control_evidence&quot;: [
+    {
+      &quot;role&quot;: &quot;User Administrator&quot;,
+      &quot;resource_id&quot;: &quot;93b9f594-8f5f-4489-a1bb-5ddff0c34dcd&quot;,
+      &quot;is_high_privilege&quot;: true,
+      &quot;assignment_count&quot;: 1,
+      &quot;members&quot;: [
+        {
+          &quot;display_name&quot;: &quot;darlington ogbuefi&quot;,
+          &quot;upn&quot;: &quot;darlington.ogbuefi_cribr.co.uk#EXT#@darlingtonogbueficribrco.onmicrosoft.com&quot;,
+          &quot;type&quot;: &quot;user&quot;
+        }
+      ]
+    },
+    {
+      &quot;role&quot;: &quot;Global Administrator&quot;,
+      &quot;resource_id&quot;: &quot;9a9d8e55-e0c5-4b25-b4cf-19f43dba6a21&quot;,
+      &quot;is_high_privilege&quot;: true,
+      &quot;assignment_count&quot;: 1,
+      &quot;members&quot;: [
+        {
+          &quot;display_name&quot;: &quot;darlington ogbuefi&quot;,
+          &quot;upn&quot;: &quot;darlington.ogbuefi_cribr.co.uk#EXT#@darlingtonogbueficribrco.onmicrosoft.com&quot;,
+          &quot;type&quot;: &quot;user&quot;
+        }
+      ]
+    }
+  ],
+  &quot;control_assessment&quot;: {
+    &quot;framework&quot;: &quot;ISO27001&quot;,
+    &quot;version&quot;: &quot;2022&quot;,
+    &quot;control_id&quot;: &quot;A.8.2&quot;,
+    &quot;title&quot;: &quot;Privileged access rights&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;score&quot;: 100,
+    &quot;coverage&quot;: 1.0,
+    &quot;assessment_scope&quot;: &quot;Technical evidence observation only&quot;,
+    &quot;assessment_limitation&quot;: &quot;This PASS indicates successful observation of the technical evidence used by this test. It does not by itself certify full ISO 27001:2022 A.8.2 compliance. Organizational policies, approvals, access reviews, least-privilege requirements, joiner/mover/leaver processes, and other relevant evidence require separate assessment.&quot;
+  },
+  &quot;evidence_retention&quot;: {
+    &quot;azure_records_collected&quot;: 949,
+    &quot;entra_records_collected&quot;: 7,
+    &quot;azure_records_embedded_in_report&quot;: 25,
+    &quot;entra_records_embedded_as_raw_data&quot;: 0,
+    &quot;control_evidence_embedded&quot;: 2,
+    &quot;note&quot;: &quot;Full collected evidence remains available to the live collection and assessment pipeline. The report contains summaries and control-relevant evidence rather than the complete raw inventory.&quot;
+  }
+}</pre>
+<h2>Live Control Evidence</h2>
+<pre>{
+  &quot;assessment_type&quot;: &quot;Live technical evidence assessment&quot;,
+  &quot;assessment_scope&quot;: &quot;Technical evidence observation only&quot;,
+  &quot;assessment_limitation&quot;: &quot;This PASS indicates successful observation of the technical evidence used by this test. It does not by itself certify full ISO 27001:2022 A.8.2 compliance. Organizational policies, approvals, access reviews, least-privilege requirements, joiner/mover/leaver processes, and other relevant evidence require separate assessment.&quot;,
+  &quot;control&quot;: {
+    &quot;framework&quot;: &quot;ISO27001&quot;,
+    &quot;version&quot;: &quot;2022&quot;,
+    &quot;control_id&quot;: &quot;A.8.2&quot;,
+    &quot;title&quot;: &quot;Privileged access rights&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;score&quot;: 100,
+    &quot;coverage&quot;: 1.0,
+    &quot;reason&quot;: &quot;Live Microsoft Entra evidence was successfully collected and normalized. High-privilege directory roles and their assigned members were identified, providing direct technical evidence relevant to assessment of privileged access rights.&quot;
+  },
+  &quot;evidence_source&quot;: &quot;Microsoft Entra ID / Microsoft Graph&quot;,
+  &quot;observed_high_privilege_roles&quot;: 2,
+  &quot;observed_assignments&quot;: 2,
+  &quot;directory_role_evidence&quot;: [
+    {
+      &quot;role&quot;: &quot;User Administrator&quot;,
+      &quot;resource_id&quot;: &quot;93b9f594-8f5f-4489-a1bb-5ddff0c34dcd&quot;,
+      &quot;is_high_privilege&quot;: true,
+      &quot;assignment_count&quot;: 1,
+      &quot;members&quot;: [
+        {
+          &quot;display_name&quot;: &quot;darlington ogbuefi&quot;,
+          &quot;upn&quot;: &quot;darlington.ogbuefi_cribr.co.uk#EXT#@darlingtonogbueficribrco.onmicrosoft.com&quot;,
+          &quot;type&quot;: &quot;user&quot;
+        }
+      ]
+    },
+    {
+      &quot;role&quot;: &quot;Global Administrator&quot;,
+      &quot;resource_id&quot;: &quot;9a9d8e55-e0c5-4b25-b4cf-19f43dba6a21&quot;,
+      &quot;is_high_privilege&quot;: true,
+      &quot;assignment_count&quot;: 1,
+      &quot;members&quot;: [
+        {
+          &quot;display_name&quot;: &quot;darlington ogbuefi&quot;,
+          &quot;upn&quot;: &quot;darlington.ogbuefi_cribr.co.uk#EXT#@darlingtonogbueficribrco.onmicrosoft.com&quot;,
+          &quot;type&quot;: &quot;user&quot;
+        }
+      ]
+    }
+  ],
+  &quot;azure_inventory&quot;: {
+    &quot;normalized_records&quot;: 949,
+    &quot;resource_types&quot;: {
+      &quot;Microsoft.Authorization/roleDefinitions&quot;: 928,
+      &quot;Microsoft.Authorization/roleAssignments&quot;: 14,
+      &quot;Microsoft.Security/settings&quot;: 5,
+      &quot;Microsoft.Resources/subscriptions&quot;: 2
+    },
+    &quot;providers&quot;: {
+      &quot;azure&quot;: 949
+    },
+    &quot;services&quot;: {
+      &quot;identity_access&quot;: 942,
+      &quot;security&quot;: 5,
+      &quot;resources&quot;: 2
+    },
+    &quot;locations&quot;: {},
+    &quot;subscriptions&quot;: {
+      &quot;a9a06c20-9359-4214-b776-9adcbd617d44&quot;: 941,
+      &quot;0786264d-36b1-4cf8-8bbe-e3e9ffab9279&quot;: 1
+    },
+    &quot;resource_groups&quot;: {}
+  },
+  &quot;entra_inventory&quot;: {
+    &quot;normalized_records&quot;: 7,
+    &quot;evidence_types&quot;: {
+      &quot;role&quot;: 5,
+      &quot;application&quot;: 1,
+      &quot;user&quot;: 1
+    },
+    &quot;high_privilege_roles&quot;: 2,
+    &quot;observed_assignments&quot;: 2
+  },
+  &quot;evidence_chain&quot;: [
+    &quot;Microsoft Entra ID / Microsoft Graph&quot;,
+    &quot;Live collector authentication&quot;,
+    &quot;Live evidence collection&quot;,
+    &quot;Evidence normalization&quot;,
+    &quot;Control evaluation&quot;,
+    &quot;Report export&quot;
+  ]
+}</pre>
+<h2>Framework Assessment</h2>
+<pre>{
+  &quot;frameworks&quot;: [
+    {
+      &quot;framework&quot;: &quot;ISO27001&quot;,
+      &quot;version&quot;: &quot;2022&quot;,
+      &quot;score&quot;: 100,
+      &quot;coverage&quot;: 1.0,
+      &quot;controls_assessed&quot;: 1,
+      &quot;controls_passed&quot;: 1,
+      &quot;assessment_scope&quot;: &quot;Technical evidence observation only&quot;,
+      &quot;assessment_limitation&quot;: &quot;This PASS indicates successful observation of the technical evidence used by this test. It does not by itself certify full ISO 27001:2022 A.8.2 compliance. Organizational policies, approvals, access reviews, least-privilege requirements, joiner/mover/leaver processes, and other relevant evidence require separate assessment.&quot;,
+      &quot;controls&quot;: [
+        {
+          &quot;control_id&quot;: &quot;A.8.2&quot;,
+          &quot;title&quot;: &quot;Privileged access rights&quot;,
+          &quot;status&quot;: &quot;PASS&quot;,
+          &quot;reason&quot;: &quot;Live Microsoft Entra evidence was successfully collected and normalized. High-privilege directory roles and their assigned members were identified, providing direct technical evidence relevant to assessment of privileged access rights.&quot;
+        }
+      ]
+    },
+    {
+      &quot;framework&quot;: &quot;SOC2&quot;,
+      &quot;version&quot;: &quot;2022&quot;,
+      &quot;score&quot;: 0,
+      &quot;coverage&quot;: 0.0,
+      &quot;controls_assessed&quot;: 0,
+      &quot;controls_passed&quot;: 0,
+      &quot;status&quot;: &quot;NOT_ASSESSED&quot;,
+      &quot;reason&quot;: &quot;No live SOC2 control evaluator is configured in this test. The framework remains included to preserve the existing report functionality.&quot;
+    }
+  ]
+}</pre>
+<h2>Risk Register</h2>
+<pre>{
+  &quot;risks&quot;: [
+    {
+      &quot;id&quot;: &quot;RISK-001&quot;,
+      &quot;title&quot;: &quot;Missing MFA&quot;,
+      &quot;score&quot;: 20,
+      &quot;level&quot;: &quot;Critical&quot;,
+      &quot;priority&quot;: &quot;Urgent&quot;
+    },
+    {
+      &quot;id&quot;: &quot;RISK-002&quot;,
+      &quot;title&quot;: &quot;Incomplete logging&quot;,
+      &quot;score&quot;: 12,
+      &quot;level&quot;: &quot;High&quot;,
+      &quot;priority&quot;: &quot;High&quot;
+    }
+  ],
+  &quot;risk_count&quot;: 2,
+  &quot;live_control_evidence&quot;: {
+    &quot;control_id&quot;: &quot;A.8.2&quot;,
+    &quot;status&quot;: &quot;PASS&quot;
+  }
+}</pre>
+</body></html>

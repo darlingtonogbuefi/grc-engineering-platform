@@ -1,3 +1,5 @@
+# engine\validator\framework_validator.py
+
 """
 Framework Validation
 
@@ -20,6 +22,7 @@ from typing import Any
 from ..exceptions import ConfigurationError
 from .schema_validator import SchemaValidator
 
+
 SUPPORTED_FRAMEWORKS = {
     "CAF",
     "ISO27001",
@@ -38,7 +41,6 @@ class FrameworkValidator:
         self,
         schema_validator: SchemaValidator | None = None,
     ) -> None:
-
         self.schema_validator = (
             schema_validator or SchemaValidator()
         )
@@ -50,7 +52,6 @@ class FrameworkValidator:
         """
         Validate framework.
         """
-
         self.schema_validator.validate_framework(
             framework
         )
@@ -64,7 +65,6 @@ class FrameworkValidator:
         self,
         framework: dict[str, Any],
     ) -> None:
-
         metadata = framework.get(
             "metadata",
             {}
@@ -75,13 +75,11 @@ class FrameworkValidator:
         )
 
         if not name:
-
             raise ConfigurationError(
                 "Framework metadata.name is required."
             )
 
         if name not in SUPPORTED_FRAMEWORKS:
-
             raise ConfigurationError(
                 f"Unsupported framework: {name}"
             )
@@ -92,7 +90,6 @@ class FrameworkValidator:
         self,
         framework: dict[str, Any],
     ) -> None:
-
         controls = framework.get(
             "controls",
             []
@@ -101,19 +98,16 @@ class FrameworkValidator:
         identifiers: set[str] = set()
 
         for control in controls:
-
             control_id = control.get(
                 "id"
             )
 
             if not control_id:
-
                 raise ConfigurationError(
                     "Control missing id."
                 )
 
             if control_id in identifiers:
-
                 raise ConfigurationError(
                     f"Duplicate control id: {control_id}"
                 )
@@ -126,17 +120,14 @@ class FrameworkValidator:
         self,
         frameworks: list[dict[str, Any]],
     ) -> None:
-
         names: set[str] = set()
 
         for framework in frameworks:
-
             self.validate(framework)
 
             name = framework["metadata"]["name"]
 
             if name in names:
-
                 raise ConfigurationError(
                     f"Duplicate framework loaded: {name}"
                 )

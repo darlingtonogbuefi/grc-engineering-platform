@@ -1,5 +1,3 @@
-
-
 # engine\mapper\capability_mapper.py
 
 
@@ -29,14 +27,9 @@ Supported capabilities include:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-
 from typing import Any
 
-
-from .control_mapper import (
-    ControlMapping,
-)
-
+from .control_mapper import ControlMapping
 
 # ==============================================================================
 # Capability Model
@@ -55,13 +48,9 @@ class Capability:
 
     description: str
 
-    controls: list[ControlMapping] = field(
-        default_factory=list
-    )
+    controls: list[ControlMapping] = field(default_factory=list)
 
-    metadata: dict[str, Any] = field(
-        default_factory=dict
-    )
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 # ==============================================================================
@@ -87,13 +76,9 @@ class CapabilityResult:
 
     score: float = 0.0
 
-    findings: list[str] = field(
-        default_factory=list
-    )
+    findings: list[str] = field(default_factory=list)
 
-    metadata: dict[str, Any] = field(
-        default_factory=dict
-    )
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 # ==============================================================================
@@ -110,99 +95,53 @@ class CapabilityRegistry:
     """
 
     DEFAULT_CAPABILITIES: dict[str, tuple[str, str]] = {
-
         "identity": (
-
             "Identity",
-
             "Identity and access management.",
-
         ),
-
         "endpoint": (
-
             "Endpoint",
-
             "Endpoint security and device management.",
-
         ),
-
         "cloud": (
-
             "Cloud",
-
             "Cloud platform governance and security.",
-
         ),
-
         "networking": (
-
             "Networking",
-
             "Network security controls.",
-
         ),
-
         "monitoring": (
-
             "Monitoring",
-
             "Monitoring and alerting.",
-
         ),
-
         "logging": (
-
             "Logging",
-
             "Audit logging and event collection.",
-
         ),
-
         "backup": (
-
             "Backup",
-
             "Backup, restore and recovery.",
-
         ),
-
         "vulnerability": (
-
             "Vulnerability",
-
             "Vulnerability and patch management.",
-
         ),
-
         "m365": (
-
             "Microsoft 365",
-
             "Microsoft 365 security capabilities.",
-
         ),
-
         "devops": (
-
             "DevOps",
-
             "DevOps and CI/CD security.",
-
         ),
-
         "business-apps": (
-
             "Business Applications",
-
             "Business application governance.",
-
         ),
-
     }
 
     def __init__(self) -> None:
-
         self._capabilities: dict[str, Capability] = {}
 
         self.load_defaults()
@@ -216,20 +155,13 @@ class CapabilityRegistry:
 
         self._capabilities.clear()
 
-        for capability_id, values in (
-            self.DEFAULT_CAPABILITIES.items()
-        ):
-
+        for capability_id, values in self.DEFAULT_CAPABILITIES.items():
             name, description = values
 
             self._capabilities[capability_id] = Capability(
-
                 id=capability_id,
-
                 name=name,
-
                 description=description,
-
             )
 
     # ------------------------------------------------------------------
@@ -242,9 +174,7 @@ class CapabilityRegistry:
         Register or replace a capability.
         """
 
-        self._capabilities[
-            capability.id
-        ] = capability
+        self._capabilities[capability.id] = capability
 
     # ------------------------------------------------------------------
 
@@ -256,9 +186,7 @@ class CapabilityRegistry:
         Retrieve a capability by identifier.
         """
 
-        return self._capabilities.get(
-            capability_id
-        )
+        return self._capabilities.get(capability_id)
 
     # ------------------------------------------------------------------
 
@@ -270,11 +198,8 @@ class CapabilityRegistry:
         """
 
         return sorted(
-
             self._capabilities.values(),
-
-            key=lambda c: c.name,
-
+            key=lambda capability: capability.name,
         )
 
     # ------------------------------------------------------------------
@@ -286,11 +211,7 @@ class CapabilityRegistry:
         Return capability identifiers.
         """
 
-        return sorted(
-            self._capabilities.keys()
-        )
-
-
+        return sorted(self._capabilities.keys())
 
 
 # ==============================================================================
@@ -323,7 +244,6 @@ class CapabilityMapper:
         self,
         registry: CapabilityRegistry | None = None,
     ) -> None:
-
         self.registry = registry or CapabilityRegistry()
 
     # ------------------------------------------------------------------
@@ -339,71 +259,87 @@ class CapabilityMapper:
         results: dict[str, CapabilityResult] = {}
 
         for mapping in mappings:
+            capability_id = self._normalise_capability_id(mapping.capability)
 
-            capability_id = (
-                mapping.capability or "uncategorised"
-            ).lower()
-
-            capability = self.registry.get(
-                capability_id
-            )
+            capability = self.registry.get(capability_id)
 
             if capability is None:
-
                 capability = Capability(
-
                     id=capability_id,
-
                     name=capability_id.replace(
                         "-",
-                        " "
+                        " ",
                     ).title(),
-
                     description="Custom capability",
-
                 )
 
-                self.registry.register(
-                    capability
-                )
+                self.registry.register(capability)
 
             if capability.id not in results:
-
-                results[capability.id] = CapabilityResult(
-                    capability=capability
+                # Create a fresh capability instance for this
+                # mapping operation so repeated calls do not
+                # accumulate controls on the registry object.
+                result_capability = Capability(
+                    id=capability.id,
+                    name=capability.name,
+                    description=capability.description,
+                    metadata=dict(capability.metadata),
                 )
+
+                results[capability.id] = CapabilityResult(capability=result_capability)
 
             result = results[capability.id]
 
-            result.capability.controls.append(
-                mapping
-            )
+            result.capability.controls.append(mapping)
 
             result.mapped_controls += 1
 
-            result.evidence_count += len(
-                mapping.evidence
+            evidence = getattr(
+                mapping,
+                "evidence",
+                None,
             )
+
+            if evidence:
+                result.evidence_count += len(evidence)
 
         for result in results.values():
+            result.score = self.calculate_score(result)
 
-            result.score = self.calculate_score(
-                result
-            )
-
-            result.maturity = (
-                self.calculate_maturity(
-                    result
-                )
-            )
+            result.maturity = self.calculate_maturity(result)
 
         return sorted(
-
             results.values(),
+            key=lambda item: item.capability.name,
+        )
 
-            key=lambda item:
-                item.capability.name,
+    # ------------------------------------------------------------------
 
+    @staticmethod
+    def _normalise_capability_id(
+        capability: str | None,
+    ) -> str:
+        """
+        Normalise a capability identifier.
+
+        Examples:
+
+            Identity -> identity
+            BUSINESS-APPS -> business-apps
+            business_apps -> business-apps
+            None -> uncategorised
+        """
+
+        if not capability:
+            return "uncategorised"
+
+        return (
+            capability.strip()
+            .lower()
+            .replace(
+                "_",
+                "-",
+            )
         )
 
     # ------------------------------------------------------------------
@@ -420,13 +356,9 @@ class CapabilityMapper:
         """
 
         if result.mapped_controls == 0:
-
             return 0.0
 
-        evidence_ratio = (
-            result.evidence_count /
-            result.mapped_controls
-        )
+        evidence_ratio = result.evidence_count / result.mapped_controls
 
         score = min(
             evidence_ratio * 20.0,
@@ -466,70 +398,36 @@ class CapabilityMapper:
         """
 
         if not results:
-
             return {
-
                 "capabilities": 0,
-
                 "average_score": 0.0,
-
                 "average_maturity": 0.0,
-
                 "mapped_controls": 0,
-
                 "evidence": 0,
-
             }
 
-        capability_count = len(
-            results
-        )
+        capability_count = len(results)
 
-        total_score = sum(
-            item.score
-            for item in results
-        )
+        total_score = sum(item.score for item in results)
 
-        total_maturity = sum(
-            item.maturity
-            for item in results
-        )
+        total_maturity = sum(item.maturity for item in results)
 
-        mapped_controls = sum(
-            item.mapped_controls
-            for item in results
-        )
+        mapped_controls = sum(item.mapped_controls for item in results)
 
-        evidence = sum(
-            item.evidence_count
-            for item in results
-        )
+        evidence = sum(item.evidence_count for item in results)
 
         return {
-
-            "capabilities":
-                capability_count,
-
-            "average_score":
-                round(
-                    total_score /
-                    capability_count,
-                    2,
-                ),
-
-            "average_maturity":
-                round(
-                    total_maturity /
-                    capability_count,
-                    2,
-                ),
-
-            "mapped_controls":
-                mapped_controls,
-
-            "evidence":
-                evidence,
-
+            "capabilities": capability_count,
+            "average_score": round(
+                total_score / capability_count,
+                2,
+            ),
+            "average_maturity": round(
+                total_maturity / capability_count,
+                2,
+            ),
+            "mapped_controls": mapped_controls,
+            "evidence": evidence,
         }
 
 
@@ -544,7 +442,7 @@ def map_capabilities(
     """
     Convenience function.
 
-    Example
+    Example:
 
         capability_results = map_capabilities(
             control_results.mappings
@@ -553,6 +451,4 @@ def map_capabilities(
 
     mapper = CapabilityMapper()
 
-    return mapper.map_controls(
-        mappings
-    )
+    return mapper.map_controls(mappings)
